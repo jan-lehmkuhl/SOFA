@@ -21,7 +21,7 @@ project-folder      	= new-project-folder
 # targets
 #################################################################
 
-all: new-project git-init submodules
+all: new-project project-folders project-dummy-files git-init submodules
 # first target will be executed with make only
 #	cd $(project-folder); pwd
 #	make -C $(project-folder) all
@@ -30,10 +30,16 @@ all: new-project git-init submodules
 
 new-project: clean
 	mkdir $(project-folder)
+#	echo; pwd; ls -la $(project-folder)
+
+project-folders: 
+	mkdir $(project-folder)/docs
+	mkdir $(project-folder)/mesh
 	mkdir $(project-folder)/tools
+
+project-dummy-files:
 	cp dummies/Makefile $(project-folder)
 	cp dummies/.gitignore $(project-folder)
-#	echo; pwd; ls -la $(project-folder)
 
 git-init: 
 	cd $(project-folder); git init
