@@ -21,19 +21,25 @@ project-folder      	= new-project-folder
 # targets
 #################################################################
 
-all: new-project
+all: new-project git-init
 # first target will be executed with make only
 #	cd $(project-folder); pwd
-	make -C $(project-folder) all
+#	make -C $(project-folder) all
 # changes directory and executes target
-	echo "all done" 
+#	echo "all done" 
 
 new-project: clean
 	mkdir $(project-folder)
 	mkdir $(project-folder)/tools
 	cp dummies/Makefile $(project-folder)
-#	echo; pwd; ls -la
+	cp dummies/.gitignore $(project-folder)
 #	echo; pwd; ls -la $(project-folder)
+
+git-init: 
+	cd $(project-folder); git init
+	cd $(project-folder); git add .gitignore
+	cd $(project-folder); git add *
+	cd $(project-folder); git commit -m "[simulation-project] #INIT from simulation-projects-repository"
 
 
 
