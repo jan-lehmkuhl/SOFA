@@ -21,7 +21,7 @@ project-folder      	= new-project-folder
 # targets
 #################################################################
 
-all: new-project git-init
+all: new-project git-init submodules
 # first target will be executed with make only
 #	cd $(project-folder); pwd
 #	make -C $(project-folder) all
@@ -41,6 +41,8 @@ git-init:
 	cd $(project-folder); git add *
 	cd $(project-folder); git commit -m "[simulation-project] #INIT from simulation-projects-repository"
 
+submodules:
+	make -C $(project-folder) submodules
 
 
 .PHONY: clean
