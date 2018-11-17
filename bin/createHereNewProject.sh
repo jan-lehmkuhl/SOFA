@@ -17,3 +17,13 @@ cd ..
 
 cp ./tools/simulation-projects/dummies/root-folder/Makefile . 
 cp ./tools/simulation-projects/dummies/root-folder/.gitignore . 
+cp ./tools/simulation-projects/dummies/root-folder/project.json .
+
+
+#################################################
+# first git commit
+#################################################
+
+git add .gitignore
+git add .root-project
+git commit -m "[base] #INIT files"
