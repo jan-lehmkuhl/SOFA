@@ -46,6 +46,7 @@ all: new-project project-folders project-dummy-files git-init submodules
 
 installrequirements: 
 	sudo apt-get install nodejs-legacy
+# install https://nodejs.org/en/download/ for macOS
 
 new-project: clean
 	mkdir $(project-folder)
