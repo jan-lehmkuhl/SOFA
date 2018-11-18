@@ -24,6 +24,21 @@ endif
 #### TESTS ####
 ###############
 
+# needs sudo apt-get install nodejs-legacy
+define GetFromProjJson
+	$(shell node -p "require('./project.json').$(1)")
+endef
+
+testValue     = $(shell node -p "require('./project.json').name")
+testValue2    = $(call GetFromProjJson,name)
+
+# testValue := $(shell python project.json name)
+
+
+test: 
+	echo "test" $(testValue)
+	echo "test" $(testValue2)
+#	echo "PROJECT $(PROJECT) 
 
 #################################################################
 # General user settings
@@ -37,7 +52,10 @@ endif
 all: 
 	pwd
 	echo "print project_root_dir: " 
-	echo $(project_root_dir) 
+	echo $(project_PROJECTroot_dir) 
+
+installrequirements: 
+	make -C tools/simulation-projects installrequirements
 
 initcfx:
 	make -C tools/simulation-projects/src-cfx folder

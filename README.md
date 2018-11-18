@@ -1,6 +1,12 @@
 # simulation-projects
 this repository delivers the framework to use different simulation tools for one simulation project within one project-git-repository
 
+
+# Requirements
+## Packages
+    make installrequirements
+sollte alle noetigen Pakete installieren
+
 # init new project
 to create a new project create and go to the new empty project folder and execute there `./bin/createHereNewProject.sh`
 

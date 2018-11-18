@@ -44,6 +44,9 @@ all: new-project project-folders project-dummy-files git-init submodules
 # changes directory and executes target
 #	echo "all done" 
 
+installrequirements: 
+	sudo apt-get install nodejs-legacy
+
 new-project: clean
 	mkdir $(project-folder)
 #	echo; pwd; ls -la $(project-folder)
