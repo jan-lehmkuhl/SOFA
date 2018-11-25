@@ -1,6 +1,7 @@
 {
     "//"            : "folders bennenen die Unterordner der einzelnen Sub-Projekte" ,
-    "foam-folders"  : ["foam1"] , 
-    "cfx-folders"   : ["cfx1"] ,
+    "cfxFolders"    : ["cfx1"] ,
+    "foamFolders"   : ["foam1"] , 
+    "list"          : ["entry1", "entry2"] ,
     "name"          : "XXX" 
 }

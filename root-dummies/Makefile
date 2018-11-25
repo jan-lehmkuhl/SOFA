@@ -1,6 +1,10 @@
 
 include tools/simulation-projects/global-make.mk
 
+cfxFolder       = $(shell node -p "require('./project.json').cfxFolders[0]")
+foamFolder      = $(shell node -p "require('./project.json').foamFolders[0]")
+
+
 
 ###############
 #### TESTS ####
@@ -13,6 +17,8 @@ endef
 
 testValue     = $(shell node -p "require('./project.json').name")
 testValue2    = $(call GetFromProjJson,name)
+testValue3    = $(shell node -p "require('./project.json').list[0]")
+testValue4    = $(project_repository_dir)
 
 # testValue := $(shell python project.json name)
 
@@ -20,8 +26,14 @@ testValue2    = $(call GetFromProjJson,name)
 jsontest: 
 	echo "test1" $(testValue)
 	echo "test2" $(testValue2)
+	echo "test3" $(testValue3)
 	echo "global-rm" $(rm)
 #	echo "PROJECT $(PROJECT) 
+
+rmfoam:
+	$(rm) $(foamFolder)
+	ls -la
+
 
 #################################################################
 # General user settings
@@ -43,7 +55,13 @@ installrequirements:
 initcfx:
 	make -C tools/simulation-projects/src-cfx folder
 
+initfoam: 
+	$(mkdir) $(foamFolder)
+	cp $(dir_sim_projects)/openFoam/dummies/Makefile $(foamFolder)
+	make -C $(foamFolder) initfolder
 
-submodules:
-	cd tools; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git
-	cd tools; git submodule add git@gitlab.com:HS-GM_OpenFOAM/OpenFoamScripts.git
+	echo; pwd
+	ls -la
+	echo; cd $(foamFolder) ; pwd
+	ls -la $(foamFolder)
+
