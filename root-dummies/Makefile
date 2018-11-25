@@ -1,23 +1,5 @@
 
-#################################################################
-# system settings
-#################################################################
-
-ifeq ($(OS),Windows_NT)
-    del                     	=del
-    rm                      	=TODO
-    mkdir                   	=md
-
-    project_root_dir        	= ${CURDIR}
-
-else
-    del                     	=rm
-    rm                      	=rm -Rf
-    mkdir                   	=mkdir -p
-
-    project_root_dir        	= $(shell pwd)
-
-endif
+include tools/simulation-projects/global-make.mk
 
 
 ###############
@@ -36,8 +18,9 @@ testValue2    = $(call GetFromProjJson,name)
 
 
 jsontest: 
-	echo "test" $(testValue)
-	echo "test" $(testValue2)
+	echo "test1" $(testValue)
+	echo "test2" $(testValue2)
+	echo "global-rm" $(rm)
 #	echo "PROJECT $(PROJECT) 
 
 #################################################################
