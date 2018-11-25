@@ -1,3 +1,6 @@
 {
-    "name": "XXX" 
+    "//"            : "folders bennenen die Unterordner der einzelnen Sub-Projekte" ,
+    "foam-folders"  : ["foam1"] , 
+    "cfx-folders"   : ["cfx1"] ,
+    "name"          : "XXX" 
 }

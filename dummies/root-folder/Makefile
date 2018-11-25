@@ -35,7 +35,7 @@ testValue2    = $(call GetFromProjJson,name)
 # testValue := $(shell python project.json name)
 
 
-test: 
+jsontest: 
 	echo "test" $(testValue)
 	echo "test" $(testValue2)
 #	echo "PROJECT $(PROJECT) 
