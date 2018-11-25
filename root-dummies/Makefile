@@ -52,12 +52,18 @@ all:
 installrequirements: 
 	make -C tools/simulation-projects installrequirements
 
+init: 
+	$(mkdir) docs
+	cp tools/simulation-projects/docs/dummies/Makefile docs
+	make -C docs initfolders
+	$(mkdir) mesh
+
 initcfx:
 	make -C tools/simulation-projects/src-cfx folder
 
 initfoam: 
 	$(mkdir) $(foamFolder)
-	cp $(dir_sim_projects)/openFoam/dummies/Makefile $(foamFolder)
+	cp tools/simulation-projects/openFoam/dummies/Makefile $(foamFolder)
 	make -C $(foamFolder) initfolder
 
 	echo; pwd
