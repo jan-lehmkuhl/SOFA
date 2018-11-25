@@ -15,9 +15,9 @@ cd ..
 # copy first files
 #################################################
 
-cp ./tools/simulation-projects/dummies/root-folder/Makefile . 
-cp ./tools/simulation-projects/dummies/root-folder/.gitignore . 
-cp ./tools/simulation-projects/dummies/root-folder/project.json .
+cp ./tools/simulation-projects/root-dummies/Makefile . 
+cp ./tools/simulation-projects/root-dummies/.gitignore . 
+cp ./tools/simulation-projects/root-dummies/project.json .
 
 
 #################################################
