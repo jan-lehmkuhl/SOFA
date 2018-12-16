@@ -6,17 +6,14 @@ include global-make.mk
 # General user settings
 #################################################################
 
-
-
 project-folder      	= new-project-folder
-# special folders
 
 
 #################################################################
 # targets
 #################################################################
 
-all: new-project project-folders project-dummy-files git-init submodules
+init: new-project project-folders project-dummy-files git-init submodules
 # first target will be executed with make only
 #	cd $(project-folder); pwd
 #	make -C $(project-folder) all
@@ -28,13 +25,13 @@ installrequirements:
 # install https://nodejs.org/en/download/ for macOS
 
 new-project: clean
-	mkdir $(project-folder)
+	$(mkdir) $(project-folder)
 #	echo; pwd; ls -la $(project-folder)
 
 project-folders: 
-	mkdir $(project-folder)/docs
-	mkdir $(project-folder)/mesh
-	mkdir $(project-folder)/tools
+	$(mkdir) $(project-folder)/docs
+	$(mkdir) $(project-folder)/mesh
+	$(mkdir) $(project-folder)/tools
 
 project-dummy-files:
 	cp dummies/Makefile $(project-folder)
@@ -52,9 +49,10 @@ submodules:
 
 .PHONY: clean
 # PHONY says make to execute even when the depending targets haven't been updated
+
 clean: 
-	rm -rf $(project-folder)  
-#	echo; pwd; ls -la
+	$(rm) $(project-folder)  
+	echo; pwd; ls -la
 
 
 #################################################################
