@@ -1,0 +1,5 @@
+newCase:
+	python3 ../../tools/openFoam/python/openFoam.py newCase
+
+test:
+	python3 ../../tools/openFoam/python/openFoam.py test
