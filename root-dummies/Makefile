@@ -1,5 +1,5 @@
 
-include tools/simulation-projects/global-make.mk
+include tools/global-make.mk
 
 cfxFolder       = $(shell node -p "require('./project.json').cfxFolders[0]")
 foamFolder      = $(shell node -p "require('./project.json').foamFolders[0]")
@@ -62,12 +62,8 @@ initcfx:
 	make -C tools/simulation-projects/src-cfx folder
 
 initfoam: 
-	$(mkdir) $(foamFolder)
-	cp tools/simulation-projects/openFoam/dummies/Makefile $(foamFolder)
-	make -C $(foamFolder) initfolder
-
-	echo; pwd
-	ls -la
-	echo; cd $(foamFolder) ; pwd
-	ls -la $(foamFolder)
+	if [ ! -d tools/openFoam/setup ]; 	  then cd tools/openFoam ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git setup;     fi;
+	if [ ! -d tools/openFoam/scripts ];   then cd tools/openFoam ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/OpenFoamScripts.git scripts; fi;
+	if [ ! -d tools/openFoam/reporting ]; then cd tools/openFoam ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/r_openfoam reporting;        fi;
+	python3 tools/openFoam/python/openFoam.py initFoam
 

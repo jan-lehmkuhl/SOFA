@@ -1,0 +1,86 @@
+{
+    "mesh" : {
+        "system": { 
+            "controlDict"           :   "/mesh/system/controlDict",
+            "blockMeshDict"         :   "/mesh/system/blockMeshDict",
+            "snappyHexMeshDict"     :   "/mesh/system/snappyHexMeshDict", 
+            "decomposeParDict"      :   "/mesh/system/decomposeParDict",
+            "meshQualityDict"       :   "/mesh/system/meshQualityDict",
+            "createPatchDict"       :   "/mesh/system/createPatchDict",
+            "fvSchemes"             :   "/mesh/system/fvSchemes",
+            "fvSolution"            :   "/mesh/system/fvSolution",
+            "topoSetDict"           :   "/mesh/system/topoSetDict",
+            "surfaceFeaturesDict"   :   "/mesh/system/surfaceFeaturesDict"
+        }
+    },
+
+    "simpleFoam" : {
+        "0" : {
+            "U"                     :   "/run/0/U",
+            "p"                     :   "/run/0/p.incomp"
+        },
+        "constant" : {
+            "transportProperties"   :   "/mesh/system/surfaceFeaturesDict"
+        },
+        "system" : {
+            "fvSchemes"             :   "/mesh/system/surfaceFeaturesDict",
+            "fvSolution"            :   "/mesh/system/surfaceFeaturesDict"
+        }
+    },
+
+    "turbulence" : {
+
+        "laminar" : {
+            "constant" : {
+                "turbulenceProperties" : "/run/constant/turbulence/turbulenceProperties.laminar"
+            } 
+        },
+
+        "kEpsilon" : {
+            "0" : {
+                "k"                 :   "/run/0/k",
+                "omega"             :   "/run/0/epsilon",
+                "nut"               :   "/run/0/nut"
+            },
+            "constant" : {
+                "turbulenceProperties"  :   "/run/constant/turbulence/turbulenceProperties.kEpsilon"
+            }
+        },
+
+        "kOmega" : {
+            "0" : {
+                "k"                 :   "/run/0/k",
+                "omega"             :   "/run/0/omega",
+                "nut"               :   "/run/0/nut"
+            },
+            "constant" : {
+                "turbulenceProperties"  :   "/run/constant/turbulence/turbulenceProperties.kOmega"
+            }
+        },
+
+        "kOmegaSST" : {
+            "0" : {
+                "k"                 :   "/run/0/k",
+                "omega"             :   "/run/0/omega",
+                "nut"               :   "/run/0/nut"
+            },
+            "constant" : {
+                "turbulenceProperties"  :   "/run/constant/turbulence/turbulenceProperties.kOmegaSST"
+            }
+        }
+
+    },
+
+    "dynamicMesh" : {
+        "constant" : {
+            "dynamicMeshDict"       :   "/run/constant/dynamicMeshDict"
+        }
+    },
+
+    "porousZone" : {
+        "constant" : {
+            "porousZone"             :   "/run/constant/porousZone"
+        }
+    }
+
+}

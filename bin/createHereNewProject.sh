@@ -5,19 +5,15 @@
 #################################################
 
 git init
-mkdir -p tools
-cd tools
-git submodule add git@gitlab.com:schlupp/simulation-projects.git
-cd ..
-
+git submodule add git@gitlab.com:schlupp/simulation-projects.git tools
 
 #################################################
 # copy first files
 #################################################
 
-cp ./tools/simulation-projects/root-dummies/Makefile . 
-cp ./tools/simulation-projects/root-dummies/.gitignore . 
-cp ./tools/simulation-projects/root-dummies/project.json .
+cp ./tools/root-dummies/Makefile . 
+cp ./tools/root-dummies/.gitignore . 
+cp ./tools/root-dummies/project.json .
 
 
 #################################################
