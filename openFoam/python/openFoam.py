@@ -466,7 +466,7 @@ class MeshCase(Case):
                 copyFileSafely(meshReportPath,"doc/meshReport/meshReport.Rmd")
             layerSizingPath = findFile("LayerSizing.Rmd", "tools")
             if layerSizingPath:
-                copyFileSafely(layerSizingPath,"doc/meshReport/meshReport.Rmd")
+                copyFileSafely(layerSizingPath,"doc/meshReport/layerSizing.Rmd")
 
 
 class RunCase(Case):
