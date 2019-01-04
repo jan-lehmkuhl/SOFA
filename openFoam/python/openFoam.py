@@ -267,6 +267,28 @@ class Case(object):
         CaseName = str(self.type + format(maxNo + 1, "0>3d"))
         return(CaseName)
 
+    def getProject(self):
+        # finds the projectname of a case
+        #
+        # Args:
+        #
+        # Return:
+        #   name:   name of the next case folder
+        #
+        i = 0
+        wd = os.getcwd()
+        subdirs = os.listdir(os.getcwd())
+        while i < 5:
+            if foamStructure["cad"]["studyName"] in subdirs:
+                return(os.path.basename(os.path.normpath(wd)))
+            else:
+                wd = os.path.join(wd, os.path.pardir)
+                subdirs = os.listdir(wd)
+                i += 1
+        else:
+            print("Could not find project name")
+            return(False)
+            
     def create(self):
         # create a new case inside a study depending on the type of case
         #
@@ -282,7 +304,7 @@ class Case(object):
             createDirSafely(os.path.join(self.path, caseName))
             copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
             copyFileSafely(jsonPath, os.path.join(self.path, caseName, self.type + ".json"))
-            #return(True)
+        return(True)
 
     def clone(self):
         # create a clone of the current case 
@@ -294,8 +316,20 @@ class Case(object):
         #
         currentCase = os.path.basename(os.getcwd())
         caseName = self.nextCaseName(os.pardir)
+        path = os.path.join(os.pardir, caseName)
         print("Cloning case >%s< to >%s<" %(currentCase, caseName))
-        shutil.copytree(os.path.join(os.pardir,currentCase),os.path.join(os.pardir, caseName), symlinks=True)
+        shutil.copytree(os.path.join(os.pardir,currentCase), path, symlinks=True)
+        while True:
+            print("Commit cloning of >%s< to >%s< ? (y/n)" %(currentCase, caseName))
+            answer = input()
+            answer = answer.lower()
+            if answer in ["y", "yes"]:
+                projName = self.getProject()
+                os.system('git add %s' % path)
+                os.system('git commit -m "[%s%s] #CLONE \'cloning case >%s< to >%s<\'"' % (projName, caseName.capitalize(), currentCase, caseName))
+                break
+            elif answer in ["n", "no"]:
+                break
 
     def clean(self):
         # removes all files, folders and symlinks from a case, but spares 
@@ -306,22 +340,42 @@ class Case(object):
         # Return:
         #   side effects: removes folders
         #
-        for root, dirs, files in os.walk("./", topdown=False):
-            for name in files:
-                if name == "Makefile":
-                    continue
-                elif name.endswith("json"):
-                    continue
-                else:
-                    os.remove(os.path.join(root, name))
-                    print("Removing file >%s< from case" % os.path.join(root, name))
-            for name in dirs:
-                if os.path.islink(os.path.join(root, name)):
-                    os.remove(os.path.join(root, name))
-                    print("Removing link >%s<" % os.path.join(root, name))
-                else:
-                    os.rmdir(os.path.join(root, name))
-                    print("Removing folder >%s< from case" % os.path.join(root, name))
+        caseName = os.path.basename(os.getcwd())
+        while True:
+            print("Do you really want to clean case >%s< ? (y/n)" % caseName)
+            answer = input()
+            answer = answer.lower()
+            if answer in ["y", "yes"]:
+                for root, dirs, files in os.walk("./", topdown=False):
+                    for name in files:
+                        if name == "Makefile":
+                            continue
+                        elif name.endswith("json"):
+                            continue
+                        else:
+                            os.remove(os.path.join(root, name))
+                            print("Removing file >%s< from case" % os.path.join(root, name))
+                    for name in dirs:
+                        if os.path.islink(os.path.join(root, name)):
+                            os.remove(os.path.join(root, name))
+                            print("Removing link >%s<" % os.path.join(root, name))
+                        else:
+                            os.rmdir(os.path.join(root, name))
+                            print("Removing folder >%s< from case" % os.path.join(root, name))
+                while True:
+                    print("Commit cleaning of %s ? (y/n)" % caseName)
+                    answer = input()
+                    answer = answer.lower()
+                    if answer in ["y", "yes"]:
+                        projName = self.getProject()
+                        os.system('git add .')
+                        os.system('git commit -m "[%s%s] #CLEAN \'cleaned case >%s< in project >%s<\'"' % (projName, caseName.capitalize(), caseName, projName))
+                        break
+                    elif answer in ["n", "no"]:
+                        break
+                break
+            elif answer in ["n", "no"]:
+                break
      
     def makeMainSymlink(self):
         # links the folder stated in the case json into the directory
@@ -377,6 +431,53 @@ class Case(object):
                         print("Removing link >%s<" % os.path.join(root, fileName))
         self.symlinksClean = True
 
+    def commitInit(self):
+        # asks user if he wants to commit the initialisation to git
+        #
+        # Args:
+        # 
+        # Result:
+        #   side effects:   commits changes of case
+        #  
+        projName = self.getProject()
+        caseName = os.path.basename(os.getcwd())
+        while True:
+            print("Commit initialisation of %s ? (y/n)" % caseName)
+            answer = input()
+            answer = answer.lower()
+            if answer in ["y", "yes"]:
+                projName = self.getProject()
+                os.system('git add .')
+                os.system('git commit -m "[%s%s] #INIT \'initialised case >%s< in project >%s<\'"' % (projName, caseName.capitalize(), caseName, projName))
+                break
+            elif answer in ["n", "no"]:
+                break
+
+    def commitChanges(self):
+        # asks user if he wants to commit changes to case
+        #
+        # Args:
+        #
+        # Result:
+        #   side effects:   commits changes of case
+        #  
+        caseName = os.path.basename(os.getcwd())
+        while True:
+            print("Commit changes in %s ? (y/n)" % caseName)
+            answer = input()
+            answer = answer.lower()
+            if answer in ["y", "yes"]:
+                while True:
+                    print("Please enter a commit message:")
+                    message = input()
+                    if not message == "":
+                        break 
+                projName = self.getProject()
+                os.system('git add .')
+                os.system('git commit -m "[%s%s] #CHANGE \'%s\'"' % (projName, caseName.capitalize(), message))
+                break
+            elif answer in ["n", "no"]:
+                break
 
 class CadCase(Case):
     # Specialized class for cad cases, which inherits from the base Case class
@@ -400,15 +501,26 @@ class CadCase(Case):
         createDirSafely(os.path.join(self.path, caseName, "vtk"))
         createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
         createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
+        makePath = findFile("Makefile_case", "tools")
+        if makePath:
+            copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
 
     def initCase(self):
-        print("Casese of type >cad< are initialized upon creation")
+        if len(os.listdir(".")) <= 1:
+            createDirSafely("native")
+            createDirSafely("stl")
+            createDirSafely("vtk")
+            createDirSafely("doc/drafts")
+            createDirSafely("doc/cadPics")
+            makePath = findFile("Makefile_case", "tools")
+            if makePath:
+                copyFileSafely(makePath, "Makefile")
+        else:
+            print("Case is already initialised. Please run >make clean< first")
 
     def makeSymlinks(self):
         print("Cases of type >cad< do not support option symlinks")
         
-
-
 
 class MeshCase(Case):
      # Specialized class for cad cases, which inherits from the base Case class
@@ -467,6 +579,7 @@ class MeshCase(Case):
             layerSizingPath = findFile("LayerSizing.Rmd", "tools")
             if layerSizingPath:
                 copyFileSafely(layerSizingPath,"doc/meshReport/layerSizing.Rmd")
+            self.commitInit()
 
 
 class RunCase(Case):
@@ -513,6 +626,7 @@ class RunCase(Case):
             self.Builder.makeTurbulence()
             self.Builder.makeDynamicMesh()
             self.Builder.makePorousZone()
+            self.commitInit()
 
 
 class AnalysisCase(Case):
@@ -646,8 +760,6 @@ class foamBuilder(object):
                             createDirSafely(folder)
                             for file in baseStruct[folder]:
                                 copyFileSafely(os.path.join(self.setupPath + baseStruct[folder][file]), os.path.join(folder,file))
-        
-
 
 entryPoint = sys.argv[1]
 
@@ -660,6 +772,8 @@ if entryPoint == "initFoam":
             for element in foamStructure:
                 newStudy = Study(element, folder)
                 newStudy.create()
+            os.system('git add .')
+            os.system('git commit -m "[%s] #INIT \'created project %s\'"' % (folder, folder))
         else:
             print("skipping project >" + folder + " since it already exists")
 elif entryPoint == "newCase":
@@ -677,3 +791,8 @@ elif entryPoint == "clone":
 elif entryPoint == "clean":
     currentCase = caseSelector()
     currentCase.clean()
+elif entryPoint == "commit":
+    currentCase = Case("run")
+    currentCase.commitChanges()
+elif entryPoint == "test":
+    print("Nothing defined")

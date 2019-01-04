@@ -10,5 +10,8 @@ clone:
 clean:
 	python3 ../../../tools/openFoam/python/openFoam.py clean
 
+commit:
+	python3 ../../../tools/openFoam/python/openFoam.py commit
+
 test:
 	python3 ../../../tools/openFoam/python/openFoam.py test
