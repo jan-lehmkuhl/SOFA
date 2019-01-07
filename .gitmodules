@@ -1,9 +1,0 @@
-[submodule "openFoam/setup"]
-	path = openFoam/setup
-	url = git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git
-[submodule "openFoam/scripts"]
-	path = openFoam/scripts
-	url = git@gitlab.com:HS-GM_OpenFOAM/OpenFoamScripts.git
-[submodule "openFoam/reporting"]
-	path = openFoam/reporting
-	url = git@gitlab.com:HS-GM_OpenFOAM/r_openfoam

@@ -295,17 +295,15 @@ class Case(object):
         # Args:
         #
         # Return:
-        #   side effects
+        #   empty:  (side effects)
         #
         jsonPath = findFile(self.type + ".json", "tools")
         makePath = findFile("Makefile_case", "tools")
-        gitignorePath = findFile(".gitignore_foam", "tools") 
         caseName = self.nextCaseName()
         if (jsonPath and makePath):
             createDirSafely(os.path.join(self.path, caseName))
             copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
             copyFileSafely(jsonPath, os.path.join(self.path, caseName, self.type + ".json"))
-            copyFileSafely(gitignorePath, os.path.join(self.path, caseName, ".gitignore"))
         return(True)
 
     def clone(self):
@@ -504,12 +502,8 @@ class CadCase(Case):
         createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
         createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
         makePath = findFile("Makefile_case", "tools")
-        gitignorePath = findFile(".gitignore_cad", "tools")
         if makePath:
             copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
-        if gitignorePath:
-            copyFileSafely(gitignorePath, os.path.join(self.path, caseName, ".gitignore"))
-        self.commitInit()
 
     def initCase(self):
         if len(os.listdir(".")) <= 1:
@@ -519,12 +513,8 @@ class CadCase(Case):
             createDirSafely("doc/drafts")
             createDirSafely("doc/cadPics")
             makePath = findFile("Makefile_case", "tools")
-            gitignorePath = findFile(".gitignore_cad", "tools")
             if makePath:
                 copyFileSafely(makePath, "Makefile")
-            if gitignorePath:
-                copyFileSafely(gitignorePath, ".gitignore")
-            self.commitInit()
         else:
             print("Case is already initialised. Please run >make clean< first")
 
@@ -588,7 +578,7 @@ class MeshCase(Case):
                 copyFileSafely(meshReportPath,"doc/meshReport/meshReport.Rmd")
             layerSizingPath = findFile("LayerSizing.Rmd", "tools")
             if layerSizingPath:
-                copyFileSafely(layerSizingPath,"doc/layerSizing/layerSizing.Rmd")
+                copyFileSafely(layerSizingPath,"doc/meshReport/layerSizing.Rmd")
             self.commitInit()
 
 
