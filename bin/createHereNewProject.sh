@@ -5,15 +5,15 @@
 #################################################
 
 git init
-git submodule add git@gitlab.com:schlupp/simulation-projects.git tools
+git submodule add git@gitlab.com:schlupp/simulation-projects.git tools/framework
 
 #################################################
 # copy first files
 #################################################
 
-cp ./tools/root-dummies/Makefile . 
-cp ./tools/root-dummies/.gitignore . 
-cp ./tools/root-dummies/project.json .
+cp ./tools/framework/root-dummies/Makefile . 
+cp ./tools/framework/root-dummies/.gitignore . 
+cp ./tools/framework/root-dummies/project.json .
 
 
 #################################################
