@@ -318,7 +318,7 @@ class Case(object):
                 self.path, caseName, "Makefile"))
             copyFileSafely(jsonPath, os.path.join(
                 self.path, caseName, self.type + ".json"))
-            copyFileSafely(gitignorePath, os.path.join(
+            createSymlinkSavely(gitignorePath, os.path.join(
                 self.path, caseName, ".gitignore"))
         return(True)
 
@@ -368,6 +368,8 @@ class Case(object):
                 for root, dirs, files in os.walk("./", topdown=False):
                     for name in files:
                         if name == "Makefile":
+                            continue
+                        if name == ".gitignore":
                             continue
                         elif name.endswith("json"):
                             continue
@@ -536,7 +538,7 @@ class CadCase(Case):
             createSymlinkSavely(makePath, os.path.join(
                 self.path, caseName, "Makefile"))
         if gitignorePath:
-            copyFileSafely(gitignorePath, os.path.join(
+            createSymlinkSavely(gitignorePath, os.path.join(
                 self.path, caseName, ".gitignore"))
         self.commitInit()
 
@@ -702,7 +704,7 @@ class foamBuilder(object):
 
     def __init__(self, foamCaseSettings=None):
         self.foamJson = loadJson(findFile("foamFiles.json", "tools"))
-        self.setupPath = findFolder("setup", "tools")
+        self.setupPath = findFolder("openFoam-setup", "tools")
         self.foamCaseSettings = foamCaseSettings
 
     def makeMesh(self):
