@@ -30,6 +30,7 @@ constant/polyMesh/neighbour*
 constant/polyMesh/boundary*
 constant/polyMesh/sets
 constant/polyMesh/*
+constant/extendedFeatureEdgeMesh/*
 
 # Zones and levels
 *Level*
@@ -50,6 +51,7 @@ lnInclude
 *.dep
 linux*
 Darwin*
+dynamicCode
 
 #exclude important folders and files:
 !0/
