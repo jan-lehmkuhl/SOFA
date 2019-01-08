@@ -1,17 +1,17 @@
-initCase:
-	python3 ../../../tools/openFoam/python/openFoam.py initCase
+init:
+	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
 symlinks:
-	python3 ../../../tools/openFoam/python/openFoam.py symlinks
+	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
 
 clone:
-	python3 ../../../tools/openFoam/python/openFoam.py clone
+	python3 ../../../tools/framework/openFoam/python/openFoam.py clone
 
-clean:
-	python3 ../../../tools/openFoam/python/openFoam.py clean
+clear:
+	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
 commit:
-	python3 ../../../tools/openFoam/python/openFoam.py commit
+	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
 test:
-	python3 ../../../tools/openFoam/python/openFoam.py test
+	python3 ../../../tools/framework/openFoam/python/openFoam.py test
