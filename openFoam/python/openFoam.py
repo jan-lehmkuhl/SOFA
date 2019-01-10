@@ -224,6 +224,16 @@ class Study(object):
             #copyFileSafely(makefilePath, os.path.join(self.path, studyName, "Makefile"))
             createSymlinkSavely(makefilePath, os.path.join(
                 self.path, studyName, "Makefile"))
+            if self.type == "mesh":
+                meshOvPath = findFile("MeshOverview.Rmd", "tools")
+                if meshOvPath:
+                    createDirSafely(os.path.join(self.path, studyName, "doc"))
+                    copyFileSafely(meshOvPath, os.path.join(self.path, studyName, "doc/MeshOverview.Rmd"))
+            if self.type == "run":
+                meshOvPath = findFile("RunOverview.Rmd", "tools")
+                if meshOvPath:
+                    createDirSafely(os.path.join(self.path, studyName, "doc"))
+                    copyFileSafely(meshOvPath, os.path.join(self.path, studyName, "doc/StudyOverview.Rmd"))
             case = caseSelector(os.path.join(self.path, studyName))
             case.create()
 
