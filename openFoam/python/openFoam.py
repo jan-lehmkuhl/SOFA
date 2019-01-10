@@ -612,18 +612,19 @@ class MeshCase(Case):
             print(
                 "Case is already initialized. If you want to reinitialize please delete >system")
         elif self.makeSymlinks():
-            self.Builder.makeMesh()
-            createDirSafely("doc/meshReport")
-            createDirSafely("doc/layerSizing")
-            createDirSafely("doc/meshPics")
             meshReportPath = findFile("MeshReport.Rmd", "tools")
-            if meshReportPath:
-                copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
             layerSizingPath = findFile("LayerSizing.Rmd", "tools")
-            if layerSizingPath:
-                copyFileSafely(layerSizingPath,
-                               "doc/layerSizing/layerSizing.Rmd")
-            self.commitInit()
+            meshStatePath = findFile("mesh.pvsm", "tools")
+            if (meshReportPath and layerSizingPath and meshStatePath):
+                self.Builder.makeMesh()
+                createDirSafely("doc/meshReport")
+                createDirSafely("doc/layerSizing")
+                createDirSafely("doc/meshPics")
+                open("paraview.foam", "a").close()
+                copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
+                copyFileSafely(layerSizingPath,"doc/layerSizing/layerSizing.Rmd")
+                copyFileSafely(meshStatePath, "mesh.pvsm")
+                self.commitInit()
 
 
 class RunCase(Case):
