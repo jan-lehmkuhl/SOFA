@@ -5,6 +5,7 @@ import json
 import os
 import sys
 import shutil
+import webbrowser
 
 foamStructure = {
     "cad":      {"studyName": "01cad"},
@@ -865,5 +866,16 @@ elif entryPoint == "clear":
 elif entryPoint == "commit":
     currentCase = Case("run")
     currentCase.commitChanges()
+elif entryPoint == "overview":
+    files = os.listdir("doc")
+    for fileName in files:
+        if fileName == "MeshOverview.Rmd":
+            os.system('R -e "rmarkdown::render(\'doc/MeshOverview.Rmd\')"')
+            webbrowser.open(os.path.realpath("doc/MeshOverview.html"))
+        elif fileName == "RunOverview.Rmd":
+            os.system('R -e "rmarkdown::render(\'doc/RunOverview.Rmd\')"')
+            webbrowser.open(os.path.realpath("doc/RunOverview.html"))
+        else:
+            print("Unabel to find RMarkdown file")
 elif entryPoint == "test":
     print("Nothing defined")
