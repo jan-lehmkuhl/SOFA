@@ -408,7 +408,6 @@ class Case(object):
                         break
                     elif answer in ["n", "no"]:
                         break
-                break
             elif answer in ["n", "no"]:
                 break
 
@@ -550,7 +549,6 @@ class CadCase(Case):
         if gitignorePath:
             createSymlinkSavely(gitignorePath, os.path.join(
                 self.path, caseName, ".gitignore"))
-        self.commitInit()
 
     def initCase(self):
         if len(os.listdir(".")) <= 1:
@@ -837,9 +835,16 @@ if entryPoint == "initFoam":
             for element in foamStructure:
                 newStudy = Study(element, folder)
                 newStudy.create()
-            os.system('git add .')
-            os.system(
-                'git commit -m "[%s] #INIT \'created project %s\'"' % (folder, folder))
+            while True:
+                print("Commit creation of project %s ? (y/n)" % folder)
+                answer = input()
+                answer = answer.lower()
+                if answer in ["y", "yes"]:
+                    os.system('git add .')
+                    os.system('git commit -m "[%s] #INIT \'created project %s\'"' % (folder, folder))
+                    break
+                elif answer in ["n", "no"]:
+                    break           
         else:
             print("skipping project >" + folder + " since it already exists")
 elif entryPoint == "newCase":
