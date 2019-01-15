@@ -6,6 +6,7 @@ import os
 import sys
 import shutil
 import webbrowser
+import fnmatch
 
 foamStructure = {
     "cad":      {"studyName": "01cad"},
@@ -41,17 +42,47 @@ def copyFileSafely(src, dst):
     # Return:
     #   side effects
     #
-    if os.path.exists(src):
-        if not os.path.isdir(src):
-            if not os.path.exists(dst):
-                shutil.copyfile(src, dst)
-                print("Copying file from >%s< to >%s<" % (src, dst))
-            else:
-                print("Skipping >%s< since it already exists" % src)
-        else:
-            print("Skipping >%s< because it is a directory" % src)
+    if os.path.islink(src):
+        linkTo = os.readlink(src)
+        createSymlinkSavely(linkTo, dst)
     else:
-        print("Unabel to find >%s<" % src)
+        if os.path.exists(src):
+            if not os.path.isdir(src):
+                if not os.path.exists(dst):
+                    shutil.copyfile(src, dst)
+                    print("Copying file from >%s< to >%s<" % (src, dst))
+                else:
+                    print("Skipping >%s< since it already exists" % src)
+            else:
+                print("Skipping >%s< because it is a directory" % src)
+        else:
+            print("Unabel to find >%s<" % src)
+
+def copyFolderSafely(src, dst):
+    # copies a file if it exists
+    #
+    # Args:
+    #   src:   s: path to the file to be copied
+    #   dst:   s: path to copy the file to
+    #
+    # Return:
+    #   side effects
+    #
+    if os.path.islink(src):
+        linkTo = os.readlink(src)
+        createSymlinkSavely(linkTo, dst)
+    else:
+        if os.path.exists(src):
+            if not os.path.isfile(src):
+                if not os.path.exists(dst):
+                    shutil.copytree(src, dst,symlinks=True)
+                    print("Copying folder from >%s< to >%s<" % (src, dst))
+                else:
+                    print("Skipping >%s< since it already exists" % src)
+            else:
+                print("Skipping >%s< because it is a file" % src)
+        else:
+            print("Unabel to find >%s<" % src)
 
 
 def createSymlinkSavely(src, dst):
@@ -344,21 +375,52 @@ class Case(object):
         currentCase = os.path.basename(os.getcwd())
         caseName = self.nextCaseName(os.pardir)
         path = os.path.join(os.pardir, caseName)
-        print("Cloning case >%s< to >%s<" % (currentCase, caseName))
-        shutil.copytree(os.path.join(os.pardir, currentCase),
-                        path, symlinks=True)
         while True:
-            print("Commit cloning of >%s< to >%s< ? (y/n)" %
+            print("Clone results from >%s< to >%s< ? (y/n)" %
                   (currentCase, caseName))
-            answer = input()
-            answer = answer.lower()
+            answer = input().lower()
             if answer in ["y", "yes"]:
-                projName = self.getProject()
-                os.system('git add %s' % path)
-                os.system('git commit -m "[%s%s] #CLONE \'cloning case >%s< to >%s<\'"' % (
-                    projName, caseName.capitalize(), currentCase, caseName))
+                while True:
+                    print("Include results? (y/n)")
+                    answer2 = input().lower()
+                    if answer2 in ["y", "yes"]:
+                        print("Cloning complete case >%s< to >%s<" % (currentCase, caseName))
+                        shutil.copytree(os.path.join(os.pardir, currentCase),
+                                        path, symlinks=True)
+                        break
+                    if answer2 in ["n", "no"]:
+                        print("Cloning case >%s< to >%s< without results" % (currentCase, caseName))
+                        for name in os.listdir("."):
+                            if fnmatch.fnmatch(name, "[1:9]*"):
+                                continue
+                            elif fnmatch.fnmatch(name, "[0:9].[0:9]*"):
+                                continue
+                            elif fnmatch.fnmatch(name, "processor*"):
+                                continue
+                            elif fnmatch.fnmatch(name, "postProcessing*"):
+                                continue
+                            elif fnmatch.fnmatch(name, "log*"):
+                                continue
+                            elif os.path.isfile(name):
+                                copyFileSafely(name,os.path.join(path,name))
+                                continue
+                            else:
+                                copyFolderSafely(name,os.path.join(path,name))
+                        break
+                while True:
+                    print("Commit cloning of >%s< to >%s< ? (y/n)" %
+                            (currentCase, caseName))
+                    answer3 = input().lower()
+                    if answer3 in ["y", "yes"]:
+                        projName = self.getProject()
+                        os.system('git add %s' % path)
+                        os.system('git commit -m "[%s%s] #CLONE \'cloning case >%s< to >%s<\'"' % (
+                            projName, caseName.capitalize(), currentCase, caseName))
+                        break
+                    elif answer3 in ["n", "no"]:
+                        break
                 break
-            elif answer in ["n", "no"]:
+            if answer in ["n", "no"]:
                 break
 
     def clear(self):
