@@ -20,11 +20,45 @@
             "p"                     :   "/run/0/p.incomp"
         },
         "constant" : {
-            "transportProperties"   :   "/mesh/system/surfaceFeaturesDict"
+            "transportProperties"   :   "/run/constant/transportProperties"
         },
         "system" : {
-            "fvSchemes"             :   "/mesh/system/surfaceFeaturesDict",
-            "fvSolution"            :   "/mesh/system/surfaceFeaturesDict"
+            "controlDict"               :   "/run/system/simpleFoam/controlDict",
+            "fvSchemes"                 :   "/run/system/simpleFoam/fvSchemes",
+            "fvSolution"                :   "/run/system/simpleFoam/fvSolution"
+        }
+    },
+
+    "pimpleFoam" : {
+        "0" : {
+            "U"                     :   "/run/0/U",
+            "p"                     :   "/run/0/p.comp"
+        },
+        "constant" : {
+            "transportProperties"   :   "/run/constant/transportProperties"
+        },
+        "system" : {
+            "controlDict"               :   "/run/system/pimpleFoam/controlDict",
+            "fvSchemes"                 :   "/run/system/pimpleFoam/fvSchemes",
+            "fvSolution"                :   "/run/system/pimpleFoam/fvSolution"
+        }
+    },
+
+    "rhoPimpleFoam" : {
+        "0" : {
+            "U"                         :   "/run/0/U",
+            "p"                         :   "/run/0/p.comp",
+            "T"                         :   "/run/0/T",
+            "alphat"                    :   "/run/0/alphat"
+        },
+        "constant" : {
+            "transportProperties"       :   "/run/constant/transportProperties",
+            "thermophysicalProperties"  :   "/run/constant/thermophysicalProperties"
+        },
+        "system" : {
+            "controlDict"               :   "/run/system/rhoPimpleFoam/controlDict",
+            "fvSchemes"                 :   "/run/system/rhoPimpleFoam/fvSchemes",
+            "fvSolution"                :   "/run/system/rhoPimpleFoam/fvSolution"
         }
     },
 
