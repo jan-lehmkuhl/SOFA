@@ -1,3 +1,17 @@
 {
-    "cadLink"   : ""
+    "cadLink"   : "",
+
+    "nCores"    : "",
+
+    "meshSettings" : {
+        
+        "blockMesh"             : "True",
+        "surfaceFeatures"       : "True",
+        "snappyHexMesh"         : "True",
+        "checkMesh"             : "True",
+        "topoSet"               : "False",
+        "createPatches"         : "False",
+
+        "report"                : "True"
+    }
 }
