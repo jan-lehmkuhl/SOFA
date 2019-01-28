@@ -471,6 +471,7 @@ class Case(object):
                         break
                     elif answer in ["n", "no"]:
                         break
+                break
             elif answer in ["n", "no"]:
                 break
 
