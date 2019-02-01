@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------#
 # Contributor: Sebastian Tueck                                             #
 # Last Change: February 01 2019                                            #
-# Topic:       Meshing process                                             #
+# Topic:       Solving process                                             #
 #--------------------------------------------------------------------------#
 
 import sys
@@ -14,6 +14,9 @@ import datetime
 import hashlib
 import pickle
 import fnmatch
+import json
+import subprocess
+import openFoam
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
@@ -79,44 +82,37 @@ def boolChecker(value):
         print("Unknown value >%s< please enter True or False" % value)
         sys.exit(0)
 
-class foamMesher(object):
+class foamRunner(object):
     # class for openFoam meshing procedures
 
     def __init__(self):
-        self.startMeshing = datetime.datetime.now()
+        # general info
+        self.startSolving = datetime.datetime.now()  
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
-        self.meshJson = loadJson("mesh.json")
-        self.nCores = int(self.meshJson["buildSettings"]["nCores"])
+        # info about the state of case
         self.nProcFolder = self.getNoProcFolder()
-        self.fileChangeDict = self.compareFileStates()
-        self.settings = self.meshJson["meshSettings"]
-        self.settingsBlockMesh = boolChecker(self.settings["blockMesh"])
-        self.settingsSurfaceFeatures = boolChecker(self.settings["surfaceFeatures"])
-        self.settingsSnappyHexMesh = boolChecker(self.settings["snappyHexMesh"])
-        self.settingsCheckMesh = boolChecker(self.settings["checkMesh"])
-        self.settingsTopoSet = boolChecker(self.settings["topoSet"])
-        self.settingsCreatePatches = boolChecker(self.settings["createPatches"])
-        self.settingsReport = boolChecker(self.settings["report"])
-        self.procHandler = procHandler(self.nCores)
-        if self.settingsBlockMesh:
-            if self.fileChangeDict["blockMeshDict"] or self.fileChangeDict["points"]:
-                self.runBlockMesh = True
-            else:
-                self.runBlockMesh = False
-        else:
-            self.runBlockMesh = False
+        self.fileChangeDict = self. compareFileStates()
+        # info from run.json
+        self.runJson = loadJson("run.json")
+        self.nCores = int(self.runJson["runSettings"]["nCores"])
+        self.solver = self.runJson["buildSettings"]["solver"]
+        self.runRenumberMesh = boolChecker(self.runJson["runSettings"]["renumberMesh"])
+        self.runPotentialFoam = boolChecker(self.runJson["runSettings"]["potentialFoam"])
+        self.runSolver = boolChecker(self.runJson["runSettings"]["solver"])
+        self.runReconstructPar = boolChecker(self.runJson["runSettings"]["reconstructPar"])
+        self.runReport = boolChecker(self.runJson["runSettings"]["report"])
+        # decision wether to run decomposePar       
         if self.nCores > 1:
-            if self.fileChangeDict["decomposeParDict"]:
-                self.runDecomposePar = True
-            elif self.runBlockMesh:
+            if self.fileChangeDict["system/decomposeParDict"]:
                 self.runDecomposePar = True
             else:
                 self.runDecomposePar = False
         else:
             self.runDecomposePar = False
+        # init process handler 
+        self.procHandler = procHandler(self.nCores)
         
-
     ###################################################################
     # general purpose 
     ###################################################################
@@ -170,18 +166,16 @@ class foamMesher(object):
         # Return:
         #
         fileStates = {}
-        for folder in  ["system", "constant"]:
+        for folder in  ["system", "constant", "0.org"]:
             for fileName in os.listdir(folder):
                 if os.path.isfile(os.path.join(folder,fileName)):
-                    fileStates[fileName] = md5(os.path.join(folder,fileName))
+                    fileStates[os.path.join(folder,fileName)] = md5(os.path.join(folder,fileName))
         if os.path.exists("constant/polyMesh/points"):
-            fileStates["points"] = md5("constant/polyMesh/points")
-        else:
-            fileStates["points"] = ""
+            fileStates["constant/polyMesh/points"] = md5("constant/polyMesh/points")
         return(fileStates)
 
     def compareFileStates(self):
-        # compares hashes of files to find changes 
+        # compares hashes of files to find changes
         #
         # Args:
         #
@@ -200,13 +194,14 @@ class foamMesher(object):
                     fileChangeDict[fileName] = True
             else:
                 fileChangeDict[fileName] = True
-        return(fileChangeDict)      
+        return(fileChangeDict)
+
 
     ###################################################################
     # graphical output
     ###################################################################
 
-    def printHeaderMesh(self):
+    def printHeader(self):
         # prints header for meshing process
         #
         # Args:
@@ -214,44 +209,18 @@ class foamMesher(object):
         # Return:
         #
         print("\n==========================================================================")
-        print("Meshing with OpenFoam %s on %s using %s cores" %(self.foamVer, self.localHost, self.nCores) )
+        print("Solving with OpenFoam %s on %s using %s cores" %(self.foamVer, self.localHost, self.nCores) )
         print("==========================================================================\n")
 
-    def printHeaderLayer(self):
-        # prints header for layering process
-        #
-        # Args:
-        #
-        # Return:
-        #
-        print("\n==========================================================================")
-        print("Meshing boundary layers with OpenFoam %s on %s" %(self.foamVer, self.localHost) )
-        print("==========================================================================\n")
-    
-    def printHeaderFinalize(self):
-        # prints header for layering process
-        #
-        # Args:
-        #
-        # Return:
-        #
-        print("\n==========================================================================")
-        print("Finalizing mesh with OpenFoam %s on %s using %s cores" %(self.foamVer, self.localHost, self.nCores) )
-        print("==========================================================================\n")
-
-    def printFooterMesh(self):
+    def printFooter(self):
         # prints footer for meshing process
         #
         # Args:
         #
         # Return:
         #
-        if 'Failed' in open("log/checkMesh.log").read():
-            meshQuality = '\033[91m' + "flawed" + '\033[0m'
-        else:
-            meshQuality = '\033[32m' + "good" + '\033[0m'
         print("\n==========================================================================")
-        print("Finished mesh with %s quality in %s" %( meshQuality, (datetime.datetime.now()-self.startMeshing) ))
+        print("Finished solving in %s" % (datetime.datetime.now()-self.startRun) )
         print("==========================================================================\n")
 
     def printFooterFailed(self):
@@ -262,7 +231,7 @@ class foamMesher(object):
         # Return:
         #
         print("\n==========================================================================")
-        print("Meshing failed after %s" % (datetime.datetime.now()-self.startMeshing))
+        print("Solving failed after %s" % (datetime.datetime.now()-self.startRun))
         print("==========================================================================")
 
     ###################################################################
@@ -279,11 +248,10 @@ class foamMesher(object):
         procStart = datetime.datetime.now()
         self.procHandler.printProcStart("Cleaning Case")
         self.procHandler.general(["foamCleanTutorials"])
-        self.procHandler.general(["foamCleanPolyMesh"])
         if os.path.exists(".fileStates.data"):
             os.remove(".fileStates.data")
-        if os.path.exists("doc/meshReport/meshReport.html"):
-            os.remove("doc/meshReport/meshReport.html")
+        if os.path.exists("doc/runReport/runReport.html"):
+            os.remove("doc/runReport/runReport.html")
         self.procHandler.printProcEnd("Cleaning Case", (datetime.datetime.now()-procStart))
 
     def generateReport(self):
@@ -293,101 +261,37 @@ class foamMesher(object):
         #
         # Return:
         #
-        cmd = ['R', '-e' , 'rmarkdown::render(\'doc/meshReport/meshReport.Rmd\')']
-        text = "Generating mesh report"
-        logFilePath = os.path.join("log",str("MeshReport" + ".log"))
-        self.procHandler.general(cmd, text, logFilePath)
-
-    def removeBoundaryDirs(self):
-        # removes all timfolder above 2
-        #
-        # Args:
-        #
-        # Return:
-        #
-        procStart = datetime.datetime.now()
-        self.procHandler.printProcStart("Removing previous layers")
-        timeDir = [f for f in os.listdir('.') if fnmatch.fnmatch(f, "[3:9]")]
-        procDir = [f for f in os.listdir('.') if fnmatch.fnmatch(f, "processor*")]
-        for dirName in timeDir:
-            shutil.rmtree(dirName)
-        for procName in procDir:
-            procTimeDirs = [f for f in os.listdir(procName) if fnmatch.fnmatch(f, "[3:9]")]
-            for procTimeDir in procTimeDirs:
-                shutil.rmtree(os.path.join(procName,procTimeDir))
-        self.procHandler.printProcEnd("Removing previous layers", (datetime.datetime.now()-procStart))
-        
+        cmd = ['R', '-e' , 'rmarkdown::render(\'doc/runReport/runReport.Rmd\')']
+        text = "Generating run report"
+        logFilePath = os.path.join("log",str("runReport" + ".log"))
+        self.procHandler.general(cmd, text, logFilePath)      
 
     ###################################################################
     # routines
     ###################################################################
 
-    def mesh(self):
+    def run(self):
         try:
-            self.startMeshing = datetime.datetime.now()
-            self.printHeaderMesh()
-            if self.runBlockMesh or self.runDecomposePar:
-                self.clean()
-            if self.settingsSurfaceFeatures:
-                self.procHandler.foam("surfaceFeatures", serial = True)
-            if self.runBlockMesh:
-                self.procHandler.foam("blockMesh", serial = True)
-                if os.path.exists("dynamicCode"):
-                    shutil.rmtree("dynamicCode")
+            self.startRun = datetime.datetime.now()
+            self.printHeader()
             if self.runDecomposePar:
-                self.procHandler.general(["foamDictionary", "system/decomposeParDict", "-entry", "numberOfSubdomains", "-set", str(self.nCores)])
-                self.procHandler.general(["foamDictionary", "system/decomposeParDict", "-entry", "method", "-set", "scotch"])
                 self.procHandler.foam("decomposePar", serial = True)
-            if self.settingsSnappyHexMesh:
-                self.procHandler.foam("snappyHexMesh")
-            if self.settingsCreatePatches:
-                self.procHandler.foam("createPatch")
-            if self.settingsTopoSet:
-                self.procHandler.foam("topoSet")
-            if self.settingsCheckMesh:
-                self.procHandler.foam("checkMesh", "-meshQuality")
-            if self.settingsReport:
+            if self.runPotentialFoam:
+                self.procHandler.foam("potentialFoam")
+            if self.runRenumberMesh:
+                self.procHandler.foam("renumberMesh")
+            if self.runSolver:
+                self.procHandler.foam(self.solver)
+            if self.runReconstructPar:
+                self.procHandler.foam("reconstructPar", "-newTimes", serial=True)
+            if self.runReport:
                 self.generateReport()
         except AssertionError:
             self.printFooterFailed()
             self.saveFileStates()
         else:
-            self.printFooterMesh()
+            self.printFooter()
             self.saveFileStates()
-
-    def meshLayer(self):
-        self.startMeshing = datetime.datetime.now()
-        self.printHeaderLayer()
-        self.removeBoundaryDirs()
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "castellatedMesh", "-set", "false"])
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "snap", "-set", "false"])
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "addLayers", "-set", "true"])        
-        self.procHandler.foam("snappyHexMesh")
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "castellatedMesh", "-set", "true"])
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "snap", "-set", "true"])
-        self.procHandler.foam("checkMesh", "-meshQuality")
-        self.generateReport()
-        self.saveFileStates()
-        self.printFooterMesh()
-
-    def cleanMesh(self):
-        self.startMeshing = datetime.datetime.now()
-        self.clean()
-
-    def finalizeMesh(self):
-        self.startMeshing = datetime.datetime.now()
-        self.printHeaderFinalize()
-        if not self.nProcFolder == 0:
-            self.procHandler.general(["reconstructParMesh", "-latestTime"], "Reconstructing final mesh")
-        timeDirs = [f for f in os.listdir('.') if fnmatch.fnmatch(f, "[1,2,3,4,5,6,7,8,9]")]
-        latestTime = max(timeDirs)
-        start = datetime.datetime.now()
-        self.procHandler.printProcStart("Copying mesh")
-        if os.path.exists("constant/polyMesh"):
-            shutil.rmtree("constant/polyMesh")
-        shutil.copytree(os.path.join(latestTime, "polyMesh"), "constant/polyMesh")
-        self.procHandler.printProcEnd("Copying mesh", (datetime.datetime.now() - start))
-        self.printFooterMesh()      
 
     def view(self):
         print("Starting paraFoam")
@@ -401,15 +305,13 @@ class foamMesher(object):
 ###################################################################
 
 entryPoint = sys.argv[1]
-mesher = foamMesher()
+runner = foamRunner()
 
-if entryPoint == "mesh":
-    mesher.mesh()
-if entryPoint == "cleanMesh":
-    mesher.cleanMesh()
-if entryPoint == "meshLayer":
-    mesher.meshLayer()
+if entryPoint == "run":
+    runner.run()
+if entryPoint == "cleanRun":
+    runner.clean()
+    builder = openFoam.caseSelector()
+    builder.makeSymlinks()
 if entryPoint == "view":
-    mesher.view()
-if entryPoint == "finalizeMesh":
-    mesher.finalizeMesh()
+    runner.view()

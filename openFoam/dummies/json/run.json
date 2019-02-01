@@ -1,0 +1,26 @@
+{
+    "name"                  :   "",
+    "description"           :   "",       
+
+    "buildSettings" : {
+        "meshLink"          :   "",
+
+        "solver"            :   "",
+        "turbulenceModel"   :   "",
+
+        "dynamicMesh"       :   "False",
+        "porousZone"        :   "False" 
+    },
+
+    "runSettings" : {
+        "nCores"            :   "",
+
+        "renumberMesh"      :   "True",
+        "potentialFoam"     :   "True",
+        "solver"            :   "True",
+        "reconstructPar"    :   "True",
+
+        "report"            :   "True"
+    }
+    
+}

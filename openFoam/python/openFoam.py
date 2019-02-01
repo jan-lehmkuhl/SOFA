@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+#--------------------------------------------------------------------------#
+# Contributor: Sebastian Tueck                                             #
+# Last Change: February 01 2019                                            #
+# Topic:       Project builder                                             #
+#--------------------------------------------------------------------------#
+
 # import librarys
 import json
 import os
@@ -8,130 +14,11 @@ import shutil
 import webbrowser
 import fnmatch
 
-foamStructure = {
-    "cad":      {"studyName": "01cad"},
-    "mesh":     {"studyName": "02mesh",        "linkName": "cadLink",     "linkType": "cad"},
-    "run":      {"studyName": "03run",         "linkName": "meshLink",    "linkType": "mesh"},
-    "analysis": {"studyName": "04analysis",    "linkName": "caseLinks",   "linkType": "run"}
-}
-
-
-def createDirSafely(dst):
-    # creates a directory recursively if it doesn't exist
-    #
-    # Args:
-    #   dst:   the path to the directory
-    #
-    # Return:
-    #   side effects
-    #
-    if not os.path.isdir(dst):
-        os.makedirs(dst)
-        print("Creating >%s<" % dst)
-    else:
-        print("Skipping >%s< since it already exists" % dst)
-
-
-def copyFileSafely(src, dst):
-    # copies a file if it exists
-    #
-    # Args:
-    #   src:   s: path to the file to be copied
-    #   dst:   s: path to copy the file to
-    #
-    # Return:
-    #   side effects
-    #
-    if os.path.islink(src):
-        linkTo = os.readlink(src)
-        createSymlinkSavely(linkTo, dst)
-    else:
-        if os.path.exists(src):
-            if not os.path.isdir(src):
-                if not os.path.exists(dst):
-                    shutil.copyfile(src, dst)
-                    print("Copying file from >%s< to >%s<" % (src, dst))
-                else:
-                    print("Skipping >%s< since it already exists" % src)
-            else:
-                print("Skipping >%s< because it is a directory" % src)
-        else:
-            print("Unabel to find >%s<" % src)
-
-def copyFolderSafely(src, dst):
-    # copies a file if it exists
-    #
-    # Args:
-    #   src:   s: path to the file to be copied
-    #   dst:   s: path to copy the file to
-    #
-    # Return:
-    #   side effects
-    #
-    if os.path.islink(src):
-        linkTo = os.readlink(src)
-        createSymlinkSavely(linkTo, dst)
-    else:
-        if os.path.exists(src):
-            if not os.path.isfile(src):
-                if not os.path.exists(dst):
-                    shutil.copytree(src, dst,symlinks=True)
-                    print("Copying folder from >%s< to >%s<" % (src, dst))
-                else:
-                    print("Skipping >%s< since it already exists" % src)
-            else:
-                print("Skipping >%s< because it is a file" % src)
-        else:
-            print("Unabel to find >%s<" % src)
-
-
-def createSymlinkSavely(src, dst):
-    # creates a symbolic link between src and dst if the source
-    # exists and the dst doesn't. If dst exists but is already
-    # a symbolic link it is overwritten.
-    #
-    # Args:
-    #   src:    s: path to the source file from current destination
-    #   dst:    s: path the the destination from current destination
-    #
-    # Return:
-    #   side effects
-    #
-    if os.path.exists(src):
-        relSrc = os.path.relpath(src, os.path.dirname(dst))
-        if not os.path.exists(dst):
-            os.symlink(relSrc, dst)
-            print("Creating link from >%s< to >%s<" % (src, dst))
-        elif os.path.islink(dst):
-            if not os.readlink(dst) == relSrc:
-                os.remove(dst)
-                os.symlink(relSrc, dst)
-                print(
-                    "Overwriting existing link with link from >%s< to >%s<" % (src, dst))
-            else:
-                print("Skipping link to >%s< because it already exists" % src)
-        else:
-            print("Unabel to create target >%s< since it exists" % dst)
-    else:
-        print("Unabel to find >%s<" % src)
-
-
-def loadJson(jsonPath):
-    # Loads a passed .json file if it exists
-    #
-    # Args:
-    #   jsonPath:   s: the path to a Json file
-    #
-    # Return:
-    #   jsonPy:     d: parsed json
-    #
-    if os.path.exists(jsonPath):
-        with open(jsonPath, 'r') as jsonFile:
-            jsonPy = json.load(jsonFile)
-            return(jsonPy)
-    else:
-        print("json file >%s< does not exis" % jsonPath)
-
+from fileHandling import createDirSafely
+from fileHandling import createSymlinkSavely
+from fileHandling import copyFileSafely
+from fileHandling import copyFolderSafely
+from fileHandling import loadJson
 
 def findFile(fileName, turnFolder):
     # traverses a tree upwards till it finds turnfolder and then dives into
@@ -229,7 +116,6 @@ def caseSelector(path=None):
         print("Unknown study type >%s<" % studyName)
         return(False)
 
-
 class Study(object):
     # base class to handle all operations related to studys
 
@@ -269,7 +155,6 @@ class Study(object):
             case = caseSelector(os.path.join(self.path, studyName))
             case.create()
 
-
 class Case(object):
     # base class to handle all operations related to cases
 
@@ -285,7 +170,7 @@ class Case(object):
         self.symlinksClean = False
         if os.path.exists(self.path + self.type + ".json"):
             self.caseJson = loadJson(self.type + ".json")
-            self.linkedCase = self.caseJson[foamStructure[self.type]["linkName"]]
+            self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.type]["linkName"]]
             if self.linkedCase:
                 if isinstance(self.linkedCase, str):
                     self.pathToLinkedCase = findFolder(
@@ -350,7 +235,7 @@ class Case(object):
         #   side effects
         #
         jsonPath = findFile(self.type + ".json", "tools")
-        makePath = findFile("Makefile_case", "tools")
+        makePath = findFile(str("Makefile_" + self.type), "tools")
         gitignorePath = findFile(".gitignore_foam", "tools")
         caseName = self.nextCaseName()
         if (jsonPath and makePath):
@@ -376,7 +261,7 @@ class Case(object):
         caseName = self.nextCaseName(os.pardir)
         path = os.path.join(os.pardir, caseName)
         while True:
-            print("Clone results from >%s< to >%s< ? (y/n)" %
+            print("Clone case from >%s< to >%s< ? (y/n)" %
                   (currentCase, caseName))
             answer = input().lower()
             if answer in ["y", "yes"]:
@@ -390,6 +275,7 @@ class Case(object):
                         break
                     if answer2 in ["n", "no"]:
                         print("Cloning case >%s< to >%s< without results" % (currentCase, caseName))
+                        os.makedirs(os.path.join(os.pardir, caseName))
                         for name in os.listdir("."):
                             if fnmatch.fnmatch(name, "[1:9]*"):
                                 continue
@@ -408,7 +294,7 @@ class Case(object):
                                 copyFolderSafely(name,os.path.join(path,name))
                         break
                 while True:
-                    print("Commit cloning of >%s< to >%s< ? (y/n)" %
+                    print("\nCommit cloning of >%s< to >%s< ? (y/n)" %
                             (currentCase, caseName))
                     answer3 = input().lower()
                     if answer3 in ["y", "yes"]:
@@ -605,7 +491,7 @@ class CadCase(Case):
         createDirSafely(os.path.join(self.path, caseName, "vtk"))
         createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
         createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
-        makePath = findFile("Makefile_case", "tools")
+        makePath = findFile("Makefile_cad", "tools")
         gitignorePath = findFile(".gitignore_cad", "tools")
         if makePath:
             createSymlinkSavely(makePath, os.path.join(
@@ -698,7 +584,6 @@ class MeshCase(Case):
                 copyFileSafely(meshStatePath, "mesh.pvsm")
                 self.commitInit()
 
-
 class RunCase(Case):
     # Class for run cases
 
@@ -706,7 +591,7 @@ class RunCase(Case):
         super().__init__("run", path)
         self.name = "RunCase"
         if self.caseJson:
-            self.Builder = foamBuilder(self.caseJson["OpenFOAMSettings"])
+            self.Builder = foamBuilder(self.caseJson["caseSettings"])
 
     def makeSymlinks(self):
         # specialized method to create all symlinks needed for a case
@@ -746,7 +631,6 @@ class RunCase(Case):
             self.Builder.makeDynamicMesh()
             self.Builder.makePorousZone()
             self.commitInit()
-
 
 class AnalysisCase(Case):
     # Class for analysis cases
@@ -888,7 +772,29 @@ class foamBuilder(object):
                                 self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
 
 
+###############################################################################
+# MAIN PROGRAMM
+###############################################################################
+
 entryPoint = sys.argv[1]
+
+# find project.json 
+i = 0
+wd = os.getcwd()
+subdirs = os.listdir(os.getcwd())
+while i < 4:
+    if "project.json" in subdirs:
+        projectJsonPath = os.path.join(wd, "project.json" )
+        projectJson = loadJson(projectJsonPath)
+        foamStructure = projectJson["foamStructure"]
+        break
+    else:
+        wd = os.path.join(wd, os.path.pardir)
+        subdirs = os.listdir(wd)
+        i += 1
+else:
+    print("Could not find project.json")
+    sys.exit(0)
 
 if entryPoint == "initFoam":
     projectStruct = loadJson('project.json')
