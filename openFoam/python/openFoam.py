@@ -572,8 +572,8 @@ class MeshCase(Case):
         elif self.makeSymlinks():
             meshReportPath = findFile("MeshReport.Rmd", "tools")
             layerSizingPath = findFile("LayerSizing.Rmd", "tools")
-            meshStatePath = findFile("mesh.pvsm", "tools")
-            if (meshReportPath and layerSizingPath and meshStatePath):
+            #meshStatePath = findFile("mesh.pvsm", "tools")
+            if (meshReportPath and layerSizingPath): # and meshStatePath):
                 self.Builder.makeMesh()
                 createDirSafely("doc/meshReport")
                 createDirSafely("doc/layerSizing")
@@ -581,7 +581,7 @@ class MeshCase(Case):
                 open("paraview.foam", "a").close()
                 copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
                 copyFileSafely(layerSizingPath,"doc/layerSizing/layerSizing.Rmd")
-                copyFileSafely(meshStatePath, "mesh.pvsm")
+                #copyFileSafely(meshStatePath, "mesh.pvsm")
                 self.commitInit()
 
 class RunCase(Case):
@@ -591,7 +591,7 @@ class RunCase(Case):
         super().__init__("run", path)
         self.name = "RunCase"
         if self.caseJson:
-            self.Builder = foamBuilder(self.caseJson["caseSettings"])
+            self.Builder = foamBuilder(self.caseJson["buildSettings"])
 
     def makeSymlinks(self):
         # specialized method to create all symlinks needed for a case

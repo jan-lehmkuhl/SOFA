@@ -87,7 +87,7 @@ class foamMesher(object):
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
         self.meshJson = loadJson("mesh.json")
-        self.nCores = int(self.meshJson["buildSettings"]["nCores"])
+        self.nCores = int(self.meshJson["meshSettings"]["nCores"])
         self.nProcFolder = self.getNoProcFolder()
         self.fileChangeDict = self.compareFileStates()
         self.settings = self.meshJson["meshSettings"]
@@ -115,7 +115,15 @@ class foamMesher(object):
                 self.runDecomposePar = False
         else:
             self.runDecomposePar = False
-        
+        if self.settingsSurfaceFeatures:
+            for fileName in os.listdir("constant/triSurface"):
+                if fnmatch.fnmatch(fileName, "*.eMesh"):
+                    featureEdgesPresent = True
+                    break
+            if not self.fileChangeDict["surfaceFeaturesDict"] and featureEdgesPresent:
+                self.runSurfaceFeatures = False
+        else: 
+            self.runSurfaceFeatures = True
 
     ###################################################################
     # general purpose 
@@ -328,15 +336,15 @@ class foamMesher(object):
             self.printHeaderMesh()
             if self.runBlockMesh or self.runDecomposePar:
                 self.clean()
-            if self.settingsSurfaceFeatures:
+            if self.runSurfaceFeatures:
                 self.procHandler.foam("surfaceFeatures", serial = True)
             if self.runBlockMesh:
                 self.procHandler.foam("blockMesh", serial = True)
                 if os.path.exists("dynamicCode"):
                     shutil.rmtree("dynamicCode")
             if self.runDecomposePar:
-                self.procHandler.general(["foamDictionary", "system/decomposeParDict", "-entry", "numberOfSubdomains", "-set", str(self.nCores)])
-                self.procHandler.general(["foamDictionary", "system/decomposeParDict", "-entry", "method", "-set", "scotch"])
+                self.procHandler.general(["foamDictionary", "system/decomposeParDict", "-disableFunctionEntries", "-entry", "numberOfSubdomains", "-set", str(self.nCores)])
+                self.procHandler.general(["foamDictionary", "system/decomposeParDict", "-disableFunctionEntries", "-entry", "method", "-set", "scotch"])
                 self.procHandler.foam("decomposePar", serial = True)
             if self.settingsSnappyHexMesh:
                 self.procHandler.foam("snappyHexMesh")
@@ -359,12 +367,12 @@ class foamMesher(object):
         self.startMeshing = datetime.datetime.now()
         self.printHeaderLayer()
         self.removeBoundaryDirs()
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "castellatedMesh", "-set", "false"])
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "snap", "-set", "false"])
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "addLayers", "-set", "true"])        
+        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "castellatedMesh", "-set", "false"])
+        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "snap", "-set", "false"])
+        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "addLayers", "-set", "true"])        
         self.procHandler.foam("snappyHexMesh")
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "castellatedMesh", "-set", "true"])
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-entry", "snap", "-set", "true"])
+        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "castellatedMesh", "-set", "true"])
+        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "snap", "-set", "true"])
         self.procHandler.foam("checkMesh", "-meshQuality")
         self.generateReport()
         self.saveFileStates()

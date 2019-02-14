@@ -74,9 +74,9 @@ def boolChecker(value):
     # Return:
     #   bool:
     #
-    if value.lower() in ["y", "yes", "true"]:
+    if value.lower() in ["y", "t", "yes", "true", "on"]:
         return(True)
-    elif value.lower() in ["n","no", "false"]:
+    elif value.lower() in ["n", "f", "no", "false", "off"]:
         return(False)
     else:
         print("Unknown value >%s< please enter True or False" % value)
@@ -92,7 +92,7 @@ class foamRunner(object):
         self.localHost = os.uname()[1]
         # info about the state of case
         self.nProcFolder = self.getNoProcFolder()
-        self.fileChangeDict = self. compareFileStates()
+        self.fileChangeDict = self.compareFileStates()
         # info from run.json
         self.runJson = loadJson("run.json")
         self.nCores = int(self.runJson["runSettings"]["nCores"])
@@ -274,12 +274,23 @@ class foamRunner(object):
         try:
             self.startRun = datetime.datetime.now()
             self.printHeader()
+            CaseFiles = os.listdir(".")
+            if "0.org" in CaseFiles:
+                if "0" in CaseFiles:
+                    shutil.rmtree("0")
+                shutil.copytree("0.org", "0")
+            elif "0" in CaseFiles:
+                shutil.copytree("0", "0.org")
+            else:
+                print("No boundary files present")
+                self.procHandler.printFooterFailed
+                sys.exit(1)
             if self.runDecomposePar:
                 self.procHandler.foam("decomposePar", serial = True)
+            if self.runRenumberMesh:
+                self.procHandler.foam("renumberMesh", "-overwrite")
             if self.runPotentialFoam:
                 self.procHandler.foam("potentialFoam")
-            if self.runRenumberMesh:
-                self.procHandler.foam("renumberMesh")
             if self.runSolver:
                 self.procHandler.foam(self.solver)
             if self.runReconstructPar:
