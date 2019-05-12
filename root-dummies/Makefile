@@ -50,16 +50,16 @@ all:
 	echo $(project_PROJECTroot_dir) 
 
 installrequirements: 
-	make -C tools/simulation-projects installrequirements
+	make -C tools/framework installrequirements
 
 init: 
 	$(mkdir) docs
-	cp tools/simulation-projects/docs/dummies/Makefile docs
+	cp tools/framework/docs/dummies/Makefile docs
 	make -C docs initfolders
 	$(mkdir) mesh
 
 initcfx:
-	make -C tools/simulation-projects/src-cfx folder
+	make -C tools/framework/src-cfx folder
 
 initfoam: 
 	if [ ! -d tools/openFoam-setup ]; 	  then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;

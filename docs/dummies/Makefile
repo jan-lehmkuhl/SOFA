@@ -1,5 +1,5 @@
 
-include ../tools/simulation-projects/global-make.mk
+include ../tools/framework/global-make.mk
 
 initfolders:
 	$(mkdir) test1
