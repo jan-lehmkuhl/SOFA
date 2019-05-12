@@ -6,43 +6,27 @@ foamFolder      = $(shell node -p "require('./project.json').foamFolders[0]")
 
 
 
-###############
-#### TESTS ####
-###############
+#####################################################################
+# TESTS
+#####################################################################
 
-# needs sudo apt-get install nodejs-legacy
 define GetFromProjJson
 	$(shell node -p "require('./project.json').$(1)")
 endef
-
-testValue     = $(shell node -p "require('./project.json').name")
-testValue2    = $(call GetFromProjJson,name)
-testValue3    = $(shell node -p "require('./project.json').list[0]")
-testValue4    = $(project_repository_dir)
-
-# testValue := $(shell python project.json name)
-
-
-jsontest: 
-	echo "test1" $(testValue)
-	echo "test2" $(testValue2)
-	echo "test3" $(testValue3)
-	echo "global-rm" $(rm)
-#	echo "PROJECT $(PROJECT) 
 
 rmfoam:
 	$(rm) $(foamFolder)
 	ls -la
 
 
-#################################################################
+#####################################################################
 # General user settings
-#################################################################
+#####################################################################
 
 
-#################################################################
+#####################################################################
 # targets
-#################################################################
+#####################################################################
 
 all: 
 	pwd
@@ -51,6 +35,7 @@ all:
 
 installrequirements: 
 	make -C tools/framework installrequirements
+	make -C tools/framework requirementtest
 
 init: 
 	$(mkdir) docs

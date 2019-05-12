@@ -20,11 +20,27 @@ init: new-project project-folders project-dummy-files git-init submodules
 # changes directory and executes target
 #	echo "all done" 
 
+
+#####################################################################
+# installation setup
+#####################################################################
+
+jsonValue     = $(shell node -p "require('./root-dummies/project.json').foamFolders[0]")
+
+requirementtest: 
+	echo "show-json-value-afterwards:   " $(jsonValue) 
+	python   --version
+	python3  --version
+
 installrequirements: 
-	sudo apt-get install nodejs-legacy
+	sudo apt-get update
+	sudo apt-get install nodejs
 # install https://nodejs.org/en/download/ for macOS
-	python --version
-	python3 --version
+
+
+#####################################################################
+# project-setup
+#####################################################################
 
 new-project: clean
 	$(mkdir) $(project-folder)
