@@ -25,10 +25,10 @@ init: new-project project-folders project-dummy-files git-init submodules
 # installation setup
 #####################################################################
 
-jsonValue     = $(shell node -p "require('./root-dummies/project.json').foamFolders[0]")
+exampleJsonValue     = $(shell node -p "require('./root-dummies/project.json').foamFolders[0]")
 
 requirementtest: 
-	echo "show-json-value-afterwards:   " $(jsonValue) 
+	echo "show-json-value-afterwards:   " $(exampleJsonValue) 
 	python   --version
 	python3  --version
 

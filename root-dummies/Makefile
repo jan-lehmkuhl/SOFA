@@ -1,4 +1,11 @@
 
+# project-root Makefile 
+
+
+#####################################################################
+# preparation
+#####################################################################
+
 include tools/framework/global-make.mk
 
 cfxFolder       = $(shell node -p "require('./project.json').cfxFolders[0]")
@@ -37,17 +44,20 @@ installrequirements:
 	make -C tools/framework installrequirements
 	make -C tools/framework requirementtest
 
-init: 
+initdocs:
 	$(mkdir) docs
 	cp tools/framework/docs/dummies/Makefile docs
-	make -C docs initfolders
+	make -C docs init
+
+initmesh: 
 	$(mkdir) mesh
 
 initcfx:
 	make -C tools/framework/src-cfx folder
 
 initfoam: 
-	if [ ! -d tools/openFoam-setup ]; 	  then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
+	if [ ! -d docs ] ;                    then make initdocs    ; fi ;
+	if [ ! -d tools/openFoam-setup ];     then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
 	if [ ! -d tools/openFoam-reporting ]; then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/r_openfoam openFoam-reporting;        fi;
 	python3 tools/framework/openFoam/python/openFoam.py initFoam
 
