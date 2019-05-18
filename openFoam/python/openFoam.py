@@ -240,11 +240,14 @@ class Case(object):
         caseName = self.nextCaseName()
         if (jsonPath and makePath):
             createDirSafely(os.path.join(self.path, caseName))
+            ### Makefile
             #copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
             createSymlinkSavely(makePath, os.path.join(
                 self.path, caseName, "Makefile"))
+            ### json
             copyFileSafely(jsonPath, os.path.join(
                 self.path, caseName, self.type + ".json"))
+            ### .gitignore
             createSymlinkSavely(gitignorePath, os.path.join(
                 self.path, caseName, ".gitignore"))
         return(True)
@@ -776,6 +779,8 @@ class foamBuilder(object):
 # MAIN PROGRAMM
 ###############################################################################
 
+print("start openFoam.py")
+
 entryPoint = sys.argv[1]
 
 # find project.json 
@@ -848,3 +853,4 @@ elif entryPoint == "overview":
             print("Unabel to find RMarkdown file")
 elif entryPoint == "test":
     print("Nothing defined")
+print("finished openFoam.py")

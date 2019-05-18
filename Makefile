@@ -1,4 +1,6 @@
 
+# simulation-projects root-Makefile in ./tools/framework
+
 include global-make.mk
 
 
