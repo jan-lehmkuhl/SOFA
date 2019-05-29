@@ -37,6 +37,7 @@ requirementtest:
 installrequirements: 
 	sudo apt-get update
 	sudo apt-get install nodejs
+	sudo apt-get install r-base
 # install https://nodejs.org/en/download/ for macOS
 
 
