@@ -3,6 +3,7 @@
 
 ### OpenFOAM ###
 # Timestep directories
+0/*
 0.*
 !0.org
 [1-9]*
