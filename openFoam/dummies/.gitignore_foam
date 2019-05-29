@@ -49,6 +49,7 @@ postProcessing
 # use a "normal" build tool (make, cmake, ..).
 lnInclude
 *.dep
+*.data
 linux*
 Darwin*
 dynamicCode
