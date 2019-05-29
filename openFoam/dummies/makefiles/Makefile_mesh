@@ -1,7 +1,7 @@
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
-symlinks:
+updateSymlinks:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
 
 clone:
