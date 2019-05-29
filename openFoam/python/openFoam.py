@@ -779,8 +779,6 @@ class foamBuilder(object):
 # MAIN PROGRAMM
 ###############################################################################
 
-print("start openFoam.py")
-
 entryPoint = sys.argv[1]
 
 # find project.json 
@@ -853,4 +851,3 @@ elif entryPoint == "overview":
             print("Unabel to find RMarkdown file")
 elif entryPoint == "test":
     print("Nothing defined")
-print("finished openFoam.py")
