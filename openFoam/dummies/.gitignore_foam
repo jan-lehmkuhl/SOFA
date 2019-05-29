@@ -4,6 +4,7 @@
 ### OpenFOAM ###
 # Timestep directories
 0.*
+!0.org
 [1-9]*
 
 # Fields that must get ignored
