@@ -1,3 +1,5 @@
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_cad.mk
+
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
@@ -13,15 +15,15 @@ clear:
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
-mesh:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py mesh
+checkSurfaces:
+	python3 ../../../tools/framework/openFoam/python/foamCad.py checkSurfaces
 
-meshLayer:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py meshLayer
+cleanVTK:
+	python3 ../../../tools/framework/openFoam/python/foamCad.py cleanVTK
 
-cleanMesh:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
+combineSTL:
+	python3 ../../../tools/framework/openFoam/python/foamCad.py combineSTL
 
 view:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py view
+	python3 ../../../tools/framework/openFoam/python/foamCad.py view
 

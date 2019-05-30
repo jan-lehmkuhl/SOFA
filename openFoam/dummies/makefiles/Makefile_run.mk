@@ -1,3 +1,5 @@
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_run.mk
+
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
@@ -13,15 +15,12 @@ clear:
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
-checkSurfaces:
-	python3 ../../../tools/framework/openFoam/python/foamCad.py checkSurfaces
+run:
+	python3 ../../../tools/framework/openFoam/python/foamRun.py run
 
-cleanVTK:
-	python3 ../../../tools/framework/openFoam/python/foamCad.py cleanVTK
-
-combineSTL:
-	python3 ../../../tools/framework/openFoam/python/foamCad.py combineSTL
+cleanRun:
+	python3 ../../../tools/framework/openFoam/python/foamRun.py cleanRun
 
 view:
-	python3 ../../../tools/framework/openFoam/python/foamCad.py view
+	python3 ../../../tools/framework/openFoam/python/foamRun.py view
 

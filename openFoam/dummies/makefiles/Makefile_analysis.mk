@@ -1,3 +1,5 @@
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_analysis.mk
+
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
@@ -13,12 +15,15 @@ clear:
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
-run:
-	python3 ../../../tools/framework/openFoam/python/foamRun.py run
+mesh:
+	python3 ../../../tools/framework/openFoam/python/foamMesh.py mesh
 
-cleanRun:
-	python3 ../../../tools/framework/openFoam/python/foamRun.py cleanRun
+meshLayer:
+	python3 ../../../tools/framework/openFoam/python/foamMesh.py meshLayer
+
+cleanMesh:
+	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
 
 view:
-	python3 ../../../tools/framework/openFoam/python/foamRun.py view
+	python3 ../../../tools/framework/openFoam/python/foamMesh.py view
 

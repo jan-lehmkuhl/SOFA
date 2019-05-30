@@ -1,3 +1,5 @@
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_mesh.mk
+
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
