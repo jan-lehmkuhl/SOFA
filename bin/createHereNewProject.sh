@@ -25,5 +25,4 @@ cp ./tools/framework/root-dummies/.gitignore .
 git add Makefile
 git add project.json
 git add .gitignore
-git add .root-project
 git commit -m "[base] #INIT files"
