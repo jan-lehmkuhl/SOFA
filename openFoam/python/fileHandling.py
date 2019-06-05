@@ -9,6 +9,7 @@
 import os
 import shutil
 import json
+import errno
 
 def createDirSafely(dst):
     # creates a directory recursively if it doesn't exist
@@ -34,13 +35,12 @@ def createDir(dst):
     # Return:
     #   side effects
     #
-    try: 
-        os.makedirs(dst)
-    except FileExistsError:
-        print("Skipping >%s< since it already exists" % dst)
-        pass
-    else:
-        print("Creating >%s<" % dst)
+    if not os.path.exists(dst):
+        try:
+            os.makedirs(dst, 0o700)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
 
 
 
