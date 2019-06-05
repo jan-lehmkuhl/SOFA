@@ -109,8 +109,8 @@ def cfdAspectSelector(path=None):
             return(MeshCase(path))
         elif aspectName == "run":
             return(RunCase(path))
-        elif aspectName == "analysis":
-            return(AnalysisCase(path))
+        elif aspectName == "survey":
+            return(SurveyCase(path))
     else:
         print("Unknown aspect >%s<" % aspectName)
         return(False)
@@ -178,7 +178,7 @@ class Case(object):
             # extract linked cases from case.json according to foamStructure gen in project.json
             self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.category]["linkName"]]
             if self.linkedCase:
-                # differentiate between single links and a list of links (analysis)
+                # differentiate between single links and a list of links (survey)
                 if isinstance(self.linkedCase, str):
                     self.pathToLinkedCase = findFolder(
                         self.linkedCase, foamStructure[foamStructure[self.category]["linkType"]]["aspectName"])
@@ -641,12 +641,12 @@ class RunCase(Case):
             self.Builder.makePorousZone()
             self.commitInit()
 
-class AnalysisCase(Case):
-    # Class for analysis cases
+class SurveyCase(Case):
+    # Class for survey cases
 
     def __init__(self, path=None):
-        super().__init__("analysis", path)
-        self.name = "AnalysisCase"
+        super().__init__("survey", path)
+        self.name = "surveyCase"
 
     def makeSymlinks(self):
         # specialized method to create all symlinks needed for a case

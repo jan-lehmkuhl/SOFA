@@ -7,9 +7,9 @@
     "//"            : "foamStructure describes the openFoam folder structure within a sub-simulation" ,
     "//"            : "this structure cannot be changed after the first >make init<",
     "foamStructure" : {
-        "cad"   :   {"aspectName": "01cad"},
-        "mesh"  :   {"aspectName": "02mesh",     "linkName": "cadLink",   "linkType": "cad" },
-        "run"   :   {"aspectName": "03run",      "linkName": "meshLink",  "linkType": "mesh"},
-        "analysis": {"aspectName": "04analysis", "linkName": "caseLinks", "linkType": "run"}
+        "cad"   :   {"aspectName": "cad"},
+        "mesh"  :   {"aspectName": "mesh",     "linkName": "cadLink",   "linkType": "cad" },
+        "run"   :   {"aspectName": "run",      "linkName": "meshLink",  "linkType": "mesh"},
+        "survey":   {"aspectName": "survey",   "linkName": "caseLinks", "linkType": "run"}
     }
 }

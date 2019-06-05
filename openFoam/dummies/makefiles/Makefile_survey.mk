@@ -1,4 +1,4 @@
-# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_analysis.mk
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_survey.mk
 
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
