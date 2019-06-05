@@ -62,7 +62,7 @@ def md5(filePath):
     else: 
         print(">%s< is not a file, can't get md5 sum" %filePath)
 
-def boolChecker(value):
+def boolChecker(value, variable):
     # takes a str and checkes if it is a bool and then converts 
     #
     # Args:
@@ -76,7 +76,7 @@ def boolChecker(value):
     elif value.lower() in ["n","no", "false"]:
         return(False)
     else:
-        print("Unknown value >%s< please enter True or False" % value)
+        print("Unknown value >%s< for variable >%s<. Please enter True or False" %(value, variable))
         sys.exit(0)
 
 class foamMesher(object):
@@ -88,16 +88,28 @@ class foamMesher(object):
         self.localHost = os.uname()[1]
         self.meshJson = loadJson("mesh.json")
         self.nCores = int(self.meshJson["meshSettings"]["nCores"])
-        self.nProcFolder = self.getNoProcFolder()
+        self.nProcFolders = self.getNoProcFolder()
         self.fileChangeDict = self.compareFileStates()
-        self.settings = self.meshJson["meshSettings"]
-        self.settingsBlockMesh = boolChecker(self.settings["blockMesh"])
-        self.settingsSurfaceFeatures = boolChecker(self.settings["surfaceFeatures"])
-        self.settingsSnappyHexMesh = boolChecker(self.settings["snappyHexMesh"])
-        self.settingsCheckMesh = boolChecker(self.settings["checkMesh"])
-        self.settingsTopoSet = boolChecker(self.settings["topoSet"])
-        self.settingsCreatePatches = boolChecker(self.settings["createPatches"])
-        self.settingsReport = boolChecker(self.settings["report"])
+        # extract mesh settings
+        self.meshSettings = self.meshJson["meshSettings"]
+        # extract variables mesh settings and assign it to a variable
+        self.settingsBlockMesh       = boolChecker(self.meshSettings["blockMesh"], "blockMesh")
+        self.settingsSurfaceFeatures = boolChecker(self.meshSettings["surfaceFeatures"], "surfaceFeatures")
+        self.settingsSnappyHexMesh   = boolChecker(self.meshSettings["snappyHexMesh"], "snappyHexMesh")
+        self.settingsCheckMesh       = boolChecker(self.meshSettings["checkMesh"], "checkMesh")
+        self.settingsTopoSet         = boolChecker(self.meshSettings["topoSet"], "topoSet")
+        self.settingsCreatePatches   = boolChecker(self.meshSettings["createPatches"], "createPatches")
+        self.settingsReport          = boolChecker(self.meshSettings["report"],"report" )
+        # initialize variables determining weather to run a program or not 
+        self.runBlockMesh       = self.settingsBlockMesh       
+        self.runSurfaceFeatures = self.settingsSurfaceFeatures 
+        self.runSnappyHexMesh   = self.settingsSnappyHexMesh   
+        self.runCheckMesh       = self.settingsCheckMesh
+        self.runTopoSet         = self.settingsTopoSet         
+        self.runCreatePatches   = self.settingsCreatePatches
+        self.runReport          = self.settingsReport          
+
+
         self.procHandler = procHandler(self.nCores)
         if self.settingsBlockMesh:
             if self.fileChangeDict["blockMeshDict"] or self.fileChangeDict["points"]:
@@ -115,6 +127,7 @@ class foamMesher(object):
                 self.runDecomposePar = False
         else:
             self.runDecomposePar = False
+        self.runSurfaceFeatures = self.settingsSurfaceFeatures
         if self.settingsSurfaceFeatures:
             for fileName in os.listdir("constant/triSurface"):
                 if fnmatch.fnmatch(fileName, "*.eMesh"):
@@ -385,7 +398,7 @@ class foamMesher(object):
     def finalizeMesh(self):
         self.startMeshing = datetime.datetime.now()
         self.printHeaderFinalize()
-        if not self.nProcFolder == 0:
+        if not self.nProcFolders == 0:
             self.procHandler.general(["reconstructParMesh", "-latestTime"], "Reconstructing final mesh")
         timeDirs = [f for f in os.listdir('.') if fnmatch.fnmatch(f, "[1,2,3,4,5,6,7,8,9]")]
         latestTime = max(timeDirs)
