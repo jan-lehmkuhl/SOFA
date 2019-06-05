@@ -242,7 +242,7 @@ class Case(object):
         #   side effects
         #
         jsonPath = findFile(self.aspectType + ".json", "tools")
-        makePath = findFile(str("Makefile_" + self.aspectType + ".mk"), "tools")
+        makePath = findFile(str("Makefile_case_" + self.aspectType + ".mk"), "tools")
         gitignorePath = findFile(".gitignore_foam", "tools")
         caseName = self.nextCaseName()
         if (jsonPath and makePath):
@@ -500,7 +500,7 @@ class CadCase(Case):
         createDirSafely(os.path.join(self.path, caseName, "vtk"))
         createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
         createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
-        makePath = findFile("Makefile_cad.mk", "tools")
+        makePath = findFile("Makefile_case_cad.mk", "tools")
         gitignorePath = findFile(".gitignore_cad", "tools")
         if makePath:
             createSymlinkSavely(makePath, os.path.join(
@@ -516,7 +516,7 @@ class CadCase(Case):
             createDirSafely("vtk")
             createDirSafely("doc/drafts")
             createDirSafely("doc/cadPics")
-            makePath = findFile("Makefile_case.mk", "tools")
+            makePath = findFile("Makefile_case_cad.mk", "tools")
             gitignorePath = findFile(".gitignore_cad", "tools")
             if makePath:
                 copyFileSafely(makePath, "Makefile")
