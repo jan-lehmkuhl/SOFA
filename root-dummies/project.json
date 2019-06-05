@@ -1,9 +1,11 @@
 {
-    "//"            : "folders bennenen die Unterordner der einzelnen Sub-Projekte" ,
+    "//"            : "folders are naming sub-projects/simulations within the whole project" ,
 
     "cfxFolders"    : ["cfx1"] ,
     "foamFolders"   : ["foam1"] , 
- 
+
+    "//"            : "foamStructure describes the openFoam folder structure within a sub-simulation" ,
+    "//"            : "this structure cannot be changed after the first >make init<",
     "foamStructure" : {
         "cad"   :   {"studyName": "01cad"},
         "mesh"  :   {"studyName": "02mesh",     "linkName": "cadLink",   "linkType": "cad" },

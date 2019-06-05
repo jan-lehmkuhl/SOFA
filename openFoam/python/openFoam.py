@@ -136,7 +136,7 @@ class Study(object):
         #
         studyName = foamStructure[self.type]["studyName"]
         createDirSafely(os.path.join(self.path, studyName))
-        makefilePath = findFile("Makefile_study", "tools")
+        makefilePath = findFile("Makefile_study.mk", "tools")
         if makefilePath:  # if find file fails it returns false
             #copyFileSafely(makefilePath, os.path.join(self.path, studyName, "Makefile"))
             createSymlinkSavely(makefilePath, os.path.join(
@@ -242,14 +242,16 @@ class Case(object):
         #   side effects
         #
         jsonPath = findFile(self.category + ".json", "tools")
-        makePath = findFile(str("Makefile_" + self.category), "tools")
+        makePath = findFile(str("Makefile_" + self.category + ".mk"), "tools")
         gitignorePath = findFile(".gitignore_foam", "tools")
         caseName = self.nextCaseName()
         if (jsonPath and makePath):
             createDirSafely(os.path.join(self.path, caseName))
+            ### Makefile
             #copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
             createSymlinkSavely(makePath, os.path.join(
                 self.path, caseName, "Makefile"))
+            ### json
             copyFileSafely(jsonPath, os.path.join(
                 self.path, caseName, self.category + ".json"))
             createSymlinkSavely(gitignorePath, os.path.join(
@@ -498,7 +500,7 @@ class CadCase(Case):
         createDirSafely(os.path.join(self.path, caseName, "vtk"))
         createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
         createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
-        makePath = findFile("Makefile_cad", "tools")
+        makePath = findFile("Makefile_cad.mk", "tools")
         gitignorePath = findFile(".gitignore_cad", "tools")
         if makePath:
             createSymlinkSavely(makePath, os.path.join(
@@ -514,7 +516,7 @@ class CadCase(Case):
             createDirSafely("vtk")
             createDirSafely("doc/drafts")
             createDirSafely("doc/cadPics")
-            makePath = findFile("Makefile_case", "tools")
+            makePath = findFile("Makefile_case.mk", "tools")
             gitignorePath = findFile(".gitignore_cad", "tools")
             if makePath:
                 copyFileSafely(makePath, "Makefile")

@@ -1,5 +1,8 @@
 
-include ../tools/simulation-projects/global-make.mk
+# docs Makefile
+# copied from ../tools/framework/docs/dummies/Makefile 
 
-initfolders:
+include ../tools/framework/global-make.mk
+
+init:
 	$(mkdir) test1

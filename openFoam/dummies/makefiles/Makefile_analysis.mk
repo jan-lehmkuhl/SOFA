@@ -1,7 +1,9 @@
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_analysis.mk
+
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
-symlinks:
+updateSymlinks:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
 
 clone:
