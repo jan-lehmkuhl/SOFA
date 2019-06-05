@@ -11,7 +11,6 @@ import json
 import os
 import sys
 import shutil
-import webbrowser
 import fnmatch
 
 from fileHandling import createDirSafely
@@ -121,8 +120,8 @@ class Study(object):
 
     global foamStructure
 
-    def __init__(self, type, path="./"):
-        self.type = type
+    def __init__(self, category, path="./"):
+        self.type = category
         self.path = path
         self.name = "Study"
 
@@ -160,26 +159,34 @@ class Case(object):
 
     global foamStructure
 
-    def __init__(self, type=None, path="./"):
+    def __init__(self, category=None, path="./"):
+        # name of class
         self.name = "Case"
-        self.type = type
+        # category of class, e.g. cad, mesh ....
+        self.category = category
+        # relative path to study
         self.path = path
+        # initialize variables 
         self.caseJson = None
         self.linkedCase = None
         self.pathToLinkedCase = None
         self.symlinksClean = False
-        if os.path.exists(self.path + self.type + ".json"):
-            self.caseJson = loadJson(self.type + ".json")
-            self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.type]["linkName"]]
+        # check if case .json exists
+        if os.path.exists(self.path + self.category + ".json"):
+            # load case .json 
+            self.caseJson = loadJson(self.category + ".json")
+            # extract linked cases from case.json according to foamStructure gen in project.json
+            self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.category]["linkName"]]
             if self.linkedCase:
+                # differentiate between single links and a list of links (analysis)
                 if isinstance(self.linkedCase, str):
                     self.pathToLinkedCase = findFolder(
-                        self.linkedCase, foamStructure[foamStructure[self.type]["linkType"]]["studyName"])
+                        self.linkedCase, foamStructure[foamStructure[self.category]["linkType"]]["studyName"])
                 elif isinstance(self.linkedCase, list):
                     self.pathToLinkedCase = []
                     for element in self.linkedCase:
                         self.pathToLinkedCase.append(findFolder(
-                            element, foamStructure[foamStructure[self.type]["linkType"]]["studyName"]))
+                            element, foamStructure[foamStructure[self.category]["linkType"]]["studyName"]))
                 else:
                     print(
                         "Unexpected type of self.linkPath in __init__ of %s" % self.name)
@@ -195,13 +202,13 @@ class Case(object):
         #
         subfolders = [f.name for f in os.scandir(path) if f.is_dir()]
         maxNo = 0
-        charCount = len(self.type)
+        charCount = len(self.category)
         for folder in subfolders:
-            if folder[:charCount] == self.type:
+            if folder[:charCount] == self.category:
                 currentNo = int(folder[charCount:])
                 if currentNo > maxNo:
                     maxNo = currentNo
-        CaseName = str(self.type + format(maxNo + 1, "0>3d"))
+        CaseName = str(self.category + format(maxNo + 1, "0>3d"))
         return(CaseName)
 
     def getProject(self):
@@ -234,8 +241,8 @@ class Case(object):
         # Return:
         #   side effects
         #
-        jsonPath = findFile(self.type + ".json", "tools")
-        makePath = findFile(str("Makefile_" + self.type), "tools")
+        jsonPath = findFile(self.category + ".json", "tools")
+        makePath = findFile(str("Makefile_" + self.category), "tools")
         gitignorePath = findFile(".gitignore_foam", "tools")
         caseName = self.nextCaseName()
         if (jsonPath and makePath):
@@ -244,7 +251,7 @@ class Case(object):
             createSymlinkSavely(makePath, os.path.join(
                 self.path, caseName, "Makefile"))
             copyFileSafely(jsonPath, os.path.join(
-                self.path, caseName, self.type + ".json"))
+                self.path, caseName, self.category + ".json"))
             createSymlinkSavely(gitignorePath, os.path.join(
                 self.path, caseName, ".gitignore"))
         return(True)
@@ -840,10 +847,8 @@ elif entryPoint == "overview":
     for fileName in files:
         if fileName == "MeshOverview.Rmd":
             os.system('R -e "rmarkdown::render(\'doc/MeshOverview.Rmd\')"')
-            webbrowser.open(os.path.realpath("doc/MeshOverview.html"))
         elif fileName == "RunOverview.Rmd":
             os.system('R -e "rmarkdown::render(\'doc/RunOverview.Rmd\')"')
-            webbrowser.open(os.path.realpath("doc/RunOverview.html"))
         else:
             print("Unabel to find RMarkdown file")
 elif entryPoint == "test":
