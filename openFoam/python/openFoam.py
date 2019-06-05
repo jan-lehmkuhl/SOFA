@@ -211,7 +211,7 @@ class Case(object):
         CaseName = str(self.aspectType + format(maxNo + 1, "0>3d"))
         return(CaseName)
 
-    def getProject(self):
+    def getStudyName(self):
         # finds the projectname of a case
         #
         # Args:
@@ -307,10 +307,10 @@ class Case(object):
                             (currentCase, caseName))
                     answer3 = input().lower()
                     if answer3 in ["y", "yes"]:
-                        projName = self.getProject()
+                        studyName = self.getStudyName()
                         os.system('git add %s' % path)
                         os.system('git commit -m "[%s%s] #CLONE \'cloning case >%s< to >%s<\'"' % (
-                            projName, caseName.capitalize(), currentCase, caseName))
+                            studyName, caseName.capitalize(), currentCase, caseName))
                         break
                     elif answer3 in ["n", "no"]:
                         break
@@ -359,10 +359,10 @@ class Case(object):
                     answer = input()
                     answer = answer.lower()
                     if answer in ["y", "yes"]:
-                        projName = self.getProject()
+                        studyName = self.getStudyName()
                         os.system('git add .')
                         os.system('git commit -m "[%s%s] #CLEAR \'cleared case >%s< in project >%s<\'"' 
-                                  % (projName, caseName.capitalize(), caseName, projName))
+                                  % (studyName, caseName.capitalize(), caseName, studyName))
                         break
                     elif answer in ["n", "no"]:
                         break
@@ -435,17 +435,17 @@ class Case(object):
         # Result:
         #   side effects:   commits changes of case
         #
-        projName = self.getProject()
+        studyName = self.getStudyName()
         caseName = os.path.basename(os.getcwd())
         while True:
             print("Commit initialisation of %s ? (y/n)" % caseName)
             answer = input()
             answer = answer.lower()
             if answer in ["y", "yes"]:
-                projName = self.getProject()
+                studyName = self.getStudyName()
                 os.system('git add .')
                 os.system('git commit -m "[%s%s] #INIT \'initialised case >%s< in project >%s<\'"' % (
-                    projName, caseName.capitalize(), caseName, projName))
+                    studyName, caseName.capitalize(), caseName, studyName))
                 break
             elif answer in ["n", "no"]:
                 break
@@ -469,10 +469,10 @@ class Case(object):
                     message = input()
                     if not message == "":
                         break
-                projName = self.getProject()
+                studyName = self.getStudyName()
                 os.system('git add .')
                 os.system('git commit -m "[%s%s] #CHANGE \'%s\'"' %
-                          (projName, caseName.capitalize(), message))
+                          (studyName, caseName.capitalize(), message))
                 break
             elif answer in ["n", "no"]:
                 break
@@ -650,7 +650,7 @@ class SurveyCase(Case):
 
     def makeSymlinks(self):
         # specialized method to create all symlinks needed for a case
-        # of aspectType run
+        # of type run
         #
         # Args:
         #
