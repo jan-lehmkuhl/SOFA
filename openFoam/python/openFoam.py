@@ -86,14 +86,14 @@ def findFolder(folderName, turnFolder):
 
 
 def cfdAspectSelector(path=None):
-    # determines the type of the case from the name of the containing folder
+    # determines the aspectType of the case from the name of the containing folder
     #
     # Args:
     #   path:       s: path to pass
     #
     # Return:
     #   aspectName:  s: Name of the containing folder stripped of numbers
-    #               this should equal the type
+    #               this should equal the aspectType
     #
     if path is None:
         path = "./"
@@ -120,13 +120,13 @@ class Aspect(object):
 
     global foamStructure
 
-    def __init__(self, category, path="./"):
-        self.category = category
+    def __init__(self, aspectType, path="./"):
+        self.aspectType = aspectType
         self.path = path
         self.name = "Aspect"
 
     def create(self):
-        # creates an aspect of self.type at location self.path
+        # creates an aspect of self.aspectType at location self.path
         # according to the entrys in the global dictionary foamStructure
         #
         # Args:
@@ -134,19 +134,19 @@ class Aspect(object):
         # Return:
         #   side effects: creates Aspect
         #
-        aspectName = foamStructure[self.category]["aspectName"]
+        aspectName = foamStructure[self.aspectType]["aspectName"]
         createDirSafely(os.path.join(self.path, aspectName))
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
             #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
             createSymlinkSavely(makefilePath, os.path.join(
                 self.path, aspectName, "Makefile"))
-            if self.category == "mesh":
+            if self.aspectType == "mesh":
                 meshOvPath = findFile("MeshOverview.Rmd", "tools")
                 if meshOvPath:
                     createDirSafely(os.path.join(self.path, aspectName, "doc"))
                     copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/MeshOverview.Rmd"))
-            if self.category == "run":
+            if self.aspectType == "run":
                 meshOvPath = findFile("RunOverview.Rmd", "tools")
                 if meshOvPath:
                     createDirSafely(os.path.join(self.path, aspectName, "doc"))
@@ -159,11 +159,11 @@ class Case(object):
 
     global foamStructure
 
-    def __init__(self, category=None, path="./"):
+    def __init__(self, aspectType=None, path="./"):
         # name of class
         self.name = "Case"
-        # category of class, e.g. cad, mesh ....
-        self.category = category
+        # aspectType of class, e.g. cad, mesh ....
+        self.aspectType = aspectType
         # relative path to Aspect
         self.path = path
         # initialize variables 
@@ -172,24 +172,24 @@ class Case(object):
         self.pathToLinkedCase = None
         self.symlinksClean = False
         # check if case .json exists
-        if os.path.exists(self.path + self.category + ".json"):
+        if os.path.exists(self.path + self.aspectType + ".json"):
             # load case .json 
-            self.caseJson = loadJson(self.category + ".json")
+            self.caseJson = loadJson(self.aspectType + ".json")
             # extract linked cases from case.json according to foamStructure gen in project.json
-            self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.category]["linkName"]]
+            self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
                 # differentiate between single links and a list of links (survey)
                 if isinstance(self.linkedCase, str):
                     self.pathToLinkedCase = findFolder(
-                        self.linkedCase, foamStructure[foamStructure[self.category]["linkType"]]["aspectName"])
+                        self.linkedCase, foamStructure[foamStructure[self.aspectType]["linkType"]]["aspectName"])
                 elif isinstance(self.linkedCase, list):
                     self.pathToLinkedCase = []
                     for element in self.linkedCase:
                         self.pathToLinkedCase.append(findFolder(
-                            element, foamStructure[foamStructure[self.category]["linkType"]]["aspectName"]))
+                            element, foamStructure[foamStructure[self.aspectType]["linkType"]]["aspectName"]))
                 else:
                     print(
-                        "Unexpected type of self.linkPath in __init__ of %s" % self.name)
+                        "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
 
     def nextCaseName(self, path="./"):
         # finds the next case name in a series of folder of type xxx123
@@ -202,13 +202,13 @@ class Case(object):
         #
         subfolders = [f.name for f in os.scandir(path) if f.is_dir()]
         maxNo = 0
-        charCount = len(self.category)
+        charCount = len(self.aspectType)
         for folder in subfolders:
-            if folder[:charCount] == self.category:
+            if folder[:charCount] == self.aspectType:
                 currentNo = int(folder[charCount:])
                 if currentNo > maxNo:
                     maxNo = currentNo
-        CaseName = str(self.category + format(maxNo + 1, "0>3d"))
+        CaseName = str(self.aspectType + format(maxNo + 1, "0>3d"))
         return(CaseName)
 
     def getProject(self):
@@ -234,15 +234,15 @@ class Case(object):
             return(False)
 
     def create(self):
-        # create a new case inside a Aspect depending on the type of case
+        # create a new case inside a Aspect depending on the aspectType of case
         #
         # Args:
         #
         # Return:
         #   side effects
         #
-        jsonPath = findFile(self.category + ".json", "tools")
-        makePath = findFile(str("Makefile_" + self.category + ".mk"), "tools")
+        jsonPath = findFile(self.aspectType + ".json", "tools")
+        makePath = findFile(str("Makefile_" + self.aspectType + ".mk"), "tools")
         gitignorePath = findFile(".gitignore_foam", "tools")
         caseName = self.nextCaseName()
         if (jsonPath and makePath):
@@ -253,7 +253,7 @@ class Case(object):
                 self.path, caseName, "Makefile"))
             ### json
             copyFileSafely(jsonPath, os.path.join(
-                self.path, caseName, self.category + ".json"))
+                self.path, caseName, self.aspectType + ".json"))
             createSymlinkSavely(gitignorePath, os.path.join(
                 self.path, caseName, ".gitignore"))
         return(True)
@@ -487,7 +487,7 @@ class CadCase(Case):
 
     def create(self):
         # specialized method which creates all folders needed in
-        # a case of type cad
+        # a case of aspectType cad
         #
         # Args:
         #
@@ -527,7 +527,7 @@ class CadCase(Case):
             print("Case is already initialised. Please run >make clean< first")
 
     def makeSymlinks(self):
-        print("Cases of type >cad< do not support option symlinks")
+        print("Cases of aspectType >cad< do not support option symlinks")
 
 
 class MeshCase(Case):
@@ -540,7 +540,7 @@ class MeshCase(Case):
 
     def makeSymlinks(self):
         # specialized method to create all symlinks needed for a case
-        # of type mesh
+        # of aspectType mesh
         #
         # Args:
         #
@@ -568,7 +568,7 @@ class MeshCase(Case):
             return(True)
 
     def initCase(self):
-        # specialised method to initialise a case of type mesh
+        # specialised method to initialise a case of aspectType mesh
         #
         # Args:
         #
@@ -604,7 +604,7 @@ class RunCase(Case):
 
     def makeSymlinks(self):
         # specialized method to create all symlinks needed for a case
-        # of type run
+        # of aspectType run
         #
         # Args:
         #
@@ -624,7 +624,7 @@ class RunCase(Case):
             return(True)
 
     def initCase(self):
-        # specialised method to initialise a case of type run
+        # specialised method to initialise a case of aspectType run
         #
         # Args:
         #
@@ -650,7 +650,7 @@ class SurveyCase(Case):
 
     def makeSymlinks(self):
         # specialized method to create all symlinks needed for a case
-        # of type run
+        # of aspectType run
         #
         # Args:
         #
