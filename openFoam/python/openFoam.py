@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #--------------------------------------------------------------------------#
-# Contributor: Sebastian Tueck                                             #
+# Contributor: Sebastian Tueck, Jan Lehmkuhl                               #
 # Last Change: February 01 2019                                            #
 # Topic:       Project builder                                             #
 #--------------------------------------------------------------------------#
@@ -85,73 +85,73 @@ def findFolder(folderName, turnFolder):
         return(False)
 
 
-def caseSelector(path=None):
+def cfdAspectSelector(path=None):
     # determines the type of the case from the name of the containing folder
     #
     # Args:
     #   path:       s: path to pass
     #
     # Return:
-    #   studyName:  s: Name of the containing folder stripped of numbers
+    #   aspectName:  s: Name of the containing folder stripped of numbers
     #               this should equal the type
     #
     if path is None:
         path = "./"
-        studyFolder = os.path.basename(os.getcwd())
+        caseFolder = os.path.basename(os.getcwd())
     else:
-        studyFolder = os.path.basename(path)
-    studyName = ''.join(
-        [i for i in studyFolder if not i.isdigit()])  # remove digits
-    if studyName in foamStructure:
-        if studyName == "cad":
+        caseFolder = os.path.basename(path)
+    aspectName = ''.join(
+        [i for i in caseFolder if not i.isdigit()])  # remove digits
+    if aspectName in foamStructure:
+        if aspectName == "cad":
             return(CadCase(path))
-        elif studyName == "mesh":
+        elif aspectName == "mesh":
             return(MeshCase(path))
-        elif studyName == "run":
+        elif aspectName == "run":
             return(RunCase(path))
-        elif studyName == "analysis":
+        elif aspectName == "analysis":
             return(AnalysisCase(path))
     else:
-        print("Unknown study type >%s<" % studyName)
+        print("Unknown aspect >%s<" % aspectName)
         return(False)
 
-class Study(object):
-    # base class to handle all operations related to studys
+class Aspect(object):
+    # base class to handle all operations related to an aspects
 
     global foamStructure
 
     def __init__(self, category, path="./"):
-        self.type = category
+        self.category = category
         self.path = path
-        self.name = "Study"
+        self.name = "Aspect"
 
     def create(self):
-        # creates a study of self.type at location self.path
+        # creates an aspect of self.type at location self.path
         # according to the entrys in the global dictionary foamStructure
         #
         # Args:
         #
         # Return:
-        #   side effects: creates study
+        #   side effects: creates Aspect
         #
-        studyName = foamStructure[self.type]["studyName"]
-        createDirSafely(os.path.join(self.path, studyName))
-        makefilePath = findFile("Makefile_study.mk", "tools")
+        aspectName = foamStructure[self.category]["aspectName"]
+        createDirSafely(os.path.join(self.path, aspectName))
+        makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
-            #copyFileSafely(makefilePath, os.path.join(self.path, studyName, "Makefile"))
+            #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
             createSymlinkSavely(makefilePath, os.path.join(
-                self.path, studyName, "Makefile"))
-            if self.type == "mesh":
+                self.path, aspectName, "Makefile"))
+            if self.category == "mesh":
                 meshOvPath = findFile("MeshOverview.Rmd", "tools")
                 if meshOvPath:
-                    createDirSafely(os.path.join(self.path, studyName, "doc"))
-                    copyFileSafely(meshOvPath, os.path.join(self.path, studyName, "doc/MeshOverview.Rmd"))
-            if self.type == "run":
+                    createDirSafely(os.path.join(self.path, aspectName, "doc"))
+                    copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/MeshOverview.Rmd"))
+            if self.category == "run":
                 meshOvPath = findFile("RunOverview.Rmd", "tools")
                 if meshOvPath:
-                    createDirSafely(os.path.join(self.path, studyName, "doc"))
-                    copyFileSafely(meshOvPath, os.path.join(self.path, studyName, "doc/StudyOverview.Rmd"))
-            case = caseSelector(os.path.join(self.path, studyName))
+                    createDirSafely(os.path.join(self.path, aspectName, "doc"))
+                    copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/StudyOverview.Rmd"))
+            case = cfdAspectSelector(os.path.join(self.path, aspectName))
             case.create()
 
 class Case(object):
@@ -164,7 +164,7 @@ class Case(object):
         self.name = "Case"
         # category of class, e.g. cad, mesh ....
         self.category = category
-        # relative path to study
+        # relative path to Aspect
         self.path = path
         # initialize variables 
         self.caseJson = None
@@ -181,12 +181,12 @@ class Case(object):
                 # differentiate between single links and a list of links (analysis)
                 if isinstance(self.linkedCase, str):
                     self.pathToLinkedCase = findFolder(
-                        self.linkedCase, foamStructure[foamStructure[self.category]["linkType"]]["studyName"])
+                        self.linkedCase, foamStructure[foamStructure[self.category]["linkType"]]["aspectName"])
                 elif isinstance(self.linkedCase, list):
                     self.pathToLinkedCase = []
                     for element in self.linkedCase:
                         self.pathToLinkedCase.append(findFolder(
-                            element, foamStructure[foamStructure[self.category]["linkType"]]["studyName"]))
+                            element, foamStructure[foamStructure[self.category]["linkType"]]["aspectName"]))
                 else:
                     print(
                         "Unexpected type of self.linkPath in __init__ of %s" % self.name)
@@ -223,7 +223,7 @@ class Case(object):
         wd = os.getcwd()
         subdirs = os.listdir(os.getcwd())
         while i < 5:
-            if foamStructure["cad"]["studyName"] in subdirs:
+            if foamStructure["cad"]["aspectName"] in subdirs:
                 return(os.path.basename(os.path.normpath(wd)))
             else:
                 wd = os.path.join(wd, os.path.pardir)
@@ -234,7 +234,7 @@ class Case(object):
             return(False)
 
     def create(self):
-        # create a new case inside a study depending on the type of case
+        # create a new case inside a Aspect depending on the type of case
         #
         # Args:
         #
@@ -812,8 +812,8 @@ if entryPoint == "initFoam":
     for folder in projectStruct['foamFolders']:
         if not os.path.exists(folder):
             for element in foamStructure:
-                newStudy = Study(element, folder)
-                newStudy.create()
+                newAspect = Aspect(element, folder)
+                newAspect.create()
             while True:
                 print("Commit creation of project %s ? (y/n)" % folder)
                 answer = input()
@@ -827,19 +827,19 @@ if entryPoint == "initFoam":
         else:
             print("skipping project >" + folder + " since it already exists")
 elif entryPoint == "newCase":
-    currentCase = caseSelector()
+    currentCase = cfdAspectSelector()
     currentCase.create()
 elif entryPoint == "initCase":
-    currentCase = caseSelector()
+    currentCase = cfdAspectSelector()
     currentCase.initCase()
 elif entryPoint == "symlinks":
-    currentCase = caseSelector()
+    currentCase = cfdAspectSelector()
     currentCase.makeSymlinks()
 elif entryPoint == "clone":
-    currentCase = caseSelector()
+    currentCase = cfdAspectSelector()
     currentCase.clone()
 elif entryPoint == "clear":
-    currentCase = caseSelector()
+    currentCase = cfdAspectSelector()
     currentCase.clear()
 elif entryPoint == "commit":
     currentCase = Case("run")

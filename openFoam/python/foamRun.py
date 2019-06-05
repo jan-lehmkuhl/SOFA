@@ -322,7 +322,7 @@ if entryPoint == "run":
     runner.run()
 if entryPoint == "cleanRun":
     runner.clean()
-    builder = openFoam.caseSelector()
+    builder = openFoam.cfdAspectSelector()
     builder.makeSymlinks()
 if entryPoint == "view":
     runner.view()
