@@ -221,7 +221,32 @@ class foamMesher(object):
                     fileChangeDict[fileName] = True
             else:
                 fileChangeDict[fileName] = True
-        return(fileChangeDict)      
+        return(fileChangeDict)   
+    
+    def latestLogFile(self, path, ident):
+        # lists all files matching "ident" and write them into a single file
+        # in order of modification date
+        #
+        # Args :
+        #   path:   path to folder to look in
+        #   ident:  identifiert for type of logfile ("snappyHexMesh")
+        #
+        # Return :
+        #   sideEffect:    writes out new logfile
+        #
+
+        nChar = len(ident)
+        files = []
+        # find all files which match ident and have the ending .log
+        subFiles = [f.name for f in os.scandir(path) if f.is_file()]
+        for fileName in subFiles:
+            if (fileName[:nChar] == ident and fileName[-4:] == ".log"):
+                files.append(fileName)
+
+        files = [os.path.join(path, f) for f in files]
+        files.sort(key=lambda x: os.path.getmtime(x))
+
+        return(files[-1])
 
     ###################################################################
     # graphical output
@@ -267,7 +292,8 @@ class foamMesher(object):
         #
         # Return:
         #
-        if 'Failed' in open("log/checkMesh.log").read():
+        checkMeshFile = self.latestLogFile("./log", "checkMesh")
+        if 'Failed' in open(checkMeshFile).read():
             meshQuality = '\033[91m' + "flawed" + '\033[0m'
         else:
             meshQuality = '\033[32m' + "good" + '\033[0m'
