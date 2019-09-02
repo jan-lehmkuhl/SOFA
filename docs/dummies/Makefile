@@ -12,3 +12,4 @@ init:
 	$(mkdir) reports-compiled
 	$(mkdir) service-requests
 
+	$(copy)  ../tools/framework/docs/dummies/main-project-readme.md   ../README-project.md

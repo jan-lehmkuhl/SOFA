@@ -807,8 +807,6 @@ else:
 
 if entryPoint == "initFoam":
     projectStruct = loadJson('project.json')
-    readmePath = findFile("READMEglobal.md", "tools")
-    copyFileSafely(readmePath, "./README.md")
     for folder in projectStruct['foamFolders']:
         if not os.path.exists(folder):
             for element in foamStructure:
