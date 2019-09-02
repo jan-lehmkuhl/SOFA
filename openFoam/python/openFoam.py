@@ -812,6 +812,8 @@ if entryPoint == "initFoam":
             for element in foamStructure:
                 newAspect = Aspect(element, folder)
                 newAspect.create()
+            readmePath = findFile("study-documentation.md", "tools")
+            copyFileSafely(readmePath, folder+ "/README-study.md")
             while True:
                 print("Commit creation of project %s ? (y/n)" % folder)
                 answer = input()
