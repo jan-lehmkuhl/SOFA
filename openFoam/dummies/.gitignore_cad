@@ -1,2 +1,7 @@
+
+# FreeCAD old versions
+*.FCStd[0-9]
+
+# XXX
 /stl*
 /vtk*

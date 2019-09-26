@@ -37,6 +37,17 @@ combineSTL:
 # GUI handling
 # =============================================================================
 
+# opencad
+openfreecad:
+	if [ ! -f native/geometry.FCStd ]; then cp ../../../tools/framework/openFoam/dummies/cad/geometry.FCStd  native/geometry.FCStd; fi
+	freecad native/geometry.FCStd
+
+
+# readable geometry diff
+difffreecad:
+	git diff  --color-words  native/geometry.FCStd
+
+
 # open paraview
 view:
 	python3 ../../../tools/framework/openFoam/python/foamCad.py view
