@@ -1,4 +1,7 @@
-# simulation-projects
+
+simulation-projects
+===================================================================================================
+
 the aim of this repository is to deliver a framework to improve the opperational efficiency for simple and complex simulation projects and therefore accelerate and improve the project output.  
 Actual the development is mainly for OpenFOAM and Dakota, but every scriptable Linux based simulation tool should work or can be integrated.  
 To achieve this multiple measures are addressed:  
@@ -27,20 +30,28 @@ To achieve this multiple measures are addressed:
   * opening the analysis in a web browser saves time and uses less resources in the daily work
   * direct comparison of similar calculations in a parameter study allows better insights of the impact of different parameters
 
-# Get Started
-## Access to GitLab with ssh
-the project downloads automatic files from gitlab to the `tools` folder. Therefore you need ssh access to GitLab.  
 
-## init new project
+Get Started
+===================================================================================================
+
+Access to GitLab with ssh
+---------------------------------------------------------------------------------------------------
+the project downloads automatic the framework files from gitlab to `tools/framework`. Therefore you need ssh access to GitLab.  
+
+
+init new project
+---------------------------------------------------------------------------------------------------
 to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/framework/bin/createHereNewProject.sh` from a previous simulation project
 
     mkdir <new-project-folder>
     cd <new-project-folder>
     <path-to-any-simulation-project-repository>/bin/createHereNewProject.sh
 
-or execute the content of `./bin/createHereNewProject.sh` directly after downloading from gitlab  
+or execute the content of `./bin/createHereNewProject.py` directly after downloading from gitlab in the new project folder  
 
-## install software requirements
+
+install software requirements
+---------------------------------------------------------------------------------------------------
 to work properly some features need special software. These should be installed after project init with:  
 
     cd ./tools/framework
@@ -51,19 +62,31 @@ to verifiy whether all required software works properly run:
     cd ./tools/framework
     make requirementtest
 
-# Usage
+
+Usage
+===================================================================================================
+
 The main idea of this framework is, that every information you need for a specific task in the simulation project is local available in the associated sub-folder and accessible by your text editor.  
 Therefore the needed/main information ist stored in a documentation file, a Makefile and a json-file. In addition there are subfolders with program specific files in lower folder levels.
 
-## documentation files (*.md)
+
+documentation files (*.md)
+---------------------------------------------------------------------------------------------------
 The documentation file should only contain the information, which is needed on a specific folder level. E.g in the root folder should only be the project specific information like who hired me to do something and which simulations will be perormed. More detailed information to the simulations will be in the documentation file in the related sub-folder
-## Makefiles
+
+
+Makefiles
+---------------------------------------------------------------------------------------------------
 The Makefiles contain the actions you can do as Makefile-Targets. Maybe they will lead you only to deeper folders.
 
-## json-files
+
+json-files
+---------------------------------------------------------------------------------------------------
 The json-file contain informations you can modify or you need to perform the calculations
 
-## folder levels
+
+folder levels
+---------------------------------------------------------------------------------------------------
 The project has different levels of folder-structure. 
 * Project-Level
   * the root of every project and of the main git-repository
@@ -74,5 +97,6 @@ The project has different levels of folder-structure.
 * cases
   * cases are small variations of an aspect in a studie. This can be a CAD modification, a finer mesh, a setup variation or a different post survey. 
 
-## additional files
+additional files
+---------------------------------------------------------------------------------------------------
 additional files can be added at every place, but be carefull not to distract from the main project structure.  
