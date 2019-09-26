@@ -1,0 +1,4 @@
+
+# add diff for zipped files
+[diff "zip"]
+	textconv = unzip -c -a

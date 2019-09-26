@@ -1,0 +1,5 @@
+
+*.pptx diff=zip
+
+# FreeCAD files 
+*.FCStd diff=zip
