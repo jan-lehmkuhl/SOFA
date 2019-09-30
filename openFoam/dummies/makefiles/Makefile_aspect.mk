@@ -8,6 +8,10 @@ newCase:
 overview:
 	python3 ../../tools/framework/openFoam/python/openFoam.py overview
 
+# create an overview report
+updateReports:
+	python3 ../../tools/framework/openFoam/python/openFoam.py updateReports
+
 # test value
 test:
 	python3 ../../tools/framework/openFoam/python/openFoam.py test

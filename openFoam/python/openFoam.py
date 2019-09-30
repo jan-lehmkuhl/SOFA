@@ -12,6 +12,7 @@ import os
 import sys
 import shutil
 import fnmatch
+import subprocess
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
@@ -143,13 +144,15 @@ class Aspect(object):
                 self.path, aspectName, "Makefile"))
             if self.aspectType == "mesh":
                 meshOvPath = findFile("MeshOverview.Rmd", "tools")
+                meshRepPath = findFile("MeshReport.Rmd", "tools")
+                createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
                 if meshOvPath:
-                    createDirSafely(os.path.join(self.path, aspectName, "doc"))
-                    copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/MeshOverview.Rmd"))
+                    copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc/template01/meshReport.Rmd"))
+                    copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/meshOverview.Rmd"))
             if self.aspectType == "run":
+                createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
                 meshOvPath = findFile("RunOverview.Rmd", "tools")
                 if meshOvPath:
-                    createDirSafely(os.path.join(self.path, aspectName, "doc"))
                     copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/StudyOverview.Rmd"))
             case = cfdAspectSelector(os.path.join(self.path, aspectName))
             case.create()
@@ -172,9 +175,9 @@ class Case(object):
         self.pathToLinkedCase = None
         self.symlinksClean = False
         # check if case .json exists
-        if os.path.exists(self.path + self.aspectType + ".json"):
+        if os.path.exists(os.path.join(self.path, self.aspectType + ".json")):
             # load case .json 
-            self.caseJson = loadJson(self.aspectType + ".json")
+            self.caseJson = loadJson(os.path.join(self.path, self.aspectType + ".json"))
             # extract linked cases from case.json according to foamStructure gen in project.json
             self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
@@ -427,6 +430,45 @@ class Case(object):
                               os.path.join(root, fileName))
         self.symlinksClean = True
 
+    def copyReport(self, run = False):
+        # method to copy reports either from the template directory or
+        # reporting
+        #
+        # Args:
+        #
+        # Return:
+        #   side effects: creates symlinks for mesh
+        #
+        reportSrc = ""
+        reportTemplate = self.caseJson["buildSettings"]["report"]
+        if reportTemplate in  os.listdir(os.path.join(self.path, "../doc")):
+            reportPath = os.path.join(self.path, "../doc", reportTemplate)
+            for file in os.listdir(reportPath):
+                if fnmatch.fnmatch(file, '*.Rmd'):
+                    reportSrc = os.path.join(reportPath, file)
+                    reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
+        if not reportSrc :
+            if self.aspectType == "cad" :
+                print("No reports supported for >cad<")
+            if self.aspectType == "mesh" :
+                reportSrc = findFile("MeshReport.Rmd", "tools")
+                reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
+            if self.aspectType == "run" :
+                reportSrc = findFile("RunReport.Rmd", "tools")
+                reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
+            if self.aspectType == "survey" :
+                print("No reports supported for >survey<")
+        if os.path.exists(reportDst):
+            print("Deleting > %s" %reportDst)
+            os.remove(reportDst)
+        copyFileSafely(src = reportSrc, dst = reportDst)  
+        if run:
+            cmd = ['R', '-e' , 'rmarkdown::render(\'' + reportDst + '\')']
+            #logFilePath = os.path.join("log",str("runReport" + ".log"))
+            runReport = subprocess.Popen(cmd)# , logFilePath)  
+            runReport.wait()    
+
+
     def commitInit(self):
         # asks user if he wants to commit the initialisation to git
         #
@@ -582,13 +624,14 @@ class MeshCase(Case):
             meshReportPath = findFile("MeshReport.Rmd", "tools")
             layerSizingPath = findFile("LayerSizing.Rmd", "tools")
             #meshStatePath = findFile("mesh.pvsm", "tools")
-            if (meshReportPath and layerSizingPath): # and meshStatePath):
+            if (meshReportPath and layerSizingPath ): # and meshStatePath):
                 self.Builder.makeMesh()
                 createDirSafely("doc/meshReport")
                 createDirSafely("doc/layerSizing")
                 createDirSafely("doc/meshPics")
                 open("paraview.foam", "a").close()
-                copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
+                self.copyReport()
+                #copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
                 copyFileSafely(layerSizingPath,"doc/layerSizing/layerSizing.Rmd")
                 #copyFileSafely(meshStatePath, "mesh.pvsm")
                 self.commitInit()
@@ -853,5 +896,22 @@ elif entryPoint == "overview":
             os.system('R -e "rmarkdown::render(\'doc/RunOverview.Rmd\')"')
         else:
             print("Unabel to find RMarkdown file")
+elif entryPoint == "updateReports":
+    while True:
+        print("Run reports after updating ? (y/n)")
+        answer = input()
+        answer = answer.lower()
+        if answer in ["y", "yes"]:
+            runReports = True
+            break
+        elif answer in ["n", "no"]:
+            runReports = False
+            break
+    for folder in os.listdir("."):
+        aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
+        if aspectName in foamStructure:
+            print("Updating report in > %s" %folder)
+            currentCase = cfdAspectSelector(os.path.join("./", folder))
+            currentCase.copyReport(runReports)
 elif entryPoint == "test":
-    print("Nothing defined")
+    print("nothing defined")

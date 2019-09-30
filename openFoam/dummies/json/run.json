@@ -9,7 +9,9 @@
         "turbulenceModel"   :   "",
 
         "dynamicMesh"       :   "False",
-        "porousZone"        :   "False" 
+        "porousZone"        :   "False",
+
+        "report"            :   "template01"
     },
 
     "runSettings" : {

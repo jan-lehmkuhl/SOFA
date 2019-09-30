@@ -3,7 +3,8 @@
     "description"   :   "",
  
     "buildSettings" : {
-        "cadLink"   : ""
+        "cadLink"   : "",
+        "report"    : "template01"
     },
 
     "meshSettings" : {
