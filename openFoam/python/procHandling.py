@@ -10,6 +10,8 @@ import subprocess
 import os
 import datetime
 import sys
+import shutil
+import fnmatch
 
 
 class procHandler(object):
@@ -55,12 +57,11 @@ class procHandler(object):
         # Return :
         #   sideEffect:    writes out new logfile
         #
-        nChar = len(ident)
         files = []
         # find all files which match ident and have the ending .log
         subFiles = [f.name for f in os.scandir(path) if f.is_file()]
         for fileName in subFiles:
-            if (fileName[:nChar] == ident and fileName[-4:] == ".log"):
+            if fnmatch.fnmatch(fileName, ident + "[0-99].log"):
                 files.append(fileName)
 
         if len(files) > 1:
@@ -72,9 +73,7 @@ class procHandler(object):
             with open(path+"/"+ident+"_combined.log", 'w') as outfile:
                 for fileName in files:
                     with open(fileName) as infile:
-                        for line in infile:
-                            if line.strip():
-                                outfile.write(line)
+                        shutil.copyfileobj(infile, outfile)
 
     def general(self, cmd, text=None, logFilePath=None, wait=True):
             # wrapper around subprocess. takes a list of commands
