@@ -90,6 +90,17 @@ class foamRunner(object):
         self.startSolving = datetime.datetime.now()  
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
+        # make sure 0.org exists or is retreived 
+        CaseFiles = os.listdir(".")
+        if "0.org" in CaseFiles:
+            if "0" in CaseFiles:
+                shutil.rmtree("0")
+            shutil.copytree("0.org", "0")
+        elif "0" in CaseFiles:
+            shutil.copytree("0", "0.org")
+        else:
+            print("No boundary files present")
+            sys.exit(1)
         # info about the state of case
         self.nProcFolder = self.getNoProcFolder()
         self.fileChangeDict = self.compareFileStates()
@@ -277,17 +288,6 @@ class foamRunner(object):
         try:
             self.startRun = datetime.datetime.now()
             self.printHeader()
-            CaseFiles = os.listdir(".")
-            if "0.org" in CaseFiles:
-                if "0" in CaseFiles:
-                    shutil.rmtree("0")
-                shutil.copytree("0.org", "0")
-            elif "0" in CaseFiles:
-                shutil.copytree("0", "0.org")
-            else:
-                print("No boundary files present")
-                self.procHandler.printFooterFailed
-                sys.exit(1)
             if self.runDecomposePar:
                 self.procHandler.foam("decomposePar", serial = True)
             if self.runRenumberMesh:
