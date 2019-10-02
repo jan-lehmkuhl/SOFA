@@ -109,8 +109,10 @@ class foamRunner(object):
                 self.runDecomposePar = True
             else:
                 self.runDecomposePar = False
+                self.runRenumberMesh = False
         else:
             self.runDecomposePar = False
+            self.runRenumberMesh = False
         # init process handler 
         self.procHandler = procHandler(self.nCores)
         
