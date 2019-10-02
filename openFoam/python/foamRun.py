@@ -297,12 +297,11 @@ class foamRunner(object):
             if self.runReconstructPar:
                 self.procHandler.foam("reconstructPar", "-newTimes", serial=True)
             if self.runFoamLog:
-                nChar = len(self.solver)
                 files = []
                 # find all files which match ident and have the ending .log
                 subFiles = [f.name for f in os.scandir("./log") if f.is_file()]
                 for fileName in subFiles:
-                    if (fileName[:nChar] == self.solver and fileName[-4:] == ".log"):
+                    if fnmatch.fnmatch(fileName, self.solver + "*.log"):
                         files.append(fileName)
                 # add path to each file
                 files = [os.path.join("./log", f) for f in files]
