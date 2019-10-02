@@ -108,35 +108,43 @@ class foamMesher(object):
         self.runTopoSet         = self.settingsTopoSet         
         self.runCreatePatches   = self.settingsCreatePatches
         self.runReport          = self.settingsReport          
-
-
+        # instantiate process handler with number 
         self.procHandler = procHandler(self.nCores)
+        # run blockmesh logic
         if self.settingsBlockMesh:
+            # if blockMeshDict or mesh changed run blockMesh
             if self.fileChangeDict["blockMeshDict"] or self.fileChangeDict["points"]:
                 self.runBlockMesh = True
+            # if nothing changed don't run blockMesh
             else:
                 self.runBlockMesh = False
         else:
             self.runBlockMesh = False
+        # run decomposePar logic 
         if self.nCores > 1:
+            # run if  decomposePar changed
             if self.fileChangeDict["decomposeParDict"]:
                 self.runDecomposePar = True
+            # run if blockMesh changed
             elif self.runBlockMesh:
                 self.runDecomposePar = True
+            # skip if nothing changed
             else:
                 self.runDecomposePar = False
         else:
             self.runDecomposePar = False
-        self.runSurfaceFeatures = self.settingsSurfaceFeatures
+        # run surfaceFeatures 
         if self.settingsSurfaceFeatures:
+            # check weather surface features are present
             for fileName in os.listdir("constant/triSurface"):
                 if fnmatch.fnmatch(fileName, "*.eMesh"):
                     featureEdgesPresent = True
                     break
+            # don't run if surfaceFeaturesDict didn't change
             if not self.fileChangeDict["surfaceFeaturesDict"] and featureEdgesPresent:
                 self.runSurfaceFeatures = False
-        else: 
-            self.runSurfaceFeatures = True
+            else: 
+                self.runSurfaceFeatures = True
 
     ###################################################################
     # general purpose 
