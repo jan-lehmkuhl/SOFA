@@ -289,11 +289,15 @@ class Case(object):
                         print("Cloning case >%s< to >%s< without results" % (currentCase, caseName))
                         os.makedirs(os.path.join(os.pardir, caseName))
                         for name in os.listdir("."):
-                            if fnmatch.fnmatch(name, "[1:9]*"):
-                                continue
-                            elif fnmatch.fnmatch(name, "[0:9].[0:9]*"):
+                            if fnmatch.fnmatch(name, "[1-9]*") or fnmatch.fnmatch(name, "[0-9].[0-9]*"):
                                 continue
                             elif fnmatch.fnmatch(name, "processor*"):
+                                createDirSafely(os.path.join(path,name))
+                                for subDir in os.listdir(os.path.join("./", name)):
+                                    if fnmatch.fnmatch(subDir, "[1-9]*") or fnmatch.fnmatch(subDir, "[0-9].[0-9]*"):
+                                        continue
+                                    else:
+                                        copyFolderSafely(os.path.join(name, subDir), os.path.join(path,name,subDir))
                                 continue
                             elif fnmatch.fnmatch(name, "postProcessing*"):
                                 continue
