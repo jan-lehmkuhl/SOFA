@@ -101,6 +101,7 @@ class foamRunner(object):
         self.runPotentialFoam = boolChecker(self.runJson["runSettings"]["potentialFoam"])
         self.runSolver = boolChecker(self.runJson["runSettings"]["solver"])
         self.runReconstructPar = boolChecker(self.runJson["runSettings"]["reconstructPar"])
+        self.runFoamLog = boolChecker(self.runJson["runSettings"]["foamLog"])
         self.runReport = boolChecker(self.runJson["runSettings"]["report"])
         # decision wether to run decomposePar       
         if self.nCores > 1:
@@ -295,6 +296,19 @@ class foamRunner(object):
                 self.procHandler.foam(self.solver)
             if self.runReconstructPar:
                 self.procHandler.foam("reconstructPar", "-newTimes", serial=True)
+            if self.runFoamLog:
+                nChar = len(self.solver)
+                files = []
+                # find all files which match ident and have the ending .log
+                subFiles = [f.name for f in os.scandir("./log") if f.is_file()]
+                for fileName in subFiles:
+                    if (fileName[:nChar] == self.solver and fileName[-4:] == ".log"):
+                        files.append(fileName)
+                # add path to each file
+                files = [os.path.join("./log", f) for f in files]
+                files.sort(key=lambda x: os.path.getmtime(x))
+                NewestSolverLog = files[-1]
+                self.procHandler.foam("foamLog", NewestSolverLog, serial=True)    
             if self.runReport:
                 self.generateReport()
         except AssertionError:
