@@ -50,6 +50,18 @@ difffreecad:
 	git diff  --color-words  native/geometry.FCStd
 
 
+# creates links in ./stl to freecad stl files for full-control OpenFOAM meshing
+linkfreecadstl:
+#	ln -s ../meshCase/constant/triSurface/Body001_Geometry.stl stl/Body001_Geometry.stl
+	cd stl;  ln -s ../meshCase/constant/triSurface/*.stl .
+
+
+clearfreecadoutput:
+	rm -rf meshCase
+	rm -rf case
+	rm stl/*
+
+
 # Paraview
 # =============================================================================
 

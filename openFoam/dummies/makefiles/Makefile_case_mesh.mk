@@ -17,6 +17,23 @@ commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
 
+# FreeCAD meshing
+# =============================================================================
+
+# for using full-control meshing
+linkfreecad:
+	make -C ../../cad/cad001 linkfreecadstl
+
+
+# can be used to overwrite the dummy settings from full-controll meshing
+copyfreecadmeshfiles:
+	cp -rf ../../cad/cad001/meshCase/* .
+
+
+runfreecadmesh:
+	./Allmesh
+
+
 # full-control OpenFOAM meshing operations
 # =============================================================================
 
