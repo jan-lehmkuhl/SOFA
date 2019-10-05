@@ -4,6 +4,7 @@
  
     "buildSettings" : {
         "cadLink"           :   "",
+        "freecadLink"       :   "",
         "report"            :   "template01"
     },
 

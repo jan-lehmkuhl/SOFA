@@ -1,6 +1,10 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_mesh.mk
 
 
+# include ../../../tools/framework/global-make.mk
+freecadFolder       = $(shell node -p "require('./mesh.json').buildSettings.freecadLink")
+
+
 # handle framework related mesh folder
 # =============================================================================
 
@@ -22,12 +26,19 @@ commit:
 
 # for using full-control meshing
 linkfreecad:
-	make -C ../../cad/cad001 linkfreecadstl
+	if [ -d cad ] ; then   rm cad   ; fi ;
+	ln -s   ../../cad/$(freecadFolder)  cad
+	make -C ../../cad/$(freecadFolder)  linkfreecadstl
 
 
 # can be used to overwrite the dummy settings from full-controll meshing
 copyfreecadmeshfiles:
-	cp -rf ../../cad/cad001/meshCase/* .
+	cp -rf ../../cad/$(freecadFolder)/meshCase/* .
+
+
+openfreecad:
+	make -C ../../cad/$(freecadFolder)  openfreecadgui
+# and write mesh case in gui
 
 
 runfreecadmesh:

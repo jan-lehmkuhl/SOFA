@@ -70,6 +70,8 @@ To clone an online project repo the submodules must be specified to load
     git clone --recurse-submodules git@gitlab.com:NAME/GITLAB_REPO_NAME.git
     # creates subfolder 
 
+be aware, that the submodules are probably behind the origin/master commit
+
 
 install software requirements
 ---------------------------------------------------------------------------------------------------
