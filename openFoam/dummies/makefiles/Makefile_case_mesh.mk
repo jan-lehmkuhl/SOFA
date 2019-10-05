@@ -32,7 +32,7 @@ linkfreecad:
 
 
 # can be used to overwrite the dummy settings from full-controll meshing
-copyfreecadmeshfiles:
+copyfreecadmeshfiles: linkfreecad
 	cp -rf ../../cad/$(freecadFolder)/meshCase/* .
 
 

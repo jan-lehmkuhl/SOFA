@@ -53,6 +53,7 @@ difffreecad:
 # creates links in ./stl to freecad stl files for full-control OpenFOAM meshing
 linkfreecadstl:
 	if [ ! -d stl ]                            ; then   mkdir stl   ; fi ;
+	if [   -f stl/* ]                          ; then   rm stl/*  ; fi ; 
 	if [   -d "meshCase/constant/triSurface" ] ; then   cd stl;  ln -s ../meshCase/constant/triSurface/*.stl .   ; fi ;
 
 
