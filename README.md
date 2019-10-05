@@ -1,5 +1,5 @@
 
-simulation-projects
+FSOP - Framework for Simulation and Optimization Projects
 ===================================================================================================
 
 the aim of this repository is to deliver a framework to improve the opperational efficiency for simple and complex simulation projects and therefore accelerate and improve the project output.  
@@ -24,6 +24,7 @@ To achieve this multiple measures are addressed:
   * easy mesh replacement for multiple calculations
 * use prepared OpenFoam-Setup-Files
   * reduce setup time
+  * or use your own templates
 * automatic comparison of similar simulation setups
   * helps to obtain the overview of different parameter runs
 * scripted post processing with builtin calculation comparison and html-output
@@ -47,7 +48,27 @@ to create a new project create and go to the new empty project folder and execut
     cd <new-project-folder>
     <path-to-any-simulation-project-repository>/bin/createHereNewProject.sh
 
-or execute the content of `./bin/createHereNewProject.py` directly after downloading from gitlab in the new project folder  
+or execute the content of `./bin/createHereNewProject.py` directly after downloading from gitlab in the new project folder.  
+
+### Push repository to Gitlab
+If you want to share the repository on gitlab, you can create an empty project on gitlab and push the local created repository afterwards to gitlab. 
+
+    git config --global user.name  "XXX"
+    git config --global user.email "XXX@XXX.XX"
+
+    cd EXISTING_LOCAL_REPO
+    # git remote rename origin old-origin     # not necessary because there is no origin yet
+    git remote add origin git@gitlab.com:NAME/GITLAB_REPO_NAME.git
+    git push -u origin --all
+    git push -u origin --tags
+
+
+Clone an existing project repo
+---------------------------------------------------------------------------------------------------
+To clone an online project repo the submodules must be specified to load
+
+    git clone --recurse-submodules git@gitlab.com:NAME/GITLAB_REPO_NAME.git
+    # creates subfolder 
 
 
 install software requirements
