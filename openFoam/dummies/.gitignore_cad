@@ -1,7 +1,17 @@
 
-# FreeCAD old versions
+# FreeCAD
+# =====================================
+
+# ## backup versions
 *.FCStd[0-9]
 
-# XXX
+# ## OpenFOAM exports
+meshCase
+case
+
+
+# universal geometry data
+# =====================================
+
 /stl*
 /vtk*
