@@ -1,10 +1,10 @@
 {
-    "name"          :   "",
-    "description"   :   "",
+    "name"                  :   "",
+    "description"           :   "",
  
     "buildSettings" : {
-        "cadLink"   : "",
-        "report"    : "template01"
+        "cadLink"           :   "",
+        "report"            :   "template01"
     },
 
     "meshSettings" : {
