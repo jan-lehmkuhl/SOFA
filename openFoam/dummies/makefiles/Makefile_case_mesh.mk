@@ -80,5 +80,10 @@ cleanMesh:
 
 # open paraview
 view:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py view
-
+	if [ ! -f "Allmesh" ] ; then                                                \
+		echo "*** start foamMesh.py" ;                                          \
+		python3 ../../../tools/framework/openFoam/python/foamMesh.py view ;     \
+	elif [ -f "pv.foam" ] ; then                                                \
+		echo "*** start paraview pv.foam" ;                                     \
+		paraview pv.foam ;                                                      \
+	fi ;
