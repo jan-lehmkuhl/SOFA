@@ -523,6 +523,36 @@ class Case(object):
             elif answer in ["n", "no"]:
                 break
 
+    def updateJson(self):
+        # update json file of a case with newest version from tools
+        #
+        # Args:
+        #
+        # Result:
+        #   side effects:   overwrite current .json
+        #
+
+        # find and load most recent version of json from framework
+        newJsonPath = findFile(self.aspectType + ".json", "tools")
+        newJson = loadJson(newJsonPath)
+        # check if present
+        if newJsonPath:
+            # loop first level of keys 
+            for key1 in self.caseJson:
+                # if found element is a string assign value
+                if isinstance(self.caseJson[key1], str):
+                    newJson[key1] = self.caseJson[key1]
+                # if found element is a dict iterate
+                elif isinstance(self.caseJson[key1], dict):
+                    # assign value 
+                    for key2 in self.caseJson[key1]:
+                        newJson[key1][key2] = self.caseJson[key1][key2]
+        else:
+            print("No version of %s found in framework" %str(self.aspectType + ".json"))
+        # save new Json file over old file
+        with open(os.path.join(self.path, self.aspectType + ".json"), 'w') as outfile:
+            json.dump(newJson, outfile, indent=4)
+
 
 class CadCase(Case):
     # Specialized class for cad cases, which inherits from the base Case class
@@ -911,11 +941,19 @@ elif entryPoint == "updateReports":
         elif answer in ["n", "no"]:
             runReports = False
             break
-    for folder in os.listdir("."):
+    for folder in sorted(os.listdir(".")):
         aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
         if aspectName in foamStructure:
             print("Updating report in > %s" %folder)
             currentCase = cfdAspectSelector(os.path.join("./", folder))
             currentCase.copyReport(runReports)
+elif entryPoint == "updateJson":
+    for folder in sorted(os.listdir(".")):
+        aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
+        if aspectName in foamStructure:
+            print("Updating .json in >%s" %folder)
+            currentCase = cfdAspectSelector(os.path.join("./", folder))
+            currentCase.updateJson()
 elif entryPoint == "test":
-    print("nothing defined")
+    print("Nothing defined")
+            
