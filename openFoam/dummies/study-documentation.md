@@ -132,7 +132,9 @@ Def-File Name:    XXX.def
 
 Convergence
 -----------------------------------------------------------------------------------------
-### Global Residuals & Imbalances
+### Global Residuals 
+
+### Imbalances
 
 ### Yplus & Residual Locations
 

@@ -1,28 +1,57 @@
 # Created by https://www.gitignore.io/api/openfoam
 # Edit at https://www.gitignore.io/?templates=openfoam
 
-### OpenFOAM ###
-# Timestep directories
+
+# OpenFOAM Preprocessing
+# =============================================================================
+
+#exclude important folders and files:
+!0/
+!constant/thermophysicalProperties
+!constant/turbulenceProperties
+!system/
+!.gitignore
+
+
+
+# OpenFOAM Solving
+# =============================================================================
+
+## Timestep directories
 0/*
 0.*
 !0.org
 [1-9]*
 
-# Fields that must get ignored
+## Fields that must get ignored
 */phi*
 */meshPhi*
 
-# Decomposed domain
+## Decomposed domain
 processor*
 
-# logfiles
+## logfiles
 log.*
 *log
+
+
+
+# OpenFOAM Postprocessing
+# =============================================================================
 
 # paraview/ParaFoam
 *.foam
 *.OpenFOAM
 *.pvsm
+
+# function object and post-processing data
+forces
+postProcessing
+
+
+
+# OpenFOAM Meshing
+# =============================================================================
 
 # mesh data that is no dictionary
 constant/polyMesh/points*
@@ -43,9 +72,10 @@ constant/polyMesh/refinementHistory*
 constant/polyMesh/surfaceIndex*
 constant/triSurface
 
-# function object and post-processing data
-forces
-postProcessing
+
+
+# OpenFOAM additional stuff
+# =============================================================================
 
 # Needed when C++ code is built using the OpenFOAM library, since it does not
 # use a "normal" build tool (make, cmake, ..).
@@ -56,11 +86,5 @@ linux*
 Darwin*
 dynamicCode
 
-#exclude important folders and files:
-!0/
-!constant/thermophysicalProperties
-!constant/turbulenceProperties
-!system/
-!.gitignore
 
 # End of https://www.gitignore.io/api/openfoam
