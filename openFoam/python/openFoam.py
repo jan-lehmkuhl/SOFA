@@ -169,6 +169,8 @@ class Case(object):
         self.aspectType = aspectType
         # relative path to Aspect
         self.path = path
+        # name of current case
+        self.caseName = os.path.basename(os.path.abspath(self.path))
         # initialize variables 
         self.caseJson = None
         self.linkedCase = None
@@ -443,25 +445,40 @@ class Case(object):
         # Return:
         #   side effects: creates symlinks for mesh
         #
+        if self.aspectType == "cad" :
+            print("Reports are not supported for >cad<")
+            exit(0)
+        elif self.aspectType == "survey" :
+            print("Reports are not yet supported for >cad<")
+            exit(0)
         reportSrc = ""
         reportTemplate = self.caseJson["buildSettings"]["report"]
         if reportTemplate in  os.listdir(os.path.join(self.path, "../doc")):
             reportPath = os.path.join(self.path, "../doc", reportTemplate)
             for file in os.listdir(reportPath):
                 if fnmatch.fnmatch(file, '*.Rmd'):
-                    reportSrc = os.path.join(reportPath, file)
-                    reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
+                    if self.aspectType == "mesh" :
+                        reportSrc = os.path.join(reportPath, file)
+                        reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
+                    elif self.aspectType == "run" :
+                        reportSrc = os.path.join(reportPath, file)
+                        reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
+                else: 
+                    print("Unabel to find a report in >%s" %reportPath)
+                    exit(0)
+        else:
+            print("Unabel to find >%s in")
+            exit(0)
         if not reportSrc :
-            if self.aspectType == "cad" :
-                print("No reports supported for >cad<")
             if self.aspectType == "mesh" :
                 reportSrc = findFile("MeshReport.Rmd", "tools")
                 reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
             if self.aspectType == "run" :
                 reportSrc = findFile("RunReport.Rmd", "tools")
                 reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
-            if self.aspectType == "survey" :
-                print("No reports supported for >survey<")
+        print("Updating report in >%s" %self.caseName)
+        if not os.path.exists(os.path.dirname(reportDst)):
+            createDirSafely(os.path.dirname(reportDst))
         if os.path.exists(reportDst):
             print("Deleting > %s" %reportDst)
             os.remove(reportDst)
@@ -922,15 +939,17 @@ elif entryPoint == "commit":
     currentCase = Case("run")
     currentCase.commitChanges()
 elif entryPoint == "overview":
+    if not os.path.exists("doc"):
+        print("Directory >doc< doesn't exist")
+        exit(0)
     files = os.listdir("doc")
     for fileName in files:
-        if fileName == "MeshOverview.Rmd":
-            os.system('R -e "rmarkdown::render(\'doc/MeshOverview.Rmd\')"')
-        elif fileName == "RunOverview.Rmd":
-            os.system('R -e "rmarkdown::render(\'doc/RunOverview.Rmd\')"')
-        else:
-            print("Unabel to find RMarkdown file")
-elif entryPoint == "updateReports":
+        if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
+            os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
+            break
+    else:
+        print("Unabel to find RMarkdown file")
+elif entryPoint == "updateAllReports":
     while True:
         print("Run reports after updating ? (y/n)")
         answer = input()
@@ -944,9 +963,32 @@ elif entryPoint == "updateReports":
     for folder in sorted(os.listdir(".")):
         aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
         if aspectName in foamStructure:
-            print("Updating report in > %s" %folder)
             currentCase = cfdAspectSelector(os.path.join("./", folder))
             currentCase.copyReport(runReports)
+    if runReports:
+        if not os.path.exists("doc"):
+            print("Directory >doc< doesn't exist")
+            exit(0)
+        files = os.listdir("doc")
+        for fileName in files:
+            if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
+                os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
+                break
+        else:
+            print("Unabel to find RMarkdown file")
+elif entryPoint == "updateReport":
+    while True:
+        print("Run reports after updating ? (y/n)")
+        answer = input()
+        answer = answer.lower()
+        if answer in ["y", "yes"]:
+            runReports = True
+            break
+        elif answer in ["n", "no"]:
+            runReports = False
+            break
+    currentCase = cfdAspectSelector()
+    currentCase.copyReport(runReports)
 elif entryPoint == "updateJson":
     for folder in sorted(os.listdir(".")):
         aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
