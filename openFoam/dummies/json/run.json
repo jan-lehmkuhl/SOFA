@@ -21,6 +21,7 @@
         "potentialFoam"     :   "True",
         "solver"            :   "True",
         "reconstructPar"    :   "True",
+        "foamLog"           :   "True",
 
         "report"            :   "True"
     }
