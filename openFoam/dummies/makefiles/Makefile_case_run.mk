@@ -30,6 +30,10 @@ clear:
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
+# update report according to .json
+updateReport:
+	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
+
 
 # run
 # =============================================================================

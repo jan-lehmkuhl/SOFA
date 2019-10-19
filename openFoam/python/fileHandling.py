@@ -10,6 +10,7 @@ import os
 import shutil
 import json
 import errno
+import collections
 
 def createDirSafely(dst):
     # creates a directory recursively if it doesn't exist
@@ -153,7 +154,7 @@ def loadJson(jsonPath):
     #
     if os.path.exists(jsonPath):
         with open(jsonPath, 'r') as jsonFile:
-            jsonPy = json.load(jsonFile)
+            jsonPy = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
             return(jsonPy)
     else:
         print("json file >%s< does not exis" % jsonPath)

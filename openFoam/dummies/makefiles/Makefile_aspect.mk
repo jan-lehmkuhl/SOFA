@@ -11,9 +11,14 @@ overview:
 	python3 ../../tools/framework/openFoam/python/openFoam.py overview
 
 
-# create an overview report
+# update reports to newest version and potentially run report generation
 updateReports:
-	python3 ../../tools/framework/openFoam/python/openFoam.py updateReports
+	python3 ../../tools/framework/openFoam/python/openFoam.py updateAllReports
+
+
+# update json files to newest version
+updateJson:
+	python3 ../../tools/framework/openFoam/python/openFoam.py updateJson
 
 
 # test value
