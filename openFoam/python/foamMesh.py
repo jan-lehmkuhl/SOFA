@@ -38,6 +38,8 @@ def checkFoamVer():
         return ("5")
     elif version == "/opt/openfoam6":
         return ("6")
+    elif version == "/opt/openfoam7":
+        return ("7")
     elif version == "/opt/openfoam-dev":
         return ("dev")
     elif version == "":
