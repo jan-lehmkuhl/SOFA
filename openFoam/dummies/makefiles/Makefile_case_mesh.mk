@@ -5,6 +5,22 @@
 freecadFolder       = $(shell node -p "require('./mesh.json').buildSettings.freecadLink")
 
 
+
+# standard targets 
+# =============================================================================
+
+# default mesh creating target
+all: mesh view
+
+mesh: 
+	if [ -f "Allmesh" ] ; then    \
+		./Allmesh               ; \
+	else                          \
+		make frameworkmeshing   ; \
+	fi ;
+
+
+
 # handle framework related mesh folder
 # =============================================================================
 
@@ -78,7 +94,7 @@ cleanfreecadmesh:
 	# rm -rf gmsh
 
 
-# full-control OpenFOAM meshing operations
+# full-control framework OpenFOAM meshing
 # =============================================================================
 
 # initialize case according to mesh.json
@@ -90,17 +106,21 @@ initOpenFoamMesh:
 updateSymlinks:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
 
+
 # generate mesh according to mesh.json
-mesh:
+frameworkmeshing:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py mesh
+
 
 # erase last boundary layer and redo 
 redoMeshLayer:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py meshLayer
 
+
 # copy last timestep to constant and erase the rest
 finalizeMesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py finalizeMesh
+
 
 # erase all meshing results
 cleanMesh:

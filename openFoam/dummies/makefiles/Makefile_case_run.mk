@@ -7,6 +7,20 @@ meshFolder       = $(shell node -p "require('./run.json').buildSettings.meshLink
 freecadFolder    = $(shell node -p "require('../../mesh/$(meshFolder)/mesh.json').buildSettings.freecadLink")
 
 
+
+# standard targets 
+# =============================================================================
+
+# default run target
+run: 
+	if [ -f "Allrun" ] ; then     \
+		./Allrun                ; \
+	else                          \
+		make frameworkrun       ; \
+	fi ;
+
+
+
 # handle framework related run folder
 # =============================================================================
 
@@ -14,21 +28,30 @@ freecadFolder    = $(shell node -p "require('../../mesh/$(meshFolder)/mesh.json'
 init:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
 
+
 # renew the symlinks to mesh
 updateSymlinks:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
+
 
 # clone this case to a new case with the next available running number 
 clone:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clone
 
+
 # erase all files except necessary framework related files
 clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
+
+# remove all calculated files
+clean: cleanRun
+
+
 # commit all changes inside case
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
+
 
 # update report according to .json
 updateReport:
@@ -39,12 +62,14 @@ updateReport:
 # =============================================================================
 
 # run case according to run.json
-run:
+frameworkrun:
 	python3 ../../../tools/framework/openFoam/python/foamRun.py run
+
 
 # erase all results
 cleanRun:
 	python3 ../../../tools/framework/openFoam/python/foamRun.py cleanRun
+
 
 # open paraview
 view:

@@ -1,6 +1,17 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_cad.mk
 
 
+
+# standard targets 
+# =============================================================================
+
+# default make target to review CAD-Object
+all: 
+	if [   -f native/geometry.FCStd ]; then   freecad native/geometry.FCStd     ; fi
+	if [ ! -f native/geometry.FCStd ]; then   make view                         ; fi
+
+
+
 # framework folder handling
 # =============================================================================
 
