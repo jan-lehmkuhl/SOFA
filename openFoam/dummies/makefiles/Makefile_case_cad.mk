@@ -9,7 +9,7 @@ clone:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clone
 
 
-# erase all files except necessary
+# erase all files except necessary framework related files
 clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
@@ -18,10 +18,6 @@ clear:
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
-
-# erase all vtk files
-cleanVTK:
-	python3 ../../../tools/framework/openFoam/python/foamCad.py cleanVTK
 
 
 # Basic stl/surface handling
@@ -35,6 +31,12 @@ checkSurfaces:
 # combine all stl files into a single regional stl
 combineSTL:
 	python3 ../../../tools/framework/openFoam/python/foamCad.py combineSTL
+
+
+# erase all vtk files
+cleanVTK:
+	python3 ../../../tools/framework/openFoam/python/foamCad.py cleanVTK
+
 
 
 # FreeCAD handling
@@ -61,6 +63,7 @@ clearfreecadoutput:
 	rm -rf meshCase
 	rm -rf case
 	rm stl/*
+
 
 
 # Paraview

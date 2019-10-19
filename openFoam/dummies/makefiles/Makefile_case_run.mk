@@ -18,11 +18,11 @@ init:
 updateSymlinks:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
 
-# clone case to a new case with the next available running number 
+# clone this case to a new case with the next available running number 
 clone:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clone
 
-# erase all files except necessary
+# erase all files except necessary framework related files
 clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
@@ -49,11 +49,11 @@ cleanRun:
 # open paraview
 view:
 	if [ ! -f "Allrun" ] ; then                                                 \
-		echo "*** start foamMesh.py" ;                                          \
-		python3 ../../../tools/framework/openFoam/python/foamRun.py view ;      \
+		echo "*** start foamMesh.py"                                          ; \
+		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \
 	elif [ -f "pv.foam" ] ; then                                                \
-		echo "*** start paraFoam -builtin" ;                                     \
-		paraFoam -builtin ;                                                      \
+		echo "*** start paraFoam -builtin"                                    ; \
+		paraFoam -builtin                                                     ; \
 	fi ;
 
 

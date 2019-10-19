@@ -50,7 +50,7 @@ to create a new project create and go to the new empty project folder and execut
 
 or execute the content of `./bin/createHereNewProject.py` directly after downloading from gitlab in the new project folder.  
 
-### Push repository to Gitlab
+### Push a local repository to Gitlab
 If you want to share the repository on gitlab, you can create an empty project on gitlab and push the local created repository afterwards to gitlab. 
 
     git config --global user.name  "XXX"

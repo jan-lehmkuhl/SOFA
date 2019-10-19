@@ -12,7 +12,8 @@ freecadFolder       = $(shell node -p "require('./mesh.json').buildSettings.free
 clone:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clone
 
-# erase all files except framework necessary files
+
+# erase all files except necessary framework related files
 clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
@@ -20,9 +21,11 @@ clear:
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
+
 # update report according to .json
 updateReport:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
+
 
 
 # FreeCAD meshing
@@ -85,9 +88,9 @@ cleanMesh:
 # open paraview
 view:
 	if [ ! -f "Allmesh" ] ; then                                                \
-		echo "*** start foamMesh.py" ;                                          \
-		python3 ../../../tools/framework/openFoam/python/foamMesh.py view ;     \
+		echo "*** start foamMesh.py"                                          ; \
+		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \
 	elif [ -f "pv.foam" ] ; then                                                \
-		echo "*** start paraview pv.foam" ;                                     \
-		paraview pv.foam ;                                                      \
+		echo "*** start paraview pv.foam"                                     ; \
+		paraview pv.foam                                                      ; \
 	fi ;
