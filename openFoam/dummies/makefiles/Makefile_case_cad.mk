@@ -14,6 +14,11 @@ clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
 
+# remove all from commited sources created files and links
+clean: cleanfreecadoutput cleanVTK
+	find . -empty -type d -delete
+
+
 # commit all changes inside case
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
@@ -59,10 +64,10 @@ linkfreecadstl:
 	if [   -d "meshCase/constant/triSurface" ] ; then   cd stl;  ln -s ../meshCase/constant/triSurface/*.stl .   ; fi ;
 
 
-clearfreecadoutput:
+cleanfreecadoutput:
 	rm -rf meshCase
 	rm -rf case
-	rm stl/*
+	rm -f  stl/*
 
 
 

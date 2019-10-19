@@ -17,6 +17,26 @@ clone:
 clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
+
+# remove all from commited sources created files and links
+clean: cleanfreecadmesh
+	rm -rf constant/polyMesh/points*
+	rm -rf constant/polyMesh/faces*
+	rm -rf constant/polyMesh/owner*
+	rm -rf constant/polyMesh/neighbour*
+	rm -rf constant/polyMesh/boundary*
+	rm -rf constant/polyMesh/sets
+	rm -rf constant/polyMesh/*
+	rm -rf constant/extendedFeatureEdgeMesh/*
+# Zones and levels
+#*Level*
+#*Zone*
+	rm -rf constant/polyMesh/refinementHistory*
+	rm -rf constant/polyMesh/surfaceIndex*
+	rm -rf constant/triSurface
+	find . -empty -type d -delete
+
+
 # commit all changes inside case
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
@@ -50,6 +70,12 @@ openfreecad:
 
 runfreecadmesh:
 	./Allmesh
+
+
+cleanfreecadmesh:
+	rm -f log.* 
+	rm -f mesh_outside.stl
+	# rm -rf gmsh
 
 
 # full-control OpenFOAM meshing operations
