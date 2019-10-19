@@ -646,6 +646,9 @@ class MeshCase(Case):
         if self.makeMainSymlink():
             createDirSafely("constant/triSurface")
             createDirSafely("doc")
+            createDirSafely( self.pathToLinkedCase+ "/doc")
+            createDirSafely( self.pathToLinkedCase+ "/stl")
+            createDirSafely( self.pathToLinkedCase+ "/vtk")
             for extension in ["stl", "vtk"]:
                 for element in os.listdir(os.path.join(self.pathToLinkedCase, extension)):
                     if element.endswith("." + extension):
@@ -711,6 +714,7 @@ class RunCase(Case):
             createDirSafely("doc")
             createSymlinkSavely(os.path.join(
                 self.pathToLinkedCase, "constant/polyMesh"), os.path.join("./constant/polyMesh"))
+            createDirSafely( self.pathToLinkedCase+ "/doc")
             for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
                 currentPath = os.path.join(
                     self.pathToLinkedCase, "doc", element)
