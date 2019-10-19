@@ -108,7 +108,11 @@ class foamRunner(object):
         self.fileChangeDict = self.compareFileStates()
         # info from run.json
         self.runJson = loadJson("run.json")
-        self.nCores = int(self.runJson["runSettings"]["nCores"])
+        if self.runJson["runSettings"]["nCores"] == "" :
+            self.nCores = 0
+            print("Number of Cores is not specified in run.json")
+        else:
+            self.nCores = int(self.runJson["runSettings"]["nCores"])
         self.solver = self.runJson["buildSettings"]["solver"]
         self.runRenumberMesh = boolChecker(self.runJson["runSettings"]["renumberMesh"])
         self.runPotentialFoam = boolChecker(self.runJson["runSettings"]["potentialFoam"])
