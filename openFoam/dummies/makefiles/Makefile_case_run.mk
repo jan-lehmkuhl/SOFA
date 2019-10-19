@@ -87,15 +87,15 @@ view:
 # =============================================================================
 
 linkfreecad:
-	if [ -d cadlnk ] ; then   rm cadlnk   ; fi ;
-	ln -s   ../../cad/$(freecadFolder)  cadlnk
-	if [ -d meshlnk ] ; then   rm meshlnk   ; fi ;
-	ln -s   ../../mesh/$(meshFolder)  meshlnk
+	if [ -d $(freecadFolder) ] ; then   rm $(freecadFolder)   ; fi ;
+	ln -s   ../../cad/$(freecadFolder)  $(freecadFolder)
+	if [ -d $(meshFolder) ] ; then   rm $(meshFolder)   ; fi ;
+	ln -s   ../../mesh/$(meshFolder)  $(meshFolder)
 
 
 # can be used to overwrite the dummy settings
 copyfreecadcasefiles: linkfreecad
 	cp -rf ../../cad/$(freecadFolder)/case/* .
-	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./mesh"\' Allrun
+	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(meshFolder)"\' Allrun
 
 
