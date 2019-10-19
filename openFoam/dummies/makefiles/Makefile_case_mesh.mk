@@ -53,8 +53,8 @@ updateReport:
 
 # for using full-control meshing
 linkfreecad:
-	if [ -d cad ] ; then   rm cad   ; fi ;
-	ln -s   ../../cad/$(freecadFolder)  cad
+	if [ -d cadlnk ] ; then   rm cadlnk   ; fi ;
+	ln -s   ../../cad/$(freecadFolder)  cadlnk
 	make -C ../../cad/$(freecadFolder)  linkfreecadstl
 
 

@@ -62,10 +62,10 @@ view:
 # =============================================================================
 
 linkfreecad:
-	if [ -d cad ] ; then   rm cad   ; fi ;
-	ln -s   ../../cad/$(freecadFolder)  cad
-	if [ -d mesh ] ; then   rm mesh   ; fi ;
-	ln -s   ../../mesh/$(meshFolder)  mesh
+	if [ -d cadlnk ] ; then   rm cadlnk   ; fi ;
+	ln -s   ../../cad/$(freecadFolder)  cadlnk
+	if [ -d meshlnk ] ; then   rm meshlnk   ; fi ;
+	ln -s   ../../mesh/$(meshFolder)  meshlnk
 
 
 # can be used to overwrite the dummy settings
