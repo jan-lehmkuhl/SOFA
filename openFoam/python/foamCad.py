@@ -19,14 +19,15 @@ class foamCAD(object):
         self.procHandler = procHandler(1)
 
     def cleanVTK(self):
-        for fileName in os.listdir("vtk"):
-            if os.path.splitext(fileName)[1] == ".vtk":
-                print("Processing >%s<" % fileName)
-                bad_words = ['METADATA', 'INFORMATION ', 'NAME ', "DATA "]
-                with open(os.path.join("vtk", fileName)) as oldfile, open(os.path.join("vtk", "Clean_" + fileName), 'w') as newfile:
-                    for line in oldfile:
-                        if not any(line.startswith(bad_word) for bad_word in bad_words):
-                            newfile.write(line)
+        if os.path.isdir("vtk"):
+            for fileName in os.listdir("vtk"):
+                if os.path.splitext(fileName)[1] == ".vtk":
+                    print("Processing >%s<" % fileName)
+                    bad_words = ['METADATA', 'INFORMATION ', 'NAME ', "DATA "]
+                    with open(os.path.join("vtk", fileName)) as oldfile, open(os.path.join("vtk", "Clean_" + fileName), 'w') as newfile:
+                        for line in oldfile:
+                            if not any(line.startswith(bad_word) for bad_word in bad_words):
+                                newfile.write(line)
 
     def combineSTL(self):
         fileNames = []
