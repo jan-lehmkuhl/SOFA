@@ -5,10 +5,20 @@
 # standard targets 
 # =============================================================================
 
-# default make target to review CAD-Object
-all: 
-	if [   -f native/geometry.FCStd ]; then   freecad native/geometry.FCStd     ; fi
-	if [ ! -f native/geometry.FCStd ]; then   make view                         ; fi
+all: cad view
+
+# writes necessary cad files from sources
+cad: 
+	if [   -f native/geometry.FCStd ]; then                                      \
+		echo; echo "*** execute WRITE MESH inside freecad ***" ;echo           ; \
+		# make openfreecadgui                                                  ; \
+		make linkfreecadstl                                                    ; \
+	fi
+
+# review cad files
+view:
+	if [   -f native/geometry.FCStd ]; then   make openfreecadgui              ; fi
+	if [ ! -f native/geometry.FCStd ]; then   make view                        ; fi
 
 
 
@@ -86,6 +96,6 @@ cleanfreecadoutput:
 # =============================================================================
 
 # open paraview
-view:
+frameworkview:
 	python3 ../../../tools/framework/openFoam/python/foamCad.py view
 

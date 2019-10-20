@@ -19,6 +19,8 @@ run:
 		make frameworkrun       ; \
 	fi ;
 
+mesh: 
+	make -C $(meshFolder) mesh
 
 
 # handle framework related run folder
@@ -45,7 +47,7 @@ clear:
 
 
 # remove all calculated files
-clean: cleanRun
+clean: cleanRun cleanFreecad
 
 
 # commit all changes inside case
@@ -99,3 +101,5 @@ copyfreecadcasefiles: linkfreecad
 	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(meshFolder)"\' Allrun
 
 
+cleanFreecad: 
+	rm -f constant/polyMesh

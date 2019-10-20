@@ -13,10 +13,12 @@ freecadFolder       = $(shell node -p "require('./mesh.json').buildSettings.free
 all: mesh view
 
 mesh: 
-	if [ -f "Allmesh" ] ; then    \
-		./Allmesh               ; \
-	else                          \
-		make frameworkmeshing   ; \
+	if [ -f "Allmesh" ] ; then                               \
+		make -C $(freecadFolder) cad                       ; \
+		make linkfreecad                                   ; \
+		./Allmesh                                          ; \
+	else                                                     \
+		make frameworkmeshing                              ; \
 	fi ;
 
 
@@ -36,6 +38,7 @@ clear:
 
 # remove all from commited sources created files and links
 clean: cleanfreecadmesh
+	rm -f  cad*
 	rm -rf constant/polyMesh/points*
 	rm -rf constant/polyMesh/faces*
 	rm -rf constant/polyMesh/owner*
