@@ -13,10 +13,12 @@ freecadFolder       = $(shell node -p "require('./mesh.json').buildSettings.free
 all: mesh view
 
 mesh: 
-	if [ -f "Allmesh" ] ; then    \
-		./Allmesh               ; \
-	else                          \
-		make frameworkmeshing   ; \
+	if [ -f "Allmesh" ] ; then                               \
+		make -C $(freecadFolder) cad                       ; \
+		make linkfreecad                                   ; \
+		./Allmesh                                          ; \
+	else                                                     \
+		make frameworkmeshing                              ; \
 	fi ;
 
 
@@ -36,6 +38,7 @@ clear:
 
 # remove all from commited sources created files and links
 clean: cleanfreecadmesh
+	rm -f  cad*
 	rm -rf constant/polyMesh/points*
 	rm -rf constant/polyMesh/faces*
 	rm -rf constant/polyMesh/owner*
@@ -72,6 +75,9 @@ linkfreecad:
 	if [ -d $(freecadFolder) ] ; then   rm $(freecadFolder)   ; fi ;
 	ln -s   ../../cad/$(freecadFolder)  $(freecadFolder)
 	make -C ../../cad/$(freecadFolder)  linkfreecadstl
+	if [ ! -d constant/triSurface ] ; then   mkdir constant/triSurface   ; fi ; 
+	cd constant/triSurface                                                         ; \
+	ln -sf ../../../../cad/$(freecadFolder)/meshCase/constant/triSurface/*.stl .   ; \
 
 
 # can be used to overwrite the dummy settings from full-controll meshing
