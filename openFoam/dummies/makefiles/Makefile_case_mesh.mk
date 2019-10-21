@@ -2,7 +2,7 @@
 
 
 # include ../../../tools/framework/global-make.mk
-freecadFolder       = $(shell node -p "require('./mesh.json').buildSettings.freecadLink")
+cadFolder       = $(shell node -p "require('./mesh.json').buildSettings.cadLink")
 
 
 
@@ -14,8 +14,8 @@ all: mesh view
 
 mesh: 
 	if [ -f "Allmesh" ] ; then                               \
-		make -C $(freecadFolder) cad                       ; \
-		make linkfreecad                                   ; \
+		make -C $(cadFolder) cad                           ; \
+		make updateCadLink                                   ; \
 		./Allmesh                                          ; \
 	else                                                     \
 		make frameworkmeshing                              ; \
@@ -71,22 +71,22 @@ updateReport:
 # =============================================================================
 
 # for using full-control meshing
-linkfreecad:
-	if [ -d $(freecadFolder) ] ; then   rm $(freecadFolder)   ; fi ;
-	ln -s   ../../cad/$(freecadFolder)  $(freecadFolder)
-	make -C ../../cad/$(freecadFolder)  linkfreecadstl
 	if [ ! -d constant/triSurface ] ; then   mkdir constant/triSurface   ; fi ; 
+updateCadLink:
+	if [ -d $(cadFolder); then   rm $(cadFolder)   ; fi ;
+	ln -s   ../../cad/$(cadFolder)  $(cadFolder)
+	make -C ../../cad/$(cadFolder)  linkfreecadstl
 	cd constant/triSurface                                                         ; \
-	ln -sf ../../../../cad/$(freecadFolder)/meshCase/constant/triSurface/*.stl .   ; \
+	ln -sf ../../../../cad/$(cadFolder)/meshCase/constant/triSurface/*.stl .   ; \
 
 
 # can be used to overwrite the dummy settings from full-controll meshing
 copyfreecadmeshfiles: linkfreecad
-	cp -rf ../../cad/$(freecadFolder)/meshCase/* .
+	cp -rf ../../cad/$(cadFolder)/meshCase/* .
 
 
 openfreecad:
-	make -C ../../cad/$(freecadFolder)  openfreecadgui
+	make -C ../../cad/$(cadFolder)  openfreecadgui
 # and write mesh case in gui
 
 

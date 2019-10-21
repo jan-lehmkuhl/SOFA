@@ -4,7 +4,7 @@
 # include ../../../tools/framework/global-make.mk
 
 meshFolder       = $(shell node -p "require('./run.json').buildSettings.meshLink")
-freecadFolder    = $(shell node -p "require('../../mesh/$(meshFolder)/mesh.json').buildSettings.freecadLink")
+cadFolder        = $(shell node -p "require('../../mesh/$(meshFolder)/mesh.json').buildSettings.cadLink")
 
 
 
@@ -48,6 +48,7 @@ clear:
 
 # remove all calculated files
 clean: cleanRun cleanFreecad
+	# rm -f  mesh[0-9][0-9][0-9]
 
 
 # commit all changes inside case
@@ -88,16 +89,9 @@ view:
 # FreeCAD settings
 # =============================================================================
 
-linkfreecad:
-	if [ -d $(freecadFolder) ] ; then   rm $(freecadFolder)   ; fi ;
-	ln -s   ../../cad/$(freecadFolder)  $(freecadFolder)
-	if [ -d $(meshFolder) ] ; then   rm $(meshFolder)   ; fi ;
-	ln -s   ../../mesh/$(meshFolder)  $(meshFolder)
-
-
 # can be used to overwrite the dummy settings
-copyfreecadcasefiles: linkfreecad
-	cp -rf ../../cad/$(freecadFolder)/case/* .
+copyfreecadcasefiles: updateSymlinks
+	cp -rf ../../cad/$(cadFolder)/case/* .
 	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(meshFolder)"\' Allrun
 
 
