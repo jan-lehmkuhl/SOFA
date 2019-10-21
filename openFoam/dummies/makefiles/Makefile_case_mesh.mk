@@ -65,12 +65,12 @@ updateReport:
 # FreeCAD meshing
 # =============================================================================
 
-	if [ ! -d constant/triSurface ] ; then   mkdir constant/triSurface   ; fi ; 
 # linking freecad-stl to std folder for using full-control meshing
 updateCadLink:
 	if [ -d $(cadFolder); then   rm $(cadFolder)   ; fi ;
 	ln -s   ../../cad/$(cadFolder)  $(cadFolder)
 	make -C ../../cad/$(cadFolder)  linkfreecadstl
+	if [ ! -d constant/triSurface ] ; then   mkdir -p constant/triSurface   ; fi ; 
 	cd constant/triSurface                                                         ; \
 	ln -sf ../../../../cad/$(cadFolder)/meshCase/constant/triSurface/*.stl .   ; \
 
