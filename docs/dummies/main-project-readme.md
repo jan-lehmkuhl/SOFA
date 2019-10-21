@@ -12,12 +12,17 @@
 |                   |                                  |
 | ----------------- | -------------------------------- |
 | **Project Title** | xxx
-| Project-Start     | xxx.2018
-| Project-End       | ongoing
+| project start     | xxx.2018
+| project end       | ongoing
+| active stakeholder| xxx
 | cfd engineer      | Jan Lehmkuhl
 | design engineer   | xxx
 | checked by        | xxx
 <br>  
+
+<!-- example picture for quick project identification -->
+<!-- ![](cfd-reports/XXX_001_Rep/Figure001.png)  -->
+
 
 **_Table of Content_**
 
@@ -29,6 +34,7 @@
   - [Study 1](#study-1)
 - [actual Project-Status](#actual-project-status)
   - [Results](#results)
+    - [Study 1](#study-1-1)
   - [Open issues](#open-issues)
   - [Project-Forecast](#project-forecast)
 - [Conclusions](#conclusions)
@@ -53,7 +59,7 @@ Simulation Explanation
 
 Study 1
 -----------------------------------------------------------------------------------------
-<!-- which information should every study deliver to reach the project goals -->
+<!-- which special information should this study deliver to reach the project goals -->
 
 
 actual Project-Status
@@ -61,7 +67,8 @@ actual Project-Status
 
 Results
 -----------------------------------------------------------------------------------------
-<!-- main results as short bulletpoints from the different studies -->
+### Study 1
+<!-- main study results as short bulletpoints -->
 
 
 Open issues

@@ -1,6 +1,27 @@
 
 <!-- copied from tools/framework/openFoam/dummies/study-documentation.md -->
 
+- [Task List](#task-list)
+- [Reality Description](#reality-description)
+  - [Geometry](#geometry)
+  - [Physics](#physics)
+- [Model & Numerics](#model--numerics)
+  - [Geometry](#geometry-1)
+  - [Mesh](#mesh)
+    - [Final Mesh Metrics](#final-mesh-metrics)
+    - [Final Mesh Specific Features](#final-mesh-specific-features)
+    - [Mesh Study](#mesh-study)
+  - [Physical Modeling](#physical-modeling)
+  - [Numerics](#numerics)
+  - [Convergence](#convergence)
+    - [Global Residuals](#global-residuals)
+    - [Imbalances](#imbalances)
+    - [Yplus](#yplus)
+    - [Monitor Point Stability](#monitor-point-stability)
+  - [Analysis Type](#analysis-type)
+  - [Numerical Confidence](#numerical-confidence)
+- [Flow Analysis](#flow-analysis)
+- [preliminary construction proposals](#preliminary-construction-proposals)
 
 Task List
 ===================================================================================================
@@ -10,9 +31,9 @@ Task List
     - [ ] simplification
 - [ ] mesh
     - [ ] first mesh
-    - [ ] mesh with skewness <0,9
+    - [ ] good quality mesh
     - [ ] mesh study
-    - [ ] mesh refinement
+    - [ ] final mesh refinement
 - [ ] setup
     - [ ] set conditions
     - [ ] define monitor points
@@ -25,109 +46,85 @@ Task List
 - [ ] write report
 
 
-Short Setup Description
+Reality Description
 ===================================================================================================
 
 Geometry
 -----------------------------------------------------------------------------------------
-
+<!-- description of the geometry features and their size -->
 
 Physics
 -----------------------------------------------------------------------------------------
+<!-- which physical effects occur -->
+
+| used materials    | used place    | density   | dyn. viscosity|
+| ----------------- | ------------- | --------- | ------------- |
+| material 1        |               | xx [kg/m³]| xx [kg/m/s]   |
+
+
+| thermodynamic value   | occuring range    |
+| --------------------- | ----------------- |
+| pressure              | xxx [Pa] 
+| velocities            | xxx [m/s]
+| temperature           | xxx [C]
+
+
+
+Model & Numerics
+===================================================================================================
+
+Geometry
+-----------------------------------------------------------------------------------------
+<!-- simplifications of the 3D modell -->
+
+
+Mesh
+-----------------------------------------------------------------------------------------
+
+### Final Mesh Metrics
+
+| Mesh                      | Value     |
+| ---------------------     | --------- |
+| number of hexahedra:      | 0 
+| number of prisms:         | 0 
+| number of wedges:         | 0 
+| number of pyramids:       | 0 
+| number of tet wedges:     | 0 
+| number of tetrahedra:     | 0 
+| number of polyhedra:      | 0 
+| max skewness              | XXX
+| min y+ (runXXX)           | XXX 
+| max y+ (runXXX)           | XXX 
+
+
+### Final Mesh Specific Features
+<!-- show pictures of meshing from important geometry features -->
+
+
+### Mesh Study
+<!-- create mesh study and define error -->
+
+
+Physical Modeling
+-----------------------------------------------------------------------------------------
+<!-- which special physical models are applied -->
+<!-- e.g. bouyancy, energy transport, material models, ... -->
+
 | Domain    | Setting               | Value             | checked       |
 | --------- | --------------------- | ----------------- | ------------- |
-| Fluid     | Ref-Pressure          | XXX [bar]         |               |
-| Fluid     | Ref-Temperature       | XXX [C]           |               |
-| Fluid     | Material              | XXX               |               |
-| Fluid     | Density               | XXX [kg/m^3]      |               |
 | Fluid     | Buoyancy              | Non               |               |
 | Inlet1    | Mass Flow / Vel       | XXX [m/s]         |               |
 | Outlet1   | Pressure-BC           | 0 Pa              |               |
 
 
-File Names/Organisation
+Numerics 
 -----------------------------------------------------------------------------------------
 
-
-Simplifications
-===================================================================================================
-
-Geometry/Mesh
------------------------------------------------------------------------------------------
-### Mesh-Log
-<!-- | Mesh-Nr/Name/hash | Nodes===_ | Features      | Quality (Skewness/Yplus)  | MeshStudyNotes    |
-| ----------------- | --------- | ------------- | ------------------------- | ------------------|
-|                   | nodes_xxx | features_xxxx | quality_xxxxxxxxxxxxxxxx  |                   | -->
-
-### latest mesh settings
-<!-- | Mesh Group| Mesh Feature              | Setting       |
-| ----------| ------------------------- | ------------- |
-| Workbench-Name |                      | XXX
-| general   | Mesh Type:                | ??? Tet/Prism Netz
-| general   | Inflation:                | ??? mit Inflation Layer
-| defaults  | Element Size              | ??? 40 mm
-| sizing    | Use Adaptive Sizing       | ??? No
-| sizing    | Mesh Defeat. / Size       | ??? yes / 1 mm
-| sizing    | Capture Curvature         | ??? Yes
-| sizing    | * Curvature Min Size      | ??? 3 mm
-| sizing    | * Curvature Normal Angel  | ??? Default
-| sizing    | Capture Proximity         | ??? Yes
-| sizing    | * Proximity Min Size      | ??? 3 mm
-| sizing    | * Num Cells Across Gap    | ??? 4
-| sizing    | Proximity Size Func Source| ??? Faces and Edges
-| quality   | Check Mesh Quality        | ??? Yes
-| quality   | Target Skewness           | ??? 0,9
-| quality   | Smoothing                 | ??? High
-| inflation | Use Automatic Inflation   | ??? All Faces in Chosen Named Selection  (MR Inflation)
-| inflation | Inflation Option          | ??? Last Aspect Ratio
-| inflation | First Layer Height        | ??? 3 mm
-| inflation | Maximum Layers            | ??? 5
-| inflation | Aspect Ratio (Base/Height)| ??? 1,5
-| infl. adv | Collision Avoidance       | ??? Layer Compression
-| infl. adv | Fix First Layer           | ??? No
-| infl. adv | Gap Factor                | ??? 0,3
-| infl. adv | Maximum Heigth over Base  | ??? 1
-| infl. adv | Maximum Angle             | ??? 140°
-| infl. adv | Fillet Ratio              | ??? 1
-| infl. adv | Use Post Smoothing (Iterations) | ??? Yes 5
-
-MR Inflation = All Faces minus: 
-* MR no-Inflation
-    * XXX
-* Inlet
-* Outlet
-* Symmetries
-
-| Mesh result               | Value     |
-| ---------------------     | --------- |
-| Statistics -> Nodes       | XXX
-| Quality->Max (Skewness)   | XXX
-| Y+ (run044)               | XXX  -->
-
-
-Physics & Numerics
------------------------------------------------------------------------------------------
-
-<!-- | Domain    | Setting               | Value             | checked       |
-| --------- | --------------------- | ----------------- | ------------- |
-| Numerics  | Advection Scheme      | (High Resolution) |               |
-| Numerics  | Analysis Type         | steady state      |               |
-| Numerics  | SubGrid-Turbulence    | (SST) <br> (Automatic Wall Function)  ||
-| Numerics  | Turbulence Numerics   | (First Order)     |               |
-| Post      | Macroscopic-Turbulence|                   |               | -->
-
-
-Simulation Behavior
-===================================================================================================
-
-Simulation-Runs Log
------------------------------------------------------------------------------------------
-
-Def-File Name:    XXX.def
-
-<!-- | run   | Geometry/Mesh     | Setup                         | solving           | postprocessing |
-| ----- | ----------------- | ----------------------------- | ----------------- | -------------- |
-| 00X   |                   |                               |                   |                | -->
+| setting               | occuring range    |
+| --------------------- | ----------------- |
+| reference pressure    | xxx [Pa]
+| turbulence model      | SST
+| residual target       | 
 
 
 Convergence
@@ -136,28 +133,27 @@ Convergence
 
 ### Imbalances
 
-### Yplus & Residual Locations
+### Yplus
 
 ### Monitor Point Stability
 
 
-Analysis 
-===================================================================================================
-
 Analysis Type
 -----------------------------------------------------------------------------------------
+<!-- is this a transient simulation or indicate the residuals a transient behaviour -->
 
 
 Numerical Confidence
 -----------------------------------------------------------------------------------------
+<!-- how exact do you expect the calculation results -->
 
 
-Domain Conditions
------------------------------------------------------------------------------------------
 
+Flow Analysis 
+===================================================================================================
+<!-- show expected behaviour to increase the confidence in the simulation -->
+<!-- show special and interesting flow features to get more insights -->
 
-Flow Pattern
------------------------------------------------------------------------------------------
 <!-- ![](cfd-reports/XXX_001_Rep/Figure001.png)  -->
 
 
