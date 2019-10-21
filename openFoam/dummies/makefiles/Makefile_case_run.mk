@@ -79,7 +79,7 @@ view:
 	if [ ! -f "Allrun" ] ; then                                                 \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \
-	elif [ -f "pv.foam" ] ; then                                                \
+	else                                                                        \
 		echo "*** start paraFoam -builtin"                                    ; \
 		paraFoam -builtin                                                     ; \
 	fi ;
