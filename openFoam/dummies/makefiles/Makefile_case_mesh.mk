@@ -15,9 +15,10 @@ all: mesh view
 mesh: 
 	if [ -f "Allmesh" ] ; then                               \
 		make -C $(cadFolder) cad                           ; \
-		make updateCadLink                                   ; \
+		make updateCadLink                                 ; \
 		./Allmesh                                          ; \
 	else                                                     \
+		make updateCadLink                                 ; \
 		make frameworkmeshing                              ; \
 	fi ;
 

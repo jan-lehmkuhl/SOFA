@@ -12,7 +12,7 @@ cadFolder        = $(shell node -p "require('../../mesh/$(meshFolder)/mesh.json'
 # =============================================================================
 
 # default run target
-run: 
+run: updateSymlinks
 	if [ -f "Allrun" ] ; then     \
 		./Allrun                ; \
 	else                          \
