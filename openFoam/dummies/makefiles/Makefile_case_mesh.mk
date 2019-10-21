@@ -12,13 +12,13 @@ cadFolder       = $(shell node -p "require('./mesh.json').buildSettings.cadLink"
 # default mesh creating target
 all: mesh view
 
-mesh: 
+mesh: updateSymlinks
 	if [ -f "Allmesh" ] ; then                               \
 		make -C $(cadFolder) cad                           ; \
-		make updateCadLink                                 ; \
+		make updateFreecadStlLink                          ; \
 		./Allmesh                                          ; \
 	else                                                     \
-		make updateCadLink                                 ; \
+		make updateFreecadStlLink                          ; \
 		make frameworkmeshing                              ; \
 	fi ;
 
@@ -67,13 +67,14 @@ updateReport:
 # =============================================================================
 
 # linking freecad-stl to std folder for using full-control meshing
-updateCadLink:
-	if [ -d $(cadFolder); then   rm $(cadFolder)   ; fi ;
-	ln -s   ../../cad/$(cadFolder)  $(cadFolder)
-	make -C ../../cad/$(cadFolder)  linkfreecadstl
-	if [ ! -d constant/triSurface ] ; then   mkdir -p constant/triSurface   ; fi ; 
-	cd constant/triSurface                                                         ; \
-	ln -sf ../../../../cad/$(cadFolder)/meshCase/constant/triSurface/*.stl .   ; \
+updateFreecadStlLink: 
+	if [   -d "../../cad/$(cadFolder)/meshCase" ] ; then                                  \
+		echo "*** freecad meshCase exists - linking starts"                             ; \
+		make -C ../../cad/$(cadFolder)  linkfreecadstl                                  ; \
+		if [ ! -d constant/triSurface ] ; then   mkdir -p constant/triSurface   ; fi    ; \
+		cd constant/triSurface                                                          ; \
+		ln -sf ../../../../cad/$(cadFolder)/meshCase/constant/triSurface/*.stl .        ; \
+	fi ;
 
 
 # can be used to overwrite the dummy settings from full-controll meshing
