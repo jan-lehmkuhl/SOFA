@@ -47,7 +47,7 @@ clear:
 
 
 # remove all calculated files
-clean: cleanRun cleanFreecad
+clean: cleanRun cleanFreecad updateSymlinks
 	# rm -f  mesh[0-9][0-9][0-9]
 
 

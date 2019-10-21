@@ -37,23 +37,18 @@ clear:
 
 
 # remove all from commited sources created files and links
-clean: cleanfreecadmesh
-	rm -f  cad*
-	rm -rf constant/polyMesh/points*
-	rm -rf constant/polyMesh/faces*
-	rm -rf constant/polyMesh/owner*
-	rm -rf constant/polyMesh/neighbour*
-	rm -rf constant/polyMesh/boundary*
-	rm -rf constant/polyMesh/sets
+clean: cleanfreecadmesh cleanframeworkmesh
+	# rm -f  cad[0-9][0-9][0-9]
 	rm -rf constant/polyMesh/*
-	rm -rf constant/extendedFeatureEdgeMesh/*
-# Zones and levels
-#*Level*
-#*Zone*
-	rm -rf constant/polyMesh/refinementHistory*
-	rm -rf constant/polyMesh/surfaceIndex*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
+
+
+cleanframeworkmesh: 
+	rm -f  .fileStates.data
+	rm -f  [0-9]/polyMesh/*
+	rm -rf constant/extendedFeatureEdgeMesh/*
+	rm -rf log/*
 
 
 # commit all changes inside case
@@ -70,8 +65,8 @@ updateReport:
 # FreeCAD meshing
 # =============================================================================
 
-# for using full-control meshing
 	if [ ! -d constant/triSurface ] ; then   mkdir constant/triSurface   ; fi ; 
+# linking freecad-stl to std folder for using full-control meshing
 updateCadLink:
 	if [ -d $(cadFolder); then   rm $(cadFolder)   ; fi ;
 	ln -s   ../../cad/$(cadFolder)  $(cadFolder)
