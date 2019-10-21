@@ -54,6 +54,7 @@ postProcessing
 # =============================================================================
 
 # mesh data that is no dictionary
+constant/polyMesh
 constant/polyMesh/points*
 constant/polyMesh/faces*
 constant/polyMesh/owner*
