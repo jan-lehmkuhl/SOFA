@@ -12,12 +12,13 @@
 |                   |                                  |
 | ----------------- | -------------------------------- |
 | **Project Title** | xxx
+| description       | 
 | project start     | xxx.2018
 | project end       | ongoing
-| active stakeholder| xxx
-| cfd engineer      | Jan Lehmkuhl
-| design engineer   | xxx
-| checked by        | xxx
+| active stakeholder| 
+| cfd engineer      | 
+| design engineer   | 
+| checked by        | 
 <br>  
 
 <!-- example picture for quick project identification -->
@@ -35,6 +36,9 @@
 - [actual Project-Status](#actual-project-status)
   - [Results](#results)
     - [Study 1](#study-1-1)
+  - [Calculation Enviroment](#calculation-enviroment)
+    - [Hardware](#hardware)
+    - [Software](#software)
   - [Open issues](#open-issues)
   - [Project-Forecast](#project-forecast)
 - [Conclusions](#conclusions)
@@ -69,6 +73,37 @@ Results
 -----------------------------------------------------------------------------------------
 ### Study 1
 <!-- main study results as short bulletpoints -->
+
+
+Calculation Enviroment
+-----------------------------------------------------------------------------------------
+<!-- Short description of the hard- and hoftware used to create the analysis.  -->
+<!-- The objective of this section is to ensure reproducebility of the results for the case of later reruns. -->
+
+### Hardware
+
+|          |                                                                                        |
+| -------- | -------------------------------------------------------------------------------------- |
+| Machine  | 
+| Hostname | 
+| System   | Kernel:  <br> Distro:  <br> Desktop: 
+| CPU      | COUNT x Name <br> Cache:  <br> Max. clock speed: XXXX MHz 
+| Memory   | Manufacturer: <br> Type: <br>  Speed: XXXX MHz <br> Size: XX x XX GB 
+| Graphics | Card: <br> Display Server: <br> Driver: 
+
+
+### Software
+
+| Task              | Programm                                          |
+| ----------------- | ------------------------------------------------- |
+| CAD               | 
+| stl               | 
+| background mesh   | OpenFoam X.x
+| mesh              | OpenFoam X.x
+| solver            | OpenFoam X.x
+| paraview          | paraview X.X.X 
+| R version         | X.X.X (20xx-xx-xx)
+
 
 
 Open issues
