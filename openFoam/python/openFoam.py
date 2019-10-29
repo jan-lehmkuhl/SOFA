@@ -943,9 +943,7 @@ elif entryPoint == "commit":
     currentCase = Case("run")
     currentCase.commitChanges()
 elif entryPoint == "overview":
-    if not os.path.exists("doc"):
-        print("Directory >doc< doesn't exist")
-        exit(0)
+    createDirSafely("doc")
     files = os.listdir("doc")
     for fileName in files:
         if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
@@ -971,7 +969,7 @@ elif entryPoint == "updateAllReports":
             currentCase.copyReport(runReports)
     if runReports:
         if not os.path.exists("doc"):
-            print("Directory >doc< doesn't exist")
+            print("Directory >doc< doesn't exist in: " + os.getcwd() )
             exit(0)
         files = os.listdir("doc")
         for fileName in files:
