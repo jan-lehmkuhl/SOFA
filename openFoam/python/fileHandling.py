@@ -23,7 +23,7 @@ def createDirSafely(dst):
     #
     if not os.path.isdir(dst):
         os.makedirs(dst)
-        print("Creating >%s<" % dst)
+        print("Creating >%s< in: " %dst + os.getcwd() )
     else:
         print("Skipping >%s< since it already exists" % dst)
 
