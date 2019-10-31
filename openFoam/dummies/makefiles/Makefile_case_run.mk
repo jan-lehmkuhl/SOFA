@@ -19,8 +19,26 @@ run: updateSymlinks
 		make frameworkrun       ; \
 	fi ;
 
+
 mesh: 
 	make -C $(meshFolder) mesh
+
+
+# open paraview
+view:
+	if [ ! -f "Allrun" ] ; then                                                 \
+		echo "*** start foamMesh.py"                                          ; \
+		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \
+	else                                                                        \
+		echo "*** start paraFoam -builtin"                                    ; \
+		paraFoam -builtin                                                     ; \
+	fi ;
+
+
+# remove all calculated files
+clean: cleanRun cleanFreecad updateSymlinks
+	# rm -f  mesh[0-9][0-9][0-9]
+
 
 
 # handle framework related run folder
@@ -46,11 +64,6 @@ clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
 
 
-# remove all calculated files
-clean: cleanRun cleanFreecad updateSymlinks
-	# rm -f  mesh[0-9][0-9][0-9]
-
-
 # commit all changes inside case
 commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
@@ -59,6 +72,7 @@ commit:
 # update report according to .json
 updateReport:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
+
 
 
 # run
@@ -72,17 +86,6 @@ frameworkrun:
 # erase all results
 cleanRun:
 	python3 ../../../tools/framework/openFoam/python/foamRun.py cleanRun
-
-
-# open paraview
-view:
-	if [ ! -f "Allrun" ] ; then                                                 \
-		echo "*** start foamMesh.py"                                          ; \
-		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \
-	else                                                                        \
-		echo "*** start paraFoam -builtin"                                    ; \
-		paraFoam -builtin                                                     ; \
-	fi ;
 
 
 

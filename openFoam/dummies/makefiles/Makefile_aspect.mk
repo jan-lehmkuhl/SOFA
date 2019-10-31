@@ -1,6 +1,10 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_aspect.mk
 
 
+
+# handle framework related run folder
+# =============================================================================
+
 # create a new case with the next available running number
 newCase:
 	python3 ../../tools/framework/openFoam/python/openFoam.py newCase
@@ -20,6 +24,10 @@ updateReports:
 updateJson:
 	python3 ../../tools/framework/openFoam/python/openFoam.py updateJson
 
+
+
+# tests
+# =============================================================================
 
 # test value
 test:

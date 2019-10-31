@@ -23,6 +23,28 @@ mesh: updateSymlinks
 	fi ;
 
 
+# open paraview
+view:
+	if [ ! -f "Allmesh" ] ; then                                                \
+		echo "*** start foamMesh.py"                                          ; \
+		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \
+	elif [ -f "pv.foam" ] ; then                                                \
+		echo "*** start paraview pv.foam"                                     ; \
+		paraview pv.foam                                                      ; \
+	else                                                                        \
+		echo "*** start paraFoam"                                             ; \
+		paraFoam                                                              ; \
+	fi ;
+
+
+# remove all from commited sources created files and links
+clean: cleanfreecadmesh cleanframeworkmesh
+	# rm -f  cad[0-9][0-9][0-9]
+	rm -rf constant/polyMesh/*
+	rm -rf constant/triSurface
+	find . -empty -type d -delete
+
+
 
 # handle framework related mesh folder
 # =============================================================================
@@ -35,14 +57,6 @@ clone:
 # erase all files except necessary framework related files
 clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
-
-
-# remove all from commited sources created files and links
-clean: cleanfreecadmesh cleanframeworkmesh
-	# rm -f  cad[0-9][0-9][0-9]
-	rm -rf constant/polyMesh/*
-	rm -rf constant/triSurface
-	find . -empty -type d -delete
 
 
 cleanframeworkmesh: 
@@ -97,6 +111,7 @@ cleanfreecadmesh:
 	# rm -rf gmsh
 
 
+
 # full-control framework OpenFOAM meshing
 # =============================================================================
 
@@ -129,17 +144,3 @@ finalizeMesh:
 cleanMesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
 
-
-
-# GUI operations
-# =============================================================================
-
-# open paraview
-view:
-	if [ ! -f "Allmesh" ] ; then                                                \
-		echo "*** start foamMesh.py"                                          ; \
-		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \
-	elif [ -f "pv.foam" ] ; then                                                \
-		echo "*** start paraview pv.foam"                                     ; \
-		paraview pv.foam                                                      ; \
-	fi ;

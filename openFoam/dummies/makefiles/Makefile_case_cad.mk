@@ -21,6 +21,11 @@ view:
 	if [ ! -f native/geometry.FCStd ]; then   make view                        ; fi
 
 
+# remove all from commited sources created files and links
+clean: cleanfreecadoutput cleanVTK
+	find . -empty -type d -delete
+
+
 
 # framework folder handling
 # =============================================================================
@@ -33,11 +38,6 @@ clone:
 # erase all files except necessary framework related files
 clear:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
-
-
-# remove all from commited sources created files and links
-clean: cleanfreecadoutput cleanVTK
-	find . -empty -type d -delete
 
 
 # commit all changes inside case
