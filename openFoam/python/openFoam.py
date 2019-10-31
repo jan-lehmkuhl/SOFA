@@ -140,20 +140,20 @@ class Aspect(object):
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
             #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
-            createSymlinkSavely(makefilePath, os.path.join(
-                self.path, aspectName, "Makefile"))
+            createSymlinkSavely(    makefilePath,       # aspect Makefile
+                                    os.path.join( self.path, aspectName, "Makefile") )
             if self.aspectType == "mesh":
-                meshOvPath = findFile("MeshOverview.Rmd", "tools")
-                meshRepPath = findFile("MeshReport.Rmd", "tools")
+                meshOvPath  = findFile("MeshOverview.Rmd", "tools")
+                meshRepPath = findFile("MeshReport.Rmd"  , "tools")
                 createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
                 if meshOvPath:
                     copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc/template01/meshReport.Rmd"))
-                    copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/meshOverview.Rmd"))
+                    copyFileSafely(meshOvPath,  os.path.join(self.path, aspectName, "doc/meshOverview.Rmd"))
             if self.aspectType == "run":
                 createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
-                meshOvPath = findFile("RunOverview.Rmd", "tools")
-                if meshOvPath:
-                    copyFileSafely(meshOvPath, os.path.join(self.path, aspectName, "doc/StudyOverview.Rmd"))
+                runOvPath = findFile("RunOverview.Rmd", "tools")
+                if runOvPath:
+                    copyFileSafely(runOvPath, os.path.join(self.path, aspectName, "doc/StudyOverview.Rmd"))
             case = cfdAspectSelector(os.path.join(self.path, aspectName))
             case.create()
 
@@ -593,14 +593,14 @@ class CadCase(Case):
         createDirSafely(os.path.join(self.path, caseName, "vtk"))
         createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
         createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
-        makePath = findFile("Makefile_case_cad.mk", "tools")
-        gitignorePath = findFile(".gitignore_cad", "tools")
+        makePath =      findFile( "Makefile_case_cad.mk",   "tools")
+        gitignorePath = findFile( ".gitignore_cad",         "tools")
         if makePath:
-            createSymlinkSavely(makePath, os.path.join(
-                self.path, caseName, "Makefile"))
+            createSymlinkSavely(    makePath, 
+                                    os.path.join( self.path, caseName, "Makefile"))
         if gitignorePath:
-            createSymlinkSavely(gitignorePath, os.path.join(
-                self.path, caseName, ".gitignore"))
+            createSymlinkSavely( gitignorePath, 
+                                 os.path.join( self.path, caseName, ".gitignore"))
 
     def initCase(self):
         if len(os.listdir(".")) <= 1:
@@ -609,12 +609,12 @@ class CadCase(Case):
             createDirSafely("vtk")
             createDirSafely("doc/drafts")
             createDirSafely("doc/cadPics")
-            makePath = findFile("Makefile_case_cad.mk", "tools")
-            gitignorePath = findFile(".gitignore_cad", "tools")
+            makePath =      findFile( "Makefile_case_cad.mk",   "tools")
+            gitignorePath = findFile( ".gitignore_cad",         "tools")
             if makePath:
-                copyFileSafely(makePath, "Makefile")
+                copyFileSafely( makePath,       "Makefile")
             if gitignorePath:
-                copyFileSafely(gitignorePath, ".gitignore")
+                copyFileSafely( gitignorePath,  ".gitignore")
             self.commitInit()
         else:
             print("Case is already initialised. Please run >make clean< first")
@@ -892,7 +892,7 @@ else:
     entryPoint = 'defaultEntryPointForDebugging'
     print("*** starting openFoam.py with hard coded entryPoint: >" + entryPoint + "< for debugging purpose ***" )
     print("better use launch.json in VS Code to specifiy settings") 
-print("starting openFoam.py with arg: >" + entryPoint + "< ")
+print("starting openFoam.py with arg: >" + entryPoint + "< in: " + os.getcwd() )
 
 
 # find project.json 
@@ -915,43 +915,51 @@ else:
 
 if entryPoint == "initFoam":
     projectStruct = loadJson('project.json')
-    for folder in projectStruct['foamFolders']:
-        if not os.path.exists(folder):
+    for studyFolder in projectStruct['foamFolders']:
+        if not os.path.exists(studyFolder):
+            print("creating study >" +studyFolder +"< and the interior")
             for element in foamStructure:
-                newAspect = Aspect(element, folder)
+                newAspect = Aspect(element, studyFolder)
                 newAspect.create()
-            readmePath = findFile("study-documentation.md", "tools")
-            copyFileSafely(readmePath, folder+ "/README-study.md")
+            copyFileSafely( findFile(    "study-documentation.md", "tools") 
+                          , studyFolder+ "/README-study.md" )
             while True:
-                print("Commit creation of project %s ? (y/n)" % folder)
+                print("Commit creation of study %s ? (y/n)" % studyFolder)
                 answer = input()
                 answer = answer.lower()
                 if answer in ["y", "yes"]:
                     os.system('git add .')
-                    os.system('git commit -m "[%s] #INIT \'created project %s\'"' % (folder, folder))
+                    os.system('git commit -m "[%s] #INIT \'created study %s\'"' % (studyFolder, studyFolder))
                     break
                 elif answer in ["n", "no"]:
                     break           
         else:
-            print("skipping project >" + folder + " since it already exists")
+            print("skipping study >" + studyFolder + " since it already exists")
+
 elif entryPoint == "newCase":
     currentCase = cfdAspectSelector()
     currentCase.create()
+
 elif entryPoint == "initCase":
     currentCase = cfdAspectSelector()
     currentCase.initCase()
+
 elif entryPoint == "symlinks":
     currentCase = cfdAspectSelector()
     currentCase.makeSymlinks()
+
 elif entryPoint == "clone":
     currentCase = cfdAspectSelector()
     currentCase.clone()
+
 elif entryPoint == "clear":
     currentCase = cfdAspectSelector()
     currentCase.clear()
+
 elif entryPoint == "commit":
     currentCase = Case("run")
     currentCase.commitChanges()
+
 elif entryPoint == "overview":
     createDirSafely("doc")
     files = os.listdir("doc")
@@ -961,6 +969,7 @@ elif entryPoint == "overview":
             break
     else:
         print("Unabel to find RMarkdown file")
+
 elif entryPoint == "updateAllReports":
     while True:
         print("Run reports after updating ? (y/n)")
@@ -988,6 +997,7 @@ elif entryPoint == "updateAllReports":
                 break
         else:
             print("Unabel to find RMarkdown file")
+
 elif entryPoint == "updateReport":
     while True:
         print("Run reports after updating ? (y/n)")
@@ -1001,6 +1011,7 @@ elif entryPoint == "updateReport":
             break
     currentCase = cfdAspectSelector()
     currentCase.copyReport(runReports)
+
 elif entryPoint == "updateJson":
     for folder in sorted(os.listdir(".")):
         aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
@@ -1008,6 +1019,7 @@ elif entryPoint == "updateJson":
             print("Updating .json in >%s" %folder)
             currentCase = cfdAspectSelector(os.path.join("./", folder))
             currentCase.updateJson()
+
 elif entryPoint == "test":
     print("Nothing defined")
             
