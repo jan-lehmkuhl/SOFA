@@ -883,7 +883,17 @@ class foamBuilder(object):
 # MAIN PROGRAMM
 ###############################################################################
 
-entryPoint = sys.argv[1]
+# read entryPoint from command input options
+if len(sys.argv) >= 2:
+    entryPoint = sys.argv[1]
+else: 
+    print("ERROR: no entryPoint is specified for openFoam.py")
+    sys.exit(0)
+    entryPoint = 'defaultEntryPointForDebugging'
+    print("*** starting openFoam.py with hard coded entryPoint: >" + entryPoint + "< for debugging purpose ***" )
+    print("better use launch.json in VS Code to specifiy settings") 
+print("starting openFoam.py with arg: >" + entryPoint + "< ")
+
 
 # find project.json 
 i = 0

@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name":             "Python: Current File",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${file}",
+            "stopOnEntry":      true,
+            "console":          "integratedTerminal"
+        },
+        {
+            "name":             "Python: openFoam.py",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${workspaceRoot}/tools/framework/openFoam/python/openFoam.py",
+            "cwd":              "${workspaceRoot}/FOAMSTUDY1/run/run001",
+            "args":             ["symlinks"],
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+            "console":          "integratedTerminal"
+        }
+    ]
+}
