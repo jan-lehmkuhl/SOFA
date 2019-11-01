@@ -113,7 +113,7 @@ def cfdAspectSelector(path=None):
         elif aspectName == "survey":
             return(SurveyCase(path))
     else:
-        print("Unknown aspect >%s<" % aspectName)
+        print("Unknown aspect >%s< in caseFolder: >%s<" % (aspectName, caseFolder) )
         return(False)
 
 class Aspect(object):
@@ -187,13 +187,13 @@ class Case(object):
             if self.linkedCase:
                 # differentiate between single links and a list of links (survey)
                 if isinstance(self.linkedCase, str):
-                    self.pathToLinkedCase = findFolder(
-                        self.linkedCase, foamStructure[foamStructure[self.aspectType]["linkType"]]["aspectName"])
+                    self.pathToLinkedCase = findFolder( self.linkedCase
+                                                      , foamStructure[ foamStructure[self.aspectType]["linkType"] ]["aspectName"] )
                 elif isinstance(self.linkedCase, list):
                     self.pathToLinkedCase = []
                     for element in self.linkedCase:
-                        self.pathToLinkedCase.append(findFolder(
-                            element, foamStructure[foamStructure[self.aspectType]["linkType"]]["aspectName"]))
+                        self.pathToLinkedCase.append(findFolder( element
+                                                               , foamStructure[ foamStructure[self.aspectType]["linkType"] ]["aspectName"] ) )
                 else:
                     print(
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
@@ -722,8 +722,8 @@ class RunCase(Case):
         if self.makeMainSymlink():
             createDirSafely("constant")
             createDirSafely("doc")
-            createSymlinkSavely(os.path.join(
-                self.pathToLinkedCase, "constant/polyMesh"), os.path.join("./constant/polyMesh"))
+            createSymlinkSavely(  os.path.join( self.pathToLinkedCase, "constant/polyMesh")
+                                , os.path.join( "./constant/polyMesh" ))
             createDirSafely( self.pathToLinkedCase+ "/doc")
             for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
                 currentPath = os.path.join(
