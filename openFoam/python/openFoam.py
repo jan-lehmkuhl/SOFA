@@ -174,7 +174,9 @@ class Case(object):
         # initialize variables 
         self.caseJson = None
         self.linkedCase = None
+        self.linkedReport = None
         self.pathToLinkedCase = None
+        self.pathToLinkedReport = None
         self.symlinksClean = False
         # check if case .json exists
         if os.path.exists(os.path.join(self.path, self.aspectType + ".json")):
@@ -195,6 +197,14 @@ class Case(object):
                 else:
                     print(
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
+            self.linkedReport = self.caseJson["buildSettings"]["report"]
+            if self.linkedReport: 
+                print( os.getcwd() )
+                # differentiate between single links and a list of links (survey)
+                self.pathToLinkedReport = "../doc/" +self.linkedReport
+                createDirSafely( self.pathToLinkedReport ) 
+                createSymlinkSavely( self.pathToLinkedReport, "postTemplate" )
+
 
     def nextCaseName(self, path="./"):
         # finds the next case name in a series of folder of type xxx123
