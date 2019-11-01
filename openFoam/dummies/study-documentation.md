@@ -85,16 +85,16 @@ Mesh
 
 | Mesh                      | Value     |
 | ---------------------     | --------- |
-| number of hexahedra:      | 0 
-| number of prisms:         | 0 
-| number of wedges:         | 0 
-| number of pyramids:       | 0 
-| number of tet wedges:     | 0 
-| number of tetrahedra:     | 0 
-| number of polyhedra:      | 0 
+| number of hexahedra:      | 0
+| number of prisms:         | 0
+| number of wedges:         | 0
+| number of pyramids:       | 0
+| number of tet wedges:     | 0
+| number of tetrahedra:     | 0
+| number of polyhedra:      | 0
 | max skewness              | XXX
-| min y+ (runXXX)           | XXX 
-| max y+ (runXXX)           | XXX 
+| min y+ (runXXX)           | XXX
+| max y+ (runXXX)           | XXX
 
 
 ### Final Mesh Specific Features

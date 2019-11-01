@@ -22,7 +22,7 @@
 <br>  
 
 <!-- example picture for quick project identification -->
-<!-- ![](cfd-reports/XXX_001_Rep/Figure001.png)  -->
+<!-- ![](docs/report-sources/freecad-gui.png)  -->
 
 
 **_Table of Content_**

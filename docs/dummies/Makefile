@@ -9,6 +9,7 @@ init:
 	$(mkdir) discussion-notes
 	$(mkdir) literature
 	$(mkdir) reports
+	$(mkdir) report-sources
 	$(mkdir) reports-compiled
 	$(mkdir) service-requests
 
