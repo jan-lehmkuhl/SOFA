@@ -138,6 +138,7 @@ class foamMesher(object):
         # run surfaceFeatures 
         if self.settingsSurfaceFeatures:
             # check weather surface features are present
+            featureEdgesPresent = False     # init
             for fileName in os.listdir("constant/triSurface"):
                 if fnmatch.fnmatch(fileName, "*.eMesh"):
                     featureEdgesPresent = True

@@ -199,8 +199,6 @@ class Case(object):
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
             self.linkedReport = self.caseJson["buildSettings"]["report"]
             if self.linkedReport: 
-                print( os.getcwd() )
-                # differentiate between single links and a list of links (survey)
                 self.pathToLinkedReport = "../doc/" +self.linkedReport
                 createDirSafely( self.pathToLinkedReport ) 
                 createSymlinkSavely( self.pathToLinkedReport, "postTemplate" )
