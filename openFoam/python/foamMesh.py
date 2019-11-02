@@ -144,10 +144,21 @@ class foamMesher(object):
                     featureEdgesPresent = True
                     break
             # don't run if surfaceFeaturesDict didn't change
-            if not self.fileChangeDict["surfaceFeaturesDict"] and featureEdgesPresent:
-                self.runSurfaceFeatures = False
-            else: 
-                self.runSurfaceFeatures = True
+            if 'surfaceFeaturesDict' in self.fileChangeDict :
+                if not self.fileChangeDict["surfaceFeaturesDict"] and featureEdgesPresent:
+                    self.runSurfaceFeatures = False
+                else: 
+                    self.runSurfaceFeatures = True
+            elif 'surfaceFeatureExtractDict' in self.fileChangeDict :
+                if not self.fileChangeDict["surfaceFeatureExtractDict"] and featureEdgesPresent:
+                    self.runSurfaceFeatures = False
+                else: 
+                    self.runSurfaceFeatures = True
+            else:
+                print("neiter surfaceFeatures or surfaceFeaturesExtract exist")
+            if self.runSurfaceFeatures == True :
+                print("decided to run surface features")            
+
 
     ###################################################################
     # general purpose 
@@ -387,7 +398,12 @@ class foamMesher(object):
             if self.runBlockMesh or self.runDecomposePar:
                 self.clean()
             if self.runSurfaceFeatures:
-                self.procHandler.foam("surfaceFeatures", serial = True)
+                if 'surfaceFeaturesDict' in self.fileChangeDict :
+                    self.procHandler.foam("surfaceFeatures", serial = True)
+                elif 'surfaceFeatureExtractDict' in self.fileChangeDict :
+                    self.procHandler.foam("surfaceFeatureExtract", serial = True)
+                else:
+                    print("no surfaceFeatures or surfaceFeatureExtract defined")
             if self.runBlockMesh:
                 self.procHandler.foam("blockMesh", serial = True)
                 if os.path.exists("dynamicCode"):
