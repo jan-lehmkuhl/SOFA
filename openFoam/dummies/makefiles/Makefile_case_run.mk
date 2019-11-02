@@ -1,4 +1,4 @@
-# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_run.mk
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_run.mk
 
 
 # include ../../../tools/framework/global-make.mk

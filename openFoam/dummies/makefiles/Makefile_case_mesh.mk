@@ -1,4 +1,4 @@
-# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_mesh.mk
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_mesh.mk
 
 
 # include ../../../tools/framework/global-make.mk
@@ -93,7 +93,8 @@ updateFreecadStlLink:
 
 # can be used to overwrite the dummy settings from full-controll meshing
 copyfreecadmeshfiles: linkfreecad
-	cp -rf ../../cad/$(cadFolder)/meshCase/* .
+	cp -f  ../../cad/$(cadFolder)/meshCase/Allmesh .
+	cp -rf ../../cad/$(cadFolder)/meshCase/system .
 
 
 openfreecad:

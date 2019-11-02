@@ -1,4 +1,4 @@
-# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_cad.mk
+# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_cad.mk
 
 
 
