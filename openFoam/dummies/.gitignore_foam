@@ -10,42 +10,7 @@
 !constant/thermophysicalProperties
 !constant/turbulenceProperties
 !system/
-
-
-
-# OpenFOAM Solving
-# =============================================================================
-
-## Timestep directories
-0/*
-0.*
 !0.org
-[1-9]*
-
-## Fields that must get ignored
-*/phi*
-*/meshPhi*
-
-## Decomposed domain
-processor*
-
-## logfiles
-log.*
-*log
-
-
-
-# OpenFOAM Postprocessing
-# =============================================================================
-
-# paraview/ParaFoam
-*.foam
-*.OpenFOAM
-# *.pvsm
-
-# function object and post-processing data
-forces
-postProcessing
 
 
 
@@ -74,6 +39,42 @@ constant/triSurface
 
 # freecad meshing
 mesh_outside.stl
+
+
+
+# OpenFOAM Solving
+# =============================================================================
+
+## Timestep directories
+0/*
+0.*
+[1-9]*
+
+## Fields that must get ignored
+*/phi*
+*/meshPhi*
+
+## Decomposed domain
+processor*
+
+## logfiles
+log.*
+*log
+
+
+
+# OpenFOAM Postprocessing
+# =============================================================================
+
+# paraview/ParaFoam
+*.foam
+*.OpenFOAM
+# *.pvsm
+
+# function object and post-processing data
+forces
+postProcessing
+
 
 
 # OpenFOAM additional stuff
