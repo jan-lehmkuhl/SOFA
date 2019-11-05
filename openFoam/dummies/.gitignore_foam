@@ -63,6 +63,20 @@ log.*
 
 
 
+# OpenFOAM additional stuff
+# =============================================================================
+
+# Needed when C++ code is built using the OpenFOAM library, since it does not
+# use a "normal" build tool (make, cmake, ..).
+lnInclude
+*.dep
+*.data
+linux*
+Darwin*
+dynamicCode
+
+
+
 # OpenFOAM Postprocessing
 # =============================================================================
 
@@ -77,17 +91,7 @@ postProcessing
 
 
 
-# OpenFOAM additional stuff
-# =============================================================================
 
-# Needed when C++ code is built using the OpenFOAM library, since it does not
-# use a "normal" build tool (make, cmake, ..).
-lnInclude
-*.dep
-*.data
-linux*
-Darwin*
-dynamicCode
 
 
 # End of https://www.gitignore.io/api/openfoam
