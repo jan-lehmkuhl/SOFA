@@ -91,7 +91,15 @@ postProcessing
 
 
 
+# R & Reporting
+# =====================================
 
+# .Rhistory
+*.Rdata
+*.rds
+
+*.html
+doc/meshReport/meshReport.Rmd
 
 
 # End of https://www.gitignore.io/api/openfoam

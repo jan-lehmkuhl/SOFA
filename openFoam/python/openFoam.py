@@ -154,6 +154,12 @@ class Aspect(object):
                 runOvPath = findFile("RunOverview.Rmd", "tools")
                 if runOvPath:
                     copyFileSafely(runOvPath, os.path.join(self.path, aspectName, "doc/StudyOverview.Rmd"))
+            if(    self.aspectType == "mesh" 
+                or self.aspectType == "run" ):
+                gitignorePath  = findFile(".gitignore_aspect_docs", "tools")
+                if gitignorePath:
+                    createSymlinkSavely( gitignorePath, 
+                                         os.path.join( self.path,  aspectName, "doc/.gitignore"))
             case = cfdAspectSelector(os.path.join(self.path, aspectName))
             case.create()
 
