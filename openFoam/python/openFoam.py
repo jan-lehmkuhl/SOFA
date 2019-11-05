@@ -199,7 +199,7 @@ class Case(object):
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
             self.linkedReport = self.caseJson["buildSettings"]["report"]
             if self.linkedReport: 
-                self.pathToLinkedReport = "../doc/" +self.linkedReport
+                self.pathToLinkedReport = os.path.join( "../doc/", self.linkedReport )
                 createDirSafely( self.pathToLinkedReport ) 
                 createSymlinkSavely( self.pathToLinkedReport, "postTemplate" )
 
@@ -654,9 +654,9 @@ class MeshCase(Case):
         if self.makeMainSymlink():
             createDirSafely("constant/triSurface")
             createDirSafely("doc")
-            createDirSafely( self.pathToLinkedCase+ "/doc")
-            createDirSafely( self.pathToLinkedCase+ "/stl")
-            createDirSafely( self.pathToLinkedCase+ "/vtk")
+            createDirSafely( os.path.join( self.pathToLinkedCase, "doc" ) )
+            createDirSafely( os.path.join( self.pathToLinkedCase, "stl" ) )
+            createDirSafely( os.path.join( self.pathToLinkedCase, "vtk" ) )
             for extension in ["stl", "vtk"]:
                 for element in os.listdir(os.path.join(self.pathToLinkedCase, extension)):
                     if element.endswith("." + extension):
@@ -722,7 +722,7 @@ class RunCase(Case):
             createDirSafely("doc")
             createSymlinkSavely(  os.path.join( self.pathToLinkedCase, "constant/polyMesh")
                                 , os.path.join( "./constant/polyMesh" ))
-            createDirSafely( self.pathToLinkedCase+ "/doc")
+            createDirSafely( os.path.join( self.pathToLinkedCase, "doc") )
             for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
                 currentPath = os.path.join(
                     self.pathToLinkedCase, "doc", element)
