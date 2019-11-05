@@ -2,15 +2,14 @@
 # Edit at https://www.gitignore.io/?templates=openfoam
 
 
+
 # OpenFOAM Preprocessing
 # =============================================================================
 
 #exclude important folders and files:
-!0/
 !constant/thermophysicalProperties
 !constant/turbulenceProperties
 !system/
-!.gitignore
 
 
 
@@ -42,7 +41,7 @@ log.*
 # paraview/ParaFoam
 *.foam
 *.OpenFOAM
-*.pvsm
+# *.pvsm
 
 # function object and post-processing data
 forces
