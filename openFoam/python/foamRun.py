@@ -109,8 +109,8 @@ class foamRunner(object):
         # info from run.json
         self.runJson = loadJson("run.json")
         if self.runJson["runSettings"]["nCores"] == "" :
-            self.nCores = 0
-            print("Number of Cores is not specified in run.json")
+            self.nCores = 1
+            print("Number of Cores is not specified in run.json, falling back to serial")
         else:
             self.nCores = int(self.runJson["runSettings"]["nCores"])
         self.solver = self.runJson["buildSettings"]["solver"]
