@@ -10,13 +10,13 @@ newCase:
 	python3 ../../tools/framework/openFoam/python/openFoam.py newCase
 
 
-# create an overview report
-overview:
+# creates an overview report for all cases
+overviewReportUpdate:
 	python3 ../../tools/framework/openFoam/python/openFoam.py overview
 
 
-# update reports to newest version and potentially run report generation
-updateReports:
+# update all case reports to newest version and potentially run report generation
+updateAllCaseReports:
 	python3 ../../tools/framework/openFoam/python/openFoam.py updateAllReports
 
 

@@ -71,8 +71,10 @@ commit:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
 
 
-# update report according to .json
-updateReport:
+# updates case report according to .json
+#   copies *Report.Rmd from aspect/doc
+#	and if yes: creates case report
+updateCaseReport:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
 
 
