@@ -27,6 +27,8 @@ mesh: updateSymlinks
 
 # open paraview
 view:
+	make -C .. showOverviewReport
+	make       showCaseReport
 	if [ ! -f "Allmesh" ] ; then                                                \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \
