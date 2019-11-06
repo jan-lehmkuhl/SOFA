@@ -21,6 +21,8 @@ mesh: updateSymlinks
 		make updateFreecadStlLink                          ; \
 		make frameworkmeshing                              ; \
 	fi ;
+	make updateCaseReport
+	make -C .. overviewReportUpdate
 
 
 # open paraview
