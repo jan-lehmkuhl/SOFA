@@ -23,11 +23,18 @@ requirementtest:
 	python3  --version
 	simpleFoam -help
 
-installrequirements: 
+installrequirements: installrequirementsR
 	sudo apt-get update
 	sudo apt-get install nodejs
-	sudo apt-get install r-base
 # install https://nodejs.org/en/download/ for macOS
+
+installrequirementsR: 
+	sudo apt-get install r-base
+	sudo apt-get install pandoc
+	sudo apt-get install xml2
+    sudo apt-get install libssl-dev
+    sudo apt-get install libxml2-dev
+    sudo apt-get install libcurl4-openssl-dev
 
 
 
