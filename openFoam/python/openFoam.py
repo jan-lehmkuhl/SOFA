@@ -13,6 +13,7 @@ import sys
 import shutil
 import fnmatch
 import subprocess
+import argparse
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
@@ -897,16 +898,16 @@ class foamBuilder(object):
 # MAIN PROGRAMM
 ###############################################################################
 
-# read entryPoint from command input options
-if len(sys.argv) >= 2:
-    entryPoint = sys.argv[1]
-else: 
-    print("ERROR: no entryPoint is specified for openFoam.py")
-    sys.exit(0)
-    entryPoint = 'defaultEntryPointForDebugging'
-    print("*** starting openFoam.py with hard coded entryPoint: >" + entryPoint + "< for debugging purpose ***" )
-    print("better use launch.json in VS Code to specifiy settings") 
-print("starting openFoam.py with arg: >" + entryPoint + "< in: " + os.getcwd() )
+# read arguments and options from command line
+parser = argparse.ArgumentParser(description='input for openFoam.py')
+parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
+parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
+
+entryPoint =    parser.parse_args().entryPoint
+verbose =       parser.parse_args().verbose
+
+if verbose :    print("starting in verbose mode" )
+if verbose :    print("starting openFoam.py with arg: >" + entryPoint + "< in: " + os.getcwd() )
 
 
 # find project.json 

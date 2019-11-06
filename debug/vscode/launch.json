@@ -18,7 +18,7 @@
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/openFoam/python/openFoam.py",
             "cwd":              "${workspaceRoot}/FOAMSTUDY1/run/run001",
-            "args":             ["symlinks"],
+            "args":             ["symlinks", "--verbose"],
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,
