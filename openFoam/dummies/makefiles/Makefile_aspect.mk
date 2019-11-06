@@ -1,6 +1,15 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_aspect.mk
 
 
+# standard targets 
+# =============================================================================
+
+# open overview report
+showOverviewReport:
+	if [ $(shell basename "`pwd`" ) = "mesh" ] ; then     \
+		firefox doc/MeshOverview.html                   ; \
+	fi ;
+
 
 # handle framework related run folder
 # =============================================================================

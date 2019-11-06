@@ -78,6 +78,10 @@ updateCaseReport:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
 
 
+showCaseReport:
+	firefox doc/meshReport/meshReport.html
+
+
 
 # FreeCAD meshing
 # =============================================================================
