@@ -27,6 +27,8 @@ mesh: updateSymlinks
 
 # open paraview
 view:
+	firefox & 
+	sleep 0.5
 	make -C .. showOverviewReport
 	make       showCaseReport
 	if [ ! -f "Allmesh" ] ; then                                                \
