@@ -20,6 +20,7 @@ mesh: updateSymlinks
 	else                                                     \
 		make updateFreecadStlLink                          ; \
 		make frameworkmeshing                              ; \
+		make finalizeMesh                                  ; \
 	fi ;
 	make updateCaseReport
 	make -C .. overviewReportUpdate
@@ -148,7 +149,7 @@ redoMeshLayer:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py meshLayer
 
 
-# copy last timestep to constant and erase the rest
+# copy last timestep to constant
 finalizeMesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py finalizeMesh
 
