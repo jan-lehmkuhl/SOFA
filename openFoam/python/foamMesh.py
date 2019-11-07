@@ -364,7 +364,7 @@ class foamMesher(object):
         #
         cmd = ['R', '-e' , 'rmarkdown::render(\'doc/meshReport/meshReport.Rmd\')']
         text = "Generating mesh report"
-        logFilePath = os.path.join("log",str("MeshReport" + ".log"))
+        logFilePath = os.path.join("log",str("meshReport" + ".log"))
         self.procHandler.general(cmd, text, logFilePath)
 
     def removeBoundaryDirs(self):
