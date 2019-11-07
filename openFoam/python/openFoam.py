@@ -144,17 +144,19 @@ class Aspect(object):
             createSymlinkSavely(    makefilePath,       # aspect Makefile
                                     os.path.join( self.path, aspectName, "Makefile") )
             if self.aspectType == "mesh":
-                meshOvPath  = findFile("MeshOverview.Rmd", "tools")
-                meshRepPath = findFile("MeshReport.Rmd"  , "tools")
+                meshOvPath  = findFile("meshOverview.Rmd", "tools")
+                meshRepPath = findFile("meshReport.Rmd"  , "tools")
                 createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
                 if meshOvPath:
                     copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc/template01/meshReport.Rmd"))
                     copyFileSafely(meshOvPath,  os.path.join(self.path, aspectName, "doc/meshOverview.Rmd"))
             if self.aspectType == "run":
                 createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
-                runOvPath = findFile("RunOverview.Rmd", "tools")
+                runOvPath = findFile("runOverview.Rmd", "tools")
+                runRepPath = findFile("runReport.Rmd"  , "tools")
                 if runOvPath:
-                    copyFileSafely(runOvPath, os.path.join(self.path, aspectName, "doc/StudyOverview.Rmd"))
+                    copyFileSafely(runRepPath, os.path.join(self.path, aspectName, "doc/template01/runReport.Rmd"))
+                    copyFileSafely(runOvPath, os.path.join(self.path, aspectName, "doc/runOverview.Rmd"))
             if(    self.aspectType == "mesh" 
                 or self.aspectType == "run" ):
                 gitignorePath  = findFile(".gitignore_aspect_docs", "tools")
@@ -486,10 +488,10 @@ class Case(object):
             exit(0)
         if not reportSrc :
             if self.aspectType == "mesh" :
-                reportSrc = findFile("MeshReport.Rmd", "tools")
+                reportSrc = findFile("meshReport.Rmd", "tools")
                 reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
             if self.aspectType == "run" :
-                reportSrc = findFile("RunReport.Rmd", "tools")
+                reportSrc = findFile("runReport.Rmd", "tools")
                 reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
         print("Updating report in >%s" %self.caseName)
         if not os.path.exists(os.path.dirname(reportDst)):
@@ -690,8 +692,8 @@ class MeshCase(Case):
             print(
                 "Case is already initialized. If you want to reinitialize please delete >system")
         elif self.makeSymlinks():
-            meshReportPath = findFile("MeshReport.Rmd", "tools")
-            layerSizingPath = findFile("LayerSizing.Rmd", "tools")
+            meshReportPath = findFile("meshReport.Rmd", "tools")
+            layerSizingPath = findFile("layerSizing.Rmd", "tools")
             #meshStatePath = findFile("mesh.pvsm", "tools")
             if (meshReportPath and layerSizingPath ): # and meshStatePath):
                 self.Builder.makeMesh()
