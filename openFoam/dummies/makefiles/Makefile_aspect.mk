@@ -7,7 +7,7 @@
 # open overview report
 showOverviewReport:
 	if [ $(shell basename "`pwd`" ) = "mesh" ] ; then     \
-		firefox doc/MeshOverview.html                   ; \
+		xdg-open doc/MeshOverview.html                  ; \
 	fi ;
 
 
