@@ -188,9 +188,10 @@ class Case(object):
         self.pathToLinkedReport = None
         self.symlinksClean = False
         # check if case .json exists
-        if os.path.exists(os.path.join(self.path, self.aspectType + ".json")):
+        self.pathToJson = os.path.join(self.path, self.aspectType + ".json")
+        if os.path.exists(self.pathToJson):
             # load case .json 
-            self.caseJson = loadJson(os.path.join(self.path, self.aspectType + ".json"))
+            self.caseJson = loadJson(self.pathToJson)
             # extract linked cases from case.json according to foamStructure gen in project.json
             self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
@@ -206,12 +207,6 @@ class Case(object):
                 else:
                     print(
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
-            self.linkedReport = self.caseJson["buildSettings"]["report"]
-            if self.linkedReport: 
-                self.pathToLinkedReport = os.path.join( "../doc/", self.linkedReport )
-                createDirSafely( self.pathToLinkedReport ) 
-                createSymlinkSavely( self.pathToLinkedReport, "postTemplate" )
-
 
     def nextCaseName(self, path="./"):
         # finds the next case name in a series of folder of type xxx123
@@ -469,6 +464,9 @@ class Case(object):
             print("Reports are not yet supported for >cad<")
             exit(0)
         reportSrc = ""
+        if "report" not in self.caseJson["buildSettings"]:
+            print("No key >report< in %s. Upatding .json with default values " %self.pathToJson)
+            self.updateJson()
         reportTemplate = self.caseJson["buildSettings"]["report"]
         if reportTemplate in  os.listdir(os.path.join(self.path, "../doc")):
             reportPath = os.path.join(self.path, "../doc", reportTemplate)
@@ -480,6 +478,7 @@ class Case(object):
                     elif self.aspectType == "run" :
                         reportSrc = os.path.join(reportPath, file)
                         reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
+                    createSymlinkSavely( reportPath, "postTemplate" )
                 else: 
                     print("Unabel to find a report in >%s" %reportPath)
                     exit(0)
@@ -676,6 +675,7 @@ class MeshCase(Case):
             for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
                 createSymlinkSavely(os.path.join(
                     self.pathToLinkedCase, "doc", element), os.path.join("./doc", element))
+            self.copyReport(run=False)
             if not linkedGeometry:
                 print("WARNING: Did not link to any geometry files")
             return(True)
@@ -736,6 +736,7 @@ class RunCase(Case):
                 currentPath = os.path.join(
                     self.pathToLinkedCase, "doc", element)
                 createSymlinkSavely(currentPath, os.path.join("doc", element))
+            self.copyReport(run=False)
             return(True)
 
     def initCase(self):
