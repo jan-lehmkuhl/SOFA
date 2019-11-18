@@ -615,6 +615,8 @@ class CadCase(Case):
         if makePath:
             createSymlinkSavely(    makePath, 
                                     os.path.join( self.path, caseName, "Makefile"))
+        createSymlinkSavely(    "tools/framework/docs/help-files/aspectPics.md" , 
+                                os.path.join( self.path, caseName, "doc/cadPics/help-cadPics.md" ) )
         if gitignorePath:
             createSymlinkSavely( gitignorePath, 
                                  os.path.join( self.path, caseName, ".gitignore"))
@@ -626,6 +628,7 @@ class CadCase(Case):
             createDirSafely("vtk")
             createDirSafely("doc/drafts")
             createDirSafely("doc/cadPics")
+            createSymlinkSavely( "../../../tools/framework/docs/help-files/aspectPics.md" , "./doc/cadPics/help-cadPics.md" ) 
             makePath =      findFile( "Makefile_case_cad.mk",   "tools")
             gitignorePath = findFile( ".gitignore_cad",         "tools")
             if makePath:
@@ -701,6 +704,7 @@ class MeshCase(Case):
                 createDirSafely("doc/meshReport")
                 createDirSafely("doc/layerSizing")
                 createDirSafely("doc/meshPics")
+                createSymlinkSavely( "../../../tools/framework/docs/help-files/aspectPics.md" , "./doc/meshPics/help-meshPics.md" ) 
                 open("paraview.foam", "a").close()
                 self.copyReport()
                 #copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
