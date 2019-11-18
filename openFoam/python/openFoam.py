@@ -479,9 +479,10 @@ class Case(object):
                         reportSrc = os.path.join(reportPath, file)
                         reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
                     createSymlinkSavely( reportPath, "postTemplate" )
-                else: 
-                    print("Unabel to find a report in >%s" %reportPath)
-                    exit(0)
+                    break
+            else: 
+                print("Unabel to find a report in >%s" %reportPath)
+                exit(0)
         else:
             print("Unabel to find >%s in")
             exit(0)
