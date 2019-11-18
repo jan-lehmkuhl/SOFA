@@ -17,6 +17,7 @@ mesh: updateSymlinks
 		make -C $(cadFolder) cad                           ; \
 		make updateFreecadStlLink                          ; \
 		./Allmesh                                          ; \
+		checkMesh  | tee log.checkMesh                     ; \
 	else                                                     \
 		make updateFreecadStlLink                          ; \
 		make frameworkmeshing                              ; \
