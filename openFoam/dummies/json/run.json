@@ -11,7 +11,7 @@
         "dynamicMesh"       :   "False",
         "porousZone"        :   "False",
 
-        "report"            :   "template01"
+        "report"            :   "reportTemplate01"
     },
 
     "runSettings" : {

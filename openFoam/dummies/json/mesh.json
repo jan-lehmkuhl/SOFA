@@ -4,7 +4,7 @@
  
     "buildSettings" : {
         "cadLink"           :   "",
-        "report"            :   "template01"
+        "report"            :   "reportTemplate01"
     },
 
     "meshSettings" : {
