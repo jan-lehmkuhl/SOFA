@@ -172,7 +172,7 @@ class Case(object):
     global foamStructure
 
     def __init__(self, aspectType=None, path="./"):
-        # name of class
+        # name of class for debugging purpose
         self.name = "Case"
         # aspectType of class, e.g. cad, mesh ....
         self.aspectType = aspectType
@@ -470,6 +470,7 @@ class Case(object):
         reportTemplate = self.caseJson["buildSettings"]["report"]
         if reportTemplate in  os.listdir(os.path.join(self.path, "../doc")):
             reportPath = os.path.join(self.path, "../doc", reportTemplate)
+            statesPath = os.path.join(self.path, "../doc/postStates")
             for file in os.listdir(reportPath):
                 if fnmatch.fnmatch(file, '*.Rmd'):
                     if self.aspectType == "mesh" :
@@ -478,7 +479,8 @@ class Case(object):
                     elif self.aspectType == "run" :
                         reportSrc = os.path.join(reportPath, file)
                         reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
-                    createSymlinkSavely( reportPath, "postTemplate" )
+                    createDirSafely( statesPath )
+                    createSymlinkSavely( statesPath, "postStates" )
                     break
             else: 
                 print("Unabel to find a report in >%s" %reportPath)
@@ -592,8 +594,9 @@ class CadCase(Case):
     # Specialized class for cad cases, which inherits from the base Case class
 
     def __init__(self, path="./"):
+        # execute init of parent class
         super().__init__("cad", path)
-        self.name = "CadCase"
+        self.name = "CadCase"   # only for debugging purpose
 
     def create(self):
         # specialized method which creates all folders needed in
