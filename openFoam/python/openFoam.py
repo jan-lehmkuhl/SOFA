@@ -143,19 +143,20 @@ class Aspect(object):
             #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
             createSymlinkSavely(    makefilePath,       # aspect Makefile
                                     os.path.join( self.path, aspectName, "Makefile") )
+            reportTemplate = loadJson( os.path.join('tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']
             if self.aspectType == "mesh":
                 meshOvPath  = findFile("meshOverview.Rmd", "tools")
                 meshRepPath = findFile("meshReport.Rmd"  , "tools")
-                createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
+                createDirSafely(os.path.join(self.path, aspectName, "doc", reportTemplate ))
                 if meshOvPath:
-                    copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc/template01/meshReport.Rmd"))
+                    copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc", reportTemplate, "meshReport.Rmd"))
                     copyFileSafely(meshOvPath,  os.path.join(self.path, aspectName, "doc/meshOverview.Rmd"))
             if self.aspectType == "run":
-                createDirSafely(os.path.join(self.path, aspectName, "doc/template01"))
+                createDirSafely(os.path.join(self.path, aspectName, "doc", reportTemplate ))
                 runOvPath = findFile("runOverview.Rmd", "tools")
                 runRepPath = findFile("runReport.Rmd"  , "tools")
                 if runOvPath:
-                    copyFileSafely(runRepPath, os.path.join(self.path, aspectName, "doc/template01/runReport.Rmd"))
+                    copyFileSafely(runRepPath, os.path.join(self.path, aspectName, "doc", reportTemplate, "runReport.Rmd"))
                     copyFileSafely(runOvPath, os.path.join(self.path, aspectName, "doc/runOverview.Rmd"))
             if(    self.aspectType == "mesh" 
                 or self.aspectType == "run" ):
