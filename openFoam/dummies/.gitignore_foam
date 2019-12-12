@@ -1,6 +1,8 @@
 # Created by https://www.gitignore.io/api/openfoam
 # Edit at https://www.gitignore.io/?templates=openfoam
 
+# framework-origin at ./tools/framework/openFoam/dummies/.gitignore_foam
+
 
 
 # OpenFOAM Preprocessing
@@ -94,12 +96,13 @@ postProcessing
 # R & Reporting
 # =====================================
 
-# .Rhistory
-*.Rdata
-*.rds
+doc/*Report/*Report.Rmd
+    # copied from aspect/doc/templateXX
+doc/*Report/*.Rdata
+doc/*Report/*.rds
+doc/*Report/*Report.html
 
-*.html
-doc/meshReport/meshReport.Rmd
-
+doc/meshReport
+    # link in runXXX to meshReport
 
 # End of https://www.gitignore.io/api/openfoam
