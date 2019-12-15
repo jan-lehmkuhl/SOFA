@@ -12,14 +12,15 @@ cadFolder       = $(shell node -p "require('./mesh.json').buildSettings.cadLink"
 # default mesh creating target
 all: mesh view
 
+
+# creates mesh
+    # NOTE: update cad folder before
 mesh: updateSymlinks
 	if [ -f "Allmesh" ] ; then                               \
-		make -C $(cadFolder) cad                           ; \
-		make updateFreecadStlLink                          ; \
+		make linkCadStlFiles                               ; \
 		./Allmesh                                          ; \
 		checkMesh  | tee log.checkMesh                     ; \
 	else                                                     \
-		make updateFreecadStlLink                          ; \
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
@@ -92,14 +93,16 @@ showCaseReport:
 # FreeCAD meshing
 # =============================================================================
 
-# linking freecad-stl to std folder for using full-control meshing
-updateFreecadStlLink: 
-	if [   -d "../../cad/$(cadFolder)/meshCase" ] ; then                                  \
-		echo "*** freecad meshCase exists - linking starts"                             ; \
+
+# links cadXXX/stl/*.stl to constant/triSurface
+    # >make -C CAD linkfreecadstl< links stl-files in meshCase to cadXXX/stl/*.stl 
+linkCadStlFiles:
+	if [ -f "Allmesh" ]  &&  [ "$(cadFolder)" != "" ]  ; then                             \
 		make -C ../../cad/$(cadFolder)  linkfreecadstl                                  ; \
 		if [ ! -d constant/triSurface ] ; then   mkdir -p constant/triSurface   ; fi    ; \
 		cd constant/triSurface                                                          ; \
-		ln -sf ../../../../cad/$(cadFolder)/meshCase/constant/triSurface/*.stl .        ; \
+		ln -sf ../../../../cad/$(cadFolder)/stl/*.stl  .                                ; \
+		echo "following files exist now in constant/triSurface" ;  ls -l                ; \
 	fi ;
 
 
