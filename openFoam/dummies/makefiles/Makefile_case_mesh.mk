@@ -106,10 +106,12 @@ linkCadStlFiles:
 	fi ;
 
 
-# can be used to overwrite the dummy settings from full-controll meshing
-copyfreecadmeshfiles: linkfreecad
-	cp -f  ../../cad/$(cadFolder)/meshCase/Allmesh .
-	cp -rf ../../cad/$(cadFolder)/meshCase/system .
+# imports and overwrites mesh settings from freecad export CAD/meshCase/system
+    # can be used to overwrite the dummy settings from full-controll meshing
+importFreecadMeshSetup: linkCadStlFiles
+	mv -f  ../../cad/$(cadFolder)/meshCase/Allmesh   .
+	rm -f  system/*
+	mv     ../../cad/$(cadFolder)/meshCase/system/*  system
 
 
 openfreecad:
