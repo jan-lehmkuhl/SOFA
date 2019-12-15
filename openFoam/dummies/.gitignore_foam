@@ -42,6 +42,8 @@ constant/triSurface
 # freecad meshing
 mesh_outside.stl
 
+# cfmesh output
+*_Geometry.fms
 
 
 # OpenFOAM Solving

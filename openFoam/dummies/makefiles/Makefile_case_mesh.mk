@@ -121,6 +121,7 @@ runfreecadmesh:
 cleanfreecadmesh:
 	rm -f log.* 
 	rm -f mesh_outside.stl
+	rm -f *_Geometry.fms
 	# rm -rf gmsh
 
 
