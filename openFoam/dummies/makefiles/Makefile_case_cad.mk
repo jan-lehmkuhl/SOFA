@@ -11,7 +11,7 @@ all: cad view
 # writes necessary cad files from sources
 cad: 
 	if [   -f native/geometry.FCStd ]; then                                      \
-		echo; echo "*** execute WRITE MESH inside freecad ***" ;echo           ; \
+		echo; echo "*** execute WRITE MESH inside freecad to provide stl files in meshCase ***" ;echo   ; \
 		# make openfreecadgui                                                  ; \
 		make linkfreecadstl                                                    ; \
 	fi
@@ -84,6 +84,11 @@ difffreecad:
     # freecad stl files are exported to ./meshCase/constant/triSurface
     # cadXXX/stl/*.stl files are necessary for full-control OpenFOAM meshing
 linkfreecadstl:
+	if [ -f native/geometry.FCStd ] ; then     \
+	if   ls meshCase/constant/triSurface/*.stl  >/dev/null 2>&1;  then  echo "";   else   \
+		echo; echo "*** PROVIDE stl-files in meshCase/constant/triSurface ***"  ; \
+		../../../tools/framework/bin/pauseForMakefiles.py                       ; \
+	fi ; fi
 	if [ ! -d stl ]                            ; then   mkdir stl   ; fi ;
 	if [   -d "meshCase/constant/triSurface" ] ; then   cd stl;  ln -sf ../meshCase/constant/triSurface/*.stl .   ; fi ;
 

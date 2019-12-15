@@ -10,7 +10,10 @@ cadFolder       = $(shell node -p "require('./mesh.json').buildSettings.cadLink"
 # =============================================================================
 
 # default mesh creating target
-all: mesh view
+all: 
+	make -C $(cadFolder) cad                           ; \
+	make mesh 
+	make view
 
 
 # creates mesh
