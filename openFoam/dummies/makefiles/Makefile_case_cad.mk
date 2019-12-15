@@ -80,11 +80,12 @@ difffreecad:
 	git diff  --color-words  native/geometry.FCStd
 
 
-# creates links in ./stl to freecad stl files for full-control OpenFOAM meshing
+# creates links from freecad-exported stl-files to the cadXXX/stl folder
+    # freecad stl files are exported to ./meshCase/constant/triSurface
+    # cadXXX/stl/*.stl files are necessary for full-control OpenFOAM meshing
 linkfreecadstl:
 	if [ ! -d stl ]                            ; then   mkdir stl   ; fi ;
-	if [   -f stl/* ]                          ; then   rm stl/*  ; fi ; 
-	if [   -d "meshCase/constant/triSurface" ] ; then   cd stl;  ln -s ../meshCase/constant/triSurface/*.stl .   ; fi ;
+	if [   -d "meshCase/constant/triSurface" ] ; then   cd stl;  ln -sf ../meshCase/constant/triSurface/*.stl .   ; fi ;
 
 
 cleanfreecadoutput:
