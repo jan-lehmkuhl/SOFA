@@ -35,16 +35,7 @@ mesh: updateSymlinks
 view:
 	make -C .. showOverviewReport
 	make       showCaseReport
-	if [ ! -f "Allmesh" ] ; then                                                \
-		echo "*** start foamMesh.py"                                          ; \
-		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \
-	elif [ -f "pv.foam" ] ; then                                                \
-		echo "*** start paraview pv.foam"                                     ; \
-		paraview pv.foam                                                      ; \
-	else                                                                        \
-		echo "*** start paraFoam"                                             ; \
-		paraFoam                                                              ; \
-	fi ;
+	make       openParaview
 
 
 # remove all from commited sources created files and links
@@ -168,3 +159,16 @@ finalizeMesh:
 cleanMesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
 
+
+# opens Paraview to review mesh
+openParaview: 
+	if [ ! -f "Allmesh" ] ; then                                                \
+		echo "*** start foamMesh.py"                                          ; \
+		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \
+	elif [ -f "pv.foam" ] ; then                                                \
+		echo "*** start paraview pv.foam"                                     ; \
+		paraview pv.foam                                                      ; \
+	else                                                                        \
+		echo "*** start paraFoam"                                             ; \
+		paraFoam                                                              ; \
+	fi ;
