@@ -112,10 +112,11 @@ linkCadStlFiles:
 
 # imports and overwrites mesh settings from freecad export CAD/meshCase/system
     # can be used to overwrite the dummy settings from full-controll meshing
-importFreecadMeshSetup: linkCadStlFiles
-	mv -f  ../../cad/$(cadFolder)/meshCase/Allmesh   .
-	rm -f  system/*
-	mv     ../../cad/$(cadFolder)/meshCase/system/*  system
+    # stl files remain in meshCase
+fetchFreecadMeshSetup: linkCadStlFiles
+	mv    -f  ../../cad/$(cadFolder)/meshCase/Allmesh   .
+	mkdir -p  system
+	mv    -f  ../../cad/$(cadFolder)/meshCase/system/*  ./system
 
 
 openfreecad:
