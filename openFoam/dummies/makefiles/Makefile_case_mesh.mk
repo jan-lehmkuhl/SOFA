@@ -23,12 +23,12 @@ mesh: updateSymlinks
 		make linkCadStlFiles                               ; \
 		./Allmesh                                          ; \
 		checkMesh  | tee log.checkMesh                     ; \
+		make updateCaseReport                              ; \
 	else                                                     \
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
-	make updateCaseReport
-	make -C .. overviewReportUpdate
+	make -C .. updateOverviewReport
 
 
 # open paraview

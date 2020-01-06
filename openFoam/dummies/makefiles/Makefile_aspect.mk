@@ -20,12 +20,13 @@ newCase:
 
 
 # creates an overview report for all cases
-overviewReportUpdate:
+    # dont updates the separate case reports
+updateOverviewReport:
 	python3 ../../tools/framework/openFoam/python/openFoam.py overview
 
 
 # update all case reports to newest version and potentially run report generation
-updateAllCaseReports:
+updateCaseReports:
 	python3 ../../tools/framework/openFoam/python/openFoam.py updateAllReports
 
 
