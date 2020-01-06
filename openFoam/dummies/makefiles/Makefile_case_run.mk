@@ -73,6 +73,7 @@ commit:
 # update report according to .json
 updateReport:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
+	make -C .. updateOverviewReport
 
 
 

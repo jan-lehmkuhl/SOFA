@@ -27,8 +27,8 @@ mesh: updateSymlinks
 	else                                                     \
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
+		make -C .. updateOverviewReport                    ; \
 	fi ;
-	make -C .. updateOverviewReport
 
 
 # open paraview
@@ -78,6 +78,7 @@ commit:
 #	and if yes: creates case report
 updateCaseReport:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
+	make -C .. updateOverviewReport
 
 
 showCaseReport:
