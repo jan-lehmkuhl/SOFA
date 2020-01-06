@@ -11,6 +11,14 @@ showOverviewReport:
 	fi ;
 
 
+# updates all reports in this aspect
+updateAllReports:
+	make updateCaseReports
+	make updateOverviewReport
+	make showOverviewReport
+
+
+
 # handle framework related run folder
 # =============================================================================
 
