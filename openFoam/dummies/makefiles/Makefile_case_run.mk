@@ -37,7 +37,8 @@ view:
 
 # remove all calculated files
 clean: cleanRun cleanFreecad updateSymlinks
-	# rm -f  mesh[0-9][0-9][0-9]
+	rm -rf doc/meshReport
+	find . -empty -type d -delete
 
 
 

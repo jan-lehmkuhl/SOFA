@@ -40,7 +40,7 @@ view:
 
 # remove all from commited sources created files and links
 clean: cleanfreecadmesh cleanframeworkmesh updateSymlinks
-	# rm -f  cad[0-9][0-9][0-9]
+	rm -rf doc/meshReport
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
