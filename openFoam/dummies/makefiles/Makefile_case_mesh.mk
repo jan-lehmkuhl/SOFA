@@ -31,7 +31,7 @@ mesh: updateSymlinks
 	fi ;
 
 
-# open paraview
+# opens reports & paraview
 view:
 	make -C .. showOverviewReport
 	make       showCaseReport

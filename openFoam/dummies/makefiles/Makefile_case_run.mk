@@ -24,15 +24,11 @@ mesh:
 	make -C $(meshFolder) mesh
 
 
-# open paraview
+# opens reports & paraview
 view:
-	if [ ! -f "Allrun" ] ; then                                                 \
-		echo "*** start foamMesh.py"                                          ; \
-		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \
-	else                                                                        \
-		echo "*** start paraFoam -builtin"                                    ; \
-		paraFoam -builtin                                                     ; \
-	fi ;
+	make -C .. showOverviewReport
+	make       showCaseReport
+	make       openParaview
 
 
 # remove all calculated files
@@ -102,3 +98,13 @@ copyfreecadcasefiles: updateSymlinks
 
 cleanFreecad: 
 	rm -f constant/polyMesh
+
+
+openParaview:
+	if [ ! -f "Allrun" ] ; then                                                 \
+		echo "*** start foamMesh.py"                                          ; \
+		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \
+	else                                                                        \
+		echo "*** start paraFoam -builtin"                                    ; \
+		paraFoam -builtin                                                     ; \
+	fi ;
