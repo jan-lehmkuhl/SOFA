@@ -85,6 +85,10 @@ showCaseReport:
 	xdg-open doc/meshReport/meshReport.html
 
 
+showOverviewReport:
+	make -C .. showOverviewReport
+
+
 
 # FreeCAD meshing
 # =============================================================================

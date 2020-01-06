@@ -67,9 +67,17 @@ commit:
 
 
 # update report according to .json
-updateReport:
+updateCaseReport:
 	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
 	make -C .. updateOverviewReport
+
+
+showCaseReport:
+	xdg-open doc/meshReport/runReport.html
+
+
+showOverviewReport:
+	make -C .. showOverviewReport
 
 
 
