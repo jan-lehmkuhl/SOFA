@@ -27,7 +27,11 @@ installrequirements:
 
 initdocs:
 	$(mkdir) docs
+ifeq ($(OS),Windows_NT)
 	cp tools/framework/docs/dummies/Makefile docs
+else
+	ln -s ../tools/framework/docs/dummies/Makefile docs/Makefile
+endif
 	make -C docs init
 
 
