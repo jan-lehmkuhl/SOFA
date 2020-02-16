@@ -25,6 +25,23 @@ sys.path.insert(1, './tools/framework/openFoam/python')
 
 
 
+
+class study(object):
+
+    def __init__(self, studyStructure, studyName):
+        self.studyStructure = studyStructure
+        self.studyName = studyName
+        print( "start __init__ ")
+
+
+    def create(self):
+        # Args:
+        #
+        # Return:
+        print( "start creation of: " +self.studyName)
+
+
+
 ###############################################################################
 # MAIN PROGRAMM
 ###############################################################################
@@ -70,6 +87,8 @@ if verbose :    print("starting study-init.py in: " + os.getcwd() )
 # create study
 # =============================================================================
 
+newStudy = study('dummystruct','emptyStudy')
+newStudy.create()
 
 
 print( "END study init" )
