@@ -35,6 +35,11 @@ endif
 	make -C docs init
 
 
+initstudy:
+	python3 tools/framework/scripts/study-init.py
+
+
+
 initfoam: 
 	if [ ! -d docs ] ;                    then make initdocs    ; fi ;
 	if [ ! -d tools/openFoam-setup ];     then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
