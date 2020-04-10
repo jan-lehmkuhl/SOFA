@@ -9,16 +9,16 @@
 ![](tools/images/logo.png)
 
 ************************************************  
-|                   |                                  |
-| ----------------- | -------------------------------- |
-| **Project Title** | xxx
-| description       | 
-| project start     | xxx.2018
-| project end       | ongoing
-| active stakeholder| 
-| cfd engineer      | 
-| design engineer   | 
-| checked by        | 
+|                       |                                  |
+| --------------------- | -------------------------------- |
+| **Project Title**     | xxx
+| description           | 
+| project start         | xxx.2020
+| project end           | ongoing
+| active stakeholder    | 
+| project leader        | 
+| supporting engineers  | 
+| checked by            | 
 <br>  
 
 <!-- example picture for quick project identification -->
@@ -31,14 +31,16 @@
 - [Project-Purpose](#project-purpose)
   - [Background](#background)
   - [Goals](#goals)
-- [Simulation Explanation](#simulation-explanation)
+- [Major Simulation Study Packages](#major-simulation-study-packages)
   - [Study 1](#study-1)
+- [Resources](#resources)
+  - [Human Resources](#human-resources)
+  - [Further Files at different places](#further-files-at-different-places)
+  - [Hardware Resources](#hardware-resources)
+  - [Software Enviroment](#software-enviroment)
 - [actual Project-Status](#actual-project-status)
   - [Results](#results)
     - [Study 1](#study-1-1)
-  - [Calculation Enviroment](#calculation-enviroment)
-    - [Hardware](#hardware)
-    - [Software](#software)
   - [Open issues](#open-issues)
   - [Project-Forecast](#project-forecast)
 - [Conclusions](#conclusions)
@@ -46,41 +48,42 @@
 
 
 Project-Purpose
-===================================================================================================
+===============================================================================
 
 Background
------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
 <!-- which information is needed to understand the project goals -->
+<!-- this should be understand by every friend or manager -->
 
 
 Goals
------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
 <!-- which goals should be reached within this project -->
+<!-- bulletpoints with max 10 words, more explanations belong to the background -->
 
 
-Simulation Explanation
-===================================================================================================
+Major Simulation Study Packages
+===============================================================================
 
 Study 1
------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
 <!-- which special information should this study deliver to reach the project goals -->
+<!-- only 4 sentences or bulletpoints. The details belong to the study report -->
 
 
-actual Project-Status
-===================================================================================================
 
-Results
------------------------------------------------------------------------------------------
-### Study 1
-<!-- main study results as short bulletpoints -->
+Resources
+===============================================================================
 
+Human Resources
+---------------------------------------------------------------------
 
-Calculation Enviroment
------------------------------------------------------------------------------------------
-<!-- Short description of the hard- and hoftware used to create the analysis.  -->
-<!-- The objective of this section is to ensure reproducebility of the results for the case of later reruns. -->
+Further Files at different places
+---------------------------------------------------------------------
 
-### Hardware
+Hardware Resources
+---------------------------------------------------------------------
+<!-- available computers, etc -->
 
 |          |                                                                                        |
 | -------- | -------------------------------------------------------------------------------------- |
@@ -92,7 +95,10 @@ Calculation Enviroment
 | Graphics | Card: <br> Display Server: <br> Driver: 
 
 
-### Software
+Software Enviroment
+---------------------------------------------------------------------
+<!-- Short description of the software used to create the analysis.  -->
+<!-- The objective of this section is to ensure reproducebility of the results for the case of later reruns. -->
 
 | Task              | Programm                                          |
 | ----------------- | ------------------------------------------------- |
@@ -106,16 +112,25 @@ Calculation Enviroment
 
 
 
+actual Project-Status
+===============================================================================
+
+Results
+---------------------------------------------------------------------
+### Study 1
+<!-- main study results as short bulletpoints -->
+
+
 Open issues
------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
 <!-- where are not yet solved issues or problems which can threaten the project outcome -->
 
 
 Project-Forecast
------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
 <!-- next steps and timeframe -->
 
 
 Conclusions
-===================================================================================================
+===============================================================================
 <!-- main outcome of this project in a few bulletpoints -->
