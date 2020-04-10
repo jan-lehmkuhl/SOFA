@@ -157,4 +157,6 @@ def loadJson(jsonPath):
             jsonPy = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
             return(jsonPy)
     else:
-        print("json file >%s< does not exis" % jsonPath)
+        print(" ")
+        print("ERROR: json file >%s< does not exist" % jsonPath)
+        print("    current directory is: " +os.getcwd() +"\n")
