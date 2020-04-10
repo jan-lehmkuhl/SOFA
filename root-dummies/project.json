@@ -4,8 +4,8 @@
     "cfxFolders"    : ["cfxStudy1"] ,
     "foamFolders"   : ["foamStudy1"] , 
 
-    "//"            : "foamStructure describes the openFoam folder structure within a sub-simulation" ,
-    "//"            : "this structure cannot be changed after the first >make init<",
+    "//2"           : "foamStructure describes the openFoam folder structure within a sub-simulation" ,
+    "//3"           : "this structure cannot be changed after the first >make init<",
     "foamStructure" : {
         "cad"   :   {"aspectName": "cad"},
         "mesh"  :   {"aspectName": "mesh",     "linkName": "cadLink",   "linkType": "cad" },

@@ -5,7 +5,7 @@
 include ../tools/framework/global-make.mk
 
 init: folderstructure
-	$(copy)  ../tools/framework/docs/dummies/main-project-readme.md   ../README-project.md
+	$(copy)  ../tools/framework/docs/dummies/main-project-readme.md   ../README.md
 
 folderstructure: 
 	for folder in             \
