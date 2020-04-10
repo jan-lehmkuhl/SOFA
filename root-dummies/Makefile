@@ -46,3 +46,14 @@ initdakota:
 	$(mkdir) dakota
 	# cp make
 	# make -C dakota init
+
+
+
+# help tools
+# =============================================================================
+
+# archives projects current state wit date stamp to ./ARCHIVE
+archive:
+	$(mkdir)    ARCHIVE
+	tar -vcjf ./ARCHIVE/$(notdir $(CURDIR))-$(shell date +"%Y%m%d-%I%M%p").tar.bz2   --exclude='ARCHIVE' --exclude='*.tar.gz' --exclude='*.tar.bz2'  `ls -A -1`
+	ls -la    ./ARCHIVE
