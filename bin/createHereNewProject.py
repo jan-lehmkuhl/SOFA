@@ -30,6 +30,12 @@ appendfile=open("./tools/framework/root-dummies/gitconfig-addition", "r")
 appendstring=appendfile.read()
 configfile.write("\n"+appendstring)
 
+# docs
+# -----------------------------------------------------------------------------
+os.system("make initdocs")
+os.system("git add README-project.md")
+os.system("git add docs/Makefile")
+
 
 # first git commit
 # =================================================================================================
