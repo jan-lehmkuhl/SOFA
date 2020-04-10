@@ -15,3 +15,6 @@ case
 
 /stl*
 /vtk*
+
+/native/*/*.gml
+/native/*.zip
