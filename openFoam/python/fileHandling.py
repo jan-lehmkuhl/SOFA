@@ -152,9 +152,12 @@ def loadJson(jsonPath):
     # Return:
     #   jsonPy:     d: parsed json
     #
+    import sys 
+    
     if os.path.exists(jsonPath):
         with open(jsonPath, 'r') as jsonFile:
             jsonPy = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
             return(jsonPy)
     else:
         print("json file >%s< does not exis" % jsonPath)
+        sys.exit("TERMINATE python script")
