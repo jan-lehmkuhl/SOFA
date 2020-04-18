@@ -21,17 +21,47 @@ sys.path.insert(1, './tools/framework/openFoam/python')
 # from fileHandling import createSymlinkSavely
 # from fileHandling import copyFileSafely
 # from fileHandling import copyFolderSafely
-# from fileHandling import loadJson
+from fileHandling import loadJson
 
 
+def prepareStudyStructureInProject():
+    # search and list possible study structures
+    #   1. already used study structures in this project
+    #   2. `~/.config/sofa/known-sofa-study-structures.list`
+    #   3. tools/framework/sofa-study-structures
+    #   4. enter repository with subfolder
+
+    # read user input of desired studyStructure
+    # if new repository
+        # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
+    # import submodule to tools
+
+    return "tools/framework/sofa-study-structures/dummy-structure"
 
 
 class study(object):
 
-    def __init__(self, studyStructure, studyName):
-        self.studyStructure = studyStructure
-        self.studyName = studyName
-        print( "start __init__ ")
+    global verbose
+
+    def __init__(self, studyStructure="notSet", studyName="notSet"):
+        if verbose :    print( "start studyStructure __init__ ")
+
+        # prepare study structure
+        # =============================================================================
+        studyStructureFolder    = prepareStudyStructureInProject( )
+        self.studyStructure     = loadJson( studyStructureFolder +"/sofa-study-structure.json" )
+        # validate study structure
+
+
+        # read and validate study folder
+        # =============================================================================
+        # ask for intendet study-name
+        self.studyName          = "AskForName"
+        # validate study-name
+        #   no doubles
+        #   no umlaute
+        # check if folder already exists
+
 
 
     def create(self):
@@ -61,33 +91,10 @@ if verbose :    print("starting study-init.py in: " + os.getcwd() )
 
 
 
-# get and prepare needed information
-# =============================================================================
-
-# search for possible study structures
-#   1. `~/.config/sofa/known-sofa-study-structures.list`
-#   2. tools
-#   3. tools/framework/sofa-study-structures
-
-# choose structure or insert new gitlab link
-
-# read study structure from json and validate structure
-
-# if new store structure 
-#   store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
-
-# ask for intendet study-name
-
-# validate study-name
-#   no doubles
-#   no umlaute
-
-
-
 # create study
 # =============================================================================
 
-newStudy = study('dummystruct','emptyStudy')
+newStudy = study( )
 newStudy.create()
 
 

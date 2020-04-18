@@ -1,0 +1,9 @@
+{
+    "name":                 "dummy-structure",
+
+    "subtypes":{    "run": "2",
+                    "survey":"2"} ,
+
+    "subtypesSeperation":   "True" ,
+    "useSubtypeAsPrefix":   "True" 
+}
