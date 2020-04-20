@@ -24,51 +24,60 @@ sys.path.insert(1, './tools/framework/openFoam/python')
 from fileHandling import loadJson
 
 
-def prepareStudyStructureInProject():
+
+class studyStructure(object):
+
+    def __init__(self, passedStructure="notSet"):
     # search and list possible study structures
     #   1. already used study structures in this project
     #   2. `~/.config/sofa/known-sofa-study-structures.list`
     #   3. tools/framework/sofa-study-structures
     #   4. enter repository with subfolder
+        pass
 
     # read user input of desired studyStructure
+        self.url                = "tools/framework/sofa-study-structures/dummy-structure"
     # if new repository
         # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
     # import submodule to tools
+        self.local          = "tools/framework/sofa-study-structures/dummy-structure"
 
-    return "tools/framework/sofa-study-structures/dummy-structure"
+        # load study structure
+        self.json           = loadJson( self.local +"/sofa-study-structure.json" )
+        self.name           = "dummy-structure"     # short name for recognising
+
+        # validate study structure
+        pass
+
+
+
+def askForStudyName( passedName="notSet"):
+        # ask for intendet study-name
+        name        = "AskForName"
+        # validate study-name
+        #   no doubles
+        #   no umlaute
+        # check if folder already exists
+        return name 
+
 
 
 class study(object):
 
     global verbose
 
-    def __init__(self, studyStructure="notSet", studyName="notSet"):
+    def __init__(self, passedStructure="notSet", studyName2="notSet"):
         if verbose :    print( "start studyStructure __init__ ")
 
-        # prepare study structure
-        # =============================================================================
-        studyStructureFolder    = prepareStudyStructureInProject( )
-        self.studyStructure     = loadJson( studyStructureFolder +"/sofa-study-structure.json" )
-        # validate study structure
-
-
-        # read and validate study folder
-        # =============================================================================
-        # ask for intendet study-name
-        self.studyName          = "AskForName"
-        # validate study-name
-        #   no doubles
-        #   no umlaute
-        # check if folder already exists
+        self.structure      = studyStructure( )
+        self.name           = askForStudyName( )
 
 
 
     def create(self):
-        # Args:
-        #
-        # Return:
-        print( "start creation of: " +self.studyName)
+        print( "start creation of:    " +self.name  )
+        print( "        with type:    " +self.structure.name )
+        pass 
 
 
 
