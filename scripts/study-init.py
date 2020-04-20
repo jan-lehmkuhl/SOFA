@@ -54,12 +54,17 @@ class studyStructure(object):
 def askForStudyName( passedName="notSet"):
         # ask for intendet study-name
         name        = "AskForName"
+        if validateFolderName( name):   print("proceed")
+        # check if folder already exists
+        pass
+        return name 
+
+
+def validateFolderName(name):
         # validate study-name
         #   no doubles
         #   no umlaute
-        # check if folder already exists
-        return name 
-
+        return True
 
 
 class study(object):
