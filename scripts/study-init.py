@@ -72,6 +72,7 @@ class study(object):
         self.structure      = studyStructure( )
         self.name           = askForStudyName( )
 
+        self.create( )
 
 
     def create(self):
@@ -104,7 +105,6 @@ if verbose :    print("starting study-init.py in: " + os.getcwd() )
 # =============================================================================
 
 newStudy = study( )
-newStudy.create()
 
 
 print( "END study init" )
