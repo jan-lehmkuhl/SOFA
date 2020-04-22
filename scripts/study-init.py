@@ -57,7 +57,7 @@ class studyStructure(object):
 
 def askForStudyName( passedName="notSet"):
         # ask for intendet study-name
-        name        = "AskForName"
+        name        = "study1"
         if validateFolderName( name):   print("proceed")
         # check if folder already exists
         pass
@@ -82,6 +82,8 @@ class study(object):
         self.name           = askForStudyName( )
 
         self.projectRoot    = findParentFolder( containingFile="project.json" )
+        self.studyFolder    = self.projectRoot +"/" +self.name
+
         self.create( )
 
 
@@ -89,7 +91,15 @@ class study(object):
         print( "start creation of:    " +self.name  )
         print( "        with type:    " +self.structure.name )
 
-        # mkdir studyFolder
+        # make study folder
+        if not os.path.exists( self.studyFolder ):
+            os.mkdir( self.studyFolder )
+        else:
+            print("\n*** StudyFolder already exists")
+            print(  "to abort press Ctrl+C to integrate the new study ")
+            input("press ENTER to proceed: ")
+
+        # loop all aspects
         for element in self.structure.aspects :
             if verbose: print("run through aspect:  " +element)
         pass 

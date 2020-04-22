@@ -44,3 +44,6 @@ initfoam:
 	if [ ! -d tools/openFoam-setup ];     then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
 	if [ ! -d tools/openFoam-reporting ]; then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/r_openfoam openFoam-reporting;        fi;
 	python3 tools/framework/openFoam/python/openFoam.py initFoam
+
+delete:
+	rm -rf study1
