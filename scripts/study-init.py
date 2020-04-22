@@ -22,29 +22,33 @@ sys.path.insert(1, './tools/framework/openFoam/python')
 # from fileHandling import copyFileSafely
 # from fileHandling import copyFolderSafely
 from fileHandling import loadJson
+from folderHandling import findParentFolder
 
 
 
 class studyStructure(object):
 
     def __init__(self, passedStructure="notSet"):
-    # search and list possible study structures
-    #   1. already used study structures in this project
-    #   2. `~/.config/sofa/known-sofa-study-structures.list`
-    #   3. tools/framework/sofa-study-structures
-    #   4. enter repository with subfolder
+        # search and list possible study structures
+        #   1. already used study structures in this project
+        #   2. `~/.config/sofa/known-sofa-study-structures.list`
+        #   3. tools/framework/sofa-study-structures
+        #   4. enter repository with subfolder
         pass
 
-    # read user input of desired studyStructure
-        self.url                = "tools/framework/sofa-study-structures/dummy-structure"
-    # if new repository
-        # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
-    # import submodule to tools
-        self.local          = "tools/framework/sofa-study-structures/dummy-structure"
+        # read user input of desired studyStructure
+        self.url            = "tools/framework/study-structures/openfoam"
+        # if new repository
+            # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
+        # import submodule to tools
+        self.local          = "tools/framework/study-structures/openfoam"
 
-        # load study structure
-        self.json           = loadJson( self.local +"/sofa-study-structure.json" )
-        self.name           = "dummy-structure"     # short name for recognising
+        # load study structure and assign to self.values
+        self.json           = loadJson( self.local +"/sofa-study-structure-root.json" )
+        self.files          = self.json['files']
+        self.aspects        = self.json['aspects']
+
+        self.name           = self.json['name']     # short name for recognising
 
         # validate study structure
         pass
@@ -77,12 +81,17 @@ class study(object):
         self.structure      = studyStructure( )
         self.name           = askForStudyName( )
 
+        self.projectRoot    = findParentFolder( containingFile="project.json" )
         self.create( )
 
 
     def create(self):
         print( "start creation of:    " +self.name  )
         print( "        with type:    " +self.structure.name )
+
+        # mkdir studyFolder
+        for element in self.structure.aspects :
+            if verbose: print("run through aspect:  " +element)
         pass 
 
 
