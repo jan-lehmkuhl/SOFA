@@ -15,11 +15,15 @@ import fnmatch
 import subprocess
 import argparse
 
+sys.path.insert(1, './tools/framework/scripts') 
+
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
 from fileHandling import copyFolderSafely
 from fileHandling import loadJson
+from folderHandling import findParentFolder
+
 
 def findFile(fileName, turnFolder):
     # traverses a tree upwards till it finds turnfolder and then dives into
@@ -921,24 +925,12 @@ verbose =       parser.parse_args().verbose
 if verbose :    print("starting in verbose mode" )
 if verbose :    print("starting openFoam.py with arg: >" + entryPoint + "< in: " + os.getcwd() )
 
+# find and read project.json 
+wd              = findParentFolder( "project.json" )
+projectJsonPath = os.path.join(wd, "project.json" )
+projectJson     = loadJson(projectJsonPath)
+foamStructure   = projectJson["foamStructure"]
 
-# find project.json 
-i = 0
-wd = os.getcwd()
-subdirs = os.listdir(os.getcwd())
-while i < 4:
-    if "project.json" in subdirs:
-        projectJsonPath = os.path.join(wd, "project.json" )
-        projectJson = loadJson(projectJsonPath)
-        foamStructure = projectJson["foamStructure"]
-        break
-    else:
-        wd = os.path.join(wd, os.path.pardir)
-        subdirs = os.listdir(wd)
-        i += 1
-else:
-    print("Could not find project.json")
-    sys.exit(0)
 
 if entryPoint == "initFoam":
     projectStruct = loadJson('project.json')
