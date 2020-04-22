@@ -26,7 +26,38 @@ import os
 # load functions
 # -------------------------------------------------------------------
 # from fileHandling import createDirSafely
+# from fileHandling import createSymlinkSavely
+# from fileHandling import copyFileSafely
+# from fileHandling import copyFolderSafely
+# from fileHandling import loadJson
 
+
+
+def walklevel(some_dir, level=-1):
+    # https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
+    #   level=-1 walks through all files (os.walk default)
+    #   level=0 lists only the current directory files 
+    #   level=1 finds lists all files in the first level subfolder 
+    some_dir = some_dir.rstrip(os.path.sep)
+    assert os.path.isdir(some_dir)
+    num_sep = some_dir.count(os.path.sep)
+    for root, dirs, files in os.walk(some_dir):
+        yield root, dirs, files
+        num_sep_this = root.count(os.path.sep)
+        if ( num_sep + level <= num_sep_this ) and ( level != -1 ): 
+            # deletes next walking through dirs if to much seperaters
+            del dirs[:]
+
+
+def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth=-1 ):
+    folderList = []
+    for subdir, dirs, files in walklevel( startFolder, directoryMaxDepth ):
+        for file in files:
+            if file == containingFile :
+                folderList.append( subdir )
+    if folderList == [] :
+        print(  "ERROR: no SubFolders with >" +containingFile +"< inside in: " +startFolder +"\n") 
+    return folderList
 
 
 def findParentFolder( containingFile, startFolder=os.getcwd() ):
