@@ -32,9 +32,9 @@ installrequirementsR:
 	sudo apt-get install r-base
 	sudo apt-get install pandoc
 	sudo apt-get install xml2
-    sudo apt-get install libssl-dev
-    sudo apt-get install libxml2-dev
-    sudo apt-get install libcurl4-openssl-dev
+	sudo apt-get install libssl-dev
+	sudo apt-get install libxml2-dev
+	sudo apt-get install libcurl4-openssl-dev
 
 
 
