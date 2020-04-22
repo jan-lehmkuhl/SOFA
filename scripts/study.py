@@ -104,6 +104,9 @@ class study(object):
             if verbose: print("run through aspect:  " +element)
         pass 
 
+        # commit new created items
+        #   maybe stash before looping and pop now
+
 
 
 ###############################################################################
