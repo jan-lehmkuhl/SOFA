@@ -109,29 +109,3 @@ class study(object):
 
 
 
-###############################################################################
-# MAIN PROGRAMM
-###############################################################################
-
-# enviroment setup
-# =============================================================================
-
-# read arguments and options from command line
-parser = argparse.ArgumentParser(description='input for openFoam.py')
-parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
-
-verbose =       parser.parse_args().verbose
-
-# explain enviroment
-if verbose :    print("starting in verbose mode" )
-if verbose :    print("starting study-init.py in: " + os.getcwd() )
-
-
-
-# create study
-# =============================================================================
-
-newStudy = study( )
-
-
-print( "END study init" )

@@ -24,6 +24,8 @@ from fileHandling import copyFolderSafely
 from fileHandling import loadJson
 from folderHandling import findParentFolder
 
+from study import study 
+
 
 def findFile(fileName, turnFolder):
     # traverses a tree upwards till it finds turnfolder and then dives into
@@ -933,6 +935,9 @@ foamStructure   = projectJson["foamStructure"]
 
 
 if entryPoint == "initFoam":
+    newStudy = study( )
+
+if entryPoint == "initFoamOld":
     projectStruct = loadJson('project.json')
     for studyFolder in projectStruct['foamFolders']:
         if not os.path.exists(studyFolder):
