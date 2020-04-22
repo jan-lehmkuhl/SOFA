@@ -935,7 +935,7 @@ foamStructure   = projectJson["foamStructure"]
 
 
 if entryPoint == "initFoam":
-    newStudy = study( )
+    newStudy = study( verbose=verbose )
 
 if entryPoint == "initFoamOld":
     projectStruct = loadJson('project.json')

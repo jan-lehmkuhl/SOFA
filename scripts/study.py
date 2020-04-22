@@ -75,7 +75,7 @@ class study(object):
 
     global verbose
 
-    def __init__(self, passedStructure="notSet", studyName2="notSet"):
+    def __init__(self, passedStructure="notSet", studyName2="notSet", verbose=False):
         if verbose :    print( "start studyStructure __init__ ")
 
         self.structure      = studyStructure( )
@@ -84,10 +84,10 @@ class study(object):
         self.projectRoot    = findParentFolder( containingFile="project.json" )
         self.studyFolder    = self.projectRoot +"/" +self.name
 
-        self.create( )
+        self.create( verbose )
 
 
-    def create(self):
+    def create(self, verbose):
         print( "start creation of:    " +self.name  )
         print( "        with type:    " +self.structure.name )
 
@@ -101,7 +101,7 @@ class study(object):
 
         # loop all aspects
         for element in self.structure.aspects :
-            if verbose: print("run through aspect:  " +element)
+            if verbose :    print("run through aspect:  " +element)
         pass 
 
         # commit new created items
