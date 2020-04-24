@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name":             "Python: Current File",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${file}",
+            "stopOnEntry":      true,
+            "console":          "integratedTerminal"
+        },
+        {
+            // to run this configuration in this directory, this framework should be part of a sofa project
+            "name":             "init study ../..",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${workspaceRoot}/openFoam/python/openFoam.py",
+            "cwd":              "${workspaceRoot}/../..",
+            "args":             ["initFoam", "--verbose"],
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+            "console":          "integratedTerminal"
+        }
+    ]
+}
