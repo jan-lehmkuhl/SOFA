@@ -17,7 +17,7 @@
             "name":             "init study ../..",
             "type":             "python",
             "request":          "launch",
-            "program":          "${workspaceRoot}/openFoam/python/openFoam.py",
+            "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/../..",
             "args":             ["initFoam", "--verbose"],
             "stopOnEntry":      true,
