@@ -25,6 +25,9 @@ from folderHandling import findParentFolder
 
 from study import study 
 
+from aspect import Aspect       # only for old init
+from case import findFile       # only for old init
+
 
 
 ###############################################################################
