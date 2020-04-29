@@ -39,8 +39,7 @@ view:
 
 
 # remove all from commited sources created files and links
-clean: cleanfreecadmesh cleanframeworkmesh updateSymlinks
-	rm -rf doc/meshReport
+clean: cleanfreecadmesh cleanframeworkmesh cleanReport updateSymlinks
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
@@ -164,6 +163,8 @@ finalizeMesh:
 cleanMesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
 
+cleanReport:
+	rm -rf doc/meshReport
 
 # opens Paraview to review mesh
 openParaview: 
