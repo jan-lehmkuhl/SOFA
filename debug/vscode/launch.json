@@ -12,10 +12,10 @@
             "console":          "integratedTerminal"
         },
         {
-            "name":             "Python: openFoam.py symlinks",
+            "name":             "Python: sofa-tasks.py symlinks",
             "type":             "python",
             "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/openFoam/python/openFoam.py",
+            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/FOAMSTUDY1/run/run001",
             "args":             ["symlinks", "--verbose"],
             "stopOnEntry":      true,
@@ -24,24 +24,12 @@
             "console":          "integratedTerminal"
         },
         {
-            "name":             "Python: openFoam.py init",
+            "name":             "Python: sofa-tasks.py init",
             "type":             "python",
             "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/openFoam/python/openFoam.py",
+            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}",
             "args":             ["initFoam", "--verbose"],
-            "stopOnEntry":      true,
-            "justMyCode":       true,
-            "showReturnValue":  true,
-            "console":          "integratedTerminal"
-        },
-        {
-            "name":             "Python: study-init.py",
-            "type":             "python",
-            "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/scripts/study-init.py",
-            "cwd":              "${workspaceRoot}",
-            "args":             ["--verbose"],
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,

@@ -24,23 +24,23 @@ updateAllReports:
 
 # create a new case with the next available running number
 newCase:
-	python3 ../../tools/framework/openFoam/python/openFoam.py newCase
+	python3 ../../tools/framework/scripts/sofa-tasks.py newCase
 
 
 # creates an overview report for all cases
     # dont updates the separate case reports
 updateOverviewReport:
-	python3 ../../tools/framework/openFoam/python/openFoam.py overview
+	python3 ../../tools/framework/scripts/sofa-tasks.py overview
 
 
 # update all case reports to newest version and potentially run report generation
 updateCaseReports:
-	python3 ../../tools/framework/openFoam/python/openFoam.py updateAllReports
+	python3 ../../tools/framework/scripts/sofa-tasks.py updateAllReports
 
 
 # update json files to newest version
 updateJson:
-	python3 ../../tools/framework/openFoam/python/openFoam.py updateJson
+	python3 ../../tools/framework/scripts/sofa-tasks.py updateJson
 
 
 
@@ -49,4 +49,4 @@ updateJson:
 
 # test value
 test:
-	python3 ../../tools/framework/openFoam/python/openFoam.py test
+	python3 ../../tools/framework/scripts/sofa-tasks.py test

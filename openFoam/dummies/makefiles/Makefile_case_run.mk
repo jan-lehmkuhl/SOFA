@@ -43,32 +43,32 @@ clean: cleanRun cleanFreecad updateSymlinks
 
 # initialize case according to run.json
 init:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
+	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 
 
 # renew the symlinks to mesh
 updateSymlinks:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
+	python3 ../../../tools/framework/scripts/sofa-tasks.py symlinks
 
 
 # clone this case to a new case with the next available running number 
 clone:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py clone
+	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
 
 # erase all files except necessary framework related files
 clear:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
+	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
 
 
 # commit all changes inside case
 commit:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
+	python3 ../../../tools/framework/scripts/sofa-tasks.py commit
 
 
 # update report according to .json
 updateCaseReport:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
+	python3 ../../../tools/framework/scripts/sofa-tasks.py updateReport
 	make -C .. updateOverviewReport
 
 

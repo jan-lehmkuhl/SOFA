@@ -36,14 +36,14 @@ endif
 
 
 initstudy:
-	python3 tools/framework/scripts/study-init.py
+	python3 tools/framework/scripts/sofa-tasks.py initFoam
 
 
 initfoam: 
 	if [ ! -d docs ] ;                    then make initdocs    ; fi ;
 	if [ ! -d tools/openFoam-setup ];     then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
 	if [ ! -d tools/openFoam-reporting ]; then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/r_openfoam openFoam-reporting;        fi;
-	python3 tools/framework/openFoam/python/openFoam.py initFoam
+	python3 tools/framework/scripts/sofa-tasks.py initFoam
 
 delete:
 	rm -rf study1
