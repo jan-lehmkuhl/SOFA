@@ -18,6 +18,7 @@ from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
 from fileHandling import copyFolderSafely
 from fileHandling import loadJson
+from fileHandling import findFile
 from folderHandling import findParentFolder
 
 from case import findFile

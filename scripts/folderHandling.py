@@ -76,3 +76,36 @@ def findParentFolder( containingFile, startFolder=os.getcwd() ):
         print("Could not find anything")
         sys.exit(0)
 
+
+def findFolder(folderName, turnFolder):
+    # traverses a tree upwards till it finds turnfolder and then dives into
+    # turnfolder till it finds folder
+    #
+    # Args:
+    #   folderName: s: name of the folder that is searched for
+    #   turnfolder: s: name of the folder to turn on
+    #
+    # Return:
+    #   path:       s: relative path to the file
+    #
+    i = 0
+    wd = os.getcwd()
+    subdirs = os.listdir(os.getcwd())
+    while i < 5:
+        if turnFolder in subdirs:
+            for root, dirs, files in os.walk(os.path.join(wd, turnFolder)):
+                if folderName in dirs:
+                    path = os.path.relpath(
+                        os.path.join(root, folderName), os.getcwd())
+                    return(path)
+            else:
+                print("Could not find folder >%s< in >%s<" %
+                      (folderName, os.path.join(wd, turnFolder)))
+                return(False)
+        wd = os.path.join(wd, os.path.pardir)
+        subdirs = os.listdir(wd)
+        i += 1
+    else:
+        print("Could not find folder >%s<" % turnFolder)
+        return(False)
+

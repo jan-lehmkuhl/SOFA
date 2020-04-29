@@ -25,7 +25,7 @@ from folderHandling import findParentFolder
 from study import Study 
 
 from aspect import Aspect       # only for old init
-from case import findFile       # only for old init
+from fileHandling import findFile       # only for old init
 
 from aspect import readFoamStructure
 
