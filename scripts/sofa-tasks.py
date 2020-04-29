@@ -28,6 +28,8 @@ from study import Study
 from aspect import Aspect       # only for old init
 from case import findFile       # only for old init
 
+from aspect import readFoamStructure
+
 
 
 ###############################################################################
@@ -45,11 +47,7 @@ verbose =       parser.parse_args().verbose
 if verbose :    print("starting in verbose mode" )
 if verbose :    print("starting sofa-tasks.py with arg: >" + entryPoint + "< in: " + os.getcwd() )
 
-# find and read project.json 
-wd              = findParentFolder( "project.json" )
-projectJsonPath = os.path.join(wd, "project.json" )
-projectJson     = loadJson(projectJsonPath)
-foamStructure   = projectJson["foamStructure"]
+foamStructure   = readFoamStructure()
 
 
 if entryPoint == "initFoam":

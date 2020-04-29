@@ -28,10 +28,15 @@ from case import findFile
 from case import cfdAspectSelector
 
 
+def readFoamStructure():
+    wd              = findParentFolder( "project.json" )
+    projectJsonPath = os.path.join(wd, "project.json" )
+    projectJson     = loadJson(projectJsonPath)
+    return projectJson["foamStructure"]
+
+
 class Aspect(object):
     # base class to handle all operations related to an aspects
-
-    global foamStructure
 
     def __init__(self, aspectType, path="./"):
         self.aspectType = aspectType
@@ -47,7 +52,8 @@ class Aspect(object):
         # Return:
         #   side effects: creates Aspect
         #
-        aspectName = foamStructure[self.aspectType]["aspectName"]
+        foamStructure   = readFoamStructure()
+        aspectName      = foamStructure[self.aspectType]["aspectName"]
         createDirSafely(os.path.join(self.path, aspectName))
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false

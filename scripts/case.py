@@ -15,7 +15,9 @@ import fnmatch
 import subprocess
 import argparse
 
-sys.path.insert(1, './tools/framework/scripts') 
+# add paths
+file_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, file_path ) 
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
@@ -102,6 +104,8 @@ def cfdAspectSelector(path=None):
     #   aspectName:  s: Name of the containing folder stripped of numbers
     #               this should equal the aspectType
     #
+    from aspect import readFoamStructure
+
     if path is None:
         path = "./"
         caseFolder = os.path.basename(os.getcwd())
@@ -109,7 +113,7 @@ def cfdAspectSelector(path=None):
         caseFolder = os.path.basename(path)
     aspectName = ''.join(
         [i for i in caseFolder if not i.isdigit()])  # remove digits
-    if aspectName in foamStructure:
+    if aspectName in readFoamStructure():
         if aspectName == "cad":
             return(CadCase(path))
         elif aspectName == "mesh":
@@ -126,9 +130,9 @@ def cfdAspectSelector(path=None):
 class Case(object):
     # base class to handle all operations related to cases
 
-    global foamStructure
-
     def __init__(self, aspectType=None, path="./"):
+        from aspect import readFoamStructure
+
         # name of class for debugging purpose
         self.name = "Case"
         # aspectType of class, e.g. cad, mesh ....
@@ -150,6 +154,7 @@ class Case(object):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
             # extract linked cases from case.json according to foamStructure gen in project.json
+            foamStructure   = readFoamStructure()
             self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
                 # differentiate between single links and a list of links (survey)
@@ -381,9 +386,12 @@ class Case(object):
         #   side effects : removes symlinks
         #
         # Lists of folders and extensions to delete
+        from aspect import readFoamStructure
+
         extensions = [".stl", ".vtk"]
         folder = ["polyMesh", "cadPics", "meshPics",
                   "drafts", "meshReport", "layerSizing"]
+        foamStructure   = readFoamStructure()
         for key in foamStructure:
             folder.append(key)
         # Traverse all subdirectories in case
