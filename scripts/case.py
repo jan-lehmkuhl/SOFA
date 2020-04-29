@@ -12,6 +12,7 @@ import os
 import sys
 import fnmatch
 import subprocess
+import shutil
 
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
@@ -132,6 +133,9 @@ class Case(object):
         # Return:
         #   name:   name of the next case folder
         #
+        from aspect import readFoamStructure
+        foamStructure   = readFoamStructure()
+
         i = 0
         wd = os.getcwd()
         subdirs = os.listdir(os.getcwd())
