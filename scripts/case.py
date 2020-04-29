@@ -24,7 +24,6 @@ from fileHandling import copyFolderSafely
 from fileHandling import loadJson
 from folderHandling import findParentFolder
 
-from study import study 
 
 
 def findFile(fileName, turnFolder):

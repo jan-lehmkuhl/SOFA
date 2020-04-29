@@ -23,7 +23,7 @@ from fileHandling import copyFileSafely
 from fileHandling import loadJson
 from folderHandling import findParentFolder
 
-from study import study 
+from study import Study 
 
 from aspect import Aspect       # only for old init
 from case import findFile       # only for old init
@@ -53,7 +53,7 @@ foamStructure   = projectJson["foamStructure"]
 
 
 if entryPoint == "initFoam":
-    newStudy = study( verbose=verbose )
+    newStudy = Study( verbose=verbose )
 
 if entryPoint == "initFoamOld":
     projectStruct = loadJson('project.json')

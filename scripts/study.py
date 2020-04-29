@@ -71,7 +71,7 @@ def validateFolderName(name):
         return True
 
 
-class study(object):
+class Study(object):
 
     global verbose
 
