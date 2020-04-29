@@ -46,6 +46,7 @@ installrequirementsR:
 
 clean: 
 	echo; pwd; ls -la
+	rm */__pycache__/*.cpython-36.pyc
 
 
 
