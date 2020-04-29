@@ -59,7 +59,7 @@ if entryPoint == "initFoamOld":
     projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')
     for studyFolder in projectStruct['foamFolders']:
         if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):
-            print("creating study >" +studyFolder +"< and the interior")
+            print("creating study:     " +studyFolder )
             for element in foamStructure:
                 newAspect = Aspect(element, os.path.join(findParentFolder('project.json'), studyFolder) )
                 newAspect.create()

@@ -21,9 +21,10 @@ def createDirSafely(dst):
     # Return:
     #   side effects
     #
+    # FIXME add warning for relative path
     if not os.path.isdir(dst):
         os.makedirs(dst)
-        print("Creating >%s< in: " %dst + os.getcwd() )
+        print("Creating folder     %s " %dst )
     else:
         print("Skipping >%s< since it already exists" % dst)
 
@@ -61,7 +62,7 @@ def createSymlinkSavely(src, dst):
         relSrc = os.path.relpath(src, os.path.dirname(dst))
         if not os.path.exists(dst):
             os.symlink(relSrc, dst)
-            print("Creating link from >%s< to >%s<" % (src, dst))
+            print("Creating link to    %s \t\t from %s" % (dst, src))
         elif os.path.islink(dst):
             if not os.readlink(dst) == relSrc:
                 os.remove(dst)
@@ -92,7 +93,7 @@ def copyFileSafely(src, dst):
         if os.path.exists(src):
             if not os.path.isdir(src):
                 if not os.path.exists(dst):
-                    print("Copying file from >%s< to >%s<" % (src, dst))
+                    print("Copying file to     %s \t from %s" % (dst, src))
                     shutil.copyfile(src, dst)
                 else:
                     print("Skipping >%s< since it already exists" % src)
