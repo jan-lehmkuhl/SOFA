@@ -15,8 +15,10 @@ cadFolder        = $(shell node -p "require('../../mesh/$(meshFolder)/mesh.json'
 run: updateSymlinks
 	if [ -f "Allrun" ] ; then     \
 		./Allrun                ; \
+		make updateCaseReport                              ; \
 	else                          \
 		make frameworkrun       ; \
+		make -C .. updateOverviewReport                    ; \
 	fi ;
 
 
