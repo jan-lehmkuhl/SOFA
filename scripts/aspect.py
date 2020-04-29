@@ -38,9 +38,9 @@ def readFoamStructure():
 class Aspect(object):
     # base class to handle all operations related to an aspects
 
-    def __init__(self, aspectType, path="./"):
+    def __init__(self, aspectType, rootFolder="./"):
         self.aspectType = aspectType
-        self.path = path
+        self.path = rootFolder
         self.name = "Aspect"
 
     def create(self):
@@ -60,10 +60,11 @@ class Aspect(object):
             #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
             createSymlinkSavely(    makefilePath,       # aspect Makefile
                                     os.path.join( self.path, aspectName, "Makefile") )
-            reportTemplate = loadJson( os.path.join('tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']
+            reportTemplate = loadJson( os.path.join( findParentFolder('project.json'), 'tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']
             if self.aspectType == "mesh":
-                meshOvPath  = findFile("meshOverview.Rmd", "tools")
-                meshRepPath = findFile("meshReport.Rmd"  , "tools")
+                toolsPath   = os.path.join(findParentFolder('project.json'), "tools") 
+                meshOvPath  = findFile("meshOverview.Rmd", toolsPath )
+                meshRepPath = findFile("meshReport.Rmd"  , toolsPath )
                 createDirSafely(os.path.join(self.path, aspectName, "doc", reportTemplate ))
                 if meshOvPath:
                     copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc", reportTemplate, "meshReport.Rmd"))

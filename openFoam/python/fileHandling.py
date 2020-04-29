@@ -92,8 +92,8 @@ def copyFileSafely(src, dst):
         if os.path.exists(src):
             if not os.path.isdir(src):
                 if not os.path.exists(dst):
-                    shutil.copyfile(src, dst)
                     print("Copying file from >%s< to >%s<" % (src, dst))
+                    shutil.copyfile(src, dst)
                 else:
                     print("Skipping >%s< since it already exists" % src)
             else:

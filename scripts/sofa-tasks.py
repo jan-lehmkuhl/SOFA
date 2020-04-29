@@ -14,8 +14,12 @@ import sys
 # import subprocess
 import argparse
 
-sys.path.insert(1, './tools/framework/openFoam/python') 
+# add paths
+file_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, file_path ) 
+sys.path.insert(1, os.path.realpath( file_path +'/../openFoam/python' ) ) 
 
+# import from sofa
 from fileHandling import createDirSafely
 # from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
@@ -44,8 +48,11 @@ parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", def
 entryPoint =    parser.parse_args().entryPoint
 verbose =       parser.parse_args().verbose
 
-if verbose :    print("starting in verbose mode" )
-if verbose :    print("starting sofa-tasks.py with arg: >" + entryPoint + "< in: " + os.getcwd() )
+if verbose :    print("starting sofa-tasks.py in verbose mode" )
+if verbose :    print("    with arg:                " + entryPoint  )
+if verbose :    print("    in folder:               " + os.getcwd() )
+if verbose :    print("    with sofa-tasks.py in:   " + file_path )
+if verbose :    print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
 
 foamStructure   = readFoamStructure()
 
@@ -54,15 +61,15 @@ if entryPoint == "initFoam":
     newStudy = Study( verbose=verbose )
 
 if entryPoint == "initFoamOld":
-    projectStruct = loadJson('project.json')
+    projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')
     for studyFolder in projectStruct['foamFolders']:
-        if not os.path.exists(studyFolder):
+        if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):
             print("creating study >" +studyFolder +"< and the interior")
             for element in foamStructure:
-                newAspect = Aspect(element, studyFolder)
+                newAspect = Aspect(element, os.path.join(findParentFolder('project.json'), studyFolder) )
                 newAspect.create()
-            copyFileSafely( findFile(    "study-documentation.md", "tools") 
-                          , studyFolder+ "/README-study.md" )
+            copyFileSafely( os.path.realpath( findFile(                         "study-documentation.md", "tools") ) 
+                          , findParentFolder("project.json") +"/" +studyFolder+ "/README-study.md" )
             while True:
                 print("Commit creation of study %s ? (y/n)" % studyFolder)
                 answer = input()

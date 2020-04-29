@@ -57,7 +57,7 @@ def findFile(fileName, turnFolder):
         subdirs = os.listdir(wd)
         i += 1
     else:
-        print("Could not find folder >%s<" % turnFolder)
+        print("Could not find >%s< in subfolders of >%s<" % (fileName, turnFolder) )
         return(False)
 
 
