@@ -22,6 +22,10 @@ shutil.copyfile( dirpath +"/tools/framework/root-dummies/Makefile"      , dirpat
 shutil.copyfile( dirpath +"/tools/framework/root-dummies/project.json"  , dirpath +"/project.json" )
 shutil.copyfile( dirpath +"/tools/framework/root-dummies/.gitignore"    , dirpath +"/.gitignore" )
 shutil.copyfile( dirpath +"/tools/framework/root-dummies/.gitattributes", dirpath +"/.gitattributes" )
+os.system("git add Makefile")
+os.system("git add project.json")
+os.system("git add .gitignore")
+os.system("git add .gitattributes")
 
 # alter ./.git/config
 # -----------------------------------------------------------------------------
@@ -30,12 +34,14 @@ appendfile=open("./tools/framework/root-dummies/gitconfig-addition", "r")
 appendstring=appendfile.read()
 configfile.write("\n"+appendstring)
 
+# docs
+# -----------------------------------------------------------------------------
+os.system("make initdocs")
+os.system("git add README.md")
+os.system("git add docs/Makefile")
+
 
 # first git commit
 # =================================================================================================
 
-os.system("git add Makefile")
-os.system("git add project.json")
-os.system("git add .gitignore")
-os.system("git add .gitattributes")
 os.system('git commit -m "[base] #INIT files"')

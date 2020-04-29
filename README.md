@@ -1,9 +1,9 @@
 
-FSOP - Framework for Simulation and Optimization Projects
+SOFA - Simulation and Optimization Framework for general purpose Applications 
 ===================================================================================================
 
 the aim of this repository is to deliver a framework to improve the opperational efficiency for simple and complex simulation projects and therefore accelerate and improve the project output.  
-Actual the development is mainly for OpenFOAM and Dakota, but every scriptable Linux based simulation tool should work or can be integrated.  
+Actual the development is mainly for OpenFOAM and Dakota under Linux, but in general every scriptable based simulation tool should work or can be integrated.  
 To achieve this multiple measures are addressed:  
 
 * automatic creation and usage of standard folders and files
@@ -32,12 +32,13 @@ To achieve this multiple measures are addressed:
   * direct comparison of similar calculations in a parameter study allows better insights of the impact of different parameters
 
 
+
 Get Started
 ===================================================================================================
 
 Access to GitLab with ssh
 ---------------------------------------------------------------------------------------------------
-the project downloads automatic the framework files from gitlab to `tools/framework`. Therefore you need ssh access to GitLab.  
+the project downloads automatic the SOFA files from gitlab to `tools/framework`. Therefore you need ssh access to GitLab.  
 
 
 init new project
@@ -86,10 +87,11 @@ to verifiy whether all required software works properly run:
     make requirementtest
 
 
+
 Usage
 ===================================================================================================
 
-The main idea of this framework is, that every information you need for a specific task in the simulation project is local available in the associated sub-folder and accessible by your text editor.  
+The main idea of the SOFA framework is, that every information you need for a specific task in the simulation project is local available in the associated sub-folder and accessible by your text editor.  
 Therefore the needed/main information ist stored in a documentation file, a Makefile and a json-file. In addition there are subfolders with program specific files in lower folder levels.
 
 
