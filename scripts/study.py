@@ -9,10 +9,6 @@
 import json
 import os
 import sys
-import shutil
-import fnmatch
-import subprocess
-import argparse
 
 # add additional path for import
 sys.path.insert(1, './tools/framework/openFoam/python') 

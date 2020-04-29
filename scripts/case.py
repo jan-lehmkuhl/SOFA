@@ -10,10 +10,7 @@
 import json
 import os
 import sys
-import shutil
 import fnmatch
-import subprocess
-import argparse
 
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))

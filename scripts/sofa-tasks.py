@@ -9,9 +9,6 @@
 import json
 import os
 import sys
-# import shutil
-# import fnmatch
-# import subprocess
 import argparse
 
 # add paths
@@ -21,9 +18,7 @@ sys.path.insert(1, os.path.realpath( file_path +'/../openFoam/python' ) )
 
 # import from sofa
 from fileHandling import createDirSafely
-# from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
-# from fileHandling import copyFolderSafely
 from fileHandling import loadJson
 from folderHandling import findParentFolder
 

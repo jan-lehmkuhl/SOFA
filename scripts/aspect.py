@@ -10,10 +10,6 @@
 import json
 import os
 import sys
-import shutil
-import fnmatch
-import subprocess
-import argparse
 
 sys.path.insert(1, './tools/framework/scripts') 
 
