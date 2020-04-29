@@ -11,15 +11,14 @@ import os
 import sys
 
 # add additional path for import
+file_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, file_path )
 sys.path.insert(1, './tools/framework/openFoam/python') 
 
-# from fileHandling import createDirSafely
-# from fileHandling import createSymlinkSavely
-# from fileHandling import copyFileSafely
-# from fileHandling import copyFolderSafely
 from fileHandling import loadJson
 from folderHandling import findParentFolder
 
+from aspect import Aspect
 
 
 class StudyStructure(object):
@@ -89,6 +88,7 @@ class Study(object):
 
         # make study folder
         if not os.path.exists( self.studyFolder ):
+            print("creating study:     " +self.studyFolder )
             os.mkdir( self.studyFolder )
         else:
             print("\n*** StudyFolder already exists")
@@ -97,8 +97,9 @@ class Study(object):
 
         # loop all aspects
         for element in self.structure.aspects :
-            if verbose :    print("run through aspect:  " +element)
-        pass 
+            if verbose :    print("run through aspect:  \t" +element)
+            newAspect = Aspect(element, self.studyFolder)
+            newAspect.create()
 
         # commit new created items
         #   maybe stash before looping and pop now
