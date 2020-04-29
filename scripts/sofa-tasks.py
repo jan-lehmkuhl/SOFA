@@ -52,10 +52,10 @@ if verbose :    print("    adding also path for:    " + os.path.realpath( file_p
 foamStructure   = readFoamStructure()
 
 
-if entryPoint == "initFoam":
+if entryPoint == "initStudy":
     newStudy = Study( verbose=verbose )
 
-if entryPoint == "initFoamOld":
+if entryPoint == "initFoam":
     projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')
     for studyFolder in projectStruct['foamFolders']:
         if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):

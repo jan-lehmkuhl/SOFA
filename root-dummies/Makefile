@@ -36,7 +36,7 @@ endif
 
 
 initstudy:
-	python3 tools/framework/scripts/sofa-tasks.py initFoam
+	python3 tools/framework/scripts/sofa-tasks.py initStudy --verbose
 
 
 initfoam: 
