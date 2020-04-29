@@ -26,7 +26,7 @@ from folderHandling import findParentFolder
 
 
 
-class studyStructure(object):
+class StudyStructure(object):
 
     def __init__(self, passedStructure="notSet"):
         # search and list possible study structures
@@ -36,7 +36,7 @@ class studyStructure(object):
         #   4. enter repository with subfolder
         pass
 
-        # read user input of desired studyStructure
+        # read user input of desired StudyStructure
         self.url            = "tools/framework/study-structures/openfoam"
         # if new repository
             # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
@@ -76,9 +76,9 @@ class Study(object):
     global verbose
 
     def __init__(self, passedStructure="notSet", studyName2="notSet", verbose=False):
-        if verbose :    print( "start studyStructure __init__ ")
+        if verbose :    print( "start StudyStructure __init__ ")
 
-        self.structure      = studyStructure( )
+        self.structure      = StudyStructure( )
         self.name           = askForStudyName( )
 
         self.projectRoot    = findParentFolder( containingFile="project.json" )
