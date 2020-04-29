@@ -29,6 +29,8 @@ from fileHandling import findFile       # only for old init
 
 from aspect import readFoamStructure
 
+from case import cfdAspectSelector
+
 
 
 ###############################################################################
