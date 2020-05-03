@@ -44,10 +44,14 @@ installrequirementsR:
 .PHONY: clean
 # PHONY says make to execute even when the depending targets haven't been updated
 
-clean: 
+clean: badMagicNumberClean
 	echo; pwd; ls -la
 	rm */__pycache__/*.cpython-36.pyc
 
+# delete python cache files 
+#    they can disturb execution
+badMagicNumberClean:
+	find . -name '*.pyc' -delete
 
 
 # ideas
