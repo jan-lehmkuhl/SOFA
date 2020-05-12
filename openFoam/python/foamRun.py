@@ -18,6 +18,10 @@ import json
 import subprocess
 import openFoam
 
+# add paths
+file_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, os.path.realpath( file_path +'/../../scripts' ) ) 
+
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely

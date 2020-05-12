@@ -1,9 +1,6 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-
-    // copy this file to PROJECT/.vscode an adapt the configurations
+    // use this configuration to run vs code within your sofa project
+    
     "version": "0.2.0",
     "configurations": [
         {
@@ -15,12 +12,24 @@
             "console":          "integratedTerminal"
         },
         {
-            "name":             "Python: openFoam.py",
+            "name":             "Python: sofa-tasks.py symlinks",
             "type":             "python",
             "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/openFoam/python/openFoam.py",
+            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/FOAMSTUDY1/run/run001",
             "args":             ["symlinks", "--verbose"],
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+            "console":          "integratedTerminal"
+        },
+        {
+            "name":             "Python: sofa-tasks.py init",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
+            "cwd":              "${workspaceRoot}",
+            "args":             ["initFoam", "--verbose"],
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,

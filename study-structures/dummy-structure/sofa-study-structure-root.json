@@ -1,0 +1,9 @@
+{
+    "name":                 "dummy-structure",
+
+    "subtypes":{    "run": "ifSpecified Collect in This Name",
+                    "survey":"2"} ,
+
+    "subtypesSeperation":   "True" ,
+    "useSubtypeAsPrefix":   "True" 
+}

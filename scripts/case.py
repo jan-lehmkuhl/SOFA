@@ -10,81 +10,23 @@
 import json
 import os
 import sys
-import shutil
 import fnmatch
 import subprocess
-import argparse
+import shutil
+
+# add paths
+file_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, file_path ) 
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
 from fileHandling import copyFolderSafely
 from fileHandling import loadJson
+from fileHandling import findFile
+from folderHandling import findFolder
+from folderHandling import findParentFolder
 
-def findFile(fileName, turnFolder):
-    # traverses a tree upwards till it finds turnfolder and then dives into
-    # turnfolder till it finds file
-    #
-    # Args:
-    #   fileName:   s: name of the file that is searched for
-    #   turnfolder: s: name of the folder to turn on
-    #
-    # Return:
-    #   path:       s: relative path to the file
-    #
-    i = 0
-    wd = os.getcwd()
-    subdirs = os.listdir(os.getcwd())
-    while i < 5:
-        if turnFolder in subdirs:
-            for root, dirs, files in os.walk(os.path.join(wd, turnFolder)):
-                if fileName in files:
-                    path = os.path.relpath(
-                        os.path.join(root, fileName), os.getcwd())
-                    return(path)
-            else:
-                print("Could not find file >%s< in >%s<" %
-                      (fileName, os.path.join(wd, turnFolder)))
-                return(False)
-        wd = os.path.join(wd, os.path.pardir)
-        subdirs = os.listdir(wd)
-        i += 1
-    else:
-        print("Could not find folder >%s<" % turnFolder)
-        return(False)
-
-
-def findFolder(folderName, turnFolder):
-    # traverses a tree upwards till it finds turnfolder and then dives into
-    # turnfolder till it finds folder
-    #
-    # Args:
-    #   folderName: s: name of the folder that is searched for
-    #   turnfolder: s: name of the folder to turn on
-    #
-    # Return:
-    #   path:       s: relative path to the file
-    #
-    i = 0
-    wd = os.getcwd()
-    subdirs = os.listdir(os.getcwd())
-    while i < 5:
-        if turnFolder in subdirs:
-            for root, dirs, files in os.walk(os.path.join(wd, turnFolder)):
-                if folderName in dirs:
-                    path = os.path.relpath(
-                        os.path.join(root, folderName), os.getcwd())
-                    return(path)
-            else:
-                print("Could not find folder >%s< in >%s<" %
-                      (folderName, os.path.join(wd, turnFolder)))
-                return(False)
-        wd = os.path.join(wd, os.path.pardir)
-        subdirs = os.listdir(wd)
-        i += 1
-    else:
-        print("Could not find folder >%s<" % turnFolder)
-        return(False)
 
 
 def cfdAspectSelector(path=None):
@@ -97,6 +39,8 @@ def cfdAspectSelector(path=None):
     #   aspectName:  s: Name of the containing folder stripped of numbers
     #               this should equal the aspectType
     #
+    from aspect import readFoamStructure
+
     if path is None:
         path = "./"
         caseFolder = os.path.basename(os.getcwd())
@@ -104,7 +48,7 @@ def cfdAspectSelector(path=None):
         caseFolder = os.path.basename(path)
     aspectName = ''.join(
         [i for i in caseFolder if not i.isdigit()])  # remove digits
-    if aspectName in foamStructure:
+    if aspectName in readFoamStructure():
         if aspectName == "cad":
             return(CadCase(path))
         elif aspectName == "mesh":
@@ -117,62 +61,13 @@ def cfdAspectSelector(path=None):
         print("Unknown aspect >%s< in caseFolder: >%s<" % (aspectName, caseFolder) )
         return(False)
 
-class Aspect(object):
-    # base class to handle all operations related to an aspects
-
-    global foamStructure
-
-    def __init__(self, aspectType, path="./"):
-        self.aspectType = aspectType
-        self.path = path
-        self.name = "Aspect"
-
-    def create(self):
-        # creates an aspect of self.aspectType at location self.path
-        # according to the entrys in the global dictionary foamStructure
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates Aspect
-        #
-        aspectName = foamStructure[self.aspectType]["aspectName"]
-        createDirSafely(os.path.join(self.path, aspectName))
-        makefilePath = findFile("Makefile_aspect.mk", "tools")
-        if makefilePath:  # if find file fails it returns false
-            #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
-            createSymlinkSavely(    makefilePath,       # aspect Makefile
-                                    os.path.join( self.path, aspectName, "Makefile") )
-            reportTemplate = loadJson( os.path.join('tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']
-            if self.aspectType == "mesh":
-                meshOvPath  = findFile("meshOverview.Rmd", "tools")
-                meshRepPath = findFile("meshReport.Rmd"  , "tools")
-                createDirSafely(os.path.join(self.path, aspectName, "doc", reportTemplate ))
-                if meshOvPath:
-                    copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc", reportTemplate, "meshReport.Rmd"))
-                    copyFileSafely(meshOvPath,  os.path.join(self.path, aspectName, "doc/meshOverview.Rmd"))
-            if self.aspectType == "run":
-                createDirSafely(os.path.join(self.path, aspectName, "doc", reportTemplate ))
-                runOvPath = findFile("runOverview.Rmd", "tools")
-                runRepPath = findFile("runReport.Rmd"  , "tools")
-                if runOvPath:
-                    copyFileSafely(runRepPath, os.path.join(self.path, aspectName, "doc", reportTemplate, "runReport.Rmd"))
-                    copyFileSafely(runOvPath, os.path.join(self.path, aspectName, "doc/runOverview.Rmd"))
-            if(    self.aspectType == "mesh" 
-                or self.aspectType == "run" ):
-                gitignorePath  = findFile(".gitignore_aspect_docs", "tools")
-                if gitignorePath:
-                    createSymlinkSavely( gitignorePath, 
-                                         os.path.join( self.path,  aspectName, "doc/.gitignore"))
-            case = cfdAspectSelector(os.path.join(self.path, aspectName))
-            case.create()
 
 class Case(object):
     # base class to handle all operations related to cases
 
-    global foamStructure
-
     def __init__(self, aspectType=None, path="./"):
+        from aspect import readFoamStructure
+
         # name of class for debugging purpose
         self.name = "Case"
         # aspectType of class, e.g. cad, mesh ....
@@ -194,6 +89,7 @@ class Case(object):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
             # extract linked cases from case.json according to foamStructure gen in project.json
+            foamStructure   = readFoamStructure()
             self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
                 # differentiate between single links and a list of links (survey)
@@ -237,6 +133,9 @@ class Case(object):
         # Return:
         #   name:   name of the next case folder
         #
+        from aspect import readFoamStructure
+        foamStructure   = readFoamStructure()
+
         i = 0
         wd = os.getcwd()
         subdirs = os.listdir(os.getcwd())
@@ -425,9 +324,12 @@ class Case(object):
         #   side effects : removes symlinks
         #
         # Lists of folders and extensions to delete
+        from aspect import readFoamStructure
+
         extensions = [".stl", ".vtk"]
         folder = ["polyMesh", "cadPics", "meshPics",
                   "drafts", "meshReport", "layerSizing"]
+        foamStructure   = readFoamStructure()
         for key in foamStructure:
             folder.append(key)
         # Traverse all subdirectories in case
@@ -905,148 +807,3 @@ class foamBuilder(object):
                             copyFileSafely(os.path.join(
                                 self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
 
-
-###############################################################################
-# MAIN PROGRAMM
-###############################################################################
-
-# read arguments and options from command line
-parser = argparse.ArgumentParser(description='input for openFoam.py')
-parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
-parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
-
-entryPoint =    parser.parse_args().entryPoint
-verbose =       parser.parse_args().verbose
-
-if verbose :    print("starting in verbose mode" )
-if verbose :    print("starting openFoam.py with arg: >" + entryPoint + "< in: " + os.getcwd() )
-
-
-# find project.json 
-i = 0
-wd = os.getcwd()
-subdirs = os.listdir(os.getcwd())
-while i < 4:
-    if "project.json" in subdirs:
-        projectJsonPath = os.path.join(wd, "project.json" )
-        projectJson = loadJson(projectJsonPath)
-        foamStructure = projectJson["foamStructure"]
-        break
-    else:
-        wd = os.path.join(wd, os.path.pardir)
-        subdirs = os.listdir(wd)
-        i += 1
-else:
-    print("Could not find project.json")
-    sys.exit(0)
-
-if entryPoint == "initFoam":
-    projectStruct = loadJson('project.json')
-    for studyFolder in projectStruct['foamFolders']:
-        if not os.path.exists(studyFolder):
-            print("creating study >" +studyFolder +"< and the interior")
-            for element in foamStructure:
-                newAspect = Aspect(element, studyFolder)
-                newAspect.create()
-            copyFileSafely( findFile(    "study-documentation.md", "tools") 
-                          , studyFolder+ "/README-study.md" )
-            while True:
-                print("Commit creation of study %s ? (y/n)" % studyFolder)
-                answer = input()
-                answer = answer.lower()
-                if answer in ["y", "yes"]:
-                    os.system('git add .')
-                    os.system('git commit -m "[%s] #INIT \'created study %s\'"' % (studyFolder, studyFolder))
-                    break
-                elif answer in ["n", "no"]:
-                    break           
-        else:
-            print("skipping study >" + studyFolder + " since it already exists")
-
-elif entryPoint == "newCase":
-    currentCase = cfdAspectSelector()
-    currentCase.create()
-
-elif entryPoint == "initCase":
-    currentCase = cfdAspectSelector()
-    currentCase.initCase()
-
-elif entryPoint == "symlinks":
-    currentCase = cfdAspectSelector()
-    currentCase.makeSymlinks()
-
-elif entryPoint == "clone":
-    currentCase = cfdAspectSelector()
-    currentCase.clone()
-
-elif entryPoint == "clear":
-    currentCase = cfdAspectSelector()
-    currentCase.clear()
-
-elif entryPoint == "commit":
-    currentCase = Case("run")
-    currentCase.commitChanges()
-
-elif entryPoint == "overview":
-    createDirSafely("doc")
-    files = os.listdir("doc")
-    for fileName in files:
-        if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
-            os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
-            break
-    else:
-        print("Unabel to find RMarkdown file")
-
-elif entryPoint == "updateAllReports":
-    while True:
-        print("Run reports after updating ? (y/n)")
-        answer = input()
-        answer = answer.lower()
-        if answer in ["y", "yes"]:
-            runReports = True
-            break
-        elif answer in ["n", "no"]:
-            runReports = False
-            break
-    for folder in sorted(os.listdir(".")):
-        aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
-        if aspectName in foamStructure:
-            currentCase = cfdAspectSelector(os.path.join("./", folder))
-            currentCase.copyReport(runReports)
-    if runReports:
-        if not os.path.exists("doc"):
-            print("Directory >doc< doesn't exist in: " + os.getcwd() )
-            exit(0)
-        files = os.listdir("doc")
-        for fileName in files:
-            if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
-                os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
-                break
-        else:
-            print("Unabel to find RMarkdown file")
-
-elif entryPoint == "updateReport":
-    while True:
-        print("Run reports after updating ? (y/n)")
-        answer = input()
-        answer = answer.lower()
-        if answer in ["y", "yes"]:
-            runReports = True
-            break
-        elif answer in ["n", "no"]:
-            runReports = False
-            break
-    currentCase = cfdAspectSelector()
-    currentCase.copyReport(runReports)
-
-elif entryPoint == "updateJson":
-    for folder in sorted(os.listdir(".")):
-        aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
-        if aspectName in foamStructure:
-            print("Updating .json in >%s" %folder)
-            currentCase = cfdAspectSelector(os.path.join("./", folder))
-            currentCase.updateJson()
-
-elif entryPoint == "test":
-    print("Nothing defined")
-            

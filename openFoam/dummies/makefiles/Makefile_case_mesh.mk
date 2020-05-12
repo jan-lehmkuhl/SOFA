@@ -39,8 +39,7 @@ view:
 
 
 # remove all from commited sources created files and links
-clean: cleanfreecadmesh cleanframeworkmesh updateSymlinks
-	rm -rf doc/meshReport
+clean: cleanfreecadmesh cleanframeworkmesh cleanReport updateSymlinks
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
@@ -53,12 +52,12 @@ clean: cleanfreecadmesh cleanframeworkmesh updateSymlinks
 
 # clone case to a new case with the next available running number 
 clone:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py clone
+	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
 
 # erase all files except necessary framework related files
 clear:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py clear
+	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
 
 
 cleanframeworkmesh: 
@@ -70,14 +69,14 @@ cleanframeworkmesh:
 
 # commit all changes inside case
 commit:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py commit
+	python3 ../../../tools/framework/scripts/sofa-tasks.py commit
 
 
 # updates case report according to .json
 #   copies *Report.Rmd from aspect/doc
 #	and if yes: creates case report
 updateCaseReport:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py updateReport
+	python3 ../../../tools/framework/scripts/sofa-tasks.py updateReport
 	make -C .. updateOverviewReport
 
 
@@ -137,12 +136,12 @@ cleanfreecadmesh:
 
 # initialize case according to mesh.json
 initOpenFoamMesh:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py initCase
+	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 
 
 # renew the symlinks to cad 
 updateSymlinks:
-	python3 ../../../tools/framework/openFoam/python/openFoam.py symlinks
+	python3 ../../../tools/framework/scripts/sofa-tasks.py symlinks
 
 
 # generate mesh according to mesh.json
@@ -164,6 +163,8 @@ finalizeMesh:
 cleanMesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
 
+cleanReport:
+	rm -rf doc/meshReport
 
 # opens Paraview to review mesh
 openParaview: 

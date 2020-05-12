@@ -113,14 +113,33 @@ The json-file contain informations you can modify or you need to perform the cal
 folder levels
 ---------------------------------------------------------------------------------------------------
 The project has different levels of folder-structure. 
-* Project-Level
-  * the root of every project and of the main git-repository
-* studies
-  * every project can contain multiple studies. These can be multiple CFD simulations of one specific geometry with minor changes, different meshing approaches and parameter variations.  
-* aspects (cad, mesh, runs, survey)
-  * every aspect contains the steps that are needed in a cfd simulation.  
-* cases
-  * cases are small variations of an aspect in a studie. This can be a CAD modification, a finer mesh, a setup variation or a different post survey. 
+
+### Project-Level
+* the root of every project and of the main git-repository
+
+### studies
+* every project can contain multiple studies. These studies can be multiple CFD simulations of one specific geometry with minor changes, different meshing approaches and parameter variations.  
+* As an example: one simulation study can be a simulation of a big vessel, while a second study delivers some pressure loss coefficients for the first simulation study.
+
+### aspects 
+* every aspect contains the steps that are needed in the simulation procedure.  
+* e.g. for a cfd study:
+    * cad
+    * mesh
+    * runs
+    * survey
+* specific workflows and aspects can be user defined in study-sturctures
+
+### cases
+* cases are small variations of an aspect in a study. 
+* e.g in a cfd simulation study this can be a: 
+    * CAD modification, 
+    * a finer mesh, 
+    * a setup variation or 
+    * a different post survey. 
+* they are normally numbered with three digits to have a unique identifier. 
+* the related names and comments are stored in the `json`-files. Special differences are partially parsed to the report-files. 
+
 
 additional files
 ---------------------------------------------------------------------------------------------------

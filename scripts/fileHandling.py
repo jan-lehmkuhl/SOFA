@@ -12,6 +12,41 @@ import json
 import errno
 import collections
 
+
+def findFile(fileName, turnFolder):
+    # FIXME move to separate
+    # traverses a tree upwards till it finds turnfolder and then dives into
+    # turnfolder till it finds file
+    #
+    # Args:
+    #   fileName:   s: name of the file that is searched for
+    #   turnfolder: s: name of the folder to turn on
+    #
+    # Return:
+    #   path:       s: relative path to the file
+    #
+    i = 0
+    wd = os.getcwd()
+    subdirs = os.listdir(os.getcwd())
+    while i < 5:
+        if turnFolder in subdirs:
+            for root, dirs, files in os.walk(os.path.join(wd, turnFolder)):
+                if fileName in files:
+                    path = os.path.relpath(
+                        os.path.join(root, fileName), os.getcwd())
+                    return(path)
+            else:
+                print("Could not find file >%s< in >%s<" %
+                      (fileName, os.path.join(wd, turnFolder)))
+                return(False)
+        wd = os.path.join(wd, os.path.pardir)
+        subdirs = os.listdir(wd)
+        i += 1
+    else:
+        print("Could not find >%s< in subfolders of >%s<" % (fileName, turnFolder) )
+        return(False)
+
+
 def createDirSafely(dst):
     # creates a directory recursively if it doesn't exist
     #
@@ -21,9 +56,10 @@ def createDirSafely(dst):
     # Return:
     #   side effects
     #
+    # FIXME add warning for relative path
     if not os.path.isdir(dst):
         os.makedirs(dst)
-        print("Creating >%s< in: " %dst + os.getcwd() )
+        print("Creating folder     %s " %dst )
     else:
         print("Skipping >%s< since it already exists" % dst)
 
@@ -61,7 +97,7 @@ def createSymlinkSavely(src, dst):
         relSrc = os.path.relpath(src, os.path.dirname(dst))
         if not os.path.exists(dst):
             os.symlink(relSrc, dst)
-            print("Creating link from >%s< to >%s<" % (src, dst))
+            print("Creating link to    %s \t\t from %s" % (dst, src))
         elif os.path.islink(dst):
             if not os.readlink(dst) == relSrc:
                 os.remove(dst)
@@ -92,8 +128,8 @@ def copyFileSafely(src, dst):
         if os.path.exists(src):
             if not os.path.isdir(src):
                 if not os.path.exists(dst):
+                    print("Copying file to     %s \t from %s" % (dst, src))
                     shutil.copyfile(src, dst)
-                    print("Copying file from >%s< to >%s<" % (src, dst))
                 else:
                     print("Skipping >%s< since it already exists" % src)
             else:
@@ -152,6 +188,8 @@ def loadJson(jsonPath):
     # Return:
     #   jsonPy:     d: parsed json
     #
+    import sys 
+    
     if os.path.exists(jsonPath):
         with open(jsonPath, 'r') as jsonFile:
             jsonPy = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
@@ -160,3 +198,4 @@ def loadJson(jsonPath):
         print(" ")
         print("ERROR: json file >%s< does not exist" % jsonPath)
         print("    current directory is: " +os.getcwd() +"\n")
+        sys.exit("TERMINATE python script")

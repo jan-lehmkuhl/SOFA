@@ -32,9 +32,9 @@ installrequirementsR:
 	sudo apt-get install r-base
 	sudo apt-get install pandoc
 	sudo apt-get install xml2
-    sudo apt-get install libssl-dev
-    sudo apt-get install libxml2-dev
-    sudo apt-get install libcurl4-openssl-dev
+	sudo apt-get install libssl-dev
+	sudo apt-get install libxml2-dev
+	sudo apt-get install libcurl4-openssl-dev
 
 
 
@@ -44,9 +44,14 @@ installrequirementsR:
 .PHONY: clean
 # PHONY says make to execute even when the depending targets haven't been updated
 
-clean: 
+clean: badMagicNumberClean
 	echo; pwd; ls -la
+	rm */__pycache__/*.cpython-36.pyc
 
+# delete python cache files 
+#    they can disturb execution
+badMagicNumberClean:
+	find . -name '*.pyc' -delete
 
 
 # ideas

@@ -35,17 +35,15 @@ endif
 	make -C docs init
 
 
+initstudy:
+	python3 tools/framework/scripts/sofa-tasks.py initStudy --verbose
+
+
 initfoam: 
 	if [ ! -d docs ] ;                    then make initdocs    ; fi ;
 	if [ ! -d tools/openFoam-setup ];     then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
 	if [ ! -d tools/openFoam-reporting ]; then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/r_openfoam openFoam-reporting;        fi;
-	python3 tools/framework/openFoam/python/openFoam.py initFoam
-
-
-initdakota: 
-	$(mkdir) dakota
-	# cp make
-	# make -C dakota init
+	python3 tools/framework/scripts/sofa-tasks.py initFoam
 
 
 
@@ -57,3 +55,7 @@ archive:
 	$(mkdir)    ARCHIVE
 	tar -vcjf ./ARCHIVE/$(notdir $(CURDIR))-$(shell date +"%Y%m%d-%I%M%p").tar.bz2   --exclude='ARCHIVE' --exclude='*.tar.gz' --exclude='*.tar.bz2'  `ls -A -1`
 	ls -la    ./ARCHIVE
+
+
+delete:
+	rm -rf study1
