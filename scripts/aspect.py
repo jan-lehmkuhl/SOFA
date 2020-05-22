@@ -36,9 +36,9 @@ class Aspect(object):
     # base class to handle all operations related to an aspects
 
     def __init__(self, aspectType, rootFolder="./"):
+        self.className = "Aspect"       # only for orientation during debugging
         self.aspectType = aspectType
         self.path = rootFolder
-        self.name = "Aspect"
 
     def create(self):
         # creates an aspect of self.aspectType at location self.path
@@ -49,8 +49,8 @@ class Aspect(object):
         # Return:
         #   side effects: creates Aspect
         #
-        foamStructure   = readFoamStructure()
-        aspectName      = foamStructure[self.aspectType]["aspectName"]
+
+        aspectName      = self.aspectType       
         createDirSafely(os.path.join(self.path, aspectName))
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
