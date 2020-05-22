@@ -17,36 +17,52 @@ sys.path.insert(1, './tools/framework/openFoam/python')
 
 from fileHandling import loadJson
 from folderHandling import findParentFolder
+from folderHandling import findChildFolders
 
 from aspect import Aspect
 
 
 class StudyStructure(object):
 
-    def __init__(self, passedStructure="notSet"):
-        # search and list possible study structures
-        #   1. already used study structures in this project
-        #   2. `~/.config/sofa/known-sofa-study-structures.list`
-        #   3. tools/framework/sofa-study-structures
-        #   4. enter repository with subfolder
-        pass
+    def __init__(self, studyStructFolder, verbose ):
 
-        # read user input of desired StudyStructure
-        self.url            = "tools/framework/study-structures/openfoam"
-        # if new repository
-            # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
-        # import submodule to tools
-        self.local          = "tools/framework/study-structures/openfoam"
+        self.local      = studyStructFolder     # for first try 
 
-        # load study structure and assign to self.values
-        self.json           = loadJson( self.local +"/sofa-study-structure-root.json" )
-        self.files          = self.json['files']
-        self.aspects        = self.json['aspects']
+        while True: 
+            if os.path.exists( self.local +"/sofa-study-structure-root.json"): 
+                self.json           = loadJson( self.local +"/sofa-study-structure-root.json" )
+                # load study structure and assign to self.values
+                self.files          = self.json['files']
+                self.aspects        = self.json['aspects']
+                self.name           = self.json['name']     # short name for recognising
 
-        self.name           = self.json['name']     # short name for recognising
+                # TODO validate study structure
+                break
+            if self.local != "": 
+                print("\nWARNING sofa-study-structure-root.json dont exists in:  " +self.local +"\n")
 
-        # validate study structure
-        pass
+            # search and list possible local study structures
+            sofaStructList      = ['INSERT url to import a new repository to tools']
+            sofaStructList.extend( findChildFolders( "sofa-study-structure-root.json", startFolder=os.getcwd()+"/tools" ) )
+            # TODO read known structures from `~/.config/sofa/known-sofa-study-structures.yaml`
+            sofaStructList.append( studyStructFolder )  # add passed value for retry
+
+            print("\npossible sofa study structures: ")
+            for iStruct in range( len(sofaStructList) ):
+                print( "idx " +str(iStruct) +"\t" +sofaStructList[iStruct]  ) 
+
+            # read user input of desired StudyStructure
+            idxChoosenStruct = int( input("\nchoose study struct by number and press enter: ") )
+            self.local          = sofaStructList[idxChoosenStruct]
+
+            if idxChoosenStruct == 0 :
+                # TODO 
+                self.url            = str(input("insert url used for 'git clone xxx': "))
+                # import submodule to tools
+                # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
+
+        if verbose:     print(  "loaded study struct")
+
 
 
 def askForStudyName( defaultName ):
@@ -68,14 +84,14 @@ class Study(object):
 
     global verbose
 
-    def __init__(self, passedStructure="notSet", studyName2="notSet", verbose=False):
+    def __init__(self, studyFolder="", studyStructFolder="", verbose=False):
         if verbose :    print( "start StudyStructure __init__ ")
 
-        self.structure      = StudyStructure( )
-        self.name           = askForStudyName( "study1" )
+        self.name           = askForStudyName( studyFolder )
 
         self.projectRoot    = findParentFolder( containingFile="project.json" )
         self.studyFolder    = self.projectRoot +"/" +self.name
+        self.structure      = StudyStructure( studyStructFolder, verbose )
 
         self.create( verbose )
 
