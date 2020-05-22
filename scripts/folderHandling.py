@@ -49,11 +49,15 @@ def walklevel(some_dir, level=-1, followlinks=False):
             del dirs[:]
 
 
-def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth=-1 , allowSymlinks=False):
+def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth=-1 , allowSymlinks=False, relativeOutput=False):
     folderList = []
     for subdir, dirs, files in walklevel( startFolder, directoryMaxDepth , followlinks=allowSymlinks):
         for file in files:
             if file == containingFile :
+                if relativeOutput and subdir.startswith(startFolder+"/") :
+                    subdir = subdir[len(startFolder+"/"):]
+                else:
+                    print("WARNING intended relative childFolder return is not converted to relative: " +subdir )
                 folderList.append( subdir )
     if folderList == [] :
         print(  "ERROR: no SubFolders with >" +containingFile +"< inside in: " +startFolder +"\n") 
