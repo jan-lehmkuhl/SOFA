@@ -57,6 +57,8 @@ foamStructure   = readFoamStructure()
 
 if entryPoint == "initStudy":
     newStudy = Study( verbose=verbose )
+if entryPoint == "initStudyDebug":
+    newStudy = Study( studyName="study1", studyStructFolder="tools/framework/study-structures/openfoam", verbose=verbose )
 
 if entryPoint == "initFoam":
     projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')

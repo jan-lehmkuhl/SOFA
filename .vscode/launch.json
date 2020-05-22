@@ -19,7 +19,7 @@
             "request":          "launch",
             "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/../..",
-            "args":             ["initStudy", "--verbose"],
+            "args":             ["initStudyDebug", "--verbose"],
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,

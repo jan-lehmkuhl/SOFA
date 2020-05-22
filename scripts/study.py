@@ -65,11 +65,14 @@ class StudyStructure(object):
 
 
 
-def askForStudyName( defaultName ):
+def askForStudyName( use="", defaultName="newStudy" ):
+    if use != "":
+        return use
+
     name = str(input( "\nplease insert the desired study name [" +defaultName +"]: " ))
     if name == "":
         name        = defaultName
-    # TODO if validateFolderName( name ):   print("proceed")
+    # TODO if validateFolderName( name ): 
     return name 
 
 
@@ -84,10 +87,10 @@ class Study(object):
 
     global verbose
 
-    def __init__(self, studyFolder="", studyStructFolder="", verbose=False):
+    def __init__(self, studyName="", studyStructFolder="", verbose=False):
         if verbose :    print( "start StudyStructure __init__ ")
 
-        self.name           = askForStudyName( studyFolder )
+        self.name           = askForStudyName( use=studyName )
         # study folder
         self.projectRoot    = findParentFolder( containingFile="project.json" )
         self.studyFolder    = self.projectRoot +"/" +self.name
