@@ -33,7 +33,7 @@ import os
 
 
 
-def walklevel(some_dir, level=-1):
+def walklevel(some_dir, level=-1, followlinks=False):
     # https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
     #   level=-1 walks through all files (os.walk default)
     #   level=0 lists only the current directory files 
@@ -41,7 +41,7 @@ def walklevel(some_dir, level=-1):
     some_dir = some_dir.rstrip(os.path.sep)
     assert os.path.isdir(some_dir)
     num_sep = some_dir.count(os.path.sep)
-    for root, dirs, files in os.walk(some_dir):
+    for root, dirs, files in os.walk(some_dir, followlinks=followlinks):
         yield root, dirs, files
         num_sep_this = root.count(os.path.sep)
         if ( num_sep + level <= num_sep_this ) and ( level != -1 ): 
@@ -49,9 +49,9 @@ def walklevel(some_dir, level=-1):
             del dirs[:]
 
 
-def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth=-1 ):
+def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth=-1 , allowSymlinks=False):
     folderList = []
-    for subdir, dirs, files in walklevel( startFolder, directoryMaxDepth ):
+    for subdir, dirs, files in walklevel( startFolder, directoryMaxDepth , followlinks=allowSymlinks):
         for file in files:
             if file == containingFile :
                 folderList.append( subdir )
@@ -73,7 +73,7 @@ def findParentFolder( containingFile, startFolder=os.getcwd() ):
             subdirs = os.listdir(wd)
             i += 1
     else:
-        print("Could not find anything")
+        print("Could not find:  >", containingFile, "< in parent folders" )
         sys.exit(0)
 
 
