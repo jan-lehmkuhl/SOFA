@@ -199,3 +199,14 @@ def loadJson(jsonPath):
         print("ERROR: json file >%s< does not exist" % jsonPath)
         print("    current directory is: " +os.getcwd() +"\n")
         sys.exit("TERMINATE python script")
+
+
+def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbose=False ):
+    source = studyStructHome  +"/"   +fileAttributes['sourcePath']
+    target = targetFolder     +"/"   +fileAttributes['targetPath']
+
+    if fileAttributes['isLink']: 
+        createSymlinkSavely(source,target)
+    else:
+        copyFileSafely(source,target)
+

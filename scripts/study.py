@@ -16,6 +16,7 @@ sys.path.insert(1, file_path )
 sys.path.insert(1, './tools/framework/openFoam/python') 
 
 from fileHandling import loadJson
+from fileHandling import handleStudyStructFile
 from folderHandling import findParentFolder
 from folderHandling import findChildFolders
 
@@ -32,9 +33,9 @@ class StudyStructure(object):
             if os.path.exists( self.local +"/sofa-study-structure-root.json"): 
                 self.json           = loadJson( self.local +"/sofa-study-structure-root.json" )
                 # load study structure and assign to self.values
-                self.files          = self.json['files']
-                self.aspects        = self.json['aspects']
                 self.name           = self.json['name']     # short name for recognising
+                self.files          = self.json['files']    # files to copy in study
+                self.aspects        = self.json['aspects']  # aspects to proceed
 
                 # TODO validate study structure
                 break
@@ -118,14 +119,19 @@ class Study(object):
         else:
             print("\nERROR: " +self.studyFolder +" dont exists")
             sys.exit(1)
+        print(" ")
 
-        # loop all aspects
+        # loop all study files
+        for thisFile in self.structure.files :
+            handleStudyStructFile( self.structure.local, thisFile, self.studyFolder, verbose ) 
+
+        # loop all study aspects
         for element in self.structure.aspects :
             if verbose :    print("run through aspect:  \t" +element)
             newAspect = Aspect(element, self.studyFolder)
             newAspect.create()
 
-        # commit new created items
+        # TODO commit new created items
         #   maybe stash before looping and pop now
 
 

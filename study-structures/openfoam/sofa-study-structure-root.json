@@ -1,11 +1,12 @@
 {
     "name": "openfoam",
-    "files": {
-        "study-documentation.md" : {
-            "name" : "README.md",
-            "link" : false
+    "files": [
+        {
+            "sourcePath": "study-documentation.md",
+            "targetPath": "README.md",
+            "isLink": false
         }
-    } ,
+    ],
     "aspects": {
         "cad": true,
         "mesh": true,
