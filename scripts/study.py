@@ -88,25 +88,33 @@ class Study(object):
         if verbose :    print( "start StudyStructure __init__ ")
 
         self.name           = askForStudyName( studyFolder )
-
+        # study folder
         self.projectRoot    = findParentFolder( containingFile="project.json" )
         self.studyFolder    = self.projectRoot +"/" +self.name
+        self.createFolder( verbose )
+        # study structure
         self.structure      = StudyStructure( studyStructFolder, verbose )
+        self.createStructure( verbose )
 
-        self.create( verbose )
 
-
-    def create(self, verbose):
-        print("\nstart creation of:         " +self.name  )
-        print(  "      with type:           " +self.structure.name )
-
-        # make study folder
+    def createFolder(self, verbose):
         if not os.path.exists( self.studyFolder ):
             print(  "creating study folder:     " +self.studyFolder )
             os.mkdir( self.studyFolder )
         else:
             print("\n*** StudyFolder already exists")
             # input(  "    to abort press Ctrl+C to integrate the new study, press ENTER to proceed: ")
+            # TODO mark self.isStudyUpdateMode
+
+
+    def createStructure(self, verbose):
+        print("\nstart structure creation of:   " +self.name  )
+        print(  "      with type:               " +self.structure.name )
+        if os.path.exists(self.studyFolder):
+            print(  "      in folder :              " +self.studyFolder )
+        else:
+            print("\nERROR: " +self.studyFolder +" dont exists")
+            sys.exit(1)
 
         # loop all aspects
         for element in self.structure.aspects :
