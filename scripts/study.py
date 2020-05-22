@@ -49,14 +49,12 @@ class StudyStructure(object):
         pass
 
 
-
-def askForStudyName( passedName="notSet"):
-        # ask for intendet study-name
-        name        = "study1"
-        if validateFolderName( name):   print("proceed")
-        # check if folder already exists
-        pass
-        return name 
+def askForStudyName( defaultName ):
+    name = str(input( "\nplease insert the desired study name [" +defaultName +"]: " ))
+    if name == "":
+        name        = defaultName
+    # TODO if validateFolderName( name ):   print("proceed")
+    return name 
 
 
 def validateFolderName(name):
@@ -74,7 +72,7 @@ class Study(object):
         if verbose :    print( "start StudyStructure __init__ ")
 
         self.structure      = StudyStructure( )
-        self.name           = askForStudyName( )
+        self.name           = askForStudyName( "study1" )
 
         self.projectRoot    = findParentFolder( containingFile="project.json" )
         self.studyFolder    = self.projectRoot +"/" +self.name
@@ -83,17 +81,16 @@ class Study(object):
 
 
     def create(self, verbose):
-        print( "start creation of:    " +self.name  )
-        print( "        with type:    " +self.structure.name )
+        print("\nstart creation of:         " +self.name  )
+        print(  "      with type:           " +self.structure.name )
 
         # make study folder
         if not os.path.exists( self.studyFolder ):
-            print("creating study:     " +self.studyFolder )
+            print(  "creating study folder:     " +self.studyFolder )
             os.mkdir( self.studyFolder )
         else:
             print("\n*** StudyFolder already exists")
-            print(  "to abort press Ctrl+C to integrate the new study ")
-            input("press ENTER to proceed: ")
+            # input(  "    to abort press Ctrl+C to integrate the new study, press ENTER to proceed: ")
 
         # loop all aspects
         for element in self.structure.aspects :
