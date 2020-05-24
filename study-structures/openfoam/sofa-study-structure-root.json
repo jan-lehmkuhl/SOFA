@@ -4,7 +4,7 @@
         {
             "sourcePath": "study-documentation.md",
             "targetPath": "README.md",
-            "isLink": false
+            "isSymlink": false
         }
     ],
     "aspects": {

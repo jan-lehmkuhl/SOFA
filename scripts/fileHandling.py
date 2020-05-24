@@ -205,7 +205,7 @@ def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbos
     source = studyStructHome  +"/"   +fileAttributes['sourcePath']
     target = targetFolder     +"/"   +fileAttributes['targetPath']
 
-    if fileAttributes['isLink']: 
+    if fileAttributes['isSymlink']: 
         createSymlinkSavely(source,target)
     else:
         copyFileSafely(source,target)
