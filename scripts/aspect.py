@@ -19,6 +19,8 @@ from fileHandling import copyFileSafely
 from fileHandling import copyFolderSafely
 from fileHandling import loadJson
 from fileHandling import findFile
+from fileHandling import handleStudyStructFile
+
 from folderHandling import findParentFolder
 
 from case import findFile
@@ -35,10 +37,13 @@ def readFoamStructure():
 class Aspect(object):
     # base class to handle all operations related to an aspects
 
-    def __init__(self, aspectType, rootFolder="./"):
+    def __init__(self, aspectType, aspectStructure, studyFolder="./", verbose=False):
         self.className3 = "Aspect"          # only for orientation during debugging
+        self.verbose    = verbose
         self.aspectType = aspectType
-        self.path = rootFolder
+        self.structure  = aspectStructure   # 
+        self.path       = studyFolder       # root of this aspect (resp. study-folder)  (#TODO remove)
+        self.folder     = os.path.join( studyFolder, self.aspectType )
 
     def create(self):
         # creates an aspect of self.aspectType at location self.path
@@ -51,7 +56,12 @@ class Aspect(object):
         #
 
         aspectName      = self.aspectType       # renaming from historical reasons 
-        createDirSafely(os.path.join(self.path, aspectName))
+        createDirSafely( self.folder )
+
+        # create aspect content
+        for thisFile in self.structure['files'] : 
+            handleStudyStructFile( self.structure['localpath'], thisFile, self.folder, self.verbose ) 
+
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
             #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))

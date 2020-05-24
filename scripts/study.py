@@ -141,7 +141,7 @@ class Study(object):
         # loop all study aspects
         for element in self.studyStructure.aspectList :
             if verbose :    print("run through aspect:  \t" +element)
-            newAspect = Aspect(element, self.studyFolder)
+            newAspect = Aspect(element, self.studyStructure.aspectList[element], self.studyFolder, verbose )
             newAspect.create()
 
         print(  "completed structure creation of:   " +self.name)
