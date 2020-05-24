@@ -28,6 +28,7 @@ class StudyStructure(object):
     def __init__(self, studyStructFolder, verbose ):
 
         self.local      = studyStructFolder     # for first try 
+        self.className2 = "StudyStructure"
 
         while True: 
             if os.path.exists( self.local +"/sofa-study-structure-root.json"): 
@@ -103,6 +104,7 @@ class Study(object):
         if verbose :    print( "start StudyStructure __init__ ")
 
         self.name           = askForStudyName( use=studyName )
+        self.className1     = "Study"
         # study folder
         self.projectRoot    = findParentFolder( containingFile="project.json" )
         self.studyFolder    = self.projectRoot +"/" +self.name
@@ -123,10 +125,10 @@ class Study(object):
 
 
     def createStructure(self, verbose):
-        print("\nstart structure creation of:   " +self.name  )
-        print(  "      with type:               " +self.structure.name )
+        print("\nstart structure creation of:       " +self.name  )
+        print(  "      with type:                   " +self.studyStructure.name )
         if os.path.exists(self.studyFolder):
-            print(  "      in folder :              " +self.studyFolder )
+            print(  "      in folder :                  " +self.studyFolder )
         else:
             print("\nERROR: " +self.studyFolder +" dont exists")
             sys.exit(1)
@@ -142,6 +144,7 @@ class Study(object):
             newAspect = Aspect(element, self.studyFolder)
             newAspect.create()
 
+        print(  "completed structure creation of:   " +self.name)
         # TODO commit new created items
         #   maybe stash before looping and pop now
 

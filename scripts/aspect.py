@@ -36,7 +36,7 @@ class Aspect(object):
     # base class to handle all operations related to an aspects
 
     def __init__(self, aspectType, rootFolder="./"):
-        self.className = "Aspect"       # only for orientation during debugging
+        self.className3 = "Aspect"          # only for orientation during debugging
         self.aspectType = aspectType
         self.path = rootFolder
 
@@ -50,7 +50,7 @@ class Aspect(object):
         #   side effects: creates Aspect
         #
 
-        aspectName      = self.aspectType       
+        aspectName      = self.aspectType       # renaming from historical reasons 
         createDirSafely(os.path.join(self.path, aspectName))
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
