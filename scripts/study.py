@@ -31,11 +31,12 @@ class StudyStructure(object):
 
         while True: 
             if os.path.exists( self.local +"/sofa-study-structure-root.json"): 
+                # load study structure root
                 self.json           = loadJson( self.local +"/sofa-study-structure-root.json" )
-                # load study structure and assign to self.values
+                # assign to self.values
                 self.name           = self.json['name']     # short name for recognising
                 self.files          = self.json['files']    # files to copy in study
-                self.aspects        = self.json['aspects']  # aspects to proceed
+                self.aspectList     = self.loadStudyStructAspectList()
 
                 # TODO validate study structure
                 break
@@ -64,6 +65,16 @@ class StudyStructure(object):
 
         if verbose:     print(  "loaded study struct")
 
+
+    def loadStudyStructAspectList(self):
+        aspectList = findChildFolders("sofa-study-structure-aspect.json", startFolder=self.local, relativeOutput=True )
+        struct = dict()
+        for aspect in aspectList: 
+            localStructAspectPath       = os.path.join( self.local, aspect ) 
+            struct[aspect]              = loadJson( os.path.join( localStructAspectPath, "sofa-study-structure-aspect.json" ) )
+            struct[aspect]['localpath'] = localStructAspectPath
+            # TODO put into class for aspect handling 
+        return struct
 
 
 def askForStudyName( use="", defaultName="newStudy" ):
@@ -97,7 +108,7 @@ class Study(object):
         self.studyFolder    = self.projectRoot +"/" +self.name
         self.createFolder( verbose )
         # study structure
-        self.structure      = StudyStructure( studyStructFolder, verbose )
+        self.studyStructure = StudyStructure( studyStructFolder, verbose )
         self.createStructure( verbose )
 
 
@@ -122,11 +133,11 @@ class Study(object):
         print(" ")
 
         # loop all study files
-        for thisFile in self.structure.files :
-            handleStudyStructFile( self.structure.local, thisFile, self.studyFolder, verbose ) 
+        for thisFile in self.studyStructure.files :
+            handleStudyStructFile( self.studyStructure.local, thisFile, self.studyFolder, verbose ) 
 
         # loop all study aspects
-        for element in self.structure.aspects :
+        for element in self.studyStructure.aspectList :
             if verbose :    print("run through aspect:  \t" +element)
             newAspect = Aspect(element, self.studyFolder)
             newAspect.create()
