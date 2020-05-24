@@ -61,6 +61,7 @@ def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth
                 folderList.append( subdir )
     if folderList == [] :
         print(  "ERROR: no SubFolders with >" +containingFile +"< inside in: " +startFolder +"\n") 
+    folderList = sorted(folderList, key=str.lower)
     return folderList
 
 
