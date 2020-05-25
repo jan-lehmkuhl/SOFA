@@ -19,7 +19,11 @@
             "request":          "launch",
             "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/../..",
-            "args":             ["initStudyDebug", "--verbose"],
+            "args":             [     "initStudy"
+                                    , "--verbose"
+                                    , "--studyName",          "study1"
+                                    , "--studyStructFolder",  "tools/framework/study-structures/openfoam"
+                                ],
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,

@@ -42,6 +42,8 @@ from case import cfdAspectSelector
 parser = argparse.ArgumentParser(description='input for sofa-tasks.py')
 parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
 parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
+parser.add_argument( '--studyName',         nargs='?', const=1, type=str )
+parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
 # store all parsed arguments to args
 args = parser.parse_args()
 
@@ -56,9 +58,15 @@ foamStructure   = readFoamStructure()
 
 
 if args.entryPoint == "initStudy":
-    newStudy = Study( verbose=verbose )
-if entryPoint == "initStudyDebug":
-    newStudy = Study( studyName="study1", studyStructFolder="tools/framework/study-structures/openfoam", verbose=verbose )
+    # create new study depending on available arguments
+    if args.studyStructFolder and args.studyName:
+        newStudy = Study( studyName=args.studyName, studyStructFolder=args.studyStructFolder, verbose=args.verbose )
+    elif args.studyName : 
+        newStudy = Study( studyName=args.studyName, verbose=args.verbose )
+    elif args.studyStructFolder:
+        newStudy = Study( studyStructFolder=args.studyStructFolder, verbose=args.verbose )
+    else :
+        newStudy = Study( verbose=args.verbose )
 
 if args.entryPoint == "initFoam":
     projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')
