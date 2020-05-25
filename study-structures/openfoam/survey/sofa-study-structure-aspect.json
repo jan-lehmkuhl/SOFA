@@ -1,5 +1,9 @@
 {
     "files": [
-
+        {
+            "sourcePath": "../shared/Makefile_aspect.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        }
     ]
 }

@@ -65,8 +65,6 @@ class Aspect(object):
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
             #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
-            createSymlinkSavely(    makefilePath,       # aspect Makefile
-                                    os.path.join( self.path, aspectName, "Makefile") )
             reportTemplate = loadJson( os.path.join( findParentFolder('project.json'), 'tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']
             if self.aspectType == "mesh":
                 toolsPath   = os.path.join(findParentFolder('project.json'), "tools") 
