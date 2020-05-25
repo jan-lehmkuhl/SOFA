@@ -42,25 +42,25 @@ from case import cfdAspectSelector
 parser = argparse.ArgumentParser(description='input for sofa-tasks.py')
 parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
 parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
+# store all parsed arguments to args
+args = parser.parse_args()
 
-entryPoint =    parser.parse_args().entryPoint
-verbose =       parser.parse_args().verbose
-
-if verbose :    print("starting sofa-tasks.py in verbose mode" )
-if verbose :    print("    with arg:                " + entryPoint  )
-if verbose :    print("    in folder:               " + os.getcwd() )
-if verbose :    print("    with sofa-tasks.py in:   " + file_path )
-if verbose :    print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
+# verbose output
+if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
+if args.verbose :   print("    with passed entryPoint:  " + args.entryPoint  )
+if args.verbose :   print("    in folder:               " + os.getcwd() )
+if args.verbose :   print("    with sofa-tasks.py in:   " + file_path )
+if args.verbose :   print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
 
 foamStructure   = readFoamStructure()
 
 
-if entryPoint == "initStudy":
+if args.entryPoint == "initStudy":
     newStudy = Study( verbose=verbose )
 if entryPoint == "initStudyDebug":
     newStudy = Study( studyName="study1", studyStructFolder="tools/framework/study-structures/openfoam", verbose=verbose )
 
-if entryPoint == "initFoam":
+if args.entryPoint == "initFoam":
     projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')
     for studyFolder in projectStruct['foamFolders']:
         if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):
@@ -83,31 +83,31 @@ if entryPoint == "initFoam":
         else:
             print("skipping study >" + studyFolder + " since it already exists")
 
-elif entryPoint == "newCase":
+elif args.entryPoint == "newCase":
     currentCase = cfdAspectSelector()
     currentCase.create()
 
-elif entryPoint == "initCase":
+elif args.entryPoint == "initCase":
     currentCase = cfdAspectSelector()
     currentCase.initCase()
 
-elif entryPoint == "symlinks":
+elif args.entryPoint == "symlinks":
     currentCase = cfdAspectSelector()
     currentCase.makeSymlinks()
 
-elif entryPoint == "clone":
+elif args.entryPoint == "clone":
     currentCase = cfdAspectSelector()
     currentCase.clone()
 
-elif entryPoint == "clear":
+elif args.entryPoint == "clear":
     currentCase = cfdAspectSelector()
     currentCase.clear()
 
-elif entryPoint == "commit":
+elif args.entryPoint == "commit":
     currentCase = Case("run")
     currentCase.commitChanges()
 
-elif entryPoint == "overview":
+elif args.entryPoint == "overview":
     createDirSafely("doc")
     files = os.listdir("doc")
     for fileName in files:
@@ -117,7 +117,7 @@ elif entryPoint == "overview":
     else:
         print("Unabel to find RMarkdown file")
 
-elif entryPoint == "updateAllReports":
+elif args.entryPoint == "updateAllReports":
     while True:
         print("Run reports after updating ? (y/n)")
         answer = input()
@@ -145,7 +145,7 @@ elif entryPoint == "updateAllReports":
         else:
             print("Unabel to find RMarkdown file")
 
-elif entryPoint == "updateReport":
+elif args.entryPoint == "updateReport":
     while True:
         print("Run reports after updating ? (y/n)")
         answer = input()
@@ -159,7 +159,7 @@ elif entryPoint == "updateReport":
     currentCase = cfdAspectSelector()
     currentCase.copyReport(runReports)
 
-elif entryPoint == "updateJson":
+elif args.entryPoint == "updateJson":
     for folder in sorted(os.listdir(".")):
         aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
         if aspectName in foamStructure:
@@ -167,8 +167,8 @@ elif entryPoint == "updateJson":
             currentCase = cfdAspectSelector(os.path.join("./", folder))
             currentCase.updateJson()
 
-elif entryPoint == "test":
+elif args.entryPoint == "test":
     print("Nothing defined")
 
 
-if verbose:     print("\n*** finished sofa-tasks.py *** \n")
+if args.verbose:     print("\n*** finished sofa-tasks.py *** \n")
