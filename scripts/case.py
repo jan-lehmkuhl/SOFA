@@ -65,13 +65,15 @@ def cfdAspectSelector(path=None):
 class Case(object):
     # base class to handle all operations related to cases
 
-    def __init__(self, aspectType=None, path="./"):
+    def __init__(self, storagePath=None, aspectType=None, caseStructure=None, verbose=False, path="./"):
         from aspect import readFoamStructure
 
-        # name of class for debugging purpose
-        self.name = "Case"
-        # aspectType of class, e.g. cad, mesh ....
+        # store known values to self
+        self.className4 = "Case"    # only for debugging purpose
+        self.storagePath= storagePath
         self.aspectType = aspectType
+        self.structure  = caseStructure
+        self.verbose    = verbose
         # relative path to Aspect
         self.path = path
         # name of current case
@@ -104,6 +106,7 @@ class Case(object):
                 else:
                     print(
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
+
 
     def nextCaseName(self, path="./"):
         # finds the next case name in a series of folder of type xxx123
@@ -158,22 +161,24 @@ class Case(object):
         # Return:
         #   side effects
         #
-        jsonPath = findFile(self.aspectType + ".json", "tools")
-        makePath = findFile(str("Makefile_case_" + self.aspectType + ".mk"), "tools")
-        gitignorePath = findFile(".gitignore_foam", "tools")
-        caseName = self.nextCaseName()
-        if (jsonPath and makePath):
-            createDirSafely(os.path.join(self.path, caseName))
-            ### Makefile
-            #copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
-            createSymlinkSavely(makePath, os.path.join(
-                self.path, caseName, "Makefile"))
-            ### json
-            copyFileSafely(jsonPath, os.path.join(
-                self.path, caseName, self.aspectType + ".json"))
-            createSymlinkSavely(gitignorePath, os.path.join(
-                self.path, caseName, ".gitignore"))
+        from fileHandling import handleStudyStructFile
+        from fileHandling import handleStudyStructFolder
+
+        # create case folder
+        caseName = self.nextCaseName( self.storagePath )
+        self.casePath = os.path.join( self.storagePath, caseName ) 
+        createDirSafely( self.casePath )
+
+        # create caseXXX content
+        if 'folders' in self.structure : 
+            for thisFolder in self.structure['folders'] : 
+                handleStudyStructFolder( self.structure['localpath'], thisFolder, self.casePath, self.verbose ) 
+        if 'files' in self.structure : 
+            for thisFile in self.structure['files'] : 
+                handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose ) 
+
         return(True)
+
 
     def clone(self):
         # create a clone of the current case
@@ -511,21 +516,8 @@ class CadCase(Case):
         #   side effects: creates directories
         #
         caseName = self.nextCaseName()
-        createDirSafely(os.path.join(self.path, caseName, "native"))
-        createDirSafely(os.path.join(self.path, caseName, "stl"))
-        createDirSafely(os.path.join(self.path, caseName, "vtk"))
-        createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
-        createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
-        makePath =      findFile( "Makefile_case_cad.mk",   "tools")
-        gitignorePath = findFile( ".gitignore_cad",         "tools")
-        if makePath:
-            createSymlinkSavely(    makePath, 
-                                    os.path.join( self.path, caseName, "Makefile"))
         createSymlinkSavely(    "tools/framework/docs/help-files/aspectPics.md" , 
                                 os.path.join( self.path, caseName, "doc/cadPics/help-cadPics.md" ) )
-        if gitignorePath:
-            createSymlinkSavely( gitignorePath, 
-                                 os.path.join( self.path, caseName, ".gitignore"))
 
     def initCase(self):
         if len(os.listdir(".")) <= 1:

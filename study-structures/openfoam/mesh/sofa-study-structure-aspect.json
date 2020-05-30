@@ -4,6 +4,17 @@
             "sourcePath": "../shared/Makefile_aspect.mk",
             "targetPath": "Makefile",
             "isSymlink": true
+        },
+        {
+            "sourcePath": "../shared/.gitignore_aspect_docs",
+            "targetPath": "doc/.gitignore",
+            "isSymlink": true
+        }
+    ],
+    "folders": [
+        {
+            "relPath": "doc/reportTemplate01",
+            "createGitKeep": true
         }
     ]
 }

@@ -201,6 +201,11 @@ def loadJson(jsonPath):
         sys.exit("TERMINATE python script")
 
 
+def handleStudyStructFolder( studyStructHome, fileAttributes, targetFolder, verbose=False ):
+    createDirSafely( os.path.join( targetFolder, fileAttributes['relPath'] ) )
+    if fileAttributes['createGitKeep']:
+        pass    # TODO create .gitkeep
+
 def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbose=False ):
     source = studyStructHome  +"/"   +fileAttributes['sourcePath']
     target = targetFolder     +"/"   +fileAttributes['targetPath']

@@ -1,0 +1,19 @@
+{
+    "files": [
+        {
+            "sourcePath": "mesh.json",
+            "targetPath": "mesh.json",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "Makefile_case_mesh.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../../run/case000/.gitignore_foam",
+            "targetPath": ".gitignore",
+            "isSymlink": true
+        }
+    ]
+}

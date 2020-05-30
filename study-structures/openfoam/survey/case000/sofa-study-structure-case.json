@@ -1,0 +1,19 @@
+{
+    "files": [
+        {
+            "sourcePath": "survey.json",
+            "targetPath": "survey.json",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "Makefile_case_survey.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../../run/case000/.gitignore_foam",
+            "targetPath": ".gitignore",
+            "isSymlink": true
+        }
+    ]
+}

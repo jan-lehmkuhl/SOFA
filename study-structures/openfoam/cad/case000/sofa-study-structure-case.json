@@ -1,0 +1,41 @@
+{
+    "files": [
+        {
+            "sourcePath": "cad.json",
+            "targetPath": "cad.json",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "Makefile_case_cad.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": ".gitignore_cad",
+            "targetPath": ".gitignore",
+            "isSymlink": true
+        }
+    ],
+    "folders": [
+        {
+            "relPath": "native",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "stl",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "vtk",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "doc/drafts",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "doc/cadPics",
+            "createGitKeep": true
+        }
+    ]
+}

@@ -72,9 +72,13 @@ class StudyStructure(object):
         struct = dict()
         for aspect in aspectList: 
             localStructAspectPath       = os.path.join( self.local, aspect ) 
+            # load aspect root
             struct[aspect]              = loadJson( os.path.join( localStructAspectPath, "sofa-study-structure-aspect.json" ) )
             struct[aspect]['localpath'] = localStructAspectPath
             # TODO put into class for aspect handling 
+            # load case000
+            struct[aspect]['case000']   = loadJson( os.path.join( localStructAspectPath, "case000", "sofa-study-structure-case.json" ) ) 
+            struct[aspect]['case000']['localpath']= os.path.join( localStructAspectPath, "case000" )
         return struct
 
 
@@ -143,7 +147,10 @@ class Study(object):
         # loop all study aspects
         for element in self.studyStructure.aspectList :
             if verbose :    print("run through aspect:  \t" +element)
-            newAspect = Aspect(element, self.studyStructure.aspectList[element], self.path, verbose )
+            newAspect = Aspect( aspectType =        element, 
+                                aspectStructure =   self.studyStructure.aspectList[element], 
+                                studyFolder =       self.path, 
+                                verbose =           verbose )
             newAspect.create()
 
         print(  "completed structure creation of:   " +self.name)
