@@ -103,13 +103,15 @@ class Study(object):
     def __init__(self, studyName="", studyStructFolder="", verbose=False):
         if verbose :    print( "start StudyStructure __init__ ")
 
-        self.name           = askForStudyName( use=studyName )
-        self.className1     = "Study"
-        # study folder
+        self.className1     = "Study"       # only for appearance during debugging
         self.projectRoot    = findParentFolder( containingFile="project.json" )
+
+        # create study folder (self.path)
+        self.name           = askForStudyName( use=studyName )
         self.path           = self.projectRoot +"/" +self.name
         self.createFolder( verbose )
-        # study structure
+
+        # create study structure
         self.studyStructure = StudyStructure( studyStructFolder, verbose )
         self.createStructure( verbose )
 

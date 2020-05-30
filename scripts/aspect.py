@@ -43,7 +43,10 @@ class Aspect(object):
         self.aspectType = aspectType
         self.structure  = aspectStructure   # 
         self.studyRoot  = studyFolder
+
+        # define aspect folder (self.path)
         self.path       = os.path.join( studyFolder, self.aspectType )
+
 
     def create(self):
         # creates an aspect of self.aspectType at location self.studyRoot
@@ -56,6 +59,8 @@ class Aspect(object):
         #
 
         aspectName      = self.aspectType       # renaming from historical reasons 
+
+        # create aspect folder
         createDirSafely( self.path )
 
         # create aspect content
