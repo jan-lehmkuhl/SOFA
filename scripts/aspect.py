@@ -42,11 +42,11 @@ class Aspect(object):
         self.verbose    = verbose
         self.aspectType = aspectType
         self.structure  = aspectStructure   # 
-        self.path       = studyFolder       # root of this aspect (resp. study-folder)  (#TODO remove)
-        self.folder     = os.path.join( studyFolder, self.aspectType )
+        self.studyRoot  = studyFolder
+        self.path       = os.path.join( studyFolder, self.aspectType )
 
     def create(self):
-        # creates an aspect of self.aspectType at location self.path
+        # creates an aspect of self.aspectType at location self.studyRoot
         # according to the entrys in the global dictionary foamStructure
         #
         # Args:
@@ -56,38 +56,38 @@ class Aspect(object):
         #
 
         aspectName      = self.aspectType       # renaming from historical reasons 
-        createDirSafely( self.folder )
+        createDirSafely( self.path )
 
         # create aspect content
         for thisFile in self.structure['files'] : 
-            handleStudyStructFile( self.structure['localpath'], thisFile, self.folder, self.verbose ) 
+            handleStudyStructFile( self.structure['localpath'], thisFile, self.path, self.verbose ) 
 
         makefilePath = findFile("Makefile_aspect.mk", "tools")
         if makefilePath:  # if find file fails it returns false
-            #copyFileSafely(makefilePath, os.path.join(self.path, aspectName, "Makefile"))
+            #copyFileSafely(makefilePath, os.path.join(self.studyRoot, aspectName, "Makefile"))
             reportTemplate = loadJson( os.path.join( findParentFolder('project.json'), 'tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']
             if self.aspectType == "mesh":
                 toolsPath   = os.path.join(findParentFolder('project.json'), "tools") 
                 meshOvPath  = findFile("meshOverview.Rmd", toolsPath )
                 meshRepPath = findFile("meshReport.Rmd"  , toolsPath )
-                createDirSafely(os.path.join(self.path, aspectName, "doc", reportTemplate ))
+                createDirSafely(os.path.join(self.studyRoot, aspectName, "doc", reportTemplate ))
                 if meshOvPath:
-                    copyFileSafely(meshRepPath, os.path.join(self.path, aspectName, "doc", reportTemplate, "meshReport.Rmd"))
-                    copyFileSafely(meshOvPath,  os.path.join(self.path, aspectName, "doc/meshOverview.Rmd"))
+                    copyFileSafely(meshRepPath, os.path.join(self.studyRoot, aspectName, "doc", reportTemplate, "meshReport.Rmd"))
+                    copyFileSafely(meshOvPath,  os.path.join(self.studyRoot, aspectName, "doc/meshOverview.Rmd"))
             if self.aspectType == "run":
-                createDirSafely(os.path.join(self.path, aspectName, "doc", reportTemplate ))
+                createDirSafely(os.path.join(self.studyRoot, aspectName, "doc", reportTemplate ))
                 runOvPath = findFile("runOverview.Rmd", "tools")
                 runRepPath = findFile("runReport.Rmd"  , "tools")
                 if runOvPath:
-                    copyFileSafely(runRepPath, os.path.join(self.path, aspectName, "doc", reportTemplate, "runReport.Rmd"))
-                    copyFileSafely(runOvPath, os.path.join(self.path, aspectName, "doc/runOverview.Rmd"))
+                    copyFileSafely(runRepPath, os.path.join(self.studyRoot, aspectName, "doc", reportTemplate, "runReport.Rmd"))
+                    copyFileSafely(runOvPath, os.path.join(self.studyRoot, aspectName, "doc/runOverview.Rmd"))
             if(    self.aspectType == "mesh" 
                 or self.aspectType == "run" ):
                 gitignorePath  = findFile(".gitignore_aspect_docs", "tools")
                 if gitignorePath:
                     createSymlinkSavely( gitignorePath, 
-                                         os.path.join( self.path,  aspectName, "doc/.gitignore"))
-            case = cfdAspectSelector(os.path.join(self.path, aspectName))
+                                         os.path.join( self.studyRoot,  aspectName, "doc/.gitignore"))
+            case = cfdAspectSelector(os.path.join(self.studyRoot, aspectName))
             case.create()
 
 
