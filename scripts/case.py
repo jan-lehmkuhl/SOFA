@@ -86,7 +86,9 @@ class Case(object):
         self.pathToLinkedReport = None
         self.symlinksClean = False
         # check if case .json exists
-        self.pathToJson = os.path.join(self.path, self.aspectType + ".json")
+        if aspectType == None:
+            aspectType = ""
+        self.pathToJson = os.path.join(self.path, aspectType, ".json")
         if os.path.exists(self.pathToJson):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
