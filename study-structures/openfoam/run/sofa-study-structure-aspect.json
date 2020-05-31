@@ -6,6 +6,11 @@
             "isSymlink": true
         },
         {
+            "sourcePath": "../shared/sofa.aspect.json",
+            "targetPath": "sofa.aspect.json",
+            "isSymlink": false
+        },
+        {
             "sourcePath": "../shared/.gitignore_aspect_docs",
             "targetPath": "doc/.gitignore",
             "isSymlink": true

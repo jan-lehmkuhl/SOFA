@@ -5,6 +5,11 @@
             "sourcePath": "study-documentation.md",
             "targetPath": "README.md",
             "isSymlink": false
+        },
+        {
+            "sourcePath": "sofa.study.json",
+            "targetPath": "sofa.study.json",
+            "isSymlink": false
         }
     ],
     "subtypeSeperation": true,

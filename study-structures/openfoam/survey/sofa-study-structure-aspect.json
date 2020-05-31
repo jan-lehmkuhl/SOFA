@@ -4,6 +4,11 @@
             "sourcePath": "../shared/Makefile_aspect.mk",
             "targetPath": "Makefile",
             "isSymlink": true
+        },
+        {
+            "sourcePath": "../shared/sofa.aspect.json",
+            "targetPath": "sofa.aspect.json",
+            "isSymlink": false
         }
     ]
 }
