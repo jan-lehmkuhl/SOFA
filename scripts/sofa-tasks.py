@@ -31,6 +31,7 @@ from fileHandling import findFile       # only for old init
 from aspect import readFoamStructure
 
 from case import cfdAspectSelector
+from case import Case
 
 
 
@@ -50,7 +51,7 @@ args = parser.parse_args()
 # verbose output
 if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
 if args.verbose :   print("    with passed entryPoint:  " + args.entryPoint  )
-if args.verbose :   print("    in folder:               " + os.getcwd() )
+if args.verbose :   print("    in folder (os.getcwd):   " + os.getcwd() )
 if args.verbose :   print("    with sofa-tasks.py in:   " + file_path )
 if args.verbose :   print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
 
@@ -92,8 +93,8 @@ if args.entryPoint == "initFoam":
             print("skipping study >" + studyFolder + " since it already exists")
 
 elif args.entryPoint == "newCase":
-    currentCase = cfdAspectSelector()
-    currentCase.create()
+    newCaseXXX = Case( verbose=args.verbose )
+    newCaseXXX.create()
 
 elif args.entryPoint == "initCase":
     currentCase = cfdAspectSelector()

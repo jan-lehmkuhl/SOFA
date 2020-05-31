@@ -67,13 +67,38 @@ class Case(object):
 
     def __init__(self, storagePath=None, aspectType=None, caseStructure=None, verbose=False, path="./"):
         from aspect import readFoamStructure
+        from study import StudyStructure
 
         # store known values to self
         self.className4 = "Case"    # only for debugging purpose
-        self.storagePath= storagePath
+        self.aspectRoot= storagePath
         self.aspectType = aspectType
-        self.structure  = caseStructure
         self.verbose    = verbose
+
+        # search for sofa enviroment provided information
+        self.projectRoot    = findParentFolder( "project.json" )
+        # read StudyStruct if not provided e.g. by aspect.py->newCase
+        if caseStructure == None :
+            self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
+            thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
+        # read Case.aspectType from foldername
+        if self.aspectType == None: 
+            base = os.path.basename( os.getcwd() )
+            if base in thisStudyStructure.aspectList:
+                self.aspectType     = base
+                self.aspectRoot    = os.getcwd()
+            elif base[:-3] in thisStudyStructure.aspectList:
+                self.aspectType = base[:-3]
+                pass
+                sys.exit(1)
+            else:
+                sys.exit(1)
+        # set Case.structure
+        if caseStructure == None :
+            self.structure      = thisStudyStructure.aspectList[self.aspectType]['case000']
+        else:
+            self.structure      = caseStructure
+
         # relative path to Aspect
         self.path = path
         # name of current case
@@ -130,6 +155,7 @@ class Case(object):
         CaseName = str(self.aspectType + format(maxNo + 1, "0>3d"))
         return(CaseName)
 
+
     def getStudyName(self):
         # finds the projectname of a case
         #
@@ -155,6 +181,7 @@ class Case(object):
             print("Could not find project name")
             return(False)
 
+
     def create(self):
         # create a new case inside a Aspect depending on the aspectType of case
         #
@@ -167,8 +194,8 @@ class Case(object):
         from fileHandling import handleStudyStructFolder
 
         # create case folder
-        caseName = self.nextCaseName( self.storagePath )
-        self.casePath = os.path.join( self.storagePath, caseName ) 
+        caseName = self.nextCaseName( self.aspectRoot )
+        self.casePath = os.path.join( self.aspectRoot, caseName ) 
         createDirSafely( self.casePath )
 
         # create caseXXX content
@@ -500,6 +527,7 @@ class Case(object):
             json.dump(newJson, outfile, indent=4)
 
 
+#TODO remove specialized classes
 class CadCase(Case):
     # Specialized class for cad cases, which inherits from the base Case class
 

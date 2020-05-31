@@ -25,11 +25,28 @@ from aspect import Aspect
 
 class StudyStructure(object):
 
-    def __init__(self, studyStructFolder, verbose ):
-
+    def __init__(self, studyStructFolder=None, studyJsonFolder=None, verbose=False ):
         self.className2 = "StudyStructure"
 
-        self.path       = studyStructFolder     # for first try
+        # if provided load specified study struct
+        if studyJsonFolder != None: 
+            sofaStudyJson       = loadJson( os.path.join( studyJsonFolder, "sofa.study.json" ) )
+            relativePath        = sofaStudyJson['study-structure']
+        if studyStructFolder != None: 
+            relativePath        = studyStructFolder     # for first try 
+
+        # convert StudyStructure.path to absolute
+        if relativePath.startswith("tools"):
+            projectRoot     = findParentFolder("project.json")
+            self.path       = os.path.join( projectRoot, relativePath )
+        elif relativePath.startswith("/"):
+            self.path       = relativePath
+        else:
+            print(  "ERROR: relativePath is not processed right")
+            pass  # ERROR TODO
+
+        # try to load study-struct from self.path
+        # otherwise a new git-repository can be loaded
         while True: 
             if os.path.exists( os.path.join( self.path, "sofa-study-structure-root.json" ) ): 
                 # load study structure root
@@ -104,7 +121,7 @@ class Study(object):
 
     global verbose
 
-    def __init__(self, studyName="", studyStructFolder="", verbose=False):
+    def __init__(self, studyName=None, studyStructFolder=None, verbose=False):
         if verbose :    print( "start StudyStructure __init__ ")
 
         self.className1     = "Study"       # only for appearance during debugging
@@ -116,7 +133,7 @@ class Study(object):
         self.createFolder( verbose )
 
         # create study structure
-        self.studyStructure = StudyStructure( studyStructFolder, verbose )
+        self.studyStructure = StudyStructure( studyStructFolder=studyStructFolder, verbose=verbose )
         self.createStructure( verbose )
 
 
