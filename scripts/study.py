@@ -27,13 +27,13 @@ class StudyStructure(object):
 
     def __init__(self, studyStructFolder, verbose ):
 
-        self.local      = studyStructFolder     # for first try 
         self.className2 = "StudyStructure"
 
+        self.path       = studyStructFolder     # for first try
         while True: 
-            if os.path.exists( self.local +"/sofa-study-structure-root.json"): 
+            if os.path.exists( os.path.join( self.path, "sofa-study-structure-root.json" ) ): 
                 # load study structure root
-                self.json           = loadJson( self.local +"/sofa-study-structure-root.json" )
+                self.json           = loadJson( os.path.join( self.path, "sofa-study-structure-root.json" ) )
                 # assign to self.values
                 self.name           = self.json['name']     # short name for recognising
                 self.files          = self.json['files']    # files to copy in study
@@ -41,8 +41,8 @@ class StudyStructure(object):
 
                 # TODO validate study structure
                 break
-            if self.local != "": 
-                print("\nWARNING sofa-study-structure-root.json dont exists in:  " +self.local +"\n")
+            if self.path != "": 
+                print("\nWARNING sofa-study-structure-root.json dont exists in:  " +self.path +"\n")
 
             # search and list possible local study structures
             sofaStructList      = ['INSERT url to import a new repository to tools']
@@ -56,7 +56,7 @@ class StudyStructure(object):
 
             # read user input of desired StudyStructure
             idxChoosenStruct = int( input("\nchoose study struct by number and press enter: ") )
-            self.local          = sofaStructList[idxChoosenStruct]
+            self.path           = sofaStructList[idxChoosenStruct]
 
             if idxChoosenStruct == 0 :
                 # TODO 
@@ -68,10 +68,10 @@ class StudyStructure(object):
 
 
     def loadStudyStructAspectList(self):
-        aspectList = findChildFolders("sofa-study-structure-aspect.json", startFolder=self.local, relativeOutput=True )
+        aspectList = findChildFolders("sofa-study-structure-aspect.json", startFolder=self.path, relativeOutput=True )
         struct = dict()
         for aspect in aspectList: 
-            localStructAspectPath       = os.path.join( self.local, aspect ) 
+            localStructAspectPath       = os.path.join( self.path, aspect ) 
             # load aspect root
             struct[aspect]              = loadJson( os.path.join( localStructAspectPath, "sofa-study-structure-aspect.json" ) )
             struct[aspect]['localpath'] = localStructAspectPath
@@ -142,7 +142,8 @@ class Study(object):
 
         # loop all study files
         for thisFile in self.studyStructure.files :
-            handleStudyStructFile( self.studyStructure.local, thisFile, self.path, verbose ) 
+            handleStudyStructFile( self.studyStructure.path, thisFile, self.path, verbose ) 
+            #TODO write used structure to study.json or it should be stored there in before
 
         # loop all study aspects
         for element in self.studyStructure.aspectList :
