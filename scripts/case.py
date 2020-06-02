@@ -196,15 +196,15 @@ class Case(object):
         # create case folder
         caseName = self.nextCaseName( self.aspectRoot )
         self.casePath = os.path.join( self.aspectRoot, caseName ) 
-        createDirSafely( self.casePath )
+        createDirSafely( self.casePath, debugRefPath=self.projectRoot )
 
         # create caseXXX content
         if 'folders' in self.structure : 
             for thisFolder in self.structure['folders'] : 
-                handleStudyStructFolder( self.structure['localpath'], thisFolder, self.casePath, self.verbose ) 
+                handleStudyStructFolder( self.structure['localpath'], thisFolder, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
         if 'files' in self.structure : 
             for thisFile in self.structure['files'] : 
-                handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose ) 
+                handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
 
         return(True)
 

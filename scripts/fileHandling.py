@@ -47,7 +47,15 @@ def findFile(fileName, turnFolder):
         return(False)
 
 
-def createDirSafely(dst):
+def convertToRelativePath( absolutePath, referencePath ,verbose=False):
+    if referencePath and absolutePath.startswith( referencePath ):
+        return absolutePath[len(referencePath):]
+    else: 
+        if verbose:
+            print(  "cannot create relative path from: ", absolutePath, " for Reference: ", referencePath )
+        return absolutePath
+
+def createDirSafely(dst, debugRefPath=None):
     # creates a directory recursively if it doesn't exist
     #
     # Args:
@@ -57,11 +65,12 @@ def createDirSafely(dst):
     #   side effects
     #
     # FIXME add warning for relative path
+    dstShort = convertToRelativePath( dst, debugRefPath )
     if not os.path.isdir(dst):
+        print("Creating folder     ", dstShort )
         os.makedirs(dst)
-        print("Creating folder     %s " %dst )
     else:
-        print("Skipping >%s< since it already exists" % dst)
+        print("Skip existing folder     ", dstShort )
 
 def createDir(dst):
     # creates a directory recursively if it doesn't exist
@@ -81,7 +90,7 @@ def createDir(dst):
 
 
 
-def createSymlinkSavely(src, dst):
+def createSymlinkSavely(src, dst, referencePath=None, verbose=False ):
     # creates a symbolic link between src and dst if the source
     # exists and the dst doesn't. If dst exists but is already
     # a symbolic link it is overwritten.
@@ -95,23 +104,24 @@ def createSymlinkSavely(src, dst):
     #
     if os.path.exists(src):
         relSrc = os.path.relpath(src, os.path.dirname(dst))
+        srcShort = convertToRelativePath( src, referencePath )
+        dstShort = convertToRelativePath( dst, referencePath )
         if not os.path.exists(dst):
+            print("Creating link to     %s \t\t from %s" % (dstShort, srcShort))
             os.symlink(relSrc, dst)
-            print("Creating link to    %s \t\t from %s" % (dst, src))
         elif os.path.islink(dst):
             if not os.readlink(dst) == relSrc:
+                print("Overwriting existing link with link from >%s< to >%s<" % (srcShort, dstShort))
                 os.remove(dst)
                 os.symlink(relSrc, dst)
-                print(
-                    "Overwriting existing link with link from >%s< to >%s<" % (src, dst))
             else:
-                print("Skipping link to >%s< because it already exists" % src)
+                print("Skip existing link to    ", src)
         else:
             print("Unabel to create target >%s< since it exists" % dst)
     else:
         print("Unabel to find >%s<" % src)
 
-def copyFileSafely(src, dst):
+def copyFileSafely(src, dst, referencePath=None, verbose=False ):
     # copies a file if it exists
     #
     # Args:
@@ -127,11 +137,13 @@ def copyFileSafely(src, dst):
     else:
         if os.path.exists(src):
             if not os.path.isdir(src):
+                srcShort = convertToRelativePath( src, referencePath, verbose )
+                dstShort = convertToRelativePath( dst, referencePath, verbose )
                 if not os.path.exists(dst):
-                    print("Copying file to     %s \t from %s" % (dst, src))
+                    print("Copying file to      %s \t from %s" % (dstShort, srcShort))
                     shutil.copyfile(src, dst)
                 else:
-                    print("Skipping >%s< since it already exists" % src)
+                    print("Skip existing file       ", dstShort )
             else:
                 print("Skipping >%s< because it is a directory" % src)
         else:
@@ -202,17 +214,17 @@ def loadJson(jsonPath, verbose=False):
         sys.exit(1)
 
 
-def handleStudyStructFolder( studyStructHome, fileAttributes, targetFolder, verbose=False ):
-    createDirSafely( os.path.join( targetFolder, fileAttributes['relPath'] ) )
+def handleStudyStructFolder( studyStructHome, fileAttributes, targetFolder, verbose=False, debugRefPath=None ):
+    createDirSafely( os.path.join( targetFolder, fileAttributes['relPath'] ), debugRefPath=debugRefPath )
     if fileAttributes['createGitKeep']:
         pass    # TODO create .gitkeep
 
-def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbose=False ):
+def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbose=False, debugRefPath=None ):
     source = studyStructHome  +"/"   +fileAttributes['sourcePath']
     target = targetFolder     +"/"   +fileAttributes['targetPath']
 
     if fileAttributes['isSymlink']: 
-        createSymlinkSavely(source,target)
+        createSymlinkSavely( source, target, referencePath=debugRefPath, verbose=verbose )
     else:
-        copyFileSafely(source,target)
+        copyFileSafely( source, target, referencePath=debugRefPath, verbose=verbose )
 

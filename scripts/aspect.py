@@ -44,6 +44,7 @@ class Aspect(object):
         self.aspectType = aspectType
         self.structure  = aspectStructure   # 
         self.studyRoot  = studyFolder
+        self.projectRoot= findParentFolder( "project.json" )
 
         # define aspect folder (self.path)
         self.path       = os.path.join( studyFolder, self.aspectType )
@@ -62,15 +63,15 @@ class Aspect(object):
         aspectName      = self.aspectType       # renaming from historical reasons 
 
         # create aspect folder
-        createDirSafely( self.path )
+        createDirSafely( self.path, self.projectRoot )
 
         # create aspect content
         if 'folders' in self.structure : 
             for thisFolder in self.structure['folders'] : 
-                handleStudyStructFolder( self.structure['localpath'], thisFolder, self.path, self.verbose ) 
+                handleStudyStructFolder( self.structure['localpath'], thisFolder, self.path, self.verbose, debugRefPath=self.projectRoot ) 
         if 'files' in self.structure : 
             for thisFile in self.structure['files'] : 
-                handleStudyStructFile( self.structure['localpath'], thisFile, self.path, self.verbose ) 
+                handleStudyStructFile( self.structure['localpath'], thisFile, self.path, self.verbose, debugRefPath=self.projectRoot ) 
 
         if False:
             reportTemplate = loadJson( os.path.join( findParentFolder('project.json'), 'tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']

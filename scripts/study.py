@@ -160,12 +160,12 @@ class Study(object):
 
         # loop all study files
         for thisFile in self.studyStructure.files :
-            handleStudyStructFile( self.studyStructure.path, thisFile, self.path, verbose ) 
+            handleStudyStructFile( self.studyStructure.path, thisFile, self.path, verbose, debugRefPath=self.projectRoot ) 
             #TODO write used structure to study.json or it should be stored there in before
 
         # loop all study aspects
         for element in self.studyStructure.aspectList :
-            if verbose :    print("run through aspect:  \t" +element)
+            if verbose :    print(  "run through aspect:    \t\t >>>  " +element +"  <<<")
             newAspect = Aspect( aspectType =        element, 
                                 aspectStructure =   self.studyStructure.aspectList[element], 
                                 studyFolder =       self.path, 
