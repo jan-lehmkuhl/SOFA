@@ -73,24 +73,6 @@ class Aspect(object):
             for thisFile in self.structure['files'] : 
                 handleStudyStructFile( self.structure['localpath'], thisFile, self.path, self.verbose, debugRefPath=self.projectRoot ) 
 
-        if False:
-            reportTemplate = loadJson( os.path.join( findParentFolder('project.json'), 'tools/framework/openFoam/dummies/json/', aspectName+'.json') )['buildSettings']['report']
-            if self.aspectType == "mesh":
-                toolsPath   = os.path.join(findParentFolder('project.json'), "tools") 
-                meshOvPath  = findFile("meshOverview.Rmd", toolsPath )
-                meshRepPath = findFile("meshReport.Rmd"  , toolsPath )
-                createDirSafely(os.path.join(self.studyRoot, aspectName, "doc", reportTemplate ))
-                if meshOvPath:
-                    copyFileSafely(meshRepPath, os.path.join(self.studyRoot, aspectName, "doc", reportTemplate, "meshReport.Rmd"))
-                    copyFileSafely(meshOvPath,  os.path.join(self.studyRoot, aspectName, "doc/meshOverview.Rmd"))
-            if self.aspectType == "run":
-                createDirSafely(os.path.join(self.studyRoot, aspectName, "doc", reportTemplate ))
-                runOvPath = findFile("runOverview.Rmd", "tools")
-                runRepPath = findFile("runReport.Rmd"  , "tools")
-                if runOvPath:
-                    copyFileSafely(runRepPath, os.path.join(self.studyRoot, aspectName, "doc", reportTemplate, "runReport.Rmd"))
-                    copyFileSafely(runOvPath, os.path.join(self.studyRoot, aspectName, "doc/runOverview.Rmd"))
-
         # call case creation
         newCase001 = Case(  storagePath =   self.path, 
                             aspectType =    self.aspectType, 

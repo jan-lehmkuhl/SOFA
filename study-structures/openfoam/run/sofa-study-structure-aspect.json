@@ -14,6 +14,18 @@
             "sourcePath": "../shared/.gitignore_aspect_docs",
             "targetPath": "doc/.gitignore",
             "isSymlink": true
+        },
+        {
+            "sourcePath": "../../../../openFoam-reporting/runOverview/runOverview.Rmd",
+            "targetPath": "doc/runOverview.Rmd",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../../../../../tools/openFoam-reporting/runReport/runReport.Rmd",
+                // TODO ask for missing repositries
+            "targetPath": "doc/reportTemplate01/runReport.Rmd",
+                // TODO rename path in dependence of    study-structures/openfoam/run/case000/run.json ['buildSettings']['report']
+            "isSymlink": false
         }
     ],
     "folders": [

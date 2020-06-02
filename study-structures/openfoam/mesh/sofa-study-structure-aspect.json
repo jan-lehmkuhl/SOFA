@@ -14,6 +14,17 @@
             "sourcePath": "../shared/.gitignore_aspect_docs",
             "targetPath": "doc/.gitignore",
             "isSymlink": true
+        },
+        {
+            "sourcePath": "../../../../openFoam-reporting/meshOverview/meshOverview.Rmd",
+            "targetPath": "doc/meshOverview.Rmd",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../../../../../tools/openFoam-reporting/meshReport/meshReport.Rmd",
+            "targetPath": "doc/reportTemplate01/meshReport.Rmd",
+                // TODO rename path in dependence of    study-structures/openfoam/mesh/case000/mesh.json ['buildSettings']['report']
+            "isSymlink": false
         }
     ],
     "folders": [
