@@ -41,6 +41,19 @@
             "justMyCode":       true,
             "showReturnValue":  true,
             "console":          "integratedTerminal"
+        },
+        {
+            // to run this configuration in this directory, this framework should be part of a sofa project
+            "name":             "symlinks ../../study1/run/run001",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
+            "cwd":              "${workspaceRoot}/../../study1/run/run001",
+            "args":             ["symlinks"],
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+            "console":          "integratedTerminal"
         }
     ]
 }
