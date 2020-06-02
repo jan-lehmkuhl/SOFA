@@ -81,39 +81,33 @@ class Case(object):
         if caseStructure == None :
             self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
+
+        currentDir  = os.path.basename( os.getcwd() )
         # read Case.aspectType from foldername
         if self.aspectType == None: 
-            base = os.path.basename( os.getcwd() )
-            if base in thisStudyStructure.aspectList:
-                self.aspectType     = base
-                self.aspectRoot    = os.getcwd()
-            elif base[:-3] in thisStudyStructure.aspectList:
-                self.aspectType = base[:-3]
-                pass
-                sys.exit(1)
-            else:
-                sys.exit(1)
+            if currentDir in thisStudyStructure.aspectList:
+                self.aspectType     = currentDir
+                self.aspectRoot     = os.getcwd()
+        if currentDir[:-3] in thisStudyStructure.aspectList:
+            self.aspectType     = currentDir[:-3]
+            self.path           = os.getcwd()
+            self.caseName       = currentDir
+        if self.aspectType == None: 
+            sys.exit(1)
         # set Case.structure
         if caseStructure == None :
             self.structure      = thisStudyStructure.aspectList[self.aspectType]['case000']
         else:
             self.structure      = caseStructure
 
-        # relative path to Aspect
-        self.path = path
-        # name of current case
-        self.caseName = os.path.basename(os.path.abspath(self.path))
-        # initialize variables 
+        # store linked cases to self
         self.caseJson = None
         self.linkedCase = None
         self.linkedReport = None
         self.pathToLinkedCase = None
         self.pathToLinkedReport = None
         self.symlinksClean = False
-        # check if case .json exists
-        if aspectType == None:
-            aspectType = ""
-        self.pathToJson = os.path.join(self.path, aspectType, ".json")
+        self.pathToJson = os.path.join(self.path, self.aspectType +".json")
         if os.path.exists(self.pathToJson):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
@@ -133,6 +127,7 @@ class Case(object):
                 else:
                     print(
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
+        pass  # end linked cases search
 
 
     def nextCaseName(self, path="./"):
