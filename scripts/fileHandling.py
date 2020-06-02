@@ -201,11 +201,15 @@ def loadJson(jsonPath, verbose=False):
     #   jsonPy:     d: parsed json
     #
     import sys 
-    
+    import re
+
     if os.path.exists(jsonPath):
         with open(jsonPath, 'r') as jsonFile:
             if verbose:     print(  "    load json:              ", jsonPath)
-            jsonPy = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
+            jsonStr = jsonFile.read()
+            jsonStr = re.sub( " // .*", "", jsonStr, flags=re.MULTILINE )
+            jsonStr = re.sub( "\n",     "", jsonStr, flags=re.MULTILINE )
+            jsonPy = json.loads( jsonStr, object_pairs_hook=collections.OrderedDict )
             return(jsonPy)
     else:
         print(" ")
