@@ -77,8 +77,8 @@ if args.entryPoint == "initFoam":
             for element in foamStructure:
                 newAspect = Aspect(element, os.path.join(findParentFolder('project.json'), studyFolder) )
                 newAspect.create()
-            copyFileSafely( os.path.realpath( findFile(                         "study-documentation.md", "tools") ) 
-                          , findParentFolder("project.json") +"/" +studyFolder+ "/README-study.md" )
+            copyFileSafely( os.path.realpath( findFile( "study-documentation.md", "tools" ) ) 
+                          , os.path.join( findParentFolder("project.json"), +studyFolder, "/README-study.md" ) )
             while True:
                 print("Commit creation of study %s ? (y/n)" % studyFolder)
                 answer = input()

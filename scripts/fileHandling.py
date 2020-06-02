@@ -224,8 +224,8 @@ def handleStudyStructFolder( studyStructHome, fileAttributes, targetFolder, verb
         pass    # TODO create .gitkeep
 
 def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbose=False, debugRefPath=None ):
-    source = studyStructHome  +"/"   +fileAttributes['sourcePath']
-    target = targetFolder     +"/"   +fileAttributes['targetPath']
+    source = os.path.join( studyStructHome, fileAttributes['sourcePath'] ) 
+    target = os.path.join( targetFolder   , fileAttributes['targetPath'] ) 
 
     if fileAttributes['isSymlink']: 
         createSymlinkSavely( source, target, referencePath=debugRefPath, verbose=verbose )
