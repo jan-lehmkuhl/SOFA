@@ -179,7 +179,7 @@ def copyFolderSafely(src, dst):
         else:
             print("Unabel to find >%s<" % src)
 
-def loadJson(jsonPath):
+def loadJson(jsonPath, verbose=False):
     # Loads a passed .json file if it exists
     #
     # Args:
@@ -192,13 +192,14 @@ def loadJson(jsonPath):
     
     if os.path.exists(jsonPath):
         with open(jsonPath, 'r') as jsonFile:
+            if verbose:     print(  "    load json:              ", jsonPath)
             jsonPy = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
             return(jsonPy)
     else:
         print(" ")
         print("ERROR: json file >%s< does not exist" % jsonPath)
         print("    current directory is: " +os.getcwd() +"\n")
-        sys.exit("TERMINATE python script")
+        sys.exit(1)
 
 
 def handleStudyStructFolder( studyStructHome, fileAttributes, targetFolder, verbose=False ):

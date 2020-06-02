@@ -55,7 +55,7 @@ if args.verbose :   print("    in folder (os.getcwd):   " + os.getcwd() )
 if args.verbose :   print("    with sofa-tasks.py in:   " + file_path )
 if args.verbose :   print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
 
-foamStructure   = readFoamStructure()
+foamStructure   = readFoamStructure( verbose=args.verbose )
 
 
 if args.entryPoint == "initStudy":
@@ -70,7 +70,7 @@ if args.entryPoint == "initStudy":
         newStudy = Study( verbose=args.verbose )
 
 if args.entryPoint == "initFoam":
-    projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')
+    projectStruct = loadJson( findParentFolder('project.json') +'/' +'project.json', verbose=args.verbose )
     for studyFolder in projectStruct['foamFolders']:
         if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):
             print("creating study:     " +studyFolder )

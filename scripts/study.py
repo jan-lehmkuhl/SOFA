@@ -27,10 +27,11 @@ class StudyStructure(object):
 
     def __init__(self, studyStructFolder=None, studyJsonFolder=None, verbose=False ):
         self.className2 = "StudyStructure"
+        self.verbose=verbose
 
         # if provided load specified study struct
         if studyJsonFolder != None: 
-            sofaStudyJson       = loadJson( os.path.join( studyJsonFolder, "sofa.study.json" ) )
+            sofaStudyJson       = loadJson( os.path.join( studyJsonFolder, "sofa.study.json" ), verbose=verbose )
             relativePath        = sofaStudyJson['study-structure']
         if studyStructFolder != None: 
             relativePath        = studyStructFolder     # for first try 
@@ -50,7 +51,7 @@ class StudyStructure(object):
         while True: 
             if os.path.exists( os.path.join( self.path, "sofa-study-structure-root.json" ) ): 
                 # load study structure root
-                self.json           = loadJson( os.path.join( self.path, "sofa-study-structure-root.json" ) )
+                self.json           = loadJson( os.path.join( self.path, "sofa-study-structure-root.json" ), verbose=verbose )
                 # assign to self.values
                 self.name           = self.json['name']     # short name for recognising
                 self.files          = self.json['files']    # files to copy in study
@@ -90,11 +91,11 @@ class StudyStructure(object):
         for aspect in aspectList: 
             localStructAspectPath       = os.path.join( self.path, aspect ) 
             # load aspect root
-            struct[aspect]              = loadJson( os.path.join( localStructAspectPath, "sofa-study-structure-aspect.json" ) )
+            struct[aspect]              = loadJson( os.path.join( localStructAspectPath, "sofa-study-structure-aspect.json" ), verbose=self.verbose )
             struct[aspect]['localpath'] = localStructAspectPath
             # TODO put into class for aspect handling 
             # load case000
-            struct[aspect]['case000']   = loadJson( os.path.join( localStructAspectPath, "case000", "sofa-study-structure-case.json" ) ) 
+            struct[aspect]['case000']   = loadJson( os.path.join( localStructAspectPath, "case000", "sofa-study-structure-case.json" ), verbose=self.verbose ) 
             struct[aspect]['case000']['localpath']= os.path.join( localStructAspectPath, "case000" )
         return struct
 

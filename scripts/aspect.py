@@ -28,10 +28,10 @@ from case import findFile
 from case import Case
 
 
-def readFoamStructure():
+def readFoamStructure( verbose=False ):
     wd              = findParentFolder( "project.json" )
     projectJsonPath = os.path.join(wd, "project.json" )
-    projectJson     = loadJson(projectJsonPath)
+    projectJson     = loadJson(projectJsonPath, verbose=verbose )
     return projectJson["foamStructure"]
 
 
