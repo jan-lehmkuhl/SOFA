@@ -50,13 +50,13 @@ def cfdAspectSelector(path=None):
         [i for i in caseFolder if not i.isdigit()])  # remove digits
     if aspectName in readFoamStructure():
         if aspectName == "cad":
-            return(CadCase(path))
+            return(CadCase(path=path))
         elif aspectName == "mesh":
-            return(MeshCase(path))
+            return(MeshCase(path=path))
         elif aspectName == "run":
-            return(RunCase(path))
+            return(RunCase(path=path))
         elif aspectName == "survey":
-            return(SurveyCase(path))
+            return(SurveyCase(path=path))
     else:
         print("Unknown aspect >%s< in caseFolder: >%s<" % (aspectName, caseFolder) )
         return(False)
@@ -528,7 +528,7 @@ class CadCase(Case):
 
     def __init__(self, path="./"):
         # execute init of parent class
-        super().__init__("cad", path)
+        super().__init__(aspectType="cad", path=path)
         self.name = "CadCase"   # only for debugging purpose
 
     def create(self):
@@ -570,7 +570,7 @@ class MeshCase(Case):
      # Specialized class for cad cases, which inherits from the base Case class
 
     def __init__(self, path="./"):
-        super().__init__("mesh", path)
+        super().__init__(aspectType="mesh", path=path)
         self.name = "MeshCase"
         self.Builder = foamBuilder()
 
@@ -639,7 +639,7 @@ class RunCase(Case):
     # Class for run cases
 
     def __init__(self, path=None):
-        super().__init__("run", path)
+        super().__init__(aspectType="run", path=path)
         self.name = "RunCase"
         if self.caseJson:
             self.Builder = foamBuilder(self.caseJson["buildSettings"])
@@ -689,7 +689,7 @@ class SurveyCase(Case):
     # Class for survey cases
 
     def __init__(self, path=None):
-        super().__init__("survey", path)
+        super().__init__(aspectType="survey", path=path)
         self.name = "surveyCase"
 
     def makeSymlinks(self):
