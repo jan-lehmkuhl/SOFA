@@ -100,8 +100,8 @@ class StudyStructure(object):
         return struct
 
 
-def askForStudyName( use="", defaultName="newStudy" ):
-    if use != "":
+def askForStudyName( use=None, defaultName="newStudy" ):
+    if use != None:
         return use
 
     name = str(input( "\nplease insert the desired study name [" +defaultName +"]: " ))
@@ -130,7 +130,7 @@ class Study(object):
 
         # create study folder (self.path)
         self.name           = askForStudyName( use=studyName )
-        self.path           = self.projectRoot +"/" +self.name
+        self.path           = os.path.join( self.projectRoot, self.name )
         self.createFolder( verbose )
 
         # create study structure

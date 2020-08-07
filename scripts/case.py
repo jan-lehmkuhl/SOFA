@@ -77,28 +77,29 @@ class Case(object):
 
         # search for sofa enviroment provided information
         self.projectRoot    = findParentFolder( "project.json" )
-        # read StudyStruct if not provided e.g. by aspect.py->newCase
         if caseStructure == None :
             self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
-
         currentDir  = os.path.basename( os.getcwd() )
         if self.aspectType == None: 
             # read Case.aspectType from foldername
             if currentDir in thisStudyStructure.aspectList:
                 self.aspectType     = currentDir
                 self.aspectRoot     = os.getcwd()
-        if currentDir[:-3] in thisStudyStructure.aspectList:
-            self.aspectType     = currentDir[:-3]
-            self.path           = os.getcwd()
-            self.caseName       = currentDir
+        if 'thisStudyStructure' in locals():
+            if currentDir[:-3] in thisStudyStructure.aspectList:
+                self.aspectType     = currentDir[:-3]
+                self.path           = os.getcwd()
+                self.caseName       = currentDir
         if self.aspectType == None: 
             sys.exit(1)
-        # set Case.structure
         if caseStructure == None :
             self.structure      = thisStudyStructure.aspectList[self.aspectType]['case000']
         else:
             self.structure      = caseStructure
+        if 'caseName' not in self.__dict__: 
+            self.caseName   = self.nextCaseName( self.aspectRoot )
+            self.path       = os.path.join( self.aspectRoot, self.caseName )
 
         # store linked cases to self
         self.caseJson = None
