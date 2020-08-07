@@ -71,7 +71,7 @@ class Case(object):
 
         # store known values to self
         self.className4 = "Case"    # only for debugging purpose
-        self.aspectRoot= storagePath
+        self.aspectRoot = storagePath
         self.aspectType = aspectType
         self.verbose    = verbose
 
@@ -83,8 +83,8 @@ class Case(object):
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
 
         currentDir  = os.path.basename( os.getcwd() )
-        # read Case.aspectType from foldername
         if self.aspectType == None: 
+            # read Case.aspectType from foldername
             if currentDir in thisStudyStructure.aspectList:
                 self.aspectType     = currentDir
                 self.aspectRoot     = os.getcwd()
@@ -187,6 +187,7 @@ class Case(object):
         #
         from fileHandling import handleStudyStructFile
         from fileHandling import handleStudyStructFolder
+        if self.verbose:    print(  "creating new case:     \t\t  >>  " +self.caseName +"  <<")
 
         # create case folder
         caseName = self.nextCaseName( self.aspectRoot )

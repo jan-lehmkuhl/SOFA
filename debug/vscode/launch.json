@@ -24,7 +24,23 @@
             "console":          "integratedTerminal"
         },
         {
-            "name":             "Python: sofa-tasks.py init",
+            "name":             "Python: sofa-tasks.py initStudy",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
+            "cwd":              "${workspaceRoot}",
+            "args":             [     "initStudy"
+                , "--verbose"
+                , "--studyName",          "study1"
+                , "--studyStructFolder",  "tools/framework/study-structures/openfoam"
+            ],
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+            "console":          "integratedTerminal"
+        },
+        {
+            "name":             "Python: sofa-tasks.py initFoam",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
