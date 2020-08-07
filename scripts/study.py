@@ -36,18 +36,21 @@ class StudyStructure(object):
         if studyStructFolder != None: 
             relativePath        = studyStructFolder     # for first try 
 
-        # convert StudyStructure.path to absolute
-        if relativePath.startswith("tools"):
-            projectRoot     = findParentFolder("project.json")
-            self.path       = os.path.join( projectRoot, relativePath )
-        elif relativePath.startswith("/"):
-            self.path       = relativePath
-        else:
-            print(  "ERROR: relativePath is not processed right")
-            pass  # ERROR TODO
+        if 'relativePath' in locals():
+            # convert StudyStructure.path to absolute
+            if relativePath.startswith("tools"):
+                projectRoot     = findParentFolder("project.json")
+                self.path       = os.path.join( projectRoot, relativePath )
+            elif relativePath.startswith("/"):
+                self.path       = relativePath
+            else:
+                print(  "ERROR: relativePath is not processed right")
+                pass  # ERROR TODO
 
         # try to load study-struct from self.path
-        # otherwise a new git-repository can be loaded
+        #   otherwise a new git-repository can be loaded
+        if 'path' not in self.__dict__:
+            self.path = "." 
         while True: 
             if os.path.exists( os.path.join( self.path, "sofa-study-structure-root.json" ) ): 
                 # load study structure root
@@ -66,7 +69,9 @@ class StudyStructure(object):
             sofaStructList      = ['INSERT url to import a new repository to tools']
             sofaStructList.extend( findChildFolders( "sofa-study-structure-root.json", startFolder=os.getcwd()+"/tools" ) )
             # TODO read known structures from `~/.config/sofa/known-sofa-study-structures.yaml`
-            sofaStructList.append( studyStructFolder )  # add passed value for retry
+            if studyStructFolder != None:
+                sofaStructList.append( studyStructFolder )  # add passed value for retry
+                #   TODO maybe its useless
 
             print("\npossible sofa study structures: ")
             for iStruct in range( len(sofaStructList) ):
