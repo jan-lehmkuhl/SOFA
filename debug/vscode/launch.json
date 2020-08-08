@@ -12,11 +12,11 @@
             "console":          "integratedTerminal"
         },
         {
-            "name":             "Python: sofa-tasks.py symlinks",
+            "name":             "Python: sofa-tasks.py symlinks run001",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}/FOAMSTUDY1/run/run001",
+            "cwd":              "${workspaceRoot}/newStudy/run/run001",
             "args":             ["symlinks", "--verbose"],
             "stopOnEntry":      true,
             "justMyCode":       true,
@@ -31,7 +31,7 @@
             "cwd":              "${workspaceRoot}",
             "args":             [     "initStudy"
                 , "--verbose"
-                , "--studyName",          "study1"
+                , "--studyName",          "newStudy"
                 , "--studyStructFolder",  "tools/framework/study-structures/openfoam"
             ],
             "stopOnEntry":      true,

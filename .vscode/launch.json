@@ -21,7 +21,7 @@
             "cwd":              "${workspaceRoot}/../..",
             "args":             [     "initStudy"
                                     , "--verbose"
-                                    , "--studyName",          "study1"
+                                    , "--studyName",          "newStudy"
                                     , "--studyStructFolder",  "tools/framework/study-structures/openfoam"
                                 ],
             "stopOnEntry":      true,
@@ -31,11 +31,11 @@
         },
         {
             // to run this configuration in this directory, this framework should be part of a sofa project
-            "name":             "newcase ../../study1/run",
+            "name":             "newcase ../../newStudy/run",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}/../../study1/run",
+            "cwd":              "${workspaceRoot}/../../newStudy/run",
             "args":             ["newCase", "--verbose"],
             "stopOnEntry":      true,
             "justMyCode":       true,
@@ -44,11 +44,11 @@
         },
         {
             // to run this configuration in this directory, this framework should be part of a sofa project
-            "name":             "symlinks ../../study1/run/run001",
+            "name":             "symlinks ../../newStudy/run/run001",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}/../../study1/run/run001",
+            "cwd":              "${workspaceRoot}/../../newStudy/run/run001",
             "args":             ["symlinks"],
             "stopOnEntry":      true,
             "justMyCode":       true,
