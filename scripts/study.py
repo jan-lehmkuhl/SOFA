@@ -177,7 +177,7 @@ class Study(object):
                                 verbose =           verbose )
             newAspect.create()
 
-        print(  "completed structure creation of:   " +self.name)
+        print(  "completed structure creation and staging of:   " +self.name)
         # TODO commit new created items
         #   maybe stash before looping and pop now
 

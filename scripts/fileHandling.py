@@ -229,8 +229,11 @@ def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbos
 
     if fileAttributes['isSymlink']: 
         createSymlinkSavely( source, target, referencePath=debugRefPath, verbose=verbose )
+        os.system("git add " +target)
     else:
         copyFileSafely( source, target, referencePath=debugRefPath, verbose=verbose )
+        os.system("git add " +target)
+    pass
 
 
 def hasRepositoryStagedFiles(  ):
