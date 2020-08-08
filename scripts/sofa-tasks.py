@@ -21,6 +21,7 @@ sys.path.insert(1, os.path.realpath( file_path +'/../openFoam/python' ) )
 from fileHandling import createDirSafely
 from fileHandling import copyFileSafely
 from fileHandling import loadJson
+from fileHandling import hasRepositoryStagedFiles
 from folderHandling import findParentFolder
 
 from study import Study 
@@ -57,6 +58,10 @@ if args.verbose :   print("    adding also path for:    " + os.path.realpath( fi
 
 foamStructure   = readFoamStructure( verbose=args.verbose )
 
+if hasRepositoryStagedFiles(): 
+    print("\nERROR: this git repository has already staged files")
+    print(  "       please unstage or commit them and try again\n")
+    sys.exit(0)
 
 if args.entryPoint == "initStudy":
     # create new study depending on available arguments

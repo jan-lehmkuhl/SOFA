@@ -232,3 +232,11 @@ def handleStudyStructFile( studyStructHome, fileAttributes, targetFolder, verbos
     else:
         copyFileSafely( source, target, referencePath=debugRefPath, verbose=verbose )
 
+
+def hasRepositoryStagedFiles(  ):
+    var = os.system( "git diff --cached --quiet" )
+    # print("var: ", var)
+    if var == 0: 
+        return False
+    else:
+        return True
