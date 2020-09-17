@@ -1,30 +1,13 @@
 {
     // use this configuration to run vs code within your sofa project
-    
+
     "version": "0.2.0",
     "configurations": [
+
         {
-            "name":             "Python: Current File",
-            "type":             "python",
-            "request":          "launch",
-            "program":          "${file}",
-            "stopOnEntry":      true,
-            "console":          "integratedTerminal"
-        },
-        {
-            "name":             "Python: sofa-tasks.py symlinks run001",
-            "type":             "python",
-            "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}/newStudy/run/run001",
-            "args":             ["symlinks", "--verbose"],
-            "stopOnEntry":      true,
-            "justMyCode":       true,
-            "showReturnValue":  true,
-            "console":          "integratedTerminal"
-        },
-        {
-            "name":             "Python: sofa-tasks.py initStudy",
+            // creates a new study
+            // needs to remove study before
+            "name":             "initStudy",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
@@ -39,17 +22,44 @@
             "showReturnValue":  true,
             "console":          "integratedTerminal"
         },
+
+
         {
-            "name":             "Python: sofa-tasks.py initFoam",
+            // creates next case runXXX
+            // newStudy has to exist
+            "name":             "newCase runXXX",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}",
-            "args":             ["initFoam", "--verbose"],
+            "cwd":              "${workspaceRoot}/newStudy/run",
+            "args": [
+                "newCase",
+                "--verbose"
+            ],
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+            "console":          "integratedTerminal"
+        },
+
+
+        {
+            // create symlinks
+            // needs specified cadlink in mesh001/mesh.json
+            "name":             "symlinks mesh001",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
+            "cwd":              "${workspaceRoot}/newStudy/mesh/mesh001",
+            "args": [
+                "symlinks",
+                "--verbose"
+            ],
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,
             "console":          "integratedTerminal"
         }
+
     ]
 }
