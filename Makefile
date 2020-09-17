@@ -46,7 +46,7 @@ installrequirementsR:
 
 clean: badMagicNumberClean
 	echo; pwd; ls -la
-	rm */__pycache__/*.cpython-36.pyc
+	rm -f */__pycache__/*.cpython-36.pyc
 
 # delete python cache files 
 #    they can disturb execution
