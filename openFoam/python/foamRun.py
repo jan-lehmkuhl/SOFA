@@ -16,12 +16,12 @@ import pickle
 import fnmatch
 import json
 import subprocess
-import openFoam
 
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.realpath( file_path +'/../../scripts' ) ) 
 
+from case import cfdAspectSelector
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
@@ -347,7 +347,7 @@ if entryPoint == "run":
     runner.run()
 if entryPoint == "cleanRun":
     runner.clean()
-    builder = openFoam.cfdAspectSelector()
+    builder = cfdAspectSelector()
     builder.makeSymlinks()
 if entryPoint == "view":
     runner.view()
