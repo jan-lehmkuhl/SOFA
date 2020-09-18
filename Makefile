@@ -18,10 +18,11 @@ include global-make.mk
 exampleJsonValue     = $(shell node -p "require('./root-dummies/project.json').foamFolders[0]")
 
 requirementtest: 
-	echo "show-json-value-afterwards:   " $(exampleJsonValue) 
-	python   --version
-	python3  --version
-	simpleFoam -help
+	@echo "show-json-value-afterwards:   " $(exampleJsonValue) 
+	@python     --version
+	@python3    --version
+	@simpleFoam -help      | grep Using
+	@R          --version  | grep "R version"
 
 installrequirements: installrequirementsR
 	sudo apt-get update

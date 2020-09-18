@@ -2,7 +2,7 @@
 
     cd tools/framework
     make installrequirementsR
-    R
+    sudo R
 
 start R CLI with: `R` and execute:
 
@@ -12,5 +12,7 @@ start R CLI with: `R` and execute:
     install.packages("openssl")
     # maybe a restart is required
 
-    q()
-    y   # save workspace
+    quit()
+    n   # save workspace
+
+sometimes a additional manual execution within `R Studio Desktop` of `meshReport.Rmd` may also help
