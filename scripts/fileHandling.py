@@ -106,16 +106,16 @@ def createSymlinkSavely(src, dst, referencePath=None, verbose=False ):
         relSrc = os.path.relpath(src, os.path.dirname(dst))
         srcShort = convertToRelativePath( src, referencePath )
         dstShort = convertToRelativePath( dst, referencePath )
-        if not os.path.exists(dst):
-            print("Creating link to     %s \t\t from %s" % (dstShort, srcShort))
-            os.symlink(relSrc, dst)
-        elif os.path.islink(dst):
+        if os.path.islink(dst):
             if not os.readlink(dst) == relSrc:
-                print("Overwriting existing link with link from >%s< to >%s<" % (srcShort, dstShort))
+                print("Overwriting link     %s \t\t with pointer to   %s" % (dstShort, srcShort))
                 os.remove(dst)
                 os.symlink(relSrc, dst)
             else:
-                print("Skip existing link to    ", src)
+                if verbose: print("Skip correct link    %s \t\t with pointer to   %s" % (dstShort, srcShort))
+        elif not os.path.exists(dst):
+            print("Creating link to     %s \t\t with pointer to   %s" % (dstShort, srcShort))
+            os.symlink(relSrc, dst)
         else:
             print("Unabel to create target >%s< since it exists" % dst)
     else:
