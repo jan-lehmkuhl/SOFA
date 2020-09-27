@@ -47,12 +47,12 @@ installrequirementsR:
 
 clean: badMagicNumberClean
 	echo; pwd; ls -la
-	rm -f */__pycache__/*.cpython-36.pyc
 
 # delete python cache files 
 #    they can disturb execution
 badMagicNumberClean:
-	find . -name '*.pyc' -delete
+	find . -wholename '*/scripts/fileHandling.pyc' -delete
+	find . -wholename '*/__pycache__/*.cpython-*.pyc' -delete
 
 
 # ideas

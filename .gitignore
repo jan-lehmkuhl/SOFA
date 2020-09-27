@@ -1,4 +1,5 @@
 
 
 .gitmodules
-**/__pycache__/*.cpython-36.pyc
+scripts/fileHandling.pyc
+**/__pycache__/*.cpython-*.pyc

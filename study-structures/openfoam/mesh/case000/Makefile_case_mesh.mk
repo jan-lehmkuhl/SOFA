@@ -44,6 +44,7 @@ clean: cleanfreecadmesh cleanframeworkmesh cleanReport updateSymlinks
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
 	rm -f pvScriptMesh.py
+	make -C ../../../tools/framework  clean
 
 
 

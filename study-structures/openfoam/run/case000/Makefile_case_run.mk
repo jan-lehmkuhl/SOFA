@@ -37,6 +37,7 @@ view:
 clean: cleanRun cleanFreecad updateSymlinks
 	rm -rf doc/meshReport
 	find . -empty -type d -delete
+	make -C ../../../tools/framework  clean
 
 
 

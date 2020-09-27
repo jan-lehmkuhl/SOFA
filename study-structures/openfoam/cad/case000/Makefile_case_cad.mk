@@ -26,6 +26,7 @@ view:
 # remove all from commited sources created files and links
 clean: cleanfreecadoutput cleanVTK
 	find . -empty -type d -delete
+	make -C ../../../tools/framework  clean
 
 
 
