@@ -191,11 +191,10 @@ class Case(object):
         #
         from fileHandling import handleStudyStructFile
         from fileHandling import handleStudyStructFolder
-        if self.verbose:    print(  "creating new case:     \t\t  >>  " +self.caseName +"  <<")
+        if self.verbose:    print(  "creating case:         \t\t  >>  " +self.caseName +"  <<")
 
         # create case folder
-        caseName = self.nextCaseName( self.aspectRoot )
-        self.casePath = os.path.join( self.aspectRoot, caseName ) 
+        self.casePath = os.path.join( self.aspectRoot, self.caseName ) 
         createDirSafely( self.casePath, debugRefPath=self.projectRoot )
 
         # create caseXXX content
