@@ -91,6 +91,8 @@ class Case(object):
                 self.aspectType     = currentDir[:-3]
                 self.path           = os.getcwd()
                 self.caseName       = currentDir
+                if self.aspectRoot == None :
+                    self.aspectRoot = os.path.abspath(os.path.join(self.path, os.pardir))
         if self.aspectType == None: 
             sys.exit(1)
         if caseStructure == None :
