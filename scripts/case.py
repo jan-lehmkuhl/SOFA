@@ -114,7 +114,8 @@ class Case(object):
             self.caseJson = loadJson(self.pathToJson)
             # extract linked cases from case.json according to foamStructure gen in project.json
             foamStructure   = readFoamStructure()
-            self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
+            if 'linkName' in foamStructure[self.aspectType]: 
+                self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
                 # differentiate between single links and a list of links (survey)
                 if isinstance(self.linkedCase, str):
