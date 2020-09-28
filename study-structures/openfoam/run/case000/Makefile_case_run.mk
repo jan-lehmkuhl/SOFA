@@ -95,6 +95,7 @@ frameworkrun:
 # erase all results
 cleanRun:
 	python3 ../../../tools/framework/openFoam/python/foamRun.py cleanRun
+	rm -rf logs
 
 
 
