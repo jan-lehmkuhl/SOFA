@@ -27,11 +27,11 @@
         {
             // creates next case runXXX
             // newStudy has to exist
-            "name":             "newCase runXXX",
+            "name":             "create newCase in run",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}/newStudy/run",
+            "cwd":              "${workspaceRoot}/INSERT_STUDY_NAME/run",
             "args": [
                 "newCase",
                 "--verbose"
@@ -46,11 +46,11 @@
         {
             // create symlinks
             // needs specified cadlink in mesh001/mesh.json
-            "name":             "symlinks mesh001",
+            "name":             "symlinks meshXXX",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}/newStudy/mesh/mesh001",
+            "cwd":              "${workspaceRoot}/INSERT_STUDY_NAME/mesh/mesh001",
             "args": [
                 "symlinks",
                 "--verbose"
