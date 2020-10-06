@@ -8,7 +8,7 @@ import shutil
 # =================================================================================================
 
 os.system("git init")
-os.system("git submodule add git@gitlab.com:schlupp/simulation-projects.git tools/framework ")
+os.system("git submodule add git@gitlab.com:sofa-framework/core.git tools/framework ")
 
 
 # copy first files
