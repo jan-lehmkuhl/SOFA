@@ -208,6 +208,22 @@ class Case(object):
         return(True)
 
 
+    def createUpstreamAspectLinks(self):
+        from fileHandling import createSymlinkSavely
+        if self.verbose:    print(  "create upstream aspect links for:  \t  >>  " +self.caseName +"  <<")
+
+        # create upstreamAspectLink
+        if 'upstreamAspects' in self.structure : 
+            for thisUpstreamConnection in self.structure['upstreamAspects'] : 
+                # sort information
+                thisUpstreamAspect  = thisUpstreamConnection['upstreamAspect']
+                upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]     # TODO read for free key depth
+                # combine and write
+                upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
+                createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
+        return(True)
+
+
     def clone(self):
         # create a clone of the current case
         #

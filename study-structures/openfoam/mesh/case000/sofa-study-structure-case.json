@@ -15,5 +15,13 @@
             "targetPath": ".gitignore",
             "isSymlink": true
         }
+    ],
+
+    "upstreamAspects": [
+        {
+            "upstreamAspect":   "cad",
+            "caseJsonKey": [    "buildSettings", "cadLink" ],
+            "isOptional":       true
+        }
     ]
 }

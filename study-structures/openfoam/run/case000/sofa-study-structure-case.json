@@ -15,5 +15,14 @@
             "targetPath": ".gitignore",
             "isSymlink": true
         }
+    ],
+
+    "upstreamAspects": [
+        {
+            "upstreamAspect":   "mesh",
+            "caseJsonKey": [    "buildSettings", "meshLink" ],
+            "isOptional":       true
+        }
     ]
+
 }
