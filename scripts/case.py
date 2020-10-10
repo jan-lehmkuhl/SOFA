@@ -218,9 +218,9 @@ class Case(object):
                 # sort information
                 thisUpstreamAspect  = thisUpstreamConnection['upstreamAspect']
                 upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]     # TODO read for free key depth
-                # combine and write
                 upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
-                createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
+                if thisUpstreamConnection['createDirectSymlink']: 
+                    createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
         return(True)
 
 

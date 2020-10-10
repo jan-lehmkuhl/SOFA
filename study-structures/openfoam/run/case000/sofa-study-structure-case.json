@@ -21,6 +21,7 @@
         {
             "upstreamAspect":   "mesh",
             "caseJsonKey": [    "buildSettings", "meshLink" ],
+            "createDirectSymlink": true,
             "isOptional":       true
         }
     ]

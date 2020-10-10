@@ -21,6 +21,7 @@
         {
             "upstreamAspect":   "cad",
             "caseJsonKey": [    "buildSettings", "cadLink" ],
+            "createDirectSymlink": true,
             "isOptional":       true
         }
     ]
