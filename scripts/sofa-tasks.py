@@ -106,7 +106,7 @@ elif args.entryPoint == "initCase":
     currentCase.initCase()
 
 elif args.entryPoint == "symlinks":
-    currentCase = cfdAspectSelector()
+    currentCase = cfdAspectSelector( verbose=args.verbose )
     currentCase.makeSymlinks()
 
 elif args.entryPoint == "clone":

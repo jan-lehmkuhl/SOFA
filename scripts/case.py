@@ -29,7 +29,7 @@ from folderHandling import findParentFolder
 
 
 
-def cfdAspectSelector(path=None):
+def cfdAspectSelector(path=None, verbose=False):
     # determines the aspectType of the case from the name of the containing folder
     #
     # Args:
@@ -50,13 +50,13 @@ def cfdAspectSelector(path=None):
         [i for i in caseFolder if not i.isdigit()])  # remove digits
     if aspectName in readFoamStructure():
         if aspectName == "cad":
-            return(CadCase(path=path))
+            return(CadCase(path=path,verbose=verbose))
         elif aspectName == "mesh":
-            return(MeshCase(path=path))
+            return(MeshCase(path=path,verbose=verbose))
         elif aspectName == "run":
-            return(RunCase(path=path))
+            return(RunCase(path=path,verbose=verbose))
         elif aspectName == "survey":
-            return(SurveyCase(path=path))
+            return(SurveyCase(path=path,verbose=verbose))
     else:
         print("Unknown aspect >%s< in caseFolder: >%s<" % (aspectName, caseFolder) )
         return(False)
@@ -359,6 +359,7 @@ class Case(object):
         # Lists of folders and extensions to delete
         from aspect import readFoamStructure
 
+        if self.verbose:    print("start removing symlinks")
         extensions = [".stl", ".vtk"]
         folder = ["polyMesh", "cadPics", "meshPics",
                   "drafts", "meshReport", "layerSizing"]
@@ -383,6 +384,8 @@ class Case(object):
                         print("Removing link >%s<" %
                               os.path.join(root, fileName))
         self.symlinksClean = True
+        if self.verbose:    print("end removing symlinks")
+
 
     def copyReport(self, run = False):
         # method to copy reports either from the template directory or
@@ -530,9 +533,9 @@ class Case(object):
 class CadCase(Case):
     # Specialized class for cad cases, which inherits from the base Case class
 
-    def __init__(self, path="./"):
+    def __init__(self, path="./", verbose=False):
         # execute init of parent class
-        super().__init__(aspectType="cad", path=path)
+        super().__init__(aspectType="cad", path=path, verbose=verbose)
         self.name = "CadCase"   # only for debugging purpose
 
     def create(self):
@@ -573,8 +576,8 @@ class CadCase(Case):
 class MeshCase(Case):
      # Specialized class for cad cases, which inherits from the base Case class
 
-    def __init__(self, path="./"):
-        super().__init__(aspectType="mesh", path=path)
+    def __init__(self, path="./", verbose=False):
+        super().__init__(aspectType="mesh", path=path, verbose=verbose)
         self.name = "MeshCase"
         self.Builder = foamBuilder()
 
@@ -642,8 +645,8 @@ class MeshCase(Case):
 class RunCase(Case):
     # Class for run cases
 
-    def __init__(self, path=None):
-        super().__init__(aspectType="run", path=path)
+    def __init__(self, path=None, verbose=False):
+        super().__init__(aspectType="run", path=path, verbose=verbose)
         self.name = "RunCase"
         if self.caseJson:
             self.Builder = foamBuilder(self.caseJson["buildSettings"])
@@ -692,8 +695,8 @@ class RunCase(Case):
 class SurveyCase(Case):
     # Class for survey cases
 
-    def __init__(self, path=None):
-        super().__init__(aspectType="survey", path=path)
+    def __init__(self, path=None, verbose=False):
+        super().__init__(aspectType="survey", path=path, verbose=verbose)
         self.name = "surveyCase"
 
     def makeSymlinks(self):
