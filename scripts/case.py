@@ -221,6 +221,9 @@ class Case(object):
                 upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
                 if thisUpstreamConnection['createDirectSymlink']: 
                     createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
+                if 'specialLinks' in thisUpstreamConnection : 
+                    for thisLink in thisUpstreamConnection['specialLinks'] : 
+                        createSymlinkSavely(os.path.join(upstreamTarget,thisLink['upstreamCasePath']), thisLink['targetPath'], verbose=self.verbose)
         return(True)
 
 

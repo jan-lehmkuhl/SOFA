@@ -22,6 +22,12 @@
             "upstreamAspect":   "cad",
             "caseJsonKey": [    "buildSettings", "cadLink" ],
             "createDirectSymlink": true,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "stl",
+                    "targetPath":       "constant/triSurface"
+                }
+            ],
             "isOptional":       true
         }
     ]

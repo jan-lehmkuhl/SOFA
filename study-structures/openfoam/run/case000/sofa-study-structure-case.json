@@ -22,6 +22,12 @@
             "upstreamAspect":   "mesh",
             "caseJsonKey": [    "buildSettings", "meshLink" ],
             "createDirectSymlink": true,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "constant/polyMesh",
+                    "targetPath":       "constant/polyMesh"
+                }
+            ],
             "isOptional":       true
         }
     ]
