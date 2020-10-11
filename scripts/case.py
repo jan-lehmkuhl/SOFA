@@ -228,16 +228,25 @@ class Case(object):
 
                 if 'specialLinks' in thisUpstreamConnection : 
                     for thisLink in thisUpstreamConnection['specialLinks'] : 
-                        # define src
+                        # define src/dst
                         if thisUpstreamConnection['useCaseJsonWithoutAspect']:
                             src         = os.path.join( '..','..',upstreamCase, thisLink['upstreamCasePath'] )
                         else:
                             src         = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
-                        # create link
-                        if thisLink['copyFile']: 
-                            copyFileSafely(src, thisLink['targetPath'], overwrite=True, verbose=self.verbose)
+                        dst = thisLink['targetPath']
+
+                        # create file
+                        if thisLink['separateFiles']:
+                            for element in os.listdir(src):
+                                if thisLink['copyFile']: 
+                                    copyFileSafely( os.path.join(src,element), os.path.join(dst,element), overwrite=True, verbose=self.verbose )
+                                else:
+                                    createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
                         else:
-                            createSymlinkSavely( src, thisLink['targetPath'], verbose=self.verbose)
+                            if thisLink['copyFile']: 
+                                copyFileSafely( src, dst, overwrite=True, verbose=self.verbose )
+                            else:
+                                createSymlinkSavely( src, dst, verbose=self.verbose )
         return(True)
 
 

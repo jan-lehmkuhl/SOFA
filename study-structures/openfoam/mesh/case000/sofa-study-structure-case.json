@@ -38,6 +38,7 @@
                 {
                     "upstreamCasePath": "stl",
                     "targetPath":       "constant/triSurface",
+                    "separateFiles":    true, 
                     "copyFile":         false
                 }
             ],
@@ -52,6 +53,7 @@
                 {
                     "upstreamCasePath": "meshReport.Rmd",
                     "targetPath":       "doc/meshReport/meshReport.Rmd",
+                    "separateFiles":    false,
                     "copyFile":         true
                 }
             ],
