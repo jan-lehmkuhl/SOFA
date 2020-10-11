@@ -154,6 +154,8 @@ def copyFileSafely(src, dst, referencePath=None, verbose=False ):
                 dstShort = convertToRelativePath( dst, referencePath, verbose )
                 if not os.path.exists(dst):
                     print("Copying file to      %s \t from %s" % (dstShort, srcShort))
+                    if not os.path.exists( os.path.dirname(dst) ):
+                        createDirSafely( os.path.dirname(dst) )
                     shutil.copyfile(src, dst)
                 else:
                     print("Skip existing file       ", dstShort )
