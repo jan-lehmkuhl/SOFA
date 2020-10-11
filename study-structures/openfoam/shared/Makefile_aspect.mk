@@ -8,6 +8,8 @@
 showOverviewReport:
 	if [ $(shell basename "`pwd`" ) = "mesh" ] ; then     \
 		xdg-open doc/meshOverview.html                  ; \
+	elif [ $(shell basename "`pwd`" ) = "run" ] ; then     \
+		xdg-open doc/runOverview.html                  ; \
 	fi ;
 
 

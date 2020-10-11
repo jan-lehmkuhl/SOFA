@@ -76,7 +76,7 @@ updateCaseReport:
 
 
 showCaseReport:
-	xdg-open doc/meshReport/runReport.html
+	xdg-open doc/runReport/runReport.html
 
 
 showOverviewReport:
