@@ -32,6 +32,10 @@
         {
             "relPath": "doc/reportTemplate01",
             "createGitKeep": true
+        },
+        {
+            "relPath": "shared/postStates",
+            "createGitKeep": true
         }
     ]
 }
