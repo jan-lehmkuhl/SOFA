@@ -134,7 +134,7 @@ def createSymlinkSavely(src, dst, referencePath=None, verbose=False ):
     else:
         print("Unabel to find >%s<" % src)
 
-def copyFileSafely(src, dst, referencePath=None, verbose=False ):
+def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False ):
     # copies a file if it exists
     #
     # Args:
@@ -144,6 +144,8 @@ def copyFileSafely(src, dst, referencePath=None, verbose=False ):
     # Return:
     #   side effects
     #
+    if referencePath == None:
+        referencePath = os.getcwd()
     if os.path.islink(src):
         linkTo = os.readlink(src)
         createSymlinkSavely(linkTo, dst)
@@ -152,6 +154,9 @@ def copyFileSafely(src, dst, referencePath=None, verbose=False ):
             if not os.path.isdir(src):
                 srcShort = convertToRelativePath( src, referencePath, verbose )
                 dstShort = convertToRelativePath( dst, referencePath, verbose )
+                if overwrite and os.path.exists(dst): 
+                    if verbose: print("remove for replacing: ", dstShort)
+                    os.remove(dst)
                 if not os.path.exists(dst):
                     print("Copying file to      %s \t from %s" % (dstShort, srcShort))
                     if not os.path.exists( os.path.dirname(dst) ):
