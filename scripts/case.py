@@ -222,11 +222,22 @@ class Case(object):
                 thisUpstreamAspect  = thisUpstreamConnection['upstreamAspect']
                 upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]     # TODO read for free key depth
                 upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
+
                 if thisUpstreamConnection['createDirectSymlink']: 
                     createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
+
                 if 'specialLinks' in thisUpstreamConnection : 
                     for thisLink in thisUpstreamConnection['specialLinks'] : 
-                        createSymlinkSavely(os.path.join(upstreamTarget,thisLink['upstreamCasePath']), thisLink['targetPath'], verbose=self.verbose)
+                        # define src
+                        if thisUpstreamConnection['useCaseJsonWithoutAspect']:
+                            src         = os.path.join( '..','..',upstreamCase, thisLink['upstreamCasePath'] )
+                        else:
+                            src         = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
+                        # create link
+                        if thisLink['copyFile']: 
+                            copyFileSafely(src, thisLink['targetPath'], overwrite=True, verbose=self.verbose)
+                        else:
+                            createSymlinkSavely( src, thisLink['targetPath'], verbose=self.verbose)
         return(True)
 
 

@@ -32,11 +32,27 @@
         {
             "upstreamAspect":   "cad",
             "caseJsonKey": [    "buildSettings", "cadLink" ],
+            "useCaseJsonWithoutAspect": false,
             "createDirectSymlink": true,
             "specialLinks": [
                 {
                     "upstreamCasePath": "stl",
-                    "targetPath":       "constant/triSurface"
+                    "targetPath":       "constant/triSurface",
+                    "copyFile":         false
+                }
+            ],
+            "isOptional":       true
+        },
+        {
+            "upstreamAspect":           "report",
+            "caseJsonKey": [            "buildSettings", "report" ],
+            "useCaseJsonWithoutAspect": true,
+            "createDirectSymlink":      false,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "meshReport.Rmd",
+                    "targetPath":       "doc/meshReport/meshReport.Rmd",
+                    "copyFile":         true
                 }
             ],
             "isOptional":       true

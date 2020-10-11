@@ -30,11 +30,27 @@
         {
             "upstreamAspect":   "mesh",
             "caseJsonKey": [    "buildSettings", "meshLink" ],
+            "useCaseJsonWithoutAspect": false,
             "createDirectSymlink": true,
             "specialLinks": [
                 {
                     "upstreamCasePath": "constant/polyMesh",
-                    "targetPath":       "constant/polyMesh"
+                    "targetPath":       "constant/polyMesh",
+                    "copyFile":         false
+                }
+            ],
+            "isOptional":       true
+        },
+        {
+            "upstreamAspect":           "report",
+            "caseJsonKey": [            "buildSettings", "report" ],
+            "useCaseJsonWithoutAspect": true,
+            "createDirectSymlink":      false,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "runReport.Rmd",
+                    "targetPath":       "doc/runReport/runReport.Rmd",
+                    "copyFile":         true
                 }
             ],
             "isOptional":       true
