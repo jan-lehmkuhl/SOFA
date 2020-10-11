@@ -104,16 +104,17 @@ def createSymlinkSavely(src, dst, referencePath=None, verbose=False ):
     #
     if not referencePath:
         referencePath = os.getcwd()
-    if os.path.exists(src):
-        # destination
-        dstShort    = convertToRelativePath( dst, referencePath )   # for output relative to reference
-        dstAbs      = os.path.abspath(dst)
-        dstFolder   = os.path.dirname(dstAbs)
-        # source/link-target
-        srcShort    = convertToRelativePath(src, referencePath )
-        srcRel      = os.path.relpath(      src, dstFolder )
-        srcAbs      = os.path.abspath(      src)
 
+    # destination
+    dstShort    = convertToRelativePath( dst, referencePath )   # for output relative to reference
+    dstAbs      = os.path.abspath(dst)
+    dstFolder   = os.path.dirname(dstAbs)
+    # source/link-target
+    srcShort    = convertToRelativePath(src, referencePath )
+    srcRel      = os.path.relpath(      src, dstFolder )
+    srcAbs      = os.path.abspath(      src)
+
+    if os.path.exists(src):
         if not os.path.exists(dstFolder):
             if verbose: print("missing parent folder of link: ", dstShort)
             createDirSafely(dstFolder, debugRefPath=referencePath)
