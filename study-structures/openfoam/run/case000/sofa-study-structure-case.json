@@ -37,6 +37,12 @@
                     "upstreamCasePath": "constant/polyMesh",
                     "targetPath":       "constant/polyMesh",
                     "copyFile":         false
+                },
+                {
+                    // additional meshReport-Link beside runReport
+                    "upstreamCasePath": "doc/meshReport",
+                    "targetPath":       "doc/meshReport",
+                    "copyFile":         false
                 }
             ],
             "isOptional":       true
