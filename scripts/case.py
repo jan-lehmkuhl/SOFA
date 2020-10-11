@@ -204,7 +204,10 @@ class Case(object):
         if 'files' in self.structure : 
             for thisFile in self.structure['files'] : 
                 handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
-
+        if 'caseLinks' in self.structure : 
+            for thisFile in self.structure['caseLinks'] : 
+                createSymlinkSavely(  os.path.join(self.casePath, thisFile['sourcePath'])
+                                    , os.path.join(self.casePath, thisFile['targetPath']) , referencePath=self.casePath, verbose=self.verbose)
         return(True)
 
 

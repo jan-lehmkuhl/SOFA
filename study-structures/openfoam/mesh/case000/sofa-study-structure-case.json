@@ -1,5 +1,6 @@
 {
     "files": [
+        // created in case but linked and relative to study-structure
         {
             "sourcePath": "mesh.json",
             "targetPath": "mesh.json",
@@ -17,7 +18,17 @@
         }
     ],
 
+    "caseLinks": [
+        // linked and relative from created case
+        {
+            "sourcePath": "../shared/postStates",
+            "targetPath": "postStates",
+            "isSymlink": true
+        }
+    ],
+
     "upstreamAspects": [
+        // linking files to upstream case defined in case.json
         {
             "upstreamAspect":   "cad",
             "caseJsonKey": [    "buildSettings", "cadLink" ],
