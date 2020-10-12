@@ -80,6 +80,7 @@ class Case(object):
         if caseStructure == None :
             self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
+            self.studyName = os.path.basename(self.studyRoot)
         currentDir  = os.path.basename( os.getcwd() )
         if self.aspectType == None: 
             # read Case.aspectType from foldername
@@ -258,60 +259,60 @@ class Case(object):
         # Return:
         #   side effects: makes a clone of the case
         #
-        currentCase = os.path.basename(os.getcwd())
+        currentCase = self.path
         caseName = self.nextCaseName(os.pardir)
-        path = os.path.join(os.pardir, caseName)
+        clonePath = os.path.join(os.pardir, caseName)
         while True:
-            print("Clone case from >%s< to >%s< ? (y/n)" %
-                  (currentCase, caseName))
-            answer = input().lower()
-            if answer in ["y", "yes"]:
+            print("Clone case from >%s< to >%s< ? (Y/n)" % (currentCase, caseName))
+            answer1 = input().lower()
+            if answer1 in ["y", "yes",""]:
                 while True:
-                    print("Include results? (y/n)")
+                    print("Include results? (y/N)")
                     answer2 = input().lower()
                     if answer2 in ["y", "yes"]:
                         print("Cloning complete case >%s< to >%s<" % (currentCase, caseName))
                         shutil.copytree(os.path.join(os.pardir, currentCase),
-                                        path, symlinks=True)
+                                        clonePath, symlinks=True)
                         break
-                    if answer2 in ["n", "no"]:
+                    if answer2 in ["n", "no",""]:
                         print("Cloning case >%s< to >%s< without results" % (currentCase, caseName))
-                        os.makedirs(os.path.join(os.pardir, caseName))
+                        os.makedirs(clonePath)
                         for name in os.listdir("."):
                             if fnmatch.fnmatch(name, "[1-9]*") or fnmatch.fnmatch(name, "[0-9].[0-9]*"):
                                 continue
                             elif fnmatch.fnmatch(name, "processor*"):
-                                createDirSafely(os.path.join(path,name))
+                                createDirSafely(os.path.join(clonePath,name))
                                 for subDir in os.listdir(os.path.join("./", name)):
                                     if fnmatch.fnmatch(subDir, "[1-9]*") or fnmatch.fnmatch(subDir, "[0-9].[0-9]*"):
                                         continue
                                     else:
-                                        copyFolderSafely(os.path.join(name, subDir), os.path.join(path,name,subDir))
+                                        copyFolderSafely(os.path.join(name, subDir), os.path.join(clonePath,name,subDir))
                                 continue
                             elif fnmatch.fnmatch(name, "postProcessing*"):
                                 continue
                             elif fnmatch.fnmatch(name, "log*"):
                                 continue
                             elif os.path.isfile(name):
-                                copyFileSafely(name,os.path.join(path,name))
+                                copyFileSafely(name,os.path.join(clonePath,name))
                                 continue
                             else:
-                                copyFolderSafely(name,os.path.join(path,name))
+                                copyFolderSafely(name,os.path.join(clonePath,name))
                         break
                 while True:
-                    print("\nCommit cloning of >%s< to >%s< ? (y/n)" %
-                            (currentCase, caseName))
+                    # git handling
+                    os.system('git add %s' % clonePath)
+                    message = '[%s %s] #CLONE from >%s<' % (self.studyName, caseName, os.path.basename(currentCase))
+                    print("staged commit for %s with commit-message: \n\t%s" % (caseName, message) )
+                    print("\nCommit cloning of >%s< to >%s< ? (y/N)" % (os.path.basename(currentCase), caseName))
                     answer3 = input().lower()
                     if answer3 in ["y", "yes"]:
-                        studyName = self.getStudyName()
-                        os.system('git add %s' % path)
-                        os.system('git commit -m "[%s%s] #CLONE \'cloning case >%s< to >%s<\'"' % (
-                            studyName, caseName.capitalize(), currentCase, caseName))
+                        os.system('git commit -m "%s"' % message)
                         break
-                    elif answer3 in ["n", "no"]:
+                    elif answer3 in ["n", "no",""]:
                         break
+                    pass
                 break
-            if answer in ["n", "no"]:
+            if answer1 in ["n", "no"]:
                 break
 
     def clear(self):

@@ -113,7 +113,7 @@ elif args.entryPoint == "symlinks":
     thisCase.createUpstreamAspectLinks()
 
 elif args.entryPoint == "clone":
-    currentCase = cfdAspectSelector()
+    currentCase = Case( verbose=args.verbose )
     currentCase.clone()
 
 elif args.entryPoint == "clear":
