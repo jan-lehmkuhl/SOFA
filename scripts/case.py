@@ -68,25 +68,33 @@ class Case(object):
     def __init__(self, storagePath=None, aspectType=None, caseStructure=None, verbose=False, path="./"):
         from aspect import readFoamStructure
         from study import StudyStructure
+        import fnmatch
 
         # store known values to self
+        # ================================================================================
         self.className4 = "Case"    # only for debugging purpose
         self.aspectRoot = storagePath
         self.aspectType = aspectType
         self.verbose    = verbose
+        if self.verbose:
+            print("start case constructor")
+        currentDir  = os.path.basename( os.getcwd() )
 
-        # search for sofa enviroment provided information
+        # search for sofa environment provided information
+        # ================================================================================
+        # project handling
         self.projectRoot    = findParentFolder( "project.json" )
         if caseStructure == None :
             self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
             self.studyName = os.path.basename(self.studyRoot)
-        currentDir  = os.path.basename( os.getcwd() )
+        # aspect handling
         if self.aspectType == None: 
             # read Case.aspectType from foldername
             if currentDir in thisStudyStructure.aspectList:
                 self.aspectType     = currentDir
                 self.aspectRoot     = os.getcwd()
+        # case handling
         if 'thisStudyStructure' in locals():
             if currentDir[:-3] in thisStudyStructure.aspectList:
                 self.aspectType     = currentDir[:-3]
@@ -96,23 +104,34 @@ class Case(object):
                     self.aspectRoot = os.path.abspath(os.path.join(self.path, os.pardir))
         if self.aspectType == None: 
             sys.exit(1)
+
         if caseStructure == None :
             self.structure      = thisStudyStructure.aspectList[self.aspectType]['case000']
         else:
             self.structure      = caseStructure
+
         if 'caseName' not in self.__dict__: 
+            self.createNew  = True
             self.caseName   = self.nextCaseName( self.aspectRoot )
             self.path       = os.path.join( self.aspectRoot, self.caseName )
+        else:
+            self.createNew  = False
+            for file in os.listdir( self.path ):
+                if fnmatch.fnmatch(file, "sofa."+ self.aspectType +"*.json"):
+                    if self.verbose: 
+                        print("with case-json:   "+ file+ "\tin: "+ self.path )
+                    self.pathToJson = os.path.join(self.path, file)
+
 
         # store linked cases to self
+        # ================================================================================
         self.caseJson = None
         self.linkedCase = None
         self.linkedReport = None
         self.pathToLinkedCase = None
         self.pathToLinkedReport = None
         self.symlinksClean = False
-        self.pathToJson = os.path.join(self.path, "sofa."+ self.aspectType +".json")
-        if os.path.exists(self.pathToJson):
+        if os.path.exists(self.path):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
             # extract linked cases from case.json according to foamStructure gen in project.json
@@ -204,6 +223,11 @@ class Case(object):
                 handleStudyStructFolder( self.structure['localpath'], thisFolder, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
         if 'files' in self.structure : 
             for thisFile in self.structure['files'] : 
+                if 'onlyAtCaseCreation' in thisFile: 
+                    if thisFile['onlyAtCaseCreation'] and not self.createNew : 
+                        if self.verbose: 
+                            print("Skip onlyAtCreation file: "+ thisFile['targetPath'])
+                        continue
                 handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
         if 'caseLinks' in self.structure : 
             for thisFile in self.structure['caseLinks'] : 

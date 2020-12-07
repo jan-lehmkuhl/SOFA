@@ -3,7 +3,8 @@
         {
             "sourcePath": "run.json",
             "targetPath": "sofa.run.json",
-            "isSymlink": false
+            "isSymlink": false,
+            "onlyAtCaseCreation": true
         },
         {
             "sourcePath": "Makefile_case_run.mk",

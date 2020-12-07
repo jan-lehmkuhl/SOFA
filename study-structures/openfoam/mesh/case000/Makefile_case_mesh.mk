@@ -2,7 +2,8 @@
 
 
 # include ../../../tools/framework/global-make.mk
-cadFolder       = $(shell node -p "require('./mesh.json').buildSettings.cadLink")
+jsonfile        = $(shell find . -name 'sofa.mesh*.json')
+linkedCadCase   = $(shell node -p "require('$(jsonfile)').buildSettings.cadLink")
 
 
 
@@ -11,7 +12,7 @@ cadFolder       = $(shell node -p "require('./mesh.json').buildSettings.cadLink"
 
 # default mesh creating target
 all: 
-	make -C $(cadFolder) cad                           ; \
+	make -C $(linkedCadCase) cad                           ; \
 	make mesh 
 	make view
 
@@ -97,11 +98,11 @@ showOverviewReport:
 # links cadXXX/stl/*.stl to constant/triSurface
     # >make -C CAD linkfreecadstl< links stl-files in meshCase to cadXXX/stl/*.stl 
 linkCadStlFiles:
-	if [ -f "Allmesh" ]  &&  [ "$(cadFolder)" != "" ]  ; then                             \
-		make -C ../../cad/$(cadFolder)  linkfreecadstl                                  ; \
+	if [ -f "Allmesh" ]  &&  [ "$(linkedCadCase)" != "" ]  ; then                             \
+		make -C ../../cad/$(linkedCadCase)  linkfreecadstl                                  ; \
 		if [ ! -d constant/triSurface ] ; then   mkdir -p constant/triSurface   ; fi    ; \
 		cd constant/triSurface                                                          ; \
-		ln -sf ../../../../cad/$(cadFolder)/stl/*.stl  .                                ; \
+		ln -sf ../../../../cad/$(linkedCadCase)/stl/*.stl  .                                ; \
 		echo "following files exist now in constant/triSurface" ;  ls -l                ; \
 	fi ;
 
@@ -110,13 +111,13 @@ linkCadStlFiles:
     # can be used to overwrite the dummy settings from full-controll meshing
     # stl files remain in meshCase
 fetchFreecadMeshSetup: linkCadStlFiles
-	mv    -f  ../../cad/$(cadFolder)/meshCase/Allmesh   .
+	mv    -f  ../../cad/$(linkedCadCase)/meshCase/Allmesh   .
 	mkdir -p  system
-	mv    -f  ../../cad/$(cadFolder)/meshCase/system/*  ./system
+	mv    -f  ../../cad/$(linkedCadCase)/meshCase/system/*  ./system
 
 
 openfreecad:
-	make -C ../../cad/$(cadFolder)  openfreecadgui
+	make -C ../../cad/$(linkedCadCase)  openfreecadgui
 # and write mesh case in gui
 
 

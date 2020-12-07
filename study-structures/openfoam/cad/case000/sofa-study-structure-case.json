@@ -3,7 +3,8 @@
         {
             "sourcePath": "cad.json",
             "targetPath": "sofa.cad.json",
-            "isSymlink": false
+            "isSymlink": false,
+            "onlyAtCaseCreation": true
         },
         {
             "sourcePath": "Makefile_case_cad.mk",

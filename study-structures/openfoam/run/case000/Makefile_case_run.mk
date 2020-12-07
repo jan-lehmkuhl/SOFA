@@ -3,8 +3,11 @@
 
 # include ../../../tools/framework/global-make.mk
 
-meshFolder       = $(shell node -p "require('./run.json').buildSettings.meshLink")
-cadFolder        = $(shell node -p "require('../../mesh/$(meshFolder)/mesh.json').buildSettings.cadLink")
+jsonFile         = $(shell find . -name 'sofa.run*.json')
+linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
+
+jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
+linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings.cadLink")
 
 
 
@@ -23,7 +26,7 @@ run: updateSymlinks
 
 
 mesh: 
-	make -C $(meshFolder) mesh
+	make -C $(linkedMeshCase) mesh
 
 
 # opens reports & paraview
@@ -104,8 +107,8 @@ cleanRun:
 
 # can be used to overwrite the dummy settings
 copyfreecadcasefiles: updateSymlinks
-	cp -rf ../../cad/$(cadFolder)/case/* .
-	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(meshFolder)"\' Allrun
+	cp -rf ../../cad/$(linkedCadCase)/case/* .
+	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(linkedMeshCase)"\' Allrun
 
 
 cleanFreecad: 

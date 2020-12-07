@@ -3,7 +3,8 @@
         {
             "sourcePath": "survey.json",
             "targetPath": "survey.json",
-            "isSymlink": false
+            "isSymlink": false,
+            "onlyAtCaseCreation": true
         },
         {
             "sourcePath": "Makefile_case_survey.mk",

@@ -4,7 +4,8 @@
         {
             "sourcePath": "mesh.json",
             "targetPath": "sofa.mesh.json",
-            "isSymlink": false
+            "isSymlink": false,
+            "onlyAtCaseCreation": true
         },
         {
             "sourcePath": "Makefile_case_mesh.mk",
