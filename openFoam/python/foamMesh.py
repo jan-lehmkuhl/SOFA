@@ -145,7 +145,8 @@ class foamMesher(object):
         else:
             self.runDecomposePar = False
         # run surfaceFeatures 
-        if self.settingsSurfaceFeatures:
+        if (self.settingsSurfaceFeatures and 
+            os.path.exists("constant/triSurface") ):
             # check weather surface features are present
             featureEdgesPresent = False     # init
             for fileName in os.listdir("constant/triSurface"):
@@ -223,6 +224,7 @@ class foamMesher(object):
         #
         fileStates = {}
         for folder in  ["system", "constant"]:
+          if os.path.exists(folder):
             for fileName in os.listdir(folder):
                 if os.path.isfile(os.path.join(folder,fileName)):
                     fileStates[fileName] = md5(os.path.join(folder,fileName))
