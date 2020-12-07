@@ -9,6 +9,7 @@
 import sys
 import os
 import time
+import argparse
 import shutil
 import datetime
 import hashlib
@@ -91,9 +92,10 @@ def boolChecker(value, variable):
 class foamMesher(object):
     # class for openFoam meshing procedures
 
-    def __init__(self):
+    def __init__(self, verbose):
         self.startMeshing = datetime.datetime.now()
         self.case = Case( )
+        self.verbose = verbose
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
         self.nProcFolders = self.getNoProcFolder()
@@ -481,8 +483,13 @@ class foamMesher(object):
 # Main Programm
 ###################################################################
 
+# read arguments and options from command line
+parser = argparse.ArgumentParser(description='input for foamMesher.py')
+parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
+parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
+
 entryPoint = sys.argv[1]
-mesher = foamMesher()
+mesher = foamMesher( verbose=parser.parse_args().verbose )
 
 if entryPoint == "mesh":
     mesher.mesh()
