@@ -111,7 +111,7 @@ class Case(object):
         self.pathToLinkedCase = None
         self.pathToLinkedReport = None
         self.symlinksClean = False
-        self.pathToJson = os.path.join(self.path, self.aspectType +".json")
+        self.pathToJson = os.path.join(self.path, "sofa."+ self.aspectType +".json")
         if os.path.exists(self.pathToJson):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)

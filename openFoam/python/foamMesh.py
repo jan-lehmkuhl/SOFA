@@ -27,6 +27,9 @@ from fileHandling import loadJson
 
 from procHandling import procHandler
 
+from case import Case
+
+
 def checkFoamVer():
     # retrieves the openFoam version from OS environment
     #
@@ -90,15 +93,15 @@ class foamMesher(object):
 
     def __init__(self):
         self.startMeshing = datetime.datetime.now()
+        self.case = Case( )
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
-        self.meshJson = loadJson("mesh.json")
-        self.nCores = int(self.meshJson["meshSettings"]["nCores"])
         self.nProcFolders = self.getNoProcFolder()
         self.fileChangeDict = self.compareFileStates()
         # extract mesh settings
-        self.meshSettings = self.meshJson["meshSettings"]
+        self.meshSettings = self.case.caseJson['meshSettings']
         # extract variables mesh settings and assign it to a variable
+        self.nCores                  = int(self.meshSettings['nCores'])
         self.settingsBlockMesh       = boolChecker(self.meshSettings["blockMesh"], "blockMesh")
         self.settingsSurfaceFeatures = boolChecker(self.meshSettings["surfaceFeatures"], "surfaceFeatures")
         self.settingsSnappyHexMesh   = boolChecker(self.meshSettings["snappyHexMesh"], "snappyHexMesh")

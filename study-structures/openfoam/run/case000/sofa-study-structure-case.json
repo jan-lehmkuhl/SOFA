@@ -2,7 +2,7 @@
     "files": [
         {
             "sourcePath": "run.json",
-            "targetPath": "run.json",
+            "targetPath": "sofa.run.json",
             "isSymlink": false
         },
         {

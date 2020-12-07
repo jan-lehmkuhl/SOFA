@@ -2,7 +2,7 @@
     "files": [
         {
             "sourcePath": "cad.json",
-            "targetPath": "cad.json",
+            "targetPath": "sofa.cad.json",
             "isSymlink": false
         },
         {

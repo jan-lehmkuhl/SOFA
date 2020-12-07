@@ -3,7 +3,7 @@
         // created in case but linked and relative to study-structure
         {
             "sourcePath": "mesh.json",
-            "targetPath": "mesh.json",
+            "targetPath": "sofa.mesh.json",
             "isSymlink": false
         },
         {

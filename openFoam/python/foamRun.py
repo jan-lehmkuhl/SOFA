@@ -30,6 +30,9 @@ from fileHandling import loadJson
 
 from procHandling import procHandler
 
+from case import Case
+
+
 def checkFoamVer():
     # retrieves the openFoam version from OS environment
     #
@@ -94,6 +97,7 @@ class foamRunner(object):
     def __init__(self):
         # general info
         self.startSolving = datetime.datetime.now()  
+        self.case = Case( )
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
         # make sure 0.org exists or is retreived 
@@ -110,8 +114,8 @@ class foamRunner(object):
         # info about the state of case
         self.nProcFolder = self.getNoProcFolder()
         self.fileChangeDict = self.compareFileStates()
-        # info from run.json
-        self.runJson = loadJson("run.json")
+        # store infos from case-json
+        self.runJson = self.case.caseJson
         if self.runJson["runSettings"]["nCores"] == "" :
             self.nCores = 1
             print("Number of Cores is not specified in run.json, falling back to serial")
