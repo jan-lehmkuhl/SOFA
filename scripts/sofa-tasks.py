@@ -65,10 +65,9 @@ if args.verbose :   print("    adding also path for:    " + os.path.realpath( fi
 
 foamStructure   = readFoamStructure( verbose=args.verbose )
 
-exitIfRepositoryIsNotClean()
-
 if args.entryPoint == "initStudy":
     # create new study depending on available arguments
+    exitIfRepositoryIsNotClean()
     if args.studyStructFolder and args.studyName:
         newStudy = Study( studyName=args.studyName, studyStructFolder=args.studyStructFolder, verbose=args.verbose )
     elif args.studyName : 
@@ -102,10 +101,12 @@ if args.entryPoint == "initFoam":
             print("skipping study >" + studyFolder + " since it already exists")
 
 elif args.entryPoint == "newCase":
+    exitIfRepositoryIsNotClean()
     newCaseXXX = Case( verbose=args.verbose )
     newCaseXXX.create()
 
 elif args.entryPoint == "initCase":
+    exitIfRepositoryIsNotClean()
     currentCase = cfdAspectSelector()
     currentCase.initCase()
 
@@ -117,10 +118,12 @@ elif args.entryPoint == "symlinks":
     thisCase.createUpstreamAspectLinks()
 
 elif args.entryPoint == "clone":
+    exitIfRepositoryIsNotClean()
     currentCase = Case( verbose=args.verbose )
     currentCase.clone()
 
 elif args.entryPoint == "clear":
+    exitIfRepositoryIsNotClean()
     currentCase = cfdAspectSelector()
     currentCase.clear()
 
@@ -172,6 +175,7 @@ elif args.entryPoint == "updateReport":
     currentCase.copyReport(True)
 
 elif args.entryPoint == "updateJson":
+    exitIfRepositoryIsNotClean()
     for folder in sorted(os.listdir(".")):
         aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
         if aspectName in foamStructure:
