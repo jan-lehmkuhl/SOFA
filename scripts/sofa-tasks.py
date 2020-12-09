@@ -136,7 +136,7 @@ elif args.entryPoint == "overview":
 
 elif args.entryPoint == "updateAllReports":
     while True:
-        print("Run reports after updating ? (y/n)")
+        print("Run all reports after updating report files? (y/n)")
         answer = input()
         answer = answer.lower()
         if answer in ["y", "yes"]:
@@ -163,18 +163,9 @@ elif args.entryPoint == "updateAllReports":
             print("Unabel to find RMarkdown file")
 
 elif args.entryPoint == "updateReport":
-    while True:
-        print("Run reports after updating ? (y/n)")
-        answer = input()
-        answer = answer.lower()
-        if answer in ["y", "yes"]:
-            runReports = True
-            break
-        elif answer in ["n", "no"]:
-            runReports = False
-            break
+    print("Start update case report")
     currentCase = cfdAspectSelector()
-    currentCase.copyReport(runReports)
+    currentCase.copyReport(True)
 
 elif args.entryPoint == "updateJson":
     for folder in sorted(os.listdir(".")):
