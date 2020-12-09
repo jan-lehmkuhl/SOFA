@@ -35,6 +35,13 @@ from case import cfdAspectSelector
 from case import Case
 
 
+def exitIfRepositoryIsNotClean(): 
+    if hasRepositoryStagedFiles(): 
+        print("\nERROR: this git repository has already staged files")
+        print(  "       please unstage or commit them and try again\n")
+        sys.exit(1)
+
+
 
 ###############################################################################
 # MAIN PROGRAMM
@@ -58,10 +65,7 @@ if args.verbose :   print("    adding also path for:    " + os.path.realpath( fi
 
 foamStructure   = readFoamStructure( verbose=args.verbose )
 
-if hasRepositoryStagedFiles(): 
-    print("\nERROR: this git repository has already staged files")
-    print(  "       please unstage or commit them and try again\n")
-    sys.exit(0)
+exitIfRepositoryIsNotClean()
 
 if args.entryPoint == "initStudy":
     # create new study depending on available arguments
