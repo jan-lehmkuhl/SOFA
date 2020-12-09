@@ -14,7 +14,6 @@ linkedCadCase   = $(shell node -p "require('$(jsonfile)').buildSettings.cadLink"
 all: 
 	make -C $(linkedCadCase) cad                           ; \
 	make mesh 
-	make view
 
 
 # creates mesh
@@ -24,12 +23,16 @@ mesh: updateSymlinks
 		make linkCadStlFiles                               ; \
 		./Allmesh                                          ; \
 		checkMesh  | tee log.checkMesh                     ; \
-		make updateCaseReport                              ; \
 	else                                                     \
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
-		make -C .. updateOverviewReport                    ; \
 	fi ;
+	make updateCaseReport
+	make -C .. updateOverviewReport
+
+
+meshshow: mesh
+	make view
 
 
 # opens reports & paraview
@@ -57,11 +60,6 @@ clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
 
-# erase all files except necessary framework related files
-clear:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
-
-
 cleanframeworkmesh: 
 	rm -f  .fileStates.data
 	rm -f  [0-9]/polyMesh/*
@@ -79,12 +77,12 @@ commit:
 #	and if yes: creates case report
 updateCaseReport:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py updateReport
-	make -C .. updateOverviewReport
 
+
+showReports:  showOverviewReport showCaseReport
 
 showCaseReport:
 	xdg-open doc/meshReport/meshReport.html
-
 
 showOverviewReport:
 	make -C .. showOverviewReport
