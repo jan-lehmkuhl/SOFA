@@ -23,16 +23,11 @@
         {
             "sourcePath": "../../../../../tools/openFoam-reporting/runReport/runReport.Rmd",
                 // TODO ask for missing repositries
-            "targetPath": "doc/reportTemplate01/runReport.Rmd",
-                // TODO rename path in dependence of    study-structures/openfoam/run/case000/run.json ['buildSettings']['report']
+            "targetPath": "shared/reportTemplates/runReport01.Rmd",
             "isSymlink": false
         }
     ],
     "folders": [
-        {
-            "relPath": "doc/reportTemplate01",
-            "createGitKeep": true
-        },
         {
             "relPath": "shared/postStates",
             "createGitKeep": true

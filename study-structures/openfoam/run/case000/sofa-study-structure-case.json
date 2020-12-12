@@ -51,13 +51,13 @@
             "isOptional":       true
         },
         {
-            "upstreamAspect":           "report",
+            "upstreamAspect":           "run/shared/reportTemplates",
             "caseJsonKey": [            "buildSettings", "report" ],
-            "useCaseJsonWithoutAspect": true,
+            "useCaseJsonWithoutAspect": false,
             "createDirectSymlink":      false,
             "specialLinks": [
                 {
-                    "upstreamCasePath": "runReport.Rmd",
+                    "upstreamCasePath": "",
                     "targetPath":       "doc/runReport/runReport.Rmd",
                     "separateFiles":    false,
                     "copyFile":         true
