@@ -477,23 +477,15 @@ class Case(object):
             print("No key >report< in %s. Upatding .json with default values " %self.pathToJson)
             self.updateJson()
         reportTemplate = self.caseJson["buildSettings"]["report"]
-        if reportTemplate in  os.listdir(os.path.join(self.path, "../doc")):
-            reportPath = os.path.join(self.path, "../doc", reportTemplate)
-            statesPath = os.path.join(self.path, "../doc/postStates")
-            for file in os.listdir(reportPath):
-                if fnmatch.fnmatch(file, '*.Rmd'):
+        if reportTemplate in  os.listdir(os.path.join(self.path, "../shared/reportTemplates")):
+            file = os.path.join(self.path, "../shared/reportTemplates", reportTemplate)   # TODO remove hardcoding
+            if fnmatch.fnmatch(file, '*.Rmd'):
                     if self.aspectType == "mesh" :
-                        reportSrc = os.path.join(reportPath, file)
+                        reportSrc = file
                         reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
                     elif self.aspectType == "run" :
-                        reportSrc = os.path.join(reportPath, file)
+                        reportSrc = file
                         reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
-                    createDirSafely( statesPath )
-                    createSymlinkSavely( statesPath, "postStates" )
-                    break
-            else: 
-                print("Unabel to find a report in >%s" %reportPath)
-                exit(0)
         else:
             print("Unabel to find >%s in")
             exit(0)
