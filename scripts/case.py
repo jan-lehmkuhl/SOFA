@@ -257,7 +257,10 @@ class Case(object):
                         if thisUpstreamConnection['useCaseJsonWithoutAspect']:
                             src         = os.path.join( '..','..',upstreamCase, thisLink['upstreamCasePath'] )
                         else:
-                            src         = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
+                            if thisLink['upstreamCasePath'] =="":
+                                src     = upstreamTarget
+                            else: 
+                                src     = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
                         dst = thisLink['targetPath']
 
                         # create file
