@@ -167,7 +167,7 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
             else:
                 print("Skipping >%s< because it is a directory" % src)
         else:
-            print("Unabel to find >%s<" % src)
+            print("Unabel to find >%s< in >%s<" % (src, referencePath) )
 
 def copyFile(src, dst):
     try:
