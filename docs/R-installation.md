@@ -10,6 +10,7 @@ start R CLI with: `R` and execute:
     install.packages("rmdformats")
     install.packages("kableExtra")
     install.packages("openssl")
+    install.packages("withr")
     # maybe a restart is required
 
     quit()
