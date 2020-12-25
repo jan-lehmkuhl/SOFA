@@ -44,15 +44,15 @@
 
 
         {
-            // create symlinks
+            // create upstreamLinks
             // needs specified cadlink in mesh001/mesh.json
-            "name":             "symlinks meshXXX",
+            "name":             "upstreamLinks meshXXX",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/INSERT_STUDY_NAME/mesh/mesh001",
             "args": [
-                "symlinks",
+                "upstreamLinks",
                 "--verbose"
             ],
             "stopOnEntry":      true,

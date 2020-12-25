@@ -15,7 +15,7 @@ linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings
 # =============================================================================
 
 # default run target
-run: updateSymlinks
+run: updateUpstreamLinks
 	if [ -f "Allrun" ] ; then     \
 		./Allrun                ; \
 		make updateCaseReport                              ; \
@@ -37,7 +37,7 @@ view:
 
 
 # remove all calculated files
-clean: cleanRun cleanFreecad updateSymlinks
+clean: cleanRun cleanFreecad updateUpstreamLinks
 	rm -rf doc/meshReport
 	find . -empty -type d -delete
 	make -C ../../../tools/framework  clean
@@ -52,9 +52,9 @@ init:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 
 
-# renew the symlinks to mesh
-updateSymlinks:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py symlinks
+# renew the upstreamLinks to mesh
+updateUpstreamLinks:
+	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
 
 
 # clone this case to a new case with the next available running number 
@@ -106,7 +106,7 @@ cleanRun:
 # =============================================================================
 
 # can be used to overwrite the dummy settings
-copyfreecadcasefiles: updateSymlinks
+copyfreecadcasefiles: updateUpstreamLinks
 	cp -rf ../../cad/$(linkedCadCase)/case/* .
 	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(linkedMeshCase)"\' Allrun
 

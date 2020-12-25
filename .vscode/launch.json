@@ -44,12 +44,12 @@
         },
         {
             // to run this configuration in this directory, this framework should be part of a sofa project
-            "name":             "symlinks ../../newStudy/run/run001",
+            "name":             "upstreamLinks ../../newStudy/run/run001",
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/../../newStudy/run/run001",
-            "args":             ["symlinks"],
+            "args":             ["upstreamLinks"],
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,

@@ -3,8 +3,8 @@
 init:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 
-updateSymlinks:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py symlinks
+updateUpstreamLinks:
+	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
 
 clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone

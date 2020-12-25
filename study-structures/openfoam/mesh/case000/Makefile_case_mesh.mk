@@ -18,7 +18,7 @@ all:
 
 # creates mesh
     # NOTE: update cad folder before
-mesh: updateSymlinks
+mesh: updateUpstreamLinks
 	if [ -f "Allmesh" ] ; then                               \
 		make linkCadStlFiles                               ; \
 		./Allmesh                                          ; \
@@ -43,7 +43,7 @@ view:
 
 
 # remove all from commited sources created files and links
-clean: cleanfreecadmesh cleanframeworkmesh cleanReport updateSymlinks
+clean: cleanfreecadmesh cleanframeworkmesh cleanReport updateUpstreamLinks
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
@@ -139,9 +139,9 @@ initOpenFoamMesh:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 
 
-# renew the symlinks to cad 
-updateSymlinks:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py symlinks
+# renew the upstreamLinks to cad 
+updateUpstreamLinks:
+	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
 
 
 # generate mesh according to mesh.json

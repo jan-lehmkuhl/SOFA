@@ -110,7 +110,7 @@ elif args.entryPoint == "initCase":
     currentCase = cfdAspectSelector()
     currentCase.initCase()
 
-elif args.entryPoint == "symlinks":
+elif args.entryPoint == "upstreamLinks":
     # currentCase = cfdAspectSelector( verbose=args.verbose )
     # currentCase.makeSymlinks()
     thisCase = Case( verbose=args.verbose )
