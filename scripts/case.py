@@ -521,36 +521,6 @@ class CadCase(Case):
         super().__init__(aspectType="cad", path=path, verbose=verbose)
         self.name = "CadCase"   # only for debugging purpose
 
-    def create(self):
-        # specialized method which creates all folders needed in
-        # a case of aspectType cad
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates directories
-        #
-        caseName = self.nextCaseName()
-        createSymlinkSavely(    "tools/framework/docs/help-files/aspectPics.md" , 
-                                os.path.join( self.path, caseName, "doc/cadPics/help-cadPics.md" ) )
-
-    def initCase(self):
-        if len(os.listdir(".")) <= 1:
-            createDirSafely("native")
-            createDirSafely("stl")
-            createDirSafely("vtk")
-            createDirSafely("doc/drafts")
-            createDirSafely("doc/cadPics")
-            createSymlinkSavely( "../../../tools/framework/docs/help-files/aspectPics.md" , "./doc/cadPics/help-cadPics.md" ) 
-            makePath =      findFile( "Makefile_case_cad.mk",   "tools")
-            gitignorePath = findFile( ".gitignore_cad",         "tools")
-            if makePath:
-                copyFileSafely( makePath,       "Makefile")
-            if gitignorePath:
-                copyFileSafely( gitignorePath,  ".gitignore")
-            self.commitInit()
-        else:
-            print("Case is already initialised. Please run >make clean< first")
 
     def makeSymlinks(self):
         print("Cases of aspectType >cad< do not support option symlinks")
