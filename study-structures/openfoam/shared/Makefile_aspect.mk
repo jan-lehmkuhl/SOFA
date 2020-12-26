@@ -40,11 +40,6 @@ updateCaseReports:
 	python3 ../../tools/framework/scripts/sofa-tasks.py updateAllReports
 
 
-# update json files to newest version
-updateJson:
-	python3 ../../tools/framework/scripts/sofa-tasks.py updateJson
-
-
 
 # tests
 # =============================================================================

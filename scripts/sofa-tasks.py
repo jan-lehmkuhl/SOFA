@@ -77,6 +77,7 @@ if args.entryPoint == "initStudy":
     else :
         newStudy = Study( verbose=args.verbose )
 
+# delete
 if args.entryPoint == "initFoam":
     projectStruct = loadJson( findParentFolder('project.json') +'/' +'project.json', verbose=args.verbose )
     for studyFolder in projectStruct['foamFolders']:
@@ -105,14 +106,13 @@ elif args.entryPoint == "newCase":
     newCaseXXX = Case( verbose=args.verbose )
     newCaseXXX.create()
 
+# todo
 elif args.entryPoint == "initCase":
     exitIfRepositoryIsNotClean()
     currentCase = cfdAspectSelector()
     currentCase.initCase()
 
 elif args.entryPoint == "upstreamLinks":
-    # currentCase = cfdAspectSelector( verbose=args.verbose )
-    # currentCase.makeSymlinks()
     thisCase = Case( verbose=args.verbose )
     thisCase.create()
     thisCase.createUpstreamAspectLinks()
@@ -122,6 +122,7 @@ elif args.entryPoint == "clone":
     currentCase = Case( verbose=args.verbose )
     currentCase.clone()
 
+# todo
 elif args.entryPoint == "overview":
     createDirSafely("doc")
     files = os.listdir("doc")
@@ -160,15 +161,6 @@ elif args.entryPoint == "updateAllReports":
         else:
             print("Unabel to find RMarkdown file")
 
-
-elif args.entryPoint == "updateJson":
-    exitIfRepositoryIsNotClean()
-    for folder in sorted(os.listdir(".")):
-        aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
-        if aspectName in foamStructure:
-            print("Updating .json in >%s" %folder)
-            currentCase = cfdAspectSelector(os.path.join("./", folder))
-            currentCase.updateJson()
 
 elif args.entryPoint == "test":
     print("Nothing defined")
