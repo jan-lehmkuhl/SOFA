@@ -169,10 +169,6 @@ elif args.entryPoint == "updateAllReports":
         else:
             print("Unabel to find RMarkdown file")
 
-elif args.entryPoint == "updateReport":
-    print("Start update case report")
-    currentCase = cfdAspectSelector()
-    currentCase.copyReport(True)
 
 elif args.entryPoint == "updateJson":
     exitIfRepositoryIsNotClean()

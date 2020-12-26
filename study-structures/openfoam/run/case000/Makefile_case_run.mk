@@ -74,7 +74,7 @@ commit:
 
 # update report according to .json
 updateCaseReport:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py updateReport
+	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
 	make -C .. updateOverviewReport
 
 

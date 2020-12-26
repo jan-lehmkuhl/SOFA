@@ -76,7 +76,7 @@ commit:
 #   copies *Report.Rmd from aspect/doc
 #	and if yes: creates case report
 updateCaseReport:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py updateReport
+	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
 
 
 showReports:  showOverviewReport showCaseReport

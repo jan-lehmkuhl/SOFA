@@ -457,59 +457,6 @@ class Case(object):
         if self.verbose:    print("end removing symlinks")
 
 
-    def copyReport(self, run = False):
-        # method to copy reports either from the template directory or
-        # reporting
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for mesh
-        #
-        if self.aspectType == "cad" :
-            print("Reports are not supported for >cad<")
-            exit(0)
-        elif self.aspectType == "survey" :
-            print("Reports are not yet supported for >cad<")
-            exit(0)
-        reportSrc = ""
-        if "report" not in self.caseJson["buildSettings"]:
-            print("No key >report< in %s. Upatding .json with default values " %self.pathToJson)
-            self.updateJson()
-        reportTemplate = self.caseJson["buildSettings"]["report"]
-        if reportTemplate in  os.listdir(os.path.join(self.path, "../shared/reportTemplates")):
-            file = os.path.join(self.path, "../shared/reportTemplates", reportTemplate)   # TODO remove hardcoding
-            if fnmatch.fnmatch(file, '*.Rmd'):
-                    if self.aspectType == "mesh" :
-                        reportSrc = file
-                        reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
-                    elif self.aspectType == "run" :
-                        reportSrc = file
-                        reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
-        else:
-            print("Unabel to find >%s in")
-            exit(0)
-        if not reportSrc :
-            if self.aspectType == "mesh" :
-                reportSrc = findFile("meshReport.Rmd", "tools")
-                reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
-            if self.aspectType == "run" :
-                reportSrc = findFile("runReport.Rmd", "tools")
-                reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
-        print("Updating report in >%s" %self.caseName)
-        if not os.path.exists(os.path.dirname(reportDst)):
-            createDirSafely(os.path.dirname(reportDst))
-        if os.path.exists(reportDst):
-            print("Deleting > %s" %reportDst)
-            os.remove(reportDst)
-        copyFileSafely(src = reportSrc, dst = reportDst)  
-        if run:
-            cmd = ['R', '-e' , 'rmarkdown::render(\'' + reportDst + '\')']
-            #logFilePath = os.path.join("log",str("runReport" + ".log"))
-            runReport = subprocess.Popen(cmd)# , logFilePath)  
-            runReport.wait()    
-
-
     def commitInit(self):
         # asks user if he wants to commit the initialisation to git
         #
