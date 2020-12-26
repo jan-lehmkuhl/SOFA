@@ -18,11 +18,11 @@ linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings
 run: updateUpstreamLinks
 	if [ -f "Allrun" ] ; then     \
 		./Allrun                ; \
-		make updateCaseReport                              ; \
+		make caseReport                                    ; \
 	else                          \
 		make frameworkrun       ; \
-		make -C .. updateOverviewReport                    ; \
 	fi ;
+	make -C .. updateOverviewReport
 
 
 mesh: 
@@ -73,9 +73,8 @@ commit:
 
 
 # update report according to .json
-updateCaseReport:
+caseReport:
 	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
-	make -C .. updateOverviewReport
 
 
 showCaseReport:

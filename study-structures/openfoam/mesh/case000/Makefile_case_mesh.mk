@@ -23,11 +23,11 @@ mesh: updateUpstreamLinks
 		make linkCadStlFiles                               ; \
 		./Allmesh                                          ; \
 		checkMesh  | tee log.checkMesh                     ; \
+		make caseReport                                    ; \
 	else                                                     \
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
-	make updateCaseReport
 	make -C .. updateOverviewReport
 
 
@@ -72,10 +72,8 @@ commit:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py commit
 
 
-# updates case report according to .json
-#   copies *Report.Rmd from aspect/doc
-#	and if yes: creates case report
-updateCaseReport:
+# run case report according to .json
+caseReport: updateUpstreamLinks
 	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
 
 
