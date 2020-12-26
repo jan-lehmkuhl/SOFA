@@ -342,57 +342,6 @@ class Case(object):
             if answer1 in ["n", "no"]:
                 break
 
-    def clear(self):
-        # removes all files, folders and symlinks from a case, but spares
-        # out the Makefile and the .json file of the case
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: removes folders
-        #
-        caseName = os.path.basename(os.getcwd())
-        while True:
-            print("Do you really want to clear case >%s< ? (y/n)" % caseName)
-            answer = input()
-            answer = answer.lower()
-            if answer in ["y", "yes"]:
-                for root, dirs, files in os.walk("./", topdown=False):
-                    for name in files:
-                        if name == "Makefile":
-                            continue
-                        if name == ".gitignore":
-                            continue
-                        elif name.endswith("json"):
-                            continue
-                        else:
-                            os.remove(os.path.join(root, name))
-                            print("Removing file >%s< from case" %
-                                  os.path.join(root, name))
-                    for name in dirs:
-                        if os.path.islink(os.path.join(root, name)):
-                            os.remove(os.path.join(root, name))
-                            print("Removing link >%s<" %
-                                  os.path.join(root, name))
-                        else:
-                            os.rmdir(os.path.join(root, name))
-                            print("Removing folder >%s< from case" %
-                                  os.path.join(root, name))
-                while True:
-                    print("Commit clearing of %s ? (y/n)" % caseName)
-                    answer = input()
-                    answer = answer.lower()
-                    if answer in ["y", "yes"]:
-                        studyName = self.getStudyName()
-                        os.system('git add .')
-                        os.system('git commit -m "[%s%s] #CLEAR \'cleared case >%s< in project >%s<\'"' 
-                                  % (studyName, caseName.capitalize(), caseName, studyName))
-                        break
-                    elif answer in ["n", "no"]:
-                        break
-                break
-            elif answer in ["n", "no"]:
-                break
 
     def makeMainSymlink(self):
         # links the folder stated in the case json into the directory

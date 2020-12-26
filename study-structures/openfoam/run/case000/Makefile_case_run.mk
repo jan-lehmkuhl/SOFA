@@ -62,11 +62,6 @@ clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
 
-# erase all files except necessary framework related files
-clear:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
-
-
 # update report according to .json
 caseReport:
 	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py

@@ -9,9 +9,6 @@ updateUpstreamLinks:
 clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
-clear:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
-
 mesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py mesh
 

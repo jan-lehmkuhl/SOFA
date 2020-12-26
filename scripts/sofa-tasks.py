@@ -122,11 +122,6 @@ elif args.entryPoint == "clone":
     currentCase = Case( verbose=args.verbose )
     currentCase.clone()
 
-elif args.entryPoint == "clear":
-    exitIfRepositoryIsNotClean()
-    currentCase = cfdAspectSelector()
-    currentCase.clear()
-
 elif args.entryPoint == "overview":
     createDirSafely("doc")
     files = os.listdir("doc")

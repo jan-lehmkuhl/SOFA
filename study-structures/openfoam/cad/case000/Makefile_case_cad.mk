@@ -38,11 +38,6 @@ clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
 
-# erase all files except necessary framework related files
-clear:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
-
-
 
 # Basic stl/surface handling
 # =============================================================================
