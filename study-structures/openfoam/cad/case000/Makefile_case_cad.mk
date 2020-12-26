@@ -43,11 +43,6 @@ clear:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
 
 
-# commit all changes inside case
-commit:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py commit
-
-
 
 # Basic stl/surface handling
 # =============================================================================

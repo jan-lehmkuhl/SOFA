@@ -67,11 +67,6 @@ cleanframeworkmesh:
 	rm -rf log/*
 
 
-# commit all changes inside case
-commit:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py commit
-
-
 # run case report according to .json
 caseReport: updateUpstreamLinks
 	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py

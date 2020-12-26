@@ -127,10 +127,6 @@ elif args.entryPoint == "clear":
     currentCase = cfdAspectSelector()
     currentCase.clear()
 
-elif args.entryPoint == "commit":
-    currentCase = Case("run")
-    currentCase.commitChanges()
-
 elif args.entryPoint == "overview":
     createDirSafely("doc")
     files = os.listdir("doc")

@@ -12,9 +12,6 @@ clone:
 clear:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clear
 
-commit:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py commit
-
 mesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py mesh
 

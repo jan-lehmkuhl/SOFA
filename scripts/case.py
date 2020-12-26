@@ -480,32 +480,6 @@ class Case(object):
             elif answer in ["n", "no"]:
                 break
 
-    def commitChanges(self):
-        # asks user if he wants to commit changes to case
-        #
-        # Args:
-        #
-        # Result:
-        #   side effects:   commits changes of case
-        #
-        caseName = os.path.basename(os.getcwd())
-        while True:
-            print("Commit changes in %s ? (y/n)" % caseName)
-            answer = input()
-            answer = answer.lower()
-            if answer in ["y", "yes"]:
-                while True:
-                    print("Please enter a commit message:")
-                    message = input()
-                    if not message == "":
-                        break
-                studyName = self.getStudyName()
-                os.system('git add .')
-                os.system('git commit -m "[%s%s] #CHANGE \'%s\'"' %
-                          (studyName, caseName.capitalize(), message))
-                break
-            elif answer in ["n", "no"]:
-                break
 
     def updateJson(self):
         # update json file of a case with newest version from tools
