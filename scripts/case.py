@@ -567,33 +567,6 @@ class MeshCase(Case):
                 print("WARNING: Did not link to any geometry files")
             return(True)
 
-    def initCase(self):
-        # specialised method to initialise a case of aspectType mesh
-        #
-        # Args:
-        #
-        # Returns:
-        #   side effects: creates directories, copies files makes symlinks
-        #
-        if os.path.isdir("./system"):
-            print(
-                "Case is already initialized. If you want to reinitialize please delete >system")
-        elif self.makeSymlinks():
-            meshReportPath = findFile("meshReport.Rmd", "tools")
-            layerSizingPath = findFile("layerSizing.Rmd", "tools")
-            #meshStatePath = findFile("mesh.pvsm", "tools")
-            if (meshReportPath and layerSizingPath ): # and meshStatePath):
-                self.Builder.makeMesh()
-                createDirSafely("doc/meshReport")
-                createDirSafely("doc/layerSizing")
-                createDirSafely("doc/meshPics")
-                createSymlinkSavely( "../../../tools/framework/docs/help-files/aspectPics.md" , "./doc/meshPics/help-meshPics.md" ) 
-                open("paraview.foam", "a").close()
-                self.copyReport()
-                #copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
-                copyFileSafely(layerSizingPath,"doc/layerSizing/layerSizing.Rmd")
-                #copyFileSafely(meshStatePath, "mesh.pvsm")
-                self.commitInit()
 
 class RunCase(Case):
     # Class for run cases

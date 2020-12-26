@@ -127,11 +127,6 @@ cleanfreecadmesh:
 # full-control framework OpenFOAM meshing
 # =============================================================================
 
-# initialize case according to mesh.json
-initOpenFoamMesh:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
-
-
 # renew the upstreamLinks to cad 
 updateUpstreamLinks:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
