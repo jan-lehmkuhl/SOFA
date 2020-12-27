@@ -48,7 +48,7 @@ clean: cleanRun cleanFreecad updateUpstreamLinks
 # =============================================================================
 
 # initialize case according to run.json
-init:
+init-case: updateUpstreamLinks
 	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 
 

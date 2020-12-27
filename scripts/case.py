@@ -366,45 +366,6 @@ class Case(object):
             print("No link specified for this case yet")
             return(False)
 
-    def removeSymlinks(self):
-        # removes the symlinks from a case which have been created
-        # by the script
-        #
-        # Args:
-        #
-        # Result:
-        #   side effects : removes symlinks
-        #
-        # Lists of folders and extensions to delete
-        from aspect import readFoamStructure
-
-        if self.verbose:    print("start removing symlinks")
-        extensions = [".stl", ".vtk"]
-        folder = ["polyMesh", "cadPics", "meshPics",
-                  "drafts", "meshReport", "layerSizing"]
-        foamStructure   = readFoamStructure()
-        for key in foamStructure:
-            folder.append(key)
-        # Traverse all subdirectories in case
-        for root, dirs, files in os.walk("./"):
-            for dirName in dirs:
-                if os.path.islink(os.path.join(root, dirName)):
-                    # remove digits from foldernames to compare with folder
-                    stripped = ''.join([i for i in dirName if not i.isdigit()])
-                    if stripped in folder:
-                        os.remove(os.path.join(root, dirName))
-                        print("Removing link >%s<" %
-                              os.path.join(root, dirName))
-            for fileName in files:
-                if os.path.islink(os.path.join(root, fileName)):
-                    # check if file extension is in extensions
-                    if os.path.splitext(os.path.join(root, fileName))[1] in extensions:
-                        os.remove(os.path.join(root, fileName))
-                        print("Removing link >%s<" %
-                              os.path.join(root, fileName))
-        self.symlinksClean = True
-        if self.verbose:    print("end removing symlinks")
-
 
     def commitInit(self):
         # asks user if he wants to commit the initialisation to git
@@ -459,28 +420,6 @@ class RunCase(Case):
         if self.caseJson:
             self.Builder = foamBuilder(self.caseJson["buildSettings"])
 
-    def makeSymlinks(self):
-        # specialized method to create all symlinks needed for a case
-        # of aspectType run
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for run
-        #
-        self.removeSymlinks()
-        if self.makeMainSymlink():
-            createDirSafely("constant")
-            createDirSafely("doc")
-            createSymlinkSavely(  os.path.join( self.pathToLinkedCase, "constant/polyMesh")
-                                , os.path.join( "./constant/polyMesh" ))
-            createDirSafely( os.path.join( self.pathToLinkedCase, "doc") )
-            for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
-                currentPath = os.path.join(
-                    self.pathToLinkedCase, "doc", element)
-                createSymlinkSavely(currentPath, os.path.join("doc", element))
-            self.copyReport(run=False)
-            return(True)
 
     def initCase(self):
         # specialised method to initialise a case of aspectType run
@@ -493,12 +432,12 @@ class RunCase(Case):
         if os.path.isdir("./system"):
             print(
                 "Case is already initialized. If you want to reinitialize please delete >system")
-        elif self.makeSymlinks():
+        else:
             self.Builder.makeBase()
             self.Builder.makeTurbulence()
             self.Builder.makeDynamicMesh()
             self.Builder.makePorousZone()
-            self.commitInit()
+            # self.commitInit()
 
 class SurveyCase(Case):
     # Class for survey cases
@@ -534,6 +473,7 @@ class foamBuilder(object):
                     for file in meshStruct[folder]:
                         copyFileSafely(os.path.join(
                             self.setupPath + meshStruct[folder][file]), os.path.join(folder, file))
+                        os.system('git add -f ' + os.path.join(folder, file) )
 
     def makeBase(self):
         # reads the file structure from foamFiles.json and copies all nessesary files
@@ -554,7 +494,9 @@ class foamBuilder(object):
                         createDirSafely(folder)
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
-                                self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
+                                self.setupPath + baseStruct[folder][file]), 
+                                os.path.join(folder, file)) 
+                            os.system('git add -f ' + os.path.join(folder, file) )
                 else:
                     print("Unknown Solver >%s< specified in run.json" % solver)
 
@@ -577,7 +519,9 @@ class foamBuilder(object):
                         createDirSafely(folder)
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
-                                self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
+                                self.setupPath + baseStruct[folder][file]), 
+                                os.path.join(folder, file))
+                            os.system('git add -f ' + os.path.join(folder, file) )
                 else:
                     print("Unknown turbulence model >%s< specified in run.json" %
                           turbulenceModell)
@@ -602,6 +546,7 @@ class foamBuilder(object):
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
                                 self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
+                            os.system('git add -f ' + os.path.join(folder, file) )
 
     def makeDynamicMesh(self):
         # reads the file structure from foamFiles.json and copies all nessesary files
@@ -623,4 +568,4 @@ class foamBuilder(object):
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
                                 self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
-
+                            os.system('git add -f ' + os.path.join(folder, file) )
