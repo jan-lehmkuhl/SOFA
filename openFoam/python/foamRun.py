@@ -352,7 +352,5 @@ if entryPoint == "run":
     runner.run()
 if entryPoint == "cleanRun":
     runner.clean()
-    builder = cfdAspectSelector()
-    builder.makeSymlinks()
 if entryPoint == "view":
     runner.view()

@@ -441,10 +441,6 @@ class CadCase(Case):
         self.name = "CadCase"   # only for debugging purpose
 
 
-    def makeSymlinks(self):
-        print("Cases of aspectType >cad< do not support option symlinks")
-
-
 class MeshCase(Case):
      # Specialized class for cad cases, which inherits from the base Case class
 
@@ -452,39 +448,6 @@ class MeshCase(Case):
         super().__init__(aspectType="mesh", path=path, verbose=verbose)
         self.name = "MeshCase"
         self.Builder = foamBuilder()
-
-    def makeSymlinks(self):
-        # specialized method to create all symlinks needed for a case
-        # of aspectType mesh
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for mesh
-        #
-        linkedGeometry = False
-        # if symlinks already exist, delete them
-        self.removeSymlinks()
-        if self.makeMainSymlink():
-            createDirSafely("constant/triSurface")
-            createDirSafely("doc")
-            createDirSafely( os.path.join( self.pathToLinkedCase, "doc" ) )
-            createDirSafely( os.path.join( self.pathToLinkedCase, "stl" ) )
-            createDirSafely( os.path.join( self.pathToLinkedCase, "vtk" ) )
-            for extension in ["stl", "vtk"]:
-                for element in os.listdir(os.path.join(self.pathToLinkedCase, extension)):
-                    if element.endswith("." + extension):
-                        createSymlinkSavely(os.path.join(self.pathToLinkedCase, extension, element), os.path.join(
-                            "./constant/triSurface/", element))
-                        if element.endswith(".stl"):
-                            linkedGeometry = True
-            for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
-                createSymlinkSavely(os.path.join(
-                    self.pathToLinkedCase, "doc", element), os.path.join("./doc", element))
-            self.copyReport(run=False)
-            if not linkedGeometry:
-                print("WARNING: Did not link to any geometry files")
-            return(True)
 
 
 class RunCase(Case):
@@ -543,21 +506,6 @@ class SurveyCase(Case):
     def __init__(self, path=None, verbose=False):
         super().__init__(aspectType="survey", path=path, verbose=verbose)
         self.name = "surveyCase"
-
-    def makeSymlinks(self):
-        # specialized method to create all symlinks needed for a case
-        # of type run
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for run
-        #
-        self.removeSymlinks()
-        if False in self.pathToLinkedCase:
-            return(False)
-        for element in self.pathToLinkedCase:
-            createSymlinkSavely(element, os.path.basename(element))
 
 
 class foamBuilder(object):
