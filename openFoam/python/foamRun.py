@@ -329,6 +329,7 @@ class foamRunner(object):
         except AssertionError:
             self.printFooterFailed()
             self.saveFileStates()
+            sys.exit(1)
         else:
             self.printFooter()
             self.saveFileStates()
