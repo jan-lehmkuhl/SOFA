@@ -402,15 +402,6 @@ class CadCase(Case):
         self.name = "CadCase"   # only for debugging purpose
 
 
-class MeshCase(Case):
-     # Specialized class for cad cases, which inherits from the base Case class
-
-    def __init__(self, path="./", verbose=False):
-        super().__init__(aspectType="mesh", path=path, verbose=verbose)
-        self.name = "MeshCase"
-        self.Builder = foamBuilder()
-
-
 class RunCase(Case):
     # Class for run cases
 
@@ -455,25 +446,6 @@ class foamBuilder(object):
         self.foamJson = loadJson(findFile("foamFiles.json", "tools"))
         self.setupPath = findFolder("openFoam-setup", "tools")
         self.foamCaseSettings = foamCaseSettings
-
-    def makeMesh(self):
-        # reads the file structure from foamFiles.json and copies all nessesary files
-        # listed there to create a mesh
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: builds an OpenFOAM structure for meshes
-        #
-        if self.foamJson:
-            if self.setupPath:
-                meshStruct = self.foamJson["mesh"]
-                for folder in meshStruct:
-                    createDirSafely(folder)
-                    for file in meshStruct[folder]:
-                        copyFileSafely(os.path.join(
-                            self.setupPath + meshStruct[folder][file]), os.path.join(folder, file))
-                        os.system('git add -f ' + os.path.join(folder, file) )
 
     def makeBase(self):
         # reads the file structure from foamFiles.json and copies all nessesary files
