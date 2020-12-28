@@ -343,30 +343,6 @@ class Case(object):
                 break
 
 
-    def makeMainSymlink(self):
-        # links the folder stated in the case json into the directory
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects:  creates the main symlink
-        #
-        # make sure symlinks are clean but avoid double calling
-        if not self.symlinksClean:
-            self.removeSymlinks
-        # check if a file to link to has been specified in *.json file
-        if self.linkedCase:
-            # check if the file to link to exists
-            if self.pathToLinkedCase:
-                #os.symlink(self.pathToLinkedCase, self.linkedCase)
-                createSymlinkSavely(self.pathToLinkedCase, self.linkedCase)
-                #print("Create link to >%s<" % self.pathToLinkedCase)
-                return(True)
-        else:
-            print("No link specified for this case yet")
-            return(False)
-
-
     def commitInit(self):
         # asks user if he wants to commit the initialisation to git
         #
