@@ -367,17 +367,7 @@ class Case(object):
                 break
 
 
-
 #TODO remove specialized classes
-class CadCase(Case):
-    # Specialized class for cad cases, which inherits from the base Case class
-
-    def __init__(self, path="./", verbose=False):
-        # execute init of parent class
-        super().__init__(aspectType="cad", path=path, verbose=verbose)
-        self.name = "CadCase"   # only for debugging purpose
-
-
 class RunCase(Case):
     # Class for run cases
 
@@ -405,13 +395,6 @@ class RunCase(Case):
             self.Builder.makeDynamicMesh()
             self.Builder.makePorousZone()
             # self.commitInit()
-
-class SurveyCase(Case):
-    # Class for survey cases
-
-    def __init__(self, path=None, verbose=False):
-        super().__init__(aspectType="survey", path=path, verbose=verbose)
-        self.name = "surveyCase"
 
 
 class foamBuilder(object):
