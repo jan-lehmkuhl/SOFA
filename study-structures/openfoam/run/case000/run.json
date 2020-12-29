@@ -11,6 +11,7 @@
         "dynamicMesh"       :   "False",
         "porousZone"        :   "False",
 
+        "paraview"          :   "../shared/postStates/RUN.pvsm",
         "report"            :   "runReport01.Rmd"
     },
 

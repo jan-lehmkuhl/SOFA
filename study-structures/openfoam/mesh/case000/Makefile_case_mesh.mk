@@ -2,8 +2,9 @@
 
 
 # include ../../../tools/framework/global-make.mk
-jsonfile        = $(shell find . -name 'sofa.mesh*.json')
-linkedCadCase   = $(shell node -p "require('$(jsonfile)').buildSettings.cadLink")
+jsonFile        = $(shell find . -name 'sofa.mesh*.json')
+linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
+paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
 
 
 
@@ -39,7 +40,7 @@ meshshow: mesh
 view:
 	make -C .. showOverviewReport
 	make       showCaseReport
-	make       openParaview
+	make       paraview
 
 
 # remove all from commited sources created files and links
@@ -154,8 +155,15 @@ cleanMesh:
 cleanReport:
 	rm -rf doc/meshReport
 
-# opens Paraview to review mesh
-openParaview: 
+
+# opens paraview with the referenced state file
+paraview: 
+	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
+	paraview --state=$(paraviewFile)  
+
+
+# opens Paraview without specified state
+paraview-empty-state: 
 	if [ ! -f "Allmesh" ] ; then                                                \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \

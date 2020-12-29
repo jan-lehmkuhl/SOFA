@@ -4,6 +4,7 @@
  
     "buildSettings" : {
         "cadLink"           :   "",
+        "paraview"          :   "../shared/postStates/MESH.pvsm",
         "report"            :   "meshReport01.Rmd"
     },
 

@@ -5,6 +5,7 @@
 
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
+paraviewFile     = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
 linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings.cadLink")
@@ -33,7 +34,7 @@ mesh:
 view:
 	make -C .. showOverviewReport
 	make       showCaseReport
-	make       openParaview
+	make       paraview
 
 
 # remove all calculated files
@@ -104,7 +105,14 @@ cleanFreecad:
 	rm -f constant/polyMesh
 
 
-openParaview:
+# opens paraview with the referenced state file
+paraview: 
+	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
+	paraview --state=$(paraviewFile)  
+
+
+# opens Paraview without specified state
+paraview-empty-state: 
 	if [ ! -f "Allrun" ] ; then                                                 \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \

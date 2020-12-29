@@ -3,6 +3,7 @@
     "description"           :   "",
  
     "buildSettings" : {
+        "paraview"          :   "../shared/postStates/CAD.pvsm",
         "report"            :   ""
     }
 

@@ -1,5 +1,8 @@
 # Makefile copied from ./tools/framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
 
+jsonfile        = $(shell find . -name 'sofa.cad*.json')
+paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview")
+
 
 
 # standard targets 
@@ -97,4 +100,10 @@ cleanfreecadoutput:
 # open paraview
 frameworkview:
 	python3 ../../../tools/framework/openFoam/python/foamCad.py view
+
+
+# opens paraview with the referenced state file
+paraview: 
+	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
+	paraview --state=$(paraviewFile)  
 
