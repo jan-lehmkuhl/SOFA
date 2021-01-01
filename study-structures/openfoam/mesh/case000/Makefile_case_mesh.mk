@@ -11,9 +11,9 @@ paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview
 # standard targets 
 # =============================================================================
 
-# default mesh creating target
+# default creating target
 all: 
-	make -C $(linkedCadCase) cad                           ; \
+	make -C $(linkedCadCase)
 	make mesh 
 
 
@@ -21,7 +21,6 @@ all:
     # NOTE: update cad folder before
 mesh: updateUpstreamLinks
 	if [ -f "Allmesh" ] ; then                               \
-		make linkCadStlFiles                               ; \
 		./Allmesh                                          ; \
 		checkMesh  | tee log.checkMesh                     ; \
 		make caseReport                                    ; \
@@ -86,26 +85,15 @@ showOverviewReport:
 # FreeCAD meshing
 # =============================================================================
 
-
-# links cadXXX/stl/*.stl to constant/triSurface
-    # >make -C CAD linkfreecadstl< links stl-files in meshCase to cadXXX/stl/*.stl 
-linkCadStlFiles:
-	if [ -f "Allmesh" ]  &&  [ "$(linkedCadCase)" != "" ]  ; then                             \
-		make -C ../../cad/$(linkedCadCase)  linkfreecadstl                                  ; \
-		if [ ! -d constant/triSurface ] ; then   mkdir -p constant/triSurface   ; fi    ; \
-		cd constant/triSurface                                                          ; \
-		ln -sf ../../../../cad/$(linkedCadCase)/stl/*.stl  .                                ; \
-		echo "following files exist now in constant/triSurface" ;  ls -l                ; \
-	fi ;
-
-
 # imports and overwrites mesh settings from freecad export CAD/meshCase/system
     # can be used to overwrite the dummy settings from full-controll meshing
-    # stl files remain in meshCase
-fetchFreecadMeshSetup: linkCadStlFiles
+fetch-freecad-mesh-setup: clean updateUpstreamLinks
+	make  -C  ../../cad/$(linkedCadCase)  push-freecad-stl
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/Allmesh   .
 	mkdir -p  system
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/system/*  ./system
+	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
+	make updateUpstreamLinks
 
 
 openfreecad:

@@ -8,15 +8,13 @@ paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview
 # standard targets 
 # =============================================================================
 
-all: cad view
-
-
 # writes necessary cad files from sources
 cad: 
+
+freecad:
 	if [   -f native/geometry.FCStd ]; then                                      \
 		echo; echo "*** execute WRITE MESH inside freecad to provide stl files in meshCase ***" ;echo   ; \
 		# make openfreecadgui                                                  ; \
-		make linkfreecadstl                                                    ; \
 	fi
 
 
@@ -69,22 +67,31 @@ openfreecadgui:
 	freecad native/geometry.FCStd
 
 
-# readable geometry diff
-difffreecad:
-	git diff  --color-words  native/geometry.FCStd
-
-
-# creates links from freecad-exported stl-files to the cadXXX/stl folder
-    # freecad stl files are exported to ./meshCase/constant/triSurface
-    # cadXXX/stl/*.stl files are necessary for full-control OpenFOAM meshing
-linkfreecadstl:
-	if [ -f native/geometry.FCStd ] ; then     \
+push-freecad-stl:
 	if   ls meshCase/constant/triSurface/*.stl  >/dev/null 2>&1;  then  echo "";   else   \
 		echo; echo "*** PROVIDE stl-files in meshCase/constant/triSurface ***"  ; \
+		exit 1 ; \
+	fi
+	if [ ! `find stl -prune -empty 2>/dev/null` ]          ; then     \
+		echo; echo "*** OVERWRITING/DELETING EXISTING stl-files in stl folder ***"      ; \
+		ls -lA stl  ; \
 		../../../tools/framework/bin/pauseForMakefiles.py                       ; \
-	fi ; fi
-	if [ ! -d stl ]                            ; then   mkdir stl   ; fi ;
-	if [   -d "meshCase/constant/triSurface" ] ; then   cd stl;  ln -sf ../meshCase/constant/triSurface/*.stl .   ; fi ;
+	fi
+	echo "*** move freecad stl files to stl folder" ; \
+	mkdir -p stl ; \
+	rm stl/*.stl
+	mv meshCase/constant/triSurface/*  stl  ; \
+	ls -lA stl  ; \
+	make prune-empty-freecad-export-folders
+
+
+prune-empty-freecad-export-folders:
+	if [ -d meshCase ] ; then  \
+		find meshCase -type d -empty -delete  ; \
+	fi
+	if [ -d case ] ; then  \
+		find case -type d -empty -delete  ;\
+	fi
 
 
 cleanfreecadoutput:

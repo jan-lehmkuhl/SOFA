@@ -15,6 +15,12 @@ linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings
 # standard targets 
 # =============================================================================
 
+# default creating target
+all: 
+	make -C $(linkedMeshCase)
+	make run 
+
+
 # default run target
 run: updateUpstreamLinks
 	if [ -f "Allrun" ] ; then     \
@@ -55,6 +61,9 @@ init-case: updateUpstreamLinks
 
 # renew the upstreamLinks to mesh
 updateUpstreamLinks:
+	if [ ! -f "Allrun" ] ; then                                                 \
+		sed -i 's\MESHDIR=".*"\MESHDIR="./$(linkedMeshCase)"\' Allrun         ; \
+	fi
 	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
 
 
@@ -96,9 +105,14 @@ cleanRun:
 # =============================================================================
 
 # can be used to overwrite the dummy settings
-copyfreecadcasefiles: updateUpstreamLinks
-	cp -rf ../../cad/$(linkedCadCase)/case/* .
+fetch-freecad-case-setup: 
+	mv  ../../cad/$(linkedCadCase)/case/0  ../../cad/$(linkedCadCase)/case/0.org
+	rm  -r 0.org
+	rm  -r constant
+	rm  -r system
+	mv  ../../cad/$(linkedCadCase)/case/* .
 	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(linkedMeshCase)"\' Allrun
+	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
 
 
 cleanFreecad: 
