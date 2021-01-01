@@ -56,7 +56,7 @@ installrequirementsR:
 # PHONY says make to execute even when the depending targets haven't been updated
 
 clean: badMagicNumberClean
-	echo; pwd; ls -la
+	# echo; pwd; ls -la
 
 # delete python cache files 
 #    they can disturb execution
