@@ -22,6 +22,7 @@ freecad:
 view:
 	if [   -f native/geometry.FCStd ]; then   make openfreecadgui              ; fi
 	if [ ! -f native/geometry.FCStd ]; then   make frameworkview               ; fi
+	make paraview
 
 
 # remove all from commited sources created files and links
@@ -64,7 +65,7 @@ cleanVTK:
 
 openfreecadgui:
 	if [ ! -f native/geometry.FCStd ]; then cp ../../../tools/framework/openFoam/dummies/cad/geometry.FCStd  native/geometry.FCStd; fi
-	freecad native/geometry.FCStd
+	freecad native/geometry.FCStd & 
 
 
 push-freecad-stl:
