@@ -78,7 +78,7 @@ if args.entryPoint == "initStudy":
         newStudy = Study( verbose=args.verbose )
 
 # delete
-if args.entryPoint == "initFoam":
+elif args.entryPoint == "initFoam":
     projectStruct = loadJson( findParentFolder('project.json') +'/' +'project.json', verbose=args.verbose )
     for studyFolder in projectStruct['foamFolders']:
         if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):
@@ -161,9 +161,8 @@ elif args.entryPoint == "updateAllReports":
         else:
             print("Unabel to find RMarkdown file")
 
-
-elif args.entryPoint == "test":
-    print("Nothing defined")
-
+else:
+    print("ERROR no sofa-task defined")
+    sys.exit("nothing defined")
 
 if args.verbose:     print("\n*** finished sofa-tasks.py *** \n")
