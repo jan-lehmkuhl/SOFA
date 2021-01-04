@@ -62,7 +62,7 @@ clone:
 
 cleanframeworkmesh: 
 	rm -f  .fileStates.data
-	rm -f  [0-9]/polyMesh/*
+	rm -rf [0-9]/polyMesh/*
 	rm -rf constant/extendedFeatureEdgeMesh/*
 	rm -rf log/*
 

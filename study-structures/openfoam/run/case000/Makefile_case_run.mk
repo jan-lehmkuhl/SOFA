@@ -61,7 +61,7 @@ init-case: updateUpstreamLinks
 
 # renew the upstreamLinks to mesh
 updateUpstreamLinks:
-	if [ ! -f "Allrun" ] ; then                                                 \
+	if [ -f "Allrun" ] ; then                                                   \
 		sed -i 's\MESHDIR=".*"\MESHDIR="./$(linkedMeshCase)"\' Allrun         ; \
 	fi
 	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
