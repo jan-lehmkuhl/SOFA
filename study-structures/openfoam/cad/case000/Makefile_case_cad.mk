@@ -8,8 +8,9 @@ paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview
 # standard targets 
 # =============================================================================
 
-# writes necessary cad files from sources
+# writes necessary stl files from sources
 cad: 
+	@echo "no automatic stl creation"
 
 freecad:
 	if [   -f native/geometry.FCStd ]; then                                      \
@@ -73,14 +74,14 @@ push-freecad-stl:
 		echo; echo "*** PROVIDE stl-files in meshCase/constant/triSurface ***"  ; \
 		exit 1 ; \
 	fi
+	mkdir -p stl ; 
 	if [ ! `find stl -prune -empty 2>/dev/null` ]          ; then     \
 		echo; echo "*** OVERWRITING/DELETING EXISTING stl-files in stl folder ***"      ; \
 		ls -lA stl  ; \
 		../../../tools/framework/bin/pauseForMakefiles.py                       ; \
 	fi
 	echo "*** move freecad stl files to stl folder" ; \
-	mkdir -p stl ; \
-	rm stl/*.stl
+	rm -f  stl/*.stl
 	mv meshCase/constant/triSurface/*  stl  ; \
 	ls -lA stl  ; \
 	make prune-empty-freecad-export-folders
