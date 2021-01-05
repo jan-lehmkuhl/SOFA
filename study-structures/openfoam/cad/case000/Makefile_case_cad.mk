@@ -99,7 +99,7 @@ prune-empty-freecad-export-folders:
 cleanfreecadoutput:
 	rm -rf meshCase
 	rm -rf case
-	rm -f  stl/*
+	# rm -f  stl/*
 
 
 
