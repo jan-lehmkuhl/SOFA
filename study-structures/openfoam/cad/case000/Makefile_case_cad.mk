@@ -69,29 +69,32 @@ openfreecadgui:
 	freecad native/geometry.FCStd & 
 
 
-push-freecad-stl:
-	if   ls meshCase/constant/triSurface/*.stl  >/dev/null 2>&1;  then  echo "";   else   \
-		echo; echo "*** PROVIDE stl-files in meshCase/constant/triSurface ***"  ; \
+freecad-stl-push: 
+	@echo "\n*** push freecad stl files to case-stl-folder ***"
+	@if   ls meshCase/constant/triSurface/*.stl  >/dev/null 2>&1;  then  echo "";   else   \
+		echo "*** PROVIDE stl-files in meshCase/constant/triSurface ***"  ; \
 		exit 1 ; \
 	fi
-	mkdir -p stl ; 
-	if [ ! `find stl -prune -empty 2>/dev/null` ]          ; then     \
-		echo; echo "*** OVERWRITING/DELETING EXISTING stl-files in stl folder ***"      ; \
+	@mkdir -p stl ; 
+	@if [ ! `find stl -prune -empty 2>/dev/null` ]          ; then     \
+		echo "*** OVERWRITING/DELETING EXISTING stl-files in stl folder ***"      ; \
 		ls -lA stl  ; \
 		../../../tools/framework/bin/pauseForMakefiles.py                       ; \
 	fi
-	echo "*** move freecad stl files to stl folder" ; \
+	@echo "\n* move freecad stl files to stl folder"
 	rm -f  stl/*.stl
-	mv meshCase/constant/triSurface/*  stl  ; \
-	ls -lA stl  ; \
+	mv meshCase/constant/triSurface/*  stl 
+	@echo "\n    list of moved stl files " 
+	@ls -lA stl 
+	@echo "" 
 	make prune-empty-freecad-export-folders
 
 
 prune-empty-freecad-export-folders:
-	if [ -d meshCase ] ; then  \
+	@if [ -d meshCase ] ; then  \
 		find meshCase -type d -empty -delete  ; \
 	fi
-	if [ -d case ] ; then  \
+	@if [ -d case ] ; then  \
 		find case -type d -empty -delete  ;\
 	fi
 

@@ -43,12 +43,13 @@ view:
 
 
 # remove all from commited sources created files and links
-clean: cleanfreecadmesh cleanframeworkmesh cleanReport updateUpstreamLinks
+clean: cleanfreecadmesh cleanframeworkmesh cleanReport
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
 	rm -f pvScriptMesh.py
 	make -C ../../../tools/framework  clean
+	make updateUpstreamLinks
 
 
 
@@ -85,10 +86,14 @@ showOverviewReport:
 # FreeCAD meshing
 # =============================================================================
 
+freecad-mesh-export-push-all: 
+	make  -C  ../../cad/$(linkedCadCase)  freecad-stl-push
+	make freecad-mesh-export-fetch-setup
+
 # imports and overwrites mesh settings from freecad export CAD/meshCase/system
     # can be used to overwrite the dummy settings from full-controll meshing
-fetch-freecad-mesh-setup: clean updateUpstreamLinks
-	make  -C  ../../cad/$(linkedCadCase)  push-freecad-stl
+freecad-mesh-export-fetch-setup: clean
+	@echo "\n*** fetch FreeCAD meshCase files ***" 
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/Allmesh   .
 	mkdir -p  system
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/system/*  ./system
