@@ -52,6 +52,12 @@ clean: cleanfreecadmesh cleanframeworkmesh cleanReport
 	make updateUpstreamLinks
 
 
+# creates a zipped file of the current run
+zip:
+	tar --verbose --bzip2 --dereference --create --file ARCHIVE-$(notdir $(CURDIR))-$(shell date +"%Y%m%d-%H%M%p").tar.bz2  \
+	    --exclude='$(linkedCadCase)'  --exclude='*.tar.gz' --exclude='*.tar.bz2'  `ls -A -1`
+
+
 
 # handle framework related mesh folder
 # =============================================================================

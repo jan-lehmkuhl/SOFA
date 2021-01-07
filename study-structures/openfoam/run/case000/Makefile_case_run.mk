@@ -50,6 +50,12 @@ clean: cleanRun cleanFreecad updateUpstreamLinks
 	make -C ../../../tools/framework  clean
 
 
+# creates a zipped file of the current run
+zip:
+	tar --verbose --bzip2 --dereference --create --file ARCHIVE-$(notdir $(CURDIR))-$(shell date +"%Y%m%d-%H%M%p").tar.bz2  \
+	    --exclude='$(linkedMeshCase)'  --exclude='*.tar.gz' --exclude='*.tar.bz2'  `ls -A -1`
+
+
 
 # handle framework related run folder
 # =============================================================================

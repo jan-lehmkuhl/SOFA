@@ -8,11 +8,10 @@
 # SOFA files
 # =====================================
 
-# case description file
-*.case.info
 cad[0-9][0-9][0-9]
 mesh[0-9][0-9][0-9]
 postStates
+ARCHIVE-*.tar.bz2
 
 
 
