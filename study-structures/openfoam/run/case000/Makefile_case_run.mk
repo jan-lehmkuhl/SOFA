@@ -24,8 +24,9 @@ all:
 # default run target
 run: updateUpstreamLinks
 	if [ -f "Allrun" ] ; then     \
+		make copy0orgto0        ; \
 		./Allrun                ; \
-		make caseReport                                    ; \
+		make caseReport         ; \
 	else                          \
 		make frameworkrun       ; \
 	fi ;
@@ -111,14 +112,19 @@ cleanRun:
 # =============================================================================
 
 # can be used to overwrite the dummy settings
-fetch-freecad-case-setup: 
+freecad-case-setup-fetch: 
 	mv  ../../cad/$(linkedCadCase)/case/0  ../../cad/$(linkedCadCase)/case/0.org
-	rm  -r 0.org
-	rm  -r constant
-	rm  -r system
+	rm  -rf 0.org
+	rm  -rf constant
+	rm  -rf system
 	mv  ../../cad/$(linkedCadCase)/case/* .
 	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(linkedMeshCase)"\' Allrun
 	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
+
+
+copy0orgto0:
+	mkdir -p   0
+	cp    -rf  0.org/*  0
 
 
 cleanFreecad: 
