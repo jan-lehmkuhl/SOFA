@@ -17,7 +17,7 @@ linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings
 
 # default creating target
 all: 
-	make -C $(linkedMeshCase)
+	make -C ../../mesh/$(linkedMeshCase)
 	make run 
 
 

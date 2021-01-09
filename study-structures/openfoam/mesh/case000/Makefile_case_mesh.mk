@@ -13,7 +13,7 @@ paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview
 
 # default creating target
 all: 
-	make -C $(linkedCadCase)
+	make -C ../../cad/$(linkedCadCase)
 	make mesh 
 
 
