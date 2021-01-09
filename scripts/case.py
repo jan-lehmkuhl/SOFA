@@ -116,7 +116,7 @@ class Case(object):
             self.path       = os.path.join( self.aspectRoot, self.caseName )
         else:
             self.createNew  = False
-            for file in os.listdir( self.path ):
+            for file in sorted(os.listdir( self.path )):
                 if fnmatch.fnmatch(file, "sofa."+ self.aspectType +"*.json"):
                     if self.verbose: 
                         print("with case-json:   "+ file+ "\tin: "+ self.path )
@@ -265,7 +265,7 @@ class Case(object):
 
                         # create file
                         if thisLink['separateFiles']:
-                            for element in os.listdir(src):
+                            for element in sorted(os.listdir(src)):
                                 if thisLink['copyFile']: 
                                     copyFileSafely( os.path.join(src,element), os.path.join(dst,element), overwrite=True, verbose=self.verbose )
                                 else:
@@ -304,7 +304,7 @@ class Case(object):
                     if answer2 in ["n", "no",""]:
                         print("Cloning case >%s< to >%s< without results" % (currentCase, caseName))
                         os.makedirs(clonePath)
-                        for name in os.listdir("."):
+                        for name in sorted( os.listdir(".") ):
                             if fnmatch.fnmatch(name, "[1-9]*") or fnmatch.fnmatch(name, "[0-9].[0-9]*"):
                                 continue
                             elif fnmatch.fnmatch(name, "processor*"):

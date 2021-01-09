@@ -126,7 +126,7 @@ elif args.entryPoint == "clone":
 # todo
 elif args.entryPoint == "overview":
     createDirSafely("doc")
-    files = os.listdir("doc")
+    files = sorted(os.listdir("doc"))
     for fileName in files:
         if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
             os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
@@ -154,7 +154,7 @@ elif args.entryPoint == "updateAllReports":
         if not os.path.exists("doc"):
             print("Directory >doc< doesn't exist in: " + os.getcwd() )
             exit(0)
-        files = os.listdir("doc")
+        files = sorted(os.listdir("doc"))
         for fileName in files:
             if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
                 os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
