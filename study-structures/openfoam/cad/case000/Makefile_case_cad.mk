@@ -66,7 +66,7 @@ cleanVTK:
 
 openfreecadgui:
 	if [ ! -f native/geometry.FCStd ]; then cp ../../../tools/framework/openFoam/dummies/cad/geometry.FCStd  native/geometry.FCStd; fi
-	freecad native/geometry.FCStd & 
+	freecad-daily native/geometry.FCStd & 
 
 
 freecad-stl-push: 
