@@ -96,7 +96,7 @@ dynamicCode
 # =============================================================================
 
 # paraview/ParaFoam
-*.foam
+# *.foam
 *.OpenFOAM
 # *.pvsm
 
