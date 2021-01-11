@@ -16,6 +16,11 @@
             "isSymlink": true
         },
         {
+            "sourcePath": "paraview-mesh-base-state.pvsm",
+            "targetPath": "shared/postStates/mesh-state-01.pvsm",
+            "isSymlink": false
+        },
+        {
             "sourcePath": "../../../../openFoam-reporting/meshOverview/meshOverview.Rmd",
             "targetPath": "doc/meshOverview.Rmd",
             "isSymlink": false

@@ -16,6 +16,11 @@
             "sourcePath": "../../run/case000/.gitignore_foam",
             "targetPath": ".gitignore",
             "isSymlink": true
+        },
+        {
+            "sourcePath": "../../shared/empty-file",
+            "targetPath": "pv.foam",
+            "isSymlink": false
         }
     ],
 

@@ -16,6 +16,11 @@
             "isSymlink": true
         },
         {
+            "sourcePath": "paraview-run-base-state.pvsm",
+            "targetPath": "shared/postStates/run-state-01.pvsm",
+            "isSymlink": false
+        },
+        {
             "sourcePath": "../../../../openFoam-reporting/runOverview/runOverview.Rmd",
             "targetPath": "doc/runOverview.Rmd",
             "isSymlink": false
