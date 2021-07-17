@@ -4,7 +4,16 @@ R CLI
 
     cd tools/framework
     make installrequirementsR
-    # maybe a restart is required
+    sudo R 
+
+beside the normal package installation which is done by `install.packages("PACKAGE")` one particular have to be added manual: 
+~~~
+devtools::install_git("https://gitlab.com/sofa-framework/ofreportr-core")
+~~~
+
+## troubleshooting
+* maybe a restart is required
+* often also an execution of the `*.Rmd` file with the `rstudio` GUI helps with installation issues 
 
 
 
