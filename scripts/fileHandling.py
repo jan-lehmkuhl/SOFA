@@ -211,6 +211,23 @@ def copyFolderSafely(src, dst):
         else:
             print("Unabel to find >%s<" % src)
 
+def copyRecursiveAndStage(src, dest, verbose=False):
+    """
+    Copy each file from src dir to dest dir, including sub-directories.
+    """
+    # https://stackoverflow.com/questions/3397752/copy-multiple-files-in-python/3399299
+
+    for item in os.listdir(src):
+        file_path = os.path.join(src, item)
+        if os.path.isfile(file_path):
+            shutil.copy(file_path, dest)
+            os.system("git add " +os.path.join(dest, item) )
+        elif os.path.isdir(file_path):
+            new_dest = os.path.join(dest, item)
+            if not os.path.exists(new_dest):
+                os.mkdir(new_dest)
+            copyRecursiveAndStage(file_path, new_dest)
+
 def loadJson(jsonPath, verbose=False):
     # Loads a passed .json file if it exists
     #

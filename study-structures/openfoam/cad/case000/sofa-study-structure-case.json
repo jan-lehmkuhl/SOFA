@@ -17,6 +17,10 @@
             "isSymlink": true
         }
     ],
+
+    "optional-file-bundles": [
+    ],
+
     "folders": [
         {
             "relPath": "native",

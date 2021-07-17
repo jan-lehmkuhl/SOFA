@@ -24,6 +24,15 @@
         }
     ],
 
+    "optional-file-bundles": [
+        {
+            "name":             "Mesh-Bundle-1",
+            "jsonSwitch":       ["buildSettings", "defaultFiles" ],
+            "jsonSwitchValues": ["bundle-1","framework"],
+            "path":             "bundle-1"
+        }
+    ],
+
     "caseLinks": [
         // linked and relative from created case
         {

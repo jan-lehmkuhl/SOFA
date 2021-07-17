@@ -23,6 +23,9 @@
         }
     ],
 
+    "optional-file-bundles": [
+    ],
+
     "caseLinks": [
         // linked and relative from created case
         {

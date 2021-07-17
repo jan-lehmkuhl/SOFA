@@ -211,6 +211,7 @@ class Case(object):
         #
         from fileHandling import handleStudyStructFile
         from fileHandling import handleStudyStructFolder
+        from fileHandling import copyRecursiveAndStage
         if self.verbose:    print(  "creating case:         \t\t  >>  " +self.caseName +"  <<")
 
         # create case folder
@@ -229,6 +230,13 @@ class Case(object):
                             print("Skip onlyAtCreation file: "+ thisFile['targetPath'])
                         continue
                 handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
+        if 'optional-file-bundles' in self.structure and not self.caseJson == None: 
+            for thisOption in self.structure['optional-file-bundles']:
+                optionValue = self.caseJson[  thisOption['jsonSwitch'][0]  ][  thisOption['jsonSwitch'][1]  ]   # TODO read for free key depth
+                if optionValue in thisOption['jsonSwitchValues']:
+                    if self.verbose: print("handle optional file bundle: ", thisOption['name'])
+                    source = os.path.join(self.structure['localpath'], thisOption['path'])
+                    copyRecursiveAndStage( source, self.casePath, verbose=self.verbose )
         if 'caseLinks' in self.structure : 
             for thisFile in self.structure['caseLinks'] : 
                 createSymlinkSavely(  os.path.join(self.casePath, thisFile['sourcePath'])

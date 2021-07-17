@@ -16,5 +16,9 @@
             "targetPath": ".gitignore",
             "isSymlink": true
         }
+    ],
+
+    "optional-file-bundles": [
     ]
+
 }
