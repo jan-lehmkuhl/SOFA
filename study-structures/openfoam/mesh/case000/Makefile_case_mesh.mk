@@ -62,6 +62,11 @@ zip:
 # handle framework related mesh folder
 # =============================================================================
 
+# reinitialize case and copies files again
+initCase: 
+	python3 ../../../tools/framework/scripts/sofa-tasks.py newCase
+
+
 # clone case to a new case with the next available running number 
 clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
