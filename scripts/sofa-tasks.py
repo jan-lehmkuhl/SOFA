@@ -104,6 +104,9 @@ elif args.entryPoint == "initFoam":
 elif args.entryPoint == "newCase":
     exitIfRepositoryIsNotClean()
     newCaseXXX = Case( verbose=args.verbose )
+    if not newCaseXXX.createNew:
+        print("\nWARNING: this will overwrite existing files with default values")
+        input("Press Enter to continue...")
     newCaseXXX.create()
 
 # todo
