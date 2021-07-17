@@ -4,13 +4,6 @@ R CLI
 
     cd tools/framework
     make installrequirementsR
-    sudo Rscript -e 'install.packages("rmarkdown")'
-    sudo Rscript -e 'install.packages("rmdformats")'
-    sudo Rscript -e 'install.packages("kableExtra")'
-    sudo Rscript -e 'install.packages("openssl")'
-    sudo Rscript -e 'install.packages("withr")'
-    sudo Rscript -e 'install.packages("shiny")'
-    sudo Rscript -e 'install.packages("ggplot2")'
     # maybe a restart is required
 
 
