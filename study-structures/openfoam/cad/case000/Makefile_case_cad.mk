@@ -10,18 +10,19 @@ paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview
 
 # writes necessary stl files from sources
 cad: 
-	@echo "no automatic stl creation"
+	@echo "no automatic stl creation provided"
+
 
 freecad:
-	if [   -f native/geometry.FCStd ]; then                                      \
-		echo; echo "*** execute WRITE MESH inside freecad to provide stl files in meshCase ***" ;echo   ; \
-		# make openfreecadgui                                                  ; \
-	fi
+	@echo; echo "*** execute >WRITE MESH< inside freecad to provide stl files in >meshCase< ***" ;echo
+	@read -p "press ENTER to continue ..." dummy
+	make freecad-gui
+	make freecad-stl-push
 
 
 # review cad files
 view:
-	if [   -f native/geometry.FCStd ]; then   make openfreecadgui              ; fi
+	if [   -f native/geometry.FCStd ]; then   make freecad-gui              ; fi
 	if [ ! -f native/geometry.FCStd ]; then   make frameworkview               ; fi
 	make paraview
 
@@ -64,25 +65,31 @@ cleanVTK:
 # FreeCAD handling
 # =============================================================================
 
-openfreecadgui:
+freecad-gui:
 	if [ ! -f native/geometry.FCStd ]; then cp ../../../tools/framework/openFoam/dummies/cad/geometry.FCStd  native/geometry.FCStd; fi
-	freecad-daily native/geometry.FCStd & 
+	freecad-daily native/geometry.FCStd
 
 
 freecad-stl-push: 
-	@echo "\n*** push freecad stl files to case-stl-folder ***"
+	@echo "\n*** push freecad stl export to ./stl ***"
+
+	# check for freecad stl file existence
 	@if   ls meshCase/constant/triSurface/*.stl  >/dev/null 2>&1;  then  echo "";   else   \
-		echo "*** PROVIDE stl-files in meshCase/constant/triSurface ***"  ; \
+		echo "ERROR: provide stl-files in meshCase/constant/triSurface \n"  ; \
 		exit 1 ; \
 	fi
+
+	@# delete outdated stl files
 	@mkdir -p stl ; 
 	@if [ ! `find stl -prune -empty 2>/dev/null` ]          ; then     \
 		echo "*** OVERWRITING/DELETING EXISTING stl-files in stl folder ***"      ; \
 		ls -lA stl  ; \
 		../../../tools/framework/bin/pauseForMakefiles.py                       ; \
 	fi
-	@echo "\n* move freecad stl files to stl folder"
 	rm -f  stl/*.stl
+	@echo ""
+
+	# move freecad stl export to ./stl
 	mv meshCase/constant/triSurface/*  stl 
 	@echo "\n    list of moved stl files " 
 	@ls -lA stl 

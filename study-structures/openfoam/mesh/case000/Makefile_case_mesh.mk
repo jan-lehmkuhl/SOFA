@@ -21,9 +21,7 @@ all:
     # NOTE: update cad folder before
 mesh: updateUpstreamLinks
 	if [ -f "Allmesh" ] ; then                               \
-		./Allmesh                                          ; \
-		checkMesh  | tee log.checkMesh                     ; \
-		make caseReport                                    ; \
+		make mesh-allmesh                                  ; \
 	else                                                     \
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
@@ -97,6 +95,10 @@ showOverviewReport:
 # FreeCAD meshing
 # =============================================================================
 
+freecad-gui:
+	make -C ../../cad/$(linkedCadCase)  freecad
+
+
 freecad-mesh-export-push-all: 
 	make  -C  ../../cad/$(linkedCadCase)  freecad-stl-push
 	make freecad-mesh-export-fetch-setup
@@ -112,13 +114,11 @@ freecad-mesh-export-fetch-setup: clean
 	make updateUpstreamLinks
 
 
-openfreecad:
-	make -C ../../cad/$(linkedCadCase)  openfreecadgui
-# and write mesh case in gui
-
-
-runfreecadmesh:
-	./Allmesh
+mesh-allmesh: 
+	./Allmesh                                       
+	@test -e constant/polyMesh/points && echo "mesh exists" || (echo "mesh not exists"; exit 1)
+	checkMesh  | tee log.checkMesh                  
+	make caseReport                                 
 
 
 cleanfreecadmesh:
