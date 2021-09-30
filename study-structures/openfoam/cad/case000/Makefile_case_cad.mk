@@ -84,7 +84,7 @@ freecad-stl-push:
 	@if [ ! `find stl -prune -empty 2>/dev/null` ]          ; then     \
 		echo "*** OVERWRITING/DELETING EXISTING stl-files in stl folder ***"      ; \
 		ls -lA stl  ; \
-		../../../tools/framework/bin/pauseForMakefiles.py                       ; \
+		read -p "press ENTER to continue ..." dummy  ; \
 	fi
 	rm -f  stl/*.stl
 	@echo ""
