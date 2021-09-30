@@ -57,7 +57,7 @@ zip:
 
 
 
-# handle framework related mesh folder
+#   framework handling
 # =============================================================================
 
 # reinitialize case and copies files again

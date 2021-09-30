@@ -5,11 +5,11 @@ paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview
 
 
 
-# standard targets 
+#   standard targets 
 # =============================================================================
 
-# writes necessary stl files from sources
-cad: 
+.PHONY: stl
+stl: 
 	@echo "no automatic stl creation provided"
 
 
@@ -20,21 +20,19 @@ freecad:
 	make freecad-stl-push
 
 
-# review cad files
 view:
 	if [   -f native/geometry.FCStd ]; then   make freecad-gui              ; fi
 	if [ ! -f native/geometry.FCStd ]; then   make frameworkview               ; fi
 	make paraview
 
 
-# remove all from commited sources created files and links
-clean: cleanfreecadoutput cleanVTK
+clean: clean-freecad-output clean-vtk
 	find . -empty -type d -delete
 	make -C ../../../tools/framework  clean
 
 
 
-# framework folder handling
+#   framework handling
 # =============================================================================
 
 # clone case to a new case with the next available running number 
@@ -57,7 +55,7 @@ combineSTL:
 
 
 # erase all vtk files
-cleanVTK:
+clean-vtk:
 	python3 ../../../tools/framework/openFoam/python/foamCad.py cleanVTK
 
 
@@ -106,7 +104,7 @@ prune-empty-freecad-export-folders:
 	fi
 
 
-cleanfreecadoutput:
+clean-freecad-output:
 	rm -rf meshCase
 	rm -rf case
 	# rm -f  stl/*

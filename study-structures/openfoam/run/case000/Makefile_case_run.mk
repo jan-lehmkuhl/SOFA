@@ -58,7 +58,7 @@ zip:
 
 
 
-# handle framework related run folder
+#   framework handling
 # =============================================================================
 
 # initialize case according to run.json
