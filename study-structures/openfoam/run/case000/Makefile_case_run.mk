@@ -21,8 +21,7 @@ all:
 	make run 
 
 
-# default run target
-run: updateUpstreamLinks
+run: upstream-links
 	if [ -f "Allrun" ] ; then     \
 		make copy0orgto0        ; \
 		./Allrun                ; \
@@ -45,7 +44,7 @@ view:
 
 
 # remove all calculated files
-clean: cleanRun cleanFreecad updateUpstreamLinks
+clean: cleanRun cleanFreecad upstream-links
 	rm -rf doc/meshReport
 	find . -empty -type d -delete
 	make -C ../../../tools/framework  clean
@@ -62,12 +61,12 @@ zip:
 # =============================================================================
 
 # initialize case according to run.json
-init-case: updateUpstreamLinks
+init-case: upstream-links
 	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 
 
-# renew the upstreamLinks to mesh
-updateUpstreamLinks:
+upstream-links:
+    # renew the upstreamLinks to mesh
 	if [ -f "Allrun" ] ; then                                                   \
 		sed -i 's\MESHDIR=".*"\MESHDIR="./$(linkedMeshCase)"\' Allrun         ; \
 	fi

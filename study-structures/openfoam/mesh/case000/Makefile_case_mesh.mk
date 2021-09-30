@@ -17,9 +17,8 @@ all:
 	make mesh 
 
 
-# creates mesh
+mesh: upstream-links
     # NOTE: update cad folder before
-mesh: updateUpstreamLinks
 	if [ -f "Allmesh" ] ; then                               \
 		make mesh-allmesh                                  ; \
 	else                                                     \
@@ -47,7 +46,7 @@ clean: cleanfreecadmesh cleanframeworkmesh cleanReport
 	find . -empty -type d -delete
 	rm -f pvScriptMesh.py
 	make -C ../../../tools/framework  clean
-	make updateUpstreamLinks
+	make upstream-links
 
 
 # creates a zipped file of the current run
@@ -65,6 +64,11 @@ initCase:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py newCase
 
 
+upstream-links:
+    # renew the upstreamLinks to cad 
+	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
+
+
 # clone case to a new case with the next available running number 
 clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
@@ -78,7 +82,7 @@ cleanframeworkmesh:
 
 
 # run case report according to .json
-caseReport: updateUpstreamLinks
+caseReport: upstream-links
 	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
 
 
@@ -111,7 +115,7 @@ freecad-mesh-export-fetch-setup: clean
 	mkdir -p  system
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/system/*  ./system
 	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
-	make updateUpstreamLinks
+	make upstream-links
 
 
 mesh-allmesh: 
@@ -131,11 +135,6 @@ cleanfreecadmesh:
 
 # full-control framework OpenFOAM meshing
 # =============================================================================
-
-# renew the upstreamLinks to cad 
-updateUpstreamLinks:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
-
 
 # generate mesh according to mesh.json
 frameworkmeshing:
