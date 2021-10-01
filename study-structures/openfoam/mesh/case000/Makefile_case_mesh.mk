@@ -40,7 +40,7 @@ view:
 
 
 # remove all from commited sources created files and links
-clean: cleanfreecadmesh cleanframeworkmesh cleanReport
+clean: clean-freecad-mesh clean-framework-mesh clean-report
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
@@ -74,7 +74,7 @@ clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
 
-cleanframeworkmesh: 
+clean-framework-mesh: 
 	rm -f  .fileStates.data
 	rm -rf [0-9]/polyMesh/*
 	rm -rf constant/extendedFeatureEdgeMesh/*
@@ -125,7 +125,7 @@ mesh-allmesh:
 	make caseReport                                 
 
 
-cleanfreecadmesh:
+clean-freecad-mesh:
 	rm -f log.* 
 	rm -f mesh_outside.stl
 	rm -f *_Geometry.fms
@@ -155,7 +155,7 @@ finalizeMesh:
 cleanMesh:
 	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
 
-cleanReport:
+clean-report:
 	rm -rf doc/meshReport
 
 
