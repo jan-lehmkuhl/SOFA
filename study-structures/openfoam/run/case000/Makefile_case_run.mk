@@ -23,9 +23,7 @@ all:
 
 run: upstream-links
 	if [ -f "Allrun" ] ; then     \
-		make copy-0org-to-0     ; \
-		./Allrun                ; \
-		make caseReport         ; \
+		make run-allrun         ; \
 	else                          \
 		make frameworkrun       ; \
 	fi ;
@@ -128,6 +126,14 @@ freecad-case-setup-fetch:
 copy-0org-to-0:
 	mkdir -p   0
 	cp    -rf  0.org/*  0
+
+
+run-allrun:
+	make copy-0org-to-0
+	./Allrun
+	# check for existing results
+	@find . -maxdepth 3 -type f -wholename "*/uniform/time" 2>/dev/null | grep -q . || exit 1
+	make caseReport
 
 
 cleanFreecad: 
