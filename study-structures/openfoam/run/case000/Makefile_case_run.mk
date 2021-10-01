@@ -23,7 +23,7 @@ all:
 
 run: upstream-links
 	if [ -f "Allrun" ] ; then     \
-		make copy0orgto0        ; \
+		make copy-0org-to-0     ; \
 		./Allrun                ; \
 		make caseReport         ; \
 	else                          \
@@ -110,6 +110,10 @@ cleanRun:
 # FreeCAD settings
 # =============================================================================
 
+freecad-gui:
+	make -C ../../mesh/$(linkedMeshCase)  freecad-gui
+
+
 # can be used to overwrite the dummy settings
 freecad-case-setup-fetch: 
 	mv  ../../cad/$(linkedCadCase)/case/0  ../../cad/$(linkedCadCase)/case/0.org
@@ -121,7 +125,7 @@ freecad-case-setup-fetch:
 	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
 
 
-copy0orgto0:
+copy-0org-to-0:
 	mkdir -p   0
 	cp    -rf  0.org/*  0
 
