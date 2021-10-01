@@ -232,7 +232,11 @@ class Case(object):
                 handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
         if 'optional-file-bundles' in self.structure and not self.caseJson == None: 
             for thisOption in self.structure['optional-file-bundles']:
-                optionValue = self.caseJson[  thisOption['jsonSwitch'][0]  ][  thisOption['jsonSwitch'][1]  ]   # TODO read for free key depth
+                try:
+                    optionValue = self.caseJson[  thisOption['jsonSwitch'][0]  ][  thisOption['jsonSwitch'][1]  ]   # TODO read for free key depth
+                except: 
+                    print("WARNING: optional-file-bundles are not specified in json")
+                    optionValue = ""
                 if optionValue in thisOption['jsonSwitchValues']:
                     if self.verbose: print("handle optional file bundle: ", thisOption['name'])
                     source = os.path.join(self.structure['localpath'], thisOption['path'])
