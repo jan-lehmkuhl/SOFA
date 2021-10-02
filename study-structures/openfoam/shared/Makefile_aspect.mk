@@ -40,6 +40,10 @@ updateCaseReports:
 	python3 ../../tools/framework/scripts/sofa-tasks.py updateAllReports
 
 
+rstudio:
+	rstudio doc/runOverview.Rmd
+
+
 
 # tests
 # =============================================================================

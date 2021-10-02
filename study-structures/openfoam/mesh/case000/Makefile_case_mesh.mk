@@ -95,6 +95,10 @@ showOverviewReport:
 	make -C .. showOverviewReport
 
 
+rstudio:
+	rstudio doc/meshReport/meshReport.Rmd
+
+
 
 # FreeCAD meshing
 # =============================================================================

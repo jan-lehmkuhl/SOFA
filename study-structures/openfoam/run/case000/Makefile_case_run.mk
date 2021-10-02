@@ -89,6 +89,10 @@ showOverviewReport:
 	make -C .. showOverviewReport
 
 
+rstudio:
+	rstudio doc/runReport/runReport.Rmd
+
+
 
 # run
 # =============================================================================
