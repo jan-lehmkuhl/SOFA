@@ -105,18 +105,22 @@ rstudio:
 
 freecad-gui:
 	make -C ../../cad/$(linkedCadCase)  freecad
+	make freecad-mesh-setup-fetch
 
 
-freecad-mesh-export-push-all: 
-	make  -C  ../../cad/$(linkedCadCase)  freecad-stl-push
-	make freecad-mesh-export-fetch-setup
-
-# imports and overwrites mesh settings from freecad export CAD/meshCase/system
+freecad-mesh-setup-fetch: clean
+    # imports and overwrites mesh settings from freecad export CAD/meshCase/system
     # can be used to overwrite the dummy settings from full-controll meshing
-freecad-mesh-export-fetch-setup: clean
+
+	@if   ls ../../cad/$(linkedCadCase)/meshCase/constant/triSurface/*.stl  >/dev/null 2>&1;  then   \
+		make  -C  ../../cad/$(linkedCadCase)  freecad-stl-push ; \
+	fi
+
 	@echo "\n*** fetch FreeCAD meshCase files ***" 
+	@read -p "press ENTER to start overwriting files ..." dummy 
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/Allmesh   .
 	mkdir -p  system
+	rm    -f  system/*
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/system/*  ./system
 	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
 	make upstream-links
