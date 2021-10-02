@@ -109,9 +109,11 @@ postProcessing
 # R & Reporting
 # =====================================
 
+.Rhistory
 doc/*Report/*Report.Rmd
     # copied from aspect/doc/templateXX
 doc/*Report/*.Rdata
+doc/*Report/*.Rhistory
 doc/*Report/*.rds
 doc/*Report/*Report.html
 

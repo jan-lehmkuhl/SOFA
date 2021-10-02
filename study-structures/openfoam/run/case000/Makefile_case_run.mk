@@ -42,8 +42,7 @@ view:
 
 
 # remove all calculated files
-clean: cleanRun cleanFreecad upstream-links
-	rm -rf doc/meshReport
+clean: cleanRun cleanFreecad clean-report upstream-links
 	find . -empty -type d -delete
 	make -C ../../../tools/framework  clean
 
@@ -91,6 +90,12 @@ showOverviewReport:
 
 rstudio:
 	rstudio doc/runReport/runReport.Rmd
+
+
+clean-report: 
+	rm -f  .Rhistory
+	rm -rf doc/meshReport
+	rm -f  doc/runReport/.Rhistory
 
 
 

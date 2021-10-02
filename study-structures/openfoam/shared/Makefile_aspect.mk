@@ -20,6 +20,10 @@ updateAllReports:
 	make showOverviewReport
 
 
+clean: 
+	rm -f  .Rhistory
+
+
 
 # handle framework related run folder
 # =============================================================================
