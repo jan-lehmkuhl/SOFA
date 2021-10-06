@@ -1,6 +1,10 @@
 {
     "name"                  :   "",
     "description"           :   "",
+    "notes"                 :[  
+        ""
+    ],
+
 
     "buildSettings" : {
         "paraview"          :   "../shared/postStates/CAD.pvsm",
