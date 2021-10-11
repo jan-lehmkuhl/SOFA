@@ -44,6 +44,8 @@ clean: clean-freecad-output clean-vtk
 clone:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
 
+clean-upstream-included: clean
+
 
 
 # Basic stl/surface handling

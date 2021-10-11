@@ -48,6 +48,9 @@ clean: clean-run clean-freecad clean-report upstream-links
 	find . -empty -type d -delete
 	make -C ../../../tools/framework  clean
 
+clean-upstream-included: clean
+	make -C $(linkedMeshCase) clean-upstream-included
+
 
 # creates a zipped file of the current run
 zip:
