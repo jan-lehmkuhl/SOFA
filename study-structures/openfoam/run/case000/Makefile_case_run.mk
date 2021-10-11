@@ -141,7 +141,7 @@ run-allrun:
 	make copy-0org-to-0
 	./Allrun
 	# check for existing results
-	@find . -maxdepth 3 -type f -wholename "*/uniform/time" 2>/dev/null | grep -q . || exit 1
+	@find . -maxdepth 4 -type f -wholename "*/uniform/time" 2>/dev/null | grep -q . || (echo "ERROR did recognize a run to process"; exit 1)
 	make caseReport
 
 
