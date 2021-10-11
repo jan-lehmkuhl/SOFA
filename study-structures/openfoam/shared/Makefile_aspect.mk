@@ -4,59 +4,72 @@ ifneq ("$(wildcard ./special-targets.mk)","")
     include special-targets.mk
 endif
 
+CASES := $(sort $(wildcard cad*/.)) $(sort $(wildcard mesh*/.)) $(sort $(wildcard run*/.))
 
 
-# standard targets 
+
+#   framework targets
 # =============================================================================
 
-# open overview report
+default: 
+
+newCase:
+    # create a new case with the next available running number
+	python3 ../../tools/framework/scripts/sofa-tasks.py newCase
+
+
+all-cases:
+	$(foreach dir,$(CASES),make -C $(dir); ) 
+
+
+#   clean
+# --------------------------------------------------------------------
+clean-aspect: 
+	rm -f  .Rhistory
+
+clean-cases: clean-aspect
+	$(foreach dir,$(CASES),make -C $(dir) clean; ) 
+
+clean-cases-upstream-included:
+	$(foreach dir,$(CASES),make -C $(dir) clean-upstream-included; ) 
+
+
+
+#   report targets 
+# =============================================================================
+
+#   show
+# --------------------------------------------------------------------
 show-overview-report:
 	if [ $(shell basename "`pwd`" ) = "mesh" ] ; then     \
 		xdg-open doc/meshOverview.html                  ; \
-	elif [ $(shell basename "`pwd`" ) = "run" ] ; then     \
-		xdg-open doc/runOverview.html                  ; \
+	elif [ $(shell basename "`pwd`" ) = "run" ] ; then    \
+		xdg-open doc/runOverview.html                   ; \
 	fi ;
 
+show-all-reports: show-overview-report
+	$(foreach dir,$(CASES),make -C $(dir) show-case-report; ) 
 
-# updates all reports in this aspect
+
+#   create
+# --------------------------------------------------------------------
 all-reports:
 	make all-case-reports
 	make overview-report
 	make show-overview-report
 
-
-clean: 
-	rm -f  .Rhistory
-
-
-
-# handle framework related run folder
-# =============================================================================
-
-# create a new case with the next available running number
-newCase:
-	python3 ../../tools/framework/scripts/sofa-tasks.py newCase
-
-
-# creates an overview report for all cases
-    # dont updates the separate case reports
 overview-report:
 	python3 ../../tools/framework/scripts/sofa-tasks.py overview
 
-
-# update all case reports to newest version and potentially run report generation
 all-case-reports:
+    # update all case reports to newest version and potentially run report generation
 	python3 ../../tools/framework/scripts/sofa-tasks.py updateAllReports
 
 
 rstudio:
-	rstudio doc/runOverview.Rmd
+	if [ $(shell basename "`pwd`" ) = "mesh" ] ; then     \
+		rstudio doc/meshOverview.Rmd                    ; \
+	elif [ $(shell basename "`pwd`" ) = "run" ] ; then    \
+		rstudio doc/runOverview.Rmd                     ; \
+	fi ;
 
-
-
-# tests
-# =============================================================================
-
-# test value
-test:
-	python3 ../../tools/framework/scripts/sofa-tasks.py test
