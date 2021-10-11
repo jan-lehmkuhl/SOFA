@@ -1,7 +1,9 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_run.mk
 
+ifneq ("$(wildcard ./special-targets.mk)","")
+    include special-targets.mk
+endif
 
-# include ../../../tools/framework/global-make.mk
 
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")

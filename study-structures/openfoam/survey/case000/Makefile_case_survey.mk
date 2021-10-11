@@ -1,5 +1,12 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_survey.mk
 
+
+ifneq ("$(wildcard ./special-targets.mk)","")
+    include special-targets.mk
+endif
+
+
+
 init:
 	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
 

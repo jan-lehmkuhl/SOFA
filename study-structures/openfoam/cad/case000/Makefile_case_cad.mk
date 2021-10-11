@@ -1,5 +1,10 @@
 # Makefile copied from ./tools/framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
 
+ifneq ("$(wildcard ./special-targets.mk)","")
+    include special-targets.mk
+endif
+
+
 jsonfile        = $(shell find . -name 'sofa.cad*.json')
 paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview")
 

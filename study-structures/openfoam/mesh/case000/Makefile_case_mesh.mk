@@ -1,7 +1,10 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_mesh.mk
 
+ifneq ("$(wildcard ./special-targets.mk)","")
+    include special-targets.mk
+endif
 
-# include ../../../tools/framework/global-make.mk
+
 jsonFile        = $(shell find . -name 'sofa.mesh*.json')
 linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
 paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")

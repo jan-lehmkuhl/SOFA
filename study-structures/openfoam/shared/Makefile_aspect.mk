@@ -1,5 +1,10 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_aspect.mk
 
+ifneq ("$(wildcard ./special-targets.mk)","")
+    include special-targets.mk
+endif
+
+
 
 # standard targets 
 # =============================================================================
