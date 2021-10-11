@@ -25,7 +25,7 @@ mesh: upstream-links
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
-	make -C .. updateOverviewReport
+	make -C .. overview-report
 
 
 meshshow: mesh
@@ -34,8 +34,8 @@ meshshow: mesh
 
 # opens reports & paraview
 view:
-	make -C .. showOverviewReport
-	make       showCaseReport
+	make -C .. show-overview-report
+	make       show-case-report
 	make       paraview
 
 
@@ -82,17 +82,17 @@ clean-framework-mesh:
 
 
 # run case report according to .json
-caseReport: upstream-links
+case-report: upstream-links
 	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
 
 
-showReports:  showOverviewReport showCaseReport
+show-reports:  show-overview-report show-case-report
 
-showCaseReport:
+show-case-report:
 	xdg-open doc/meshReport/meshReport.html
 
-showOverviewReport:
-	make -C .. showOverviewReport
+show-overview-report:
+	make -C .. show-overview-report
 
 
 rstudio:
@@ -130,7 +130,7 @@ mesh-allmesh:
 	./Allmesh                                       
 	@test -e constant/polyMesh/points && echo "mesh exists" || (echo "mesh not exists"; exit 1)
 	checkMesh  | tee log.checkMesh                  
-	make caseReport                                 
+	make case-report                                 
 
 
 clean-freecad-mesh:

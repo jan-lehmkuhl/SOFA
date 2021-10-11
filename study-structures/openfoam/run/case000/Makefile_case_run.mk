@@ -27,7 +27,7 @@ run: upstream-links
 	else                          \
 		make frameworkrun       ; \
 	fi ;
-	make -C .. updateOverviewReport
+	make -C .. overview-report
 
 
 mesh: 
@@ -36,13 +36,13 @@ mesh:
 
 # opens reports & paraview
 view:
-	make -C .. showOverviewReport
-	make       showCaseReport
+	make -C .. show-overview-report
+	make       show-case-report
 	make       paraview
 
 
 # remove all calculated files
-clean: cleanRun cleanFreecad clean-report upstream-links
+clean: clean-run clean-freecad clean-report upstream-links
 	find . -empty -type d -delete
 	make -C ../../../tools/framework  clean
 
@@ -76,16 +76,17 @@ clone:
 
 
 # update report according to .json
-caseReport:
+case-report:
 	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
 
 
-showCaseReport:
+show-reports:  show-overview-report show-case-report
+
+show-case-report: 
 	xdg-open doc/runReport/runReport.html
 
-
-showOverviewReport:
-	make -C .. showOverviewReport
+show-overview-report:
+	make -C .. show-overview-report
 
 
 rstudio:
@@ -108,7 +109,7 @@ frameworkrun:
 
 
 # erase all results
-cleanRun:
+clean-run:
 	python3 ../../../tools/framework/openFoam/python/foamRun.py cleanRun
 	rm -rf logs
 
@@ -142,10 +143,10 @@ run-allrun:
 	./Allrun
 	# check for existing results
 	@find . -maxdepth 4 -type f -wholename "*/uniform/time" 2>/dev/null | grep -q . || (echo "ERROR did recognize a run to process"; exit 1)
-	make caseReport
+	make case-report
 
 
-cleanFreecad: 
+clean-freecad: 
 	rm -f constant/polyMesh
 
 
