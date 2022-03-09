@@ -153,6 +153,8 @@ class Study(object):
         else:
             print("\n*** StudyFolder already exists:")
             print(self.path)
+            print("Abort execution")
+            sys.exit(0)
             # input(  "    to abort press Ctrl+C to integrate the new study, press ENTER to proceed: ")
             # TODO mark self.isStudyUpdateMode
 
