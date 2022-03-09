@@ -2,7 +2,7 @@
 
 #--------------------------------------------------------------------------#
 # Contributor: Jan Lehmkuhl                                                #
-# Topic:       Create study epending on specific study structure           #
+# Topic:       Create study depending on specific study structure          #
 #--------------------------------------------------------------------------#
 
 # import librarys
@@ -29,7 +29,7 @@ class StudyStructure(object):
         self.className2 = "StudyStructure"
         self.verbose=verbose
 
-        # if provided load specified study struct
+        # if provided (e.g. by cli argument) load specified study struct
         if studyJsonFolder != None: 
             sofaStudyJson       = loadJson( os.path.join( studyJsonFolder, "sofa.study.json" ), verbose=verbose )
             relativePath        = sofaStudyJson['study-structure']
@@ -50,7 +50,7 @@ class StudyStructure(object):
         # try to load study-struct from self.path
         #   otherwise a new git-repository can be loaded
         if 'path' not in self.__dict__:
-            self.path = "." 
+            self.path = "" 
         while True: 
             if os.path.exists( os.path.join( self.path, "sofa-study-structure-root.json" ) ): 
                 # load study structure root
@@ -61,6 +61,7 @@ class StudyStructure(object):
                 self.aspectList     = self.loadStudyStructAspectList()
 
                 # TODO validate study structure
+                if verbose:     print("study structure loading successful")
                 break
             if self.path != "": 
                 print("\nWARNING sofa-study-structure-root.json dont exists in:  " +self.path +"\n")
@@ -82,12 +83,13 @@ class StudyStructure(object):
             self.path           = sofaStructList[idxChoosenStruct]
 
             if idxChoosenStruct == 0 :
-                # TODO 
                 self.url            = str(input("insert url used for 'git clone xxx': "))
+                print("WARNING: not yet implemented (873473), choose another option")
                 # import submodule to tools
                 # store sofa-study-structure URL to `~/.config/sofa/known-sofa-study-structures.list` or `%appdata%\sofa\known-sofa-study-structures.list`
+                self.path = self.url
 
-        if verbose:     print(  "loaded study struct")
+        if verbose:     print(  "study structure loading finished")
 
 
     def loadStudyStructAspectList(self):
@@ -148,7 +150,8 @@ class Study(object):
             print(  "creating study folder:     " +self.path )
             os.mkdir( self.path )
         else:
-            print("\n*** StudyFolder already exists")
+            print("\n*** StudyFolder already exists:")
+            print(self.path)
             # input(  "    to abort press Ctrl+C to integrate the new study, press ENTER to proceed: ")
             # TODO mark self.isStudyUpdateMode
 
@@ -180,6 +183,3 @@ class Study(object):
         print(  "completed structure creation and staging of:   " +self.name)
         # TODO commit new created items
         #   maybe stash before looping and pop now
-
-
-
