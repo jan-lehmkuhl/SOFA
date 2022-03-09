@@ -242,7 +242,7 @@ def loadJson(jsonPath, verbose=False):
 
     if os.path.exists(jsonPath):
         with open(jsonPath, 'r') as jsonFile:
-            if verbose:     print(  "    load json:              ", jsonPath)
+            # if verbose:     print(  "    load json:              ", jsonPath)  
             jsonStr = jsonFile.read()
             jsonStr = re.sub( " // .*", "", jsonStr, flags=re.MULTILINE )
             jsonStr = re.sub( "\n",     "", jsonStr, flags=re.MULTILINE )

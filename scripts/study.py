@@ -147,7 +147,8 @@ class Study(object):
 
     def createFolder(self, verbose):
         if not os.path.exists( self.path ):
-            print(  "creating study folder:     " +self.path )
+            print(  "creating study folder")
+            # print(  "    " +self.path )
             os.mkdir( self.path )
         else:
             print("\n*** StudyFolder already exists:")
@@ -158,13 +159,11 @@ class Study(object):
 
     def createStructure(self, verbose):
         print("\nstart structure creation of:       " +self.name  )
-        print(  "       with study type:            " +self.studyStructure.name )
-        if os.path.exists(self.path):
-            print(  "       in folder :                  " +self.path )
-        else:
+        print(  "    with study type:               " +self.studyStructure.name )
+        if not os.path.exists(self.path):
             print("\nERROR: " +self.path +" dont exists")
             sys.exit(1)
-        print(" ")
+        print("")
 
         # loop all study files
         for thisFile in self.studyStructure.files :
