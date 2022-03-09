@@ -51,6 +51,7 @@ def exitIfRepositoryIsNotClean():
 parser = argparse.ArgumentParser(description='input for sofa-tasks.py')
 parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
 parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
+parser.add_argument( '--no-absolute-path', action="store_true", dest="noAbsolutePathOutput", default=False )
 parser.add_argument( '--studyName',         nargs='?', const=1, type=str )
 parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
 # store all parsed arguments to args
@@ -59,9 +60,10 @@ args = parser.parse_args()
 # verbose output
 if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
 if args.verbose :   print("    with passed entryPoint:  " + args.entryPoint  )
-if args.verbose :   print("    in folder (os.getcwd):   " + os.getcwd() )
-if args.verbose :   print("    with sofa-tasks.py in:   " + file_path )
-if args.verbose :   print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
+if not args.noAbsolutePathOutput:
+    if args.verbose :   print("    in folder (os.getcwd):   " + os.getcwd() )
+    if args.verbose :   print("    with sofa-tasks.py in:   " + file_path )
+    if args.verbose :   print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
 
 foamStructure   = readFoamStructure( verbose=args.verbose )
 

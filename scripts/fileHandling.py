@@ -160,7 +160,7 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
                 if not os.path.exists(dst):
                     print("Copying file to      %s \t from %s" % (dstShort, srcShort))
                     if not os.path.exists( os.path.dirname(dst) ):
-                        createDirSafely( os.path.dirname(dst) )
+                        createDirSafely( os.path.dirname(dst), debugRefPath=referencePath ) 
                     shutil.copyfile(src, dst)
                 else:
                     print("Skip existing file       ", dstShort )
