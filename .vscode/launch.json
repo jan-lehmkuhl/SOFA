@@ -12,8 +12,35 @@
             "stopOnEntry":      true,
             "console":          "integratedTerminal"
         },
+
+
+
+        //  debug test-cases inside the framework-repository
+        // =====================================================================
         {
-            // to run this configuration in this directory, this framework should be part of a sofa project
+            "name":             "tests/create-study",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests",
+            "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
+            "args":             [   "initStudy", 
+                                    "--verbose", 
+                                    "--studyName", "create-study/dummy",
+                                    "--studyStructFolder",  "tools/framework/study-structures/openfoam",
+                                ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
+
+
+
+        //  Debug the downstairs project
+        // =====================================================================
+        
+        // to run this configurations in this directory, this repository should be part of a sofa project
+        {
             "name":             "init study ../..",
             "type":             "python",
             "request":          "launch",
@@ -30,7 +57,6 @@
             "console":          "integratedTerminal"
         },
         {
-            // to run this configuration in this directory, this framework should be part of a sofa project
             "name":             "newcase ../../newStudy/run",
             "type":             "python",
             "request":          "launch",
@@ -43,7 +69,6 @@
             "console":          "integratedTerminal"
         },
         {
-            // to run this configuration in this directory, this framework should be part of a sofa project
             "name":             "upstreamLinks ../../newStudy/run/run001",
             "type":             "python",
             "request":          "launch",
@@ -54,6 +79,8 @@
             "justMyCode":       true,
             "showReturnValue":  true,
             "console":          "integratedTerminal"
-        }
+        },
+
+
     ]
 }

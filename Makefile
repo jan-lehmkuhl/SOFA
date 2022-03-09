@@ -2,6 +2,7 @@
 # simulation-projects root-Makefile in ./tools/framework
 
 include global-make.mk
+include root-dummies/Makefile
 
 
 
@@ -68,4 +69,3 @@ badMagicNumberClean:
 
 # ideas
 # ===================================================================
-
