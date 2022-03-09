@@ -1,4 +1,8 @@
 
+listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'
+
+
+
 #   Main
 # ==========================================================
 
@@ -9,6 +13,7 @@ tests: primary-init re-init
 primary-init: clean
 	make run-framework
 	mv terminal-output-tmp.log terminal-output-init.log
+	cd dummy; ${listcontent} > ../content-dump-init.txt
 
 
 .PHONY: clean
@@ -23,6 +28,7 @@ clean:
 re-init: 
 	make run-framework
 	mv terminal-output-tmp.log terminal-output-reinit.log
+	# cd dummy; ${listcontent} > ../content-dump-reinit.txt
 
 
 run-framework:
