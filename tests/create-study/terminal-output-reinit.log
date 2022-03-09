@@ -1,0 +1,78 @@
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  initStudy
+start StudyStructure __init__ 
+
+*** StudyFolder already exists:
+/home/jan/workspace/sofa-test/tools/framework/tests/create-study/dummy
+study structure loading successful
+study structure loading finished
+
+start structure creation of:       create-study/dummy
+    with study type:               openfoam
+
+Skip existing file        /create-study/dummy/README.md
+Skip existing file        /create-study/dummy/sofa.study.json
+run through aspect:    		 >>>  cad  <<<
+Skip existing folder      /create-study/dummy/cad
+Skip existing folder      /create-study/dummy/cad/shared/postStates
+Skip correct link    /create-study/dummy/cad/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/cad/../shared/Makefile_aspect.mk
+Skip existing file        /create-study/dummy/cad/sofa.aspect.json
+start case constructor
+creating case:         		  >>  cad002  <<
+Creating folder      /create-study/dummy/cad/cad002
+Creating folder      /create-study/dummy/cad/cad002/native
+Creating folder      /create-study/dummy/cad/cad002/stl
+Creating folder      /create-study/dummy/cad/cad002/vtk
+Creating folder      /create-study/dummy/cad/cad002/doc/drafts
+Creating folder      /create-study/dummy/cad/cad002/doc/cadPics
+Copying file to      /create-study/dummy/cad/cad002/sofa.cad.json 	 from /tools/framework/study-structures/openfoam/cad/case000/cad.json
+Creating link to     /create-study/dummy/cad/cad002/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
+Creating link to     /create-study/dummy/cad/cad002/.gitignore 		 with pointer to   /tools/framework/study-structures/openfoam/cad/case000/.gitignore_cad
+run through aspect:    		 >>>  mesh  <<<
+Skip existing folder      /create-study/dummy/mesh
+Skip existing folder      /create-study/dummy/mesh/shared/postStates
+Skip correct link    /create-study/dummy/mesh/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/mesh/../shared/Makefile_aspect.mk
+Skip existing file        /create-study/dummy/mesh/sofa.aspect.json
+Skip correct link    /create-study/dummy/mesh/doc/.gitignore 		 with pointer to   /tools/framework/study-structures/openfoam/mesh/../shared/.gitignore_aspect_docs
+Skip existing file        /create-study/dummy/mesh/shared/postStates/mesh-state-01.pvsm
+Skip existing file        /create-study/dummy/mesh/doc/meshOverview.Rmd
+Skip existing file        /create-study/dummy/mesh/shared/reportTemplates/meshReport01.Rmd
+start case constructor
+creating case:         		  >>  mesh002  <<
+Creating folder      /create-study/dummy/mesh/mesh002
+Copying file to      /create-study/dummy/mesh/mesh002/sofa.mesh.json 	 from /tools/framework/study-structures/openfoam/mesh/case000/mesh.json
+Creating link to     /create-study/dummy/mesh/mesh002/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/mesh/case000/Makefile_case_mesh.mk
+Creating link to     /create-study/dummy/mesh/mesh002/.gitignore 		 with pointer to   /tools/framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Copying file to      /create-study/dummy/mesh/mesh002/pv.foam 	 from /tools/framework/study-structures/openfoam/mesh/case000/../../shared/empty-file
+Creating link to     /postStates 		 with pointer to   /../shared/postStates
+run through aspect:    		 >>>  run  <<<
+Skip existing folder      /create-study/dummy/run
+Skip existing folder      /create-study/dummy/run/shared/postStates
+Skip correct link    /create-study/dummy/run/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/run/../shared/Makefile_aspect.mk
+Skip existing file        /create-study/dummy/run/sofa.aspect.json
+Skip correct link    /create-study/dummy/run/doc/.gitignore 		 with pointer to   /tools/framework/study-structures/openfoam/run/../shared/.gitignore_aspect_docs
+Skip existing file        /create-study/dummy/run/shared/postStates/run-state-01.pvsm
+Skip existing file        /create-study/dummy/run/doc/runOverview.Rmd
+Skip existing file        /create-study/dummy/run/shared/reportTemplates/runReport01.Rmd
+start case constructor
+creating case:         		  >>  run002  <<
+Creating folder      /create-study/dummy/run/run002
+Copying file to      /create-study/dummy/run/run002/sofa.run.json 	 from /tools/framework/study-structures/openfoam/run/case000/run.json
+Creating link to     /create-study/dummy/run/run002/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/run/case000/Makefile_case_run.mk
+Creating link to     /create-study/dummy/run/run002/.gitignore 		 with pointer to   /tools/framework/study-structures/openfoam/run/case000/.gitignore_foam
+Copying file to      /create-study/dummy/run/run002/pv.foam 	 from /tools/framework/study-structures/openfoam/run/case000/../../shared/empty-file
+Creating link to     /postStates 		 with pointer to   /../shared/postStates
+run through aspect:    		 >>>  survey  <<<
+Skip existing folder      /create-study/dummy/survey
+Skip correct link    /create-study/dummy/survey/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/survey/../shared/Makefile_aspect.mk
+Skip existing file        /create-study/dummy/survey/sofa.aspect.json
+start case constructor
+creating case:         		  >>  survey002  <<
+Creating folder      /create-study/dummy/survey/survey002
+Copying file to      /create-study/dummy/survey/survey002/survey.json 	 from /tools/framework/study-structures/openfoam/survey/case000/survey.json
+Creating link to     /create-study/dummy/survey/survey002/Makefile 		 with pointer to   /tools/framework/study-structures/openfoam/survey/case000/Makefile_case_survey.mk
+Creating link to     /create-study/dummy/survey/survey002/.gitignore 		 with pointer to   /tools/framework/study-structures/openfoam/survey/case000/../../run/case000/.gitignore_foam
+completed structure creation and staging of:   create-study/dummy
+
+*** finished sofa-tasks.py *** 
+
