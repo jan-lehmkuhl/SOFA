@@ -65,11 +65,11 @@ def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth
     return folderList
 
 
-def findParentFolder( containingFile, startFolder=os.getcwd(), allowFail=False, verbose=False ):
+def findParentFolder( containingFile, startFolder=os.getcwd(), allowFail=False, verbose=False, searchDepth=6 ):
     wd = startFolder
     subdirs = os.listdir(os.getcwd())
     i = 0
-    while i < 4:
+    while i < searchDepth:
         if containingFile in subdirs:
             return wd
         else:
@@ -117,4 +117,3 @@ def findFolder(folderName, turnFolder):
     else:
         print("Could not find folder >%s<" % turnFolder)
         return(False)
-

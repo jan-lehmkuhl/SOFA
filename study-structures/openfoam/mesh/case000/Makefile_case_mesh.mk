@@ -1,13 +1,26 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_mesh.mk
 
-ifneq ("$(wildcard ./special-targets.mk)","")
-    include special-targets.mk
-endif
 
+ifneq      ("$(wildcard ../../project.json)","")
+    FRAMEWORK_PATH =    ../../tools/framework
+else ifneq ("$(wildcard ../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../tools/framework
+else ifneq ("$(wildcard ../../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../../tools/framework
+else ifneq ("$(wildcard ../../../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../../../tools/framework
+else
+    FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND
+endif
 
 jsonFile        = $(shell find . -name 'sofa.mesh*.json')
 linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
 paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
+
+
+ifneq ("$(wildcard ./special-targets.mk)","")
+    include special-targets.mk
+endif
 
 
 
@@ -48,7 +61,7 @@ clean: clean-freecad-mesh clean-framework-mesh clean-report
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
 	rm -f pvScriptMesh.py
-	make -C ../../../tools/framework  clean
+	make -C ${FRAMEWORK_PATH}  clean
 	make upstream-links
 
 clean-upstream-included: clean
@@ -67,17 +80,17 @@ zip:
 
 # reinitialize case and copies files again
 initCase: 
-	python3 ../../../tools/framework/scripts/sofa-tasks.py newCase
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py newCase
 
 
 upstream-links:
     # renew the upstreamLinks to cad 
-	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py upstreamLinks
 
 
 # clone case to a new case with the next available running number 
 clone:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
 
 
 clean-framework-mesh: 
@@ -89,7 +102,7 @@ clean-framework-mesh:
 
 # run case report according to .json
 case-report: upstream-links
-	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
+	python3 ${FRAMEWORK_PATH}/study-structures/openfoam/shared/report.py
 
 
 show-reports:  show-overview-report show-case-report
@@ -152,22 +165,22 @@ clean-freecad-mesh:
 
 # generate mesh according to mesh.json
 frameworkmeshing:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py mesh
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py mesh
 
 
 # erase last boundary layer and redo 
 redoMeshLayer:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py meshLayer
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py meshLayer
 
 
 # copy last timestep to constant
 finalizeMesh:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py finalizeMesh
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py finalizeMesh
 
 
 # erase all meshing results
 cleanMesh:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py cleanMesh
 
 clean-report:
 	rm -rf doc/meshReport
@@ -183,7 +196,7 @@ paraview:
 paraview-empty-state: 
 	if [ ! -f "Allmesh" ] ; then                                                \
 		echo "*** start foamMesh.py"                                          ; \
-		python3 ../../../tools/framework/openFoam/python/foamMesh.py view     ; \
+		python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py view     ; \
 	elif [ -f "pv.foam" ] ; then                                                \
 		echo "*** start paraview pv.foam"                                     ; \
 		paraview pv.foam                                                      ; \

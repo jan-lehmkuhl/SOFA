@@ -1,6 +1,18 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_survey.mk
 
 
+ifneq      ("$(wildcard ../../project.json)","")
+    FRAMEWORK_PATH =    ../../tools/framework
+else ifneq ("$(wildcard ../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../tools/framework
+else ifneq ("$(wildcard ../../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../../tools/framework
+else ifneq ("$(wildcard ../../../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../../../tools/framework
+else
+    FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND
+endif
+
 ifneq ("$(wildcard ./special-targets.mk)","")
     include special-targets.mk
 endif
@@ -8,23 +20,22 @@ endif
 
 
 init:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py initCase
 
 upstream-links:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py upstreamLinks
 
 clone:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
 
 mesh:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py mesh
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py mesh
 
 meshLayer:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py meshLayer
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py meshLayer
 
 cleanMesh:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py cleanMesh
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py cleanMesh
 
 view:
-	python3 ../../../tools/framework/openFoam/python/foamMesh.py view
-
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py view

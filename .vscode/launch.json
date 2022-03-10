@@ -34,6 +34,21 @@
             "showReturnValue":  true,
         },
 
+        {
+            "name":             "tests/create-study/cad/cad001 clone",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests/create-study/cad/cad001",
+            "program":          "${workspaceRoot}/scripts/sofa-tasks.py",
+            "args":             [   "clone", 
+                                    "--verbose", 
+                                ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
+
 
 
         //  Debug the downstairs project

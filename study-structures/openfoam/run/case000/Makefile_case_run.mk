@@ -1,9 +1,17 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_run.mk
 
-ifneq ("$(wildcard ./special-targets.mk)","")
-    include special-targets.mk
-endif
 
+ifneq      ("$(wildcard ../../project.json)","")
+    FRAMEWORK_PATH =    ../../tools/framework
+else ifneq ("$(wildcard ../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../tools/framework
+else ifneq ("$(wildcard ../../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../../tools/framework
+else ifneq ("$(wildcard ../../../../../project.json)","")
+    FRAMEWORK_PATH =    ../../../../../tools/framework
+else
+    FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND
+endif
 
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
@@ -11,6 +19,11 @@ paraviewFile     = $(shell node -p "require('$(jsonFile)').buildSettings.paravie
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
 linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings.cadLink")
+
+
+ifneq ("$(wildcard ./special-targets.mk)","")
+    include special-targets.mk
+endif
 
 
 
@@ -46,7 +59,7 @@ view:
 # remove all calculated files
 clean: clean-run clean-freecad clean-report upstream-links
 	find . -empty -type d -delete
-	make -C ../../../tools/framework  clean
+	make -C ${FRAMEWORK_PATH}  clean
 
 clean-upstream-included: clean
 	make -C $(linkedMeshCase) clean-upstream-included
@@ -64,7 +77,7 @@ zip:
 
 # initialize case according to run.json
 init-case: upstream-links
-	python3 ../../../tools/framework/scripts/sofa-tasks.py initCase
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py initCase
 
 
 upstream-links:
@@ -72,17 +85,17 @@ upstream-links:
 	if [ -f "Allrun" ] ; then                                                   \
 		sed -i 's\MESHDIR=".*"\MESHDIR="./$(linkedMeshCase)"\' Allrun         ; \
 	fi
-	python3 ../../../tools/framework/scripts/sofa-tasks.py upstreamLinks
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py upstreamLinks
 
 
 # clone this case to a new case with the next available running number 
 clone:
-	python3 ../../../tools/framework/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
 
 
 # update report according to .json
 case-report:
-	python3 ../../../tools/framework/study-structures/openfoam/shared/report.py
+	python3 ${FRAMEWORK_PATH}/study-structures/openfoam/shared/report.py
 
 
 show-reports:  show-overview-report show-case-report
@@ -110,12 +123,12 @@ clean-report:
 
 # run case according to run.json
 frameworkrun:
-	python3 ../../../tools/framework/openFoam/python/foamRun.py run
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py run
 
 
 # erase all results
 clean-run:
-	python3 ../../../tools/framework/openFoam/python/foamRun.py cleanRun
+	python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py cleanRun
 	rm -rf logs
 
 
@@ -165,7 +178,7 @@ paraview:
 paraview-empty-state: 
 	if [ ! -f "Allrun" ] ; then                                                 \
 		echo "*** start foamMesh.py"                                          ; \
-		python3 ../../../tools/framework/openFoam/python/foamRun.py view      ; \
+		python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py view      ; \
 	else                                                                        \
 		echo "*** start paraFoam -builtin"                                    ; \
 		paraFoam -builtin                                                     ; \
