@@ -8,12 +8,16 @@ listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --
 
 .PHONY: tests
 tests: primary-init re-init
+	@echo "finished tests for create-study"
 
 
 primary-init: clean
-	make run-framework
-	mv terminal-output-tmp.log terminal-output-init.log
-	cd dummy; ${listcontent} > ../content-dump-init.txt
+	make run-init
+	mv terminal-output-tmp.log                  terminal-output-init.log
+	@python3 ../../scripts/testing/isGitClean.py  terminal-output-init.log
+	cd dummy; ${listcontent}                 > ../content-dump-init.txt
+	@python3 ../../scripts/testing/isGitClean.py  content-dump-init.txt
+	@echo "primary-init test completed"
 
 
 .PHONY: clean
@@ -26,19 +30,23 @@ clean:
 # ==========================================================
 
 re-init: 
-	make run-framework
+	make run-init
 	mv terminal-output-tmp.log terminal-output-reinit.log
 	# cd dummy; ${listcontent} > ../content-dump-reinit.txt
 
 
-run-framework:
+run-init:
 	rm -f .gitignore
+	make run-single
+	git reset
+	git checkout .gitignore
+
+run-single:
 	python3 ../tools/framework/scripts/sofa-tasks.py   \
 			initStudy   \
 			--verbose   \
 			--no-absolute-path   \
 			--studyName  create-study/dummy   \
 			--studyStructFolder tools/framework/study-structures/openfoam   \
-		| tee   terminal-output-tmp.log
-	git reset
-	git checkout .gitignore
+		| tee  terminal-output-tmp.log
+	@echo "finished run-single"
