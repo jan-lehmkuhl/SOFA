@@ -35,6 +35,21 @@
         },
 
         {
+            "name":             "tests/create-study/isGitClean",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests/create-study",
+            "program":          "${workspaceRoot}/scripts/testing/isGitClean.py",
+            "args":             [    
+                                    "logs/initStudy-primary.log", 
+            ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
+
+        {
             "name":             "tests/create-study/cad/cad001 clone",
             "type":             "python",
             "request":          "launch",
