@@ -48,5 +48,5 @@ run-single:
 			--no-absolute-path   \
 			--studyName  create-study/dummy   \
 			--studyStructFolder tools/framework/study-structures/openfoam   \
-		| tee  terminal-output-tmp.log
+		>  terminal-output-tmp.log
 	@echo "finished run-single"
