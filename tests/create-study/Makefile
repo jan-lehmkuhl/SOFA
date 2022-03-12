@@ -13,10 +13,10 @@ tests: clean delete-logs primary-init re-init
 
 primary-init: clean
 	make run-init
-	mv terminal-output-tmp.log                  terminal-output-init.log
-	@python3 ../../scripts/testing/isGitClean.py  terminal-output-init.log
-	cd dummy; ${listcontent}                 > ../content-dump-init.txt
-	@python3 ../../scripts/testing/isGitClean.py  content-dump-init.txt
+	mv logs/initStudy-tmp.log                     logs/initStudy-primary.log
+	@python3 ../../scripts/testing/isGitClean.py  logs/initStudy-primary.log
+	cd dummy; ${listcontent}                 > ../logs/initStudy-primary.filelist.txt
+	@python3 ../../scripts/testing/isGitClean.py  logs/initStudy-primary.filelist.txt
 	@echo "primary-init test completed"
 
 
@@ -31,7 +31,7 @@ clean:
 
 re-init: 
 	make run-init
-	mv terminal-output-tmp.log terminal-output-reinit.log
+	mv logs/initStudy-tmp.log  logs/initStudy-reinit.log
 	# cd dummy; ${listcontent} > ../content-dump-reinit.txt
 
 
@@ -48,10 +48,10 @@ run-single:
 			--no-absolute-path   \
 			--studyName  create-study/dummy   \
 			--studyStructFolder tools/framework/study-structures/openfoam   \
-		>  terminal-output-tmp.log
+		>  logs/initStudy-tmp.log
 	@echo "finished run-single"
 
 delete-logs:
-	rm -f  terminal-output-init.log
-	rm -f  content-dump-init.txt
-	rm -f  terminal-output-reinit.log
+	rm -f  logs/initStudy-primary.log
+	rm -f  logs/initStudy-primary.filelist.txt
+	rm -f  logs/initStudy-reinit.log
