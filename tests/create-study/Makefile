@@ -7,7 +7,7 @@ listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --
 # ==========================================================
 
 .PHONY: tests
-tests: primary-init re-init
+tests: clean delete-logs primary-init re-init
 	@echo "finished tests for create-study"
 
 
@@ -50,3 +50,8 @@ run-single:
 			--studyStructFolder tools/framework/study-structures/openfoam   \
 		>  terminal-output-tmp.log
 	@echo "finished run-single"
+
+delete-logs:
+	rm -f  terminal-output-init.log
+	rm -f  content-dump-init.txt
+	rm -f  terminal-output-reinit.log
