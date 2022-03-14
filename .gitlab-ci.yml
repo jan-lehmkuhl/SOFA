@@ -1,4 +1,4 @@
-image: aergus/latex:2021-10-08
+image: ubuntu
 
 
 variables:
@@ -6,6 +6,10 @@ variables:
 
 default:
   before_script:
+    - apt update
+    - apt-get install -y git
+    - apt-get install -y make
+    - apt-get install -y python3
     - git config --global http.sslVerify "false"
     - git submodule init
     - git submodule update --recursive --remote
