@@ -8,8 +8,8 @@ gitlab-pipeline: gitlab-environment-setup
 
 
 gitlab-environment-setup:
-	git clone git@gitlab.com:sofa-framework/openFoam-setup-templates.git  openFoam-setup
-	git clone git@gitlab.com:sofa-framework/ofreportr-templates.git       openFoam-reporting
+	git clone https://gitlab.com/sofa-framework/openFoam-setup-templates.git  openFoam-setup
+	git clone https://gitlab.com/sofa-framework/ofreportr-templates.git       openFoam-reporting
 
 
 pipeline-tests:
