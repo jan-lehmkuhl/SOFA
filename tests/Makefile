@@ -8,10 +8,10 @@ gitlab-pipeline: gitlab-environment-setup
 
 
 gitlab-environment-setup:
-	rm -f openFoam-setup
-	git clone https://gitlab.com/sofa-framework/openFoam-setup-templates.git  openFoam-setup
-	rm -f openFoam-reporting
-	git clone https://gitlab.com/sofa-framework/ofreportr-templates.git       openFoam-reporting
+	rm -f tools/openFoam-setup
+	git clone https://gitlab.com/sofa-framework/openFoam-setup-templates.git  tools/openFoam-setup
+	rm -f tools/openFoam-reporting
+	git clone https://gitlab.com/sofa-framework/ofreportr-templates.git       tools/openFoam-reporting
 
 
 pipeline-tests:
