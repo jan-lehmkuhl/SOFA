@@ -3,15 +3,9 @@
 tests: pipeline-tests
 
 
-gitlab-pipeline: gitlab-environment-setup
+gitlab-pipeline: 
+	make -C tools  replace-submodule-softlinks-with-clones
 	make pipeline-tests
-
-
-gitlab-environment-setup:
-	rm -f tools/openFoam-setup
-	git clone https://gitlab.com/sofa-framework/openFoam-setup-templates.git  tools/openFoam-setup
-	rm -f tools/openFoam-reporting
-	git clone https://gitlab.com/sofa-framework/ofreportr-templates.git       tools/openFoam-reporting
 
 
 pipeline-tests:
