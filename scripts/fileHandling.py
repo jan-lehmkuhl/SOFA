@@ -150,6 +150,7 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
         linkTo = os.readlink(src)
         createSymlinkSavely(linkTo, dst)
     else:
+        src = os.path.abspath(src)
         if os.path.exists(src):
             if not os.path.isdir(src):
                 srcShort = convertToRelativePath( src, referencePath, verbose )
