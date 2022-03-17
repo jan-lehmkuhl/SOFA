@@ -132,7 +132,7 @@ def createSymlinkSavely(src, dst, referencePath=None, verbose=False ):
         else:
             print("Unabel to create target >%s< since it exists" % dst)
     else:
-        print("Unabel to find >%s<" % src)
+        print("Unabel to find (728) >%s<" % src)
 
 def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False ):
     # copies a file if it exists
@@ -167,14 +167,14 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
             else:
                 print("Skipping >%s< because it is a directory" % src)
         else:
-            print("Unabel to find >%s< in >%s<" % (src, referencePath) )
+            print("Unabel to find (984) >%s< in >%s<" % (src, referencePath) )
 
 def copyFile(src, dst):
     try:
         assert(os.path.exists(dst))
         shutil.copyfile(src, dst)
     except FileNotFoundError:
-        print("Unabel to find >%s<" % src)
+        print("Unabel to find (163) >%s<" % src)
         raise
     except IsADirectoryError:
         print("Either >%s< or >%s< is a directory" % (src, dst))
@@ -209,7 +209,7 @@ def copyFolderSafely(src, dst):
             else:
                 print("Skipping >%s< because it is a file" % src)
         else:
-            print("Unabel to find >%s<" % src)
+            print("Unabel to find (934) >%s<" % src)
 
 def copyRecursiveAndStage(src, dest, verbose=False):
     """
