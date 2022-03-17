@@ -1,6 +1,6 @@
 
 SHELL := '/bin/bash'
-listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'
+listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'   | sed -e 's/,/./g'
 
 
 
