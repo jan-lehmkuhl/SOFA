@@ -2,6 +2,7 @@ starting sofa-tasks.py in verbose mode
     with passed entryPoint:  initStudy
 start StudyStructure __init__ 
 creating study folder
+    /create-study/dummy
 study structure loading successful
 study structure loading finished
 

@@ -146,13 +146,15 @@ class Study(object):
 
 
     def createFolder(self, verbose):
+        from fileHandling import convertToRelativePath 
+        printPath = convertToRelativePath(self.path, self.projectRoot)
         if not os.path.exists( self.path ):
             print(  "creating study folder")
-            # print(  "    " +self.path )
+            print(  "    " +printPath )
             os.mkdir( self.path )
         else:
             print("\n*** StudyFolder already exists:")
-            print(self.path)
+            print(printPath)
             print("Abort execution")
             sys.exit(0)
             # input(  "    to abort press Ctrl+C to integrate the new study, press ENTER to proceed: ")
