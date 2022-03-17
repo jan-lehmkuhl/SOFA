@@ -33,6 +33,7 @@
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,
+            "postDebugTask":    "tests/create-study restore",
         },
 
         {
