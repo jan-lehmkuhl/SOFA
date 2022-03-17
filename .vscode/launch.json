@@ -19,6 +19,7 @@
         // =====================================================================
         {
             "name":             "tests/create-study",
+            "preLaunchTask":    "tests/create-study remove dummy",
             "type":             "python",
             "request":          "launch",
             "cwd":              "${workspaceRoot}/tests",
