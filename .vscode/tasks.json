@@ -12,6 +12,9 @@
                 "cd tests/create-study && rm -f  .gitignore",
                 // "cd tests/create-study && git reset .",
             ],
+            "presentation": {
+                "reveal": "silent",
+            },
         },
         
         {
@@ -24,6 +27,9 @@
                 "cd tests/create-study && git reset .",
                 "cd tests/create-study && git checkout  .gitignore",
             ],
+            "presentation": {
+                "reveal": "silent",
+            },
         },
 
     ]
