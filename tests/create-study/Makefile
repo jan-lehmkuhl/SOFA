@@ -1,6 +1,6 @@
 
 SHELL := '/bin/bash'
-listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'
+listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'   | sed -e 's/,/./g'
 
 
 
@@ -49,7 +49,7 @@ run-single:
 			--no-absolute-path   \
 			--studyName  create-study/dummy   \
 			--studyStructFolder tools/framework/study-structures/openfoam   \
-		> >(tee logs/initStudy-tmp.log) 2>&1
+		> logs/initStudy-tmp.log
 	@echo "finished run-single"
 
 delete-logs:

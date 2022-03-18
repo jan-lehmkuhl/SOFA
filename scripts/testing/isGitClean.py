@@ -7,8 +7,8 @@
 
 
 import os
-import sys
 import argparse
+import subprocess
 
 
 
@@ -23,8 +23,9 @@ args = parser.parse_args()      # stores all parsed arguments to args
 
 isGitChanged = os.system("git diff --quiet " +args.file)
 if not isGitChanged == 0:   # zero means clean
-    print("git changes in:      " +args.file)
-    print(os.system("git --no-pager diff " +args.file +" | tee --append diff.txt"))
-    sys.exit(1)
+    print("ERROR git changes in: " +args.file)
+    gitDiff = subprocess. getoutput("git diff " +args.file)
+    print (gitDiff)
+    raise SystemExit("ERROR raise SystemExit: git changes in:   " +args.file)
 else:
     print("no git changes in:   " +args.file)

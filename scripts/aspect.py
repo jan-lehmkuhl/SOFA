@@ -29,8 +29,8 @@ from case import Case
 
 
 def readFoamStructure( verbose=False ):
-    wd              = findParentFolder( "project.json" )
-    projectJsonPath = os.path.join(wd, "project.json" )
+    wd              = findParentFolder( "sofa.project.json" )
+    projectJsonPath = os.path.join(wd, "sofa.project.json" )
     projectJson     = loadJson(projectJsonPath, verbose=verbose )
     return projectJson["foamStructure"]
 
@@ -44,7 +44,7 @@ class Aspect(object):
         self.aspectType = aspectType
         self.structure  = aspectStructure   # 
         self.studyRoot  = studyFolder
-        self.projectRoot= findParentFolder( "project.json" )
+        self.projectRoot= findParentFolder( "sofa.project.json" )
 
         # define aspect folder (self.path)
         self.path       = os.path.join( studyFolder, self.aspectType )
@@ -80,4 +80,3 @@ class Aspect(object):
                             verbose =       self.verbose
                         )
         newCase001.create()
-

@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "tests/create-study remove dummy",
+            "type": "shell",
+            "command": [
+                "echo 'start task: tests/create-study remove dummy' \n",
+                "echo $(date) \n", 
+                "echo $(pwd) \n", 
+                "cd tests/create-study && rm -rf dummy",
+                "cd tests/create-study && rm -f  .gitignore",
+                // "cd tests/create-study && git reset .",
+            ],
+            "presentation": {
+                "reveal": "silent",
+            },
+        },
+        
+        {
+            "label": "tests/create-study restore",
+            "type": "shell",
+            "command": [
+                "echo 'start task: tests/create-study restore' \n",
+                "echo $(date) \n", 
+                "echo $(pwd) \n",
+                "cd tests/create-study && git reset .",
+                "cd tests/create-study && git checkout  .gitignore",
+            ],
+            "presentation": {
+                "reveal": "silent",
+            },
+        },
+
+    ]
+}

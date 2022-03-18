@@ -6,10 +6,12 @@
 # preparation
 # =============================================================================
 
-include tools/framework/global-make.mk
+ifneq      ("$(wildcard tools/framework/global-make.mk)","")
+	include tools/framework/global-make.mk
+endif
 
-cfxFolder       = $(shell node -p "require('./project.json').cfxFolders[0]")
-foamFolder      = $(shell node -p "require('./project.json').foamFolders[0]")
+cfxFolder       = $(shell node -p "require('./sofa.project.json').cfxFolders[0]")
+foamFolder      = $(shell node -p "require('./sofa.project.json').foamFolders[0]")
 
 
 

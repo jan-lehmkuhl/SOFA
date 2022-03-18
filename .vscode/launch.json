@@ -19,6 +19,7 @@
         // =====================================================================
         {
             "name":             "tests/create-study",
+            "preLaunchTask":    "tests/create-study remove dummy",
             "type":             "python",
             "request":          "launch",
             "cwd":              "${workspaceRoot}/tests",
@@ -32,6 +33,7 @@
             "stopOnEntry":      true,
             "justMyCode":       true,
             "showReturnValue":  true,
+            "postDebugTask":    "tests/create-study restore",
         },
 
         {

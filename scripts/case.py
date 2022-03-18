@@ -83,7 +83,7 @@ class Case(object):
         # search for sofa environment provided information
         # ================================================================================
         # project handling
-        self.projectRoot    = findParentFolder( "project.json" )
+        self.projectRoot    = findParentFolder( "sofa.project.json" )
         if caseStructure == None :
             self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
@@ -134,7 +134,7 @@ class Case(object):
         if os.path.exists(self.path):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
-            # extract linked cases from case.json according to foamStructure gen in project.json
+            # extract linked cases from case.json according to foamStructure gen in sofa.project.json
             foamStructure   = readFoamStructure()
             if 'linkName' in foamStructure[self.aspectType]: 
                 self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
@@ -284,7 +284,7 @@ class Case(object):
                                     createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
                         else:
                             if thisLink['copyFile']: 
-                                copyFileSafely( src, dst, overwrite=True, verbose=self.verbose )
+                                copyFileSafely( src, dst, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
                             else:
                                 createSymlinkSavely( src, dst, verbose=self.verbose )
         return(True)
@@ -332,7 +332,7 @@ class Case(object):
                             elif fnmatch.fnmatch(name, "log*"):
                                 continue
                             elif os.path.isfile(name):
-                                copyFileSafely(name,os.path.join(clonePath,name))
+                                copyFileSafely(name, os.path.join(clonePath,name), referencePath=self.projectRoot)
                                 continue
                             else:
                                 copyFolderSafely(name,os.path.join(clonePath,name))

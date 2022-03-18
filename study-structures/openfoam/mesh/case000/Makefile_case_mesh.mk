@@ -1,13 +1,13 @@
 # Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_mesh.mk
 
 
-ifneq      ("$(wildcard ../../project.json)","")
+ifneq      ("$(wildcard ../../sofa.project.json)","")
     FRAMEWORK_PATH =    ../../tools/framework
-else ifneq ("$(wildcard ../../../project.json)","")
+else ifneq ("$(wildcard ../../../sofa.project.json)","")
     FRAMEWORK_PATH =    ../../../tools/framework
-else ifneq ("$(wildcard ../../../../project.json)","")
+else ifneq ("$(wildcard ../../../../sofa.project.json)","")
     FRAMEWORK_PATH =    ../../../../tools/framework
-else ifneq ("$(wildcard ../../../../../project.json)","")
+else ifneq ("$(wildcard ../../../../../sofa.project.json)","")
     FRAMEWORK_PATH =    ../../../../../tools/framework
 else
     FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND

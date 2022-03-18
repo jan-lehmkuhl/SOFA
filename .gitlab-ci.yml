@@ -1,0 +1,32 @@
+image: ubuntu
+
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive 
+
+default:
+  before_script:
+    - apt update
+    - apt-get install -y git
+    - apt-get install -y make
+    - apt-get install -y python3
+    - git config --global http.sslVerify "false"
+    - git submodule init
+    - git submodule update --recursive --remote
+
+stages:
+  - test
+
+make-test:
+  stage: test
+  script:
+    - "echo 'PIPELINE_OUTPUT'"
+    - "make -C ./tests/ gitlab-pipeline"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+  artifacts:
+    when: always
+    untracked: true
+    expire_in: 30 days
+    paths:
+      - tests/

@@ -39,7 +39,7 @@ class StudyStructure(object):
         if 'relativePath' in locals():
             # convert StudyStructure.path to absolute
             if relativePath.startswith("tools"):
-                projectRoot     = findParentFolder("project.json")
+                projectRoot     = findParentFolder("sofa.project.json")
                 self.path       = os.path.join( projectRoot, relativePath )
             elif relativePath.startswith("/"):
                 self.path       = relativePath
@@ -133,7 +133,7 @@ class Study(object):
         if verbose :    print( "start StudyStructure __init__ ")
 
         self.className1     = "Study"       # only for appearance during debugging
-        self.projectRoot    = findParentFolder( containingFile="project.json" )
+        self.projectRoot    = findParentFolder( containingFile="sofa.project.json" )
 
         # create study folder (self.path)
         self.name           = askForStudyName( use=studyName )
@@ -146,13 +146,15 @@ class Study(object):
 
 
     def createFolder(self, verbose):
+        from fileHandling import convertToRelativePath 
+        printPath = convertToRelativePath(self.path, self.projectRoot)
         if not os.path.exists( self.path ):
             print(  "creating study folder")
-            # print(  "    " +self.path )
+            print(  "    " +printPath )
             os.mkdir( self.path )
         else:
             print("\n*** StudyFolder already exists:")
-            print(self.path)
+            print(printPath)
             print("Abort execution")
             sys.exit(0)
             # input(  "    to abort press Ctrl+C to integrate the new study, press ENTER to proceed: ")
