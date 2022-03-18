@@ -1,0 +1,7 @@
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  initStudy
+start StudyStructure __init__ 
+
+*** StudyFolder already exists:
+/home/jan/workspace/sofa-test/tools/framework/tests/create-study/dummy
+Abort execution

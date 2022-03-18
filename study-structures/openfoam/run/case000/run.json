@@ -1,6 +1,10 @@
 {
     "name"                  :   "",
     "description"           :   "",
+    "notes"                 :[  
+        ""
+    ],
+
 
     "buildSettings" : {
         "meshLink"          :   "",
@@ -11,7 +15,8 @@
         "dynamicMesh"       :   "False",
         "porousZone"        :   "False",
 
-        "report"            :   "reportTemplate01"
+        "paraview"          :   "../shared/postStates/run-state-01.pvsm",
+        "report"            :   "runReport01.Rmd"
     },
 
     "runSettings" : {

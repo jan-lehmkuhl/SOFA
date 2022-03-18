@@ -1,0 +1,30 @@
+{
+    "files": [
+        {
+            "sourcePath": "../shared/Makefile_aspect.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../shared/sofa.aspect.json",
+            "targetPath": "sofa.aspect.json",
+            "isSymlink": false
+        }
+    ],
+
+    "caseLinks": [
+        // linked and relative from created case
+        {
+            "sourcePath": "../shared/postStates",
+            "targetPath": "postStates",
+            "isSymlink": true
+        }
+    ],
+
+    "folders": [
+        {
+            "relPath": "shared/postStates",
+            "createGitKeep": true
+        }
+    ]
+}

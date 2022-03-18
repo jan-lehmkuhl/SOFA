@@ -9,6 +9,7 @@
 import sys
 import os
 import time
+import argparse
 import shutil
 import datetime
 import hashlib
@@ -26,6 +27,9 @@ from fileHandling import copyFolderSafely
 from fileHandling import loadJson
 
 from procHandling import procHandler
+
+from case import Case
+
 
 def checkFoamVer():
     # retrieves the openFoam version from OS environment
@@ -88,17 +92,18 @@ def boolChecker(value, variable):
 class foamMesher(object):
     # class for openFoam meshing procedures
 
-    def __init__(self):
+    def __init__(self, verbose):
         self.startMeshing = datetime.datetime.now()
+        self.case = Case( )
+        self.verbose = verbose
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
-        self.meshJson = loadJson("mesh.json")
-        self.nCores = int(self.meshJson["meshSettings"]["nCores"])
         self.nProcFolders = self.getNoProcFolder()
         self.fileChangeDict = self.compareFileStates()
         # extract mesh settings
-        self.meshSettings = self.meshJson["meshSettings"]
+        self.meshSettings = self.case.caseJson['meshSettings']
         # extract variables mesh settings and assign it to a variable
+        self.nCores                  = int(self.meshSettings['nCores'])
         self.settingsBlockMesh       = boolChecker(self.meshSettings["blockMesh"], "blockMesh")
         self.settingsSurfaceFeatures = boolChecker(self.meshSettings["surfaceFeatures"], "surfaceFeatures")
         self.settingsSnappyHexMesh   = boolChecker(self.meshSettings["snappyHexMesh"], "snappyHexMesh")
@@ -140,7 +145,8 @@ class foamMesher(object):
         else:
             self.runDecomposePar = False
         # run surfaceFeatures 
-        if self.settingsSurfaceFeatures:
+        if (self.settingsSurfaceFeatures and 
+            os.path.exists("constant/triSurface") ):
             # check weather surface features are present
             featureEdgesPresent = False     # init
             for fileName in os.listdir("constant/triSurface"):
@@ -218,6 +224,7 @@ class foamMesher(object):
         #
         fileStates = {}
         for folder in  ["system", "constant"]:
+          if os.path.exists(folder):
             for fileName in os.listdir(folder):
                 if os.path.isfile(os.path.join(folder,fileName)):
                     fileStates[fileName] = md5(os.path.join(folder,fileName))
@@ -478,8 +485,13 @@ class foamMesher(object):
 # Main Programm
 ###################################################################
 
+# read arguments and options from command line
+parser = argparse.ArgumentParser(description='input for foamMesher.py')
+parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
+parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
+
 entryPoint = sys.argv[1]
-mesher = foamMesher()
+mesher = foamMesher( verbose=parser.parse_args().verbose )
 
 if entryPoint == "mesh":
     mesher.mesh()

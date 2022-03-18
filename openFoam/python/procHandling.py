@@ -189,7 +189,8 @@ class procHandler(object):
         #
         sys.stdout.flush()
         sys.stdout.write(
-            " - {0:<30s} --> finished after {1:25s}\n".format(text, str(duration)))
+            " - {0:<30s} --> finished after {1:25s}".format(text, str(duration)))
+        sys.stdout.write("\n")
 
     def printProcFailed(self, text, duration):
         # prints formated text after failure

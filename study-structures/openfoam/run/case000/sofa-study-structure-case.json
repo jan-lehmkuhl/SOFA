@@ -1,0 +1,78 @@
+{
+    "files": [
+        {
+            "sourcePath": "run.json",
+            "targetPath": "sofa.run.json",
+            "isSymlink": false,
+            "onlyAtCaseCreation": true
+        },
+        {
+            "sourcePath": "Makefile_case_run.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": ".gitignore_foam",
+            "targetPath": ".gitignore",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../../shared/empty-file",
+            "targetPath": "pv.foam",
+            "isSymlink": false
+        }
+    ],
+
+    "optional-file-bundles": [
+    ],
+
+    "caseLinks": [
+        // linked and relative from created case
+        {
+            "sourcePath": "../shared/postStates",
+            "targetPath": "postStates",
+            "isSymlink": true
+        }
+    ],
+
+    "upstreamAspects": [
+        {
+            "upstreamAspect":   "mesh",
+            "caseJsonKey": [    "buildSettings", "meshLink" ],
+            "useCaseJsonWithoutAspect": false,
+            "createDirectSymlink": true,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "constant/polyMesh",
+                    "targetPath":       "constant/polyMesh",
+                    "separateFiles":    false,
+                    "copyFile":         false
+                },
+                {
+                    // additional meshReport-Link beside runReport
+                    "upstreamCasePath": "doc/meshReport",
+                    "targetPath":       "doc/meshReport",
+                    "separateFiles":    false,
+                    "copyFile":         false
+                }
+            ],
+            "isOptional":       true
+        },
+        {
+            "upstreamAspect":           "run/shared/reportTemplates",
+            "caseJsonKey": [            "buildSettings", "report" ],
+            "useCaseJsonWithoutAspect": false,
+            "createDirectSymlink":      false,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "",
+                    "targetPath":       "doc/runReport/runReport.Rmd",
+                    "separateFiles":    false,
+                    "copyFile":         true
+                }
+            ],
+            "isOptional":       true
+        }
+    ]
+
+}

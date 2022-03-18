@@ -21,6 +21,7 @@ sys.path.insert(1, os.path.realpath( file_path +'/../openFoam/python' ) )
 from fileHandling import createDirSafely
 from fileHandling import copyFileSafely
 from fileHandling import loadJson
+from fileHandling import hasRepositoryStagedFiles
 from folderHandling import findParentFolder
 
 from study import Study 
@@ -31,6 +32,14 @@ from fileHandling import findFile       # only for old init
 from aspect import readFoamStructure
 
 from case import cfdAspectSelector
+from case import Case
+
+
+def exitIfRepositoryIsNotClean(): 
+    if hasRepositoryStagedFiles(): 
+        print("\nERROR: this git repository has already staged files")
+        print(  "       please unstage or commit them and try again\n")
+        sys.exit(1)
 
 
 
@@ -42,32 +51,45 @@ from case import cfdAspectSelector
 parser = argparse.ArgumentParser(description='input for sofa-tasks.py')
 parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
 parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
+parser.add_argument( '--no-absolute-path', action="store_true", dest="noAbsolutePathOutput", default=False )
+parser.add_argument( '--studyName',         nargs='?', const=1, type=str )
+parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
+# store all parsed arguments to args
+args = parser.parse_args()
 
-entryPoint =    parser.parse_args().entryPoint
-verbose =       parser.parse_args().verbose
+# verbose output
+if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
+if args.verbose :   print("    with passed entryPoint:  " + args.entryPoint  )
+if not args.noAbsolutePathOutput:
+    if args.verbose :   print("    in folder (os.getcwd):   " + os.getcwd() )
+    if args.verbose :   print("    with sofa-tasks.py in:   " + file_path )
+    if args.verbose :   print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
 
-if verbose :    print("starting sofa-tasks.py in verbose mode" )
-if verbose :    print("    with arg:                " + entryPoint  )
-if verbose :    print("    in folder:               " + os.getcwd() )
-if verbose :    print("    with sofa-tasks.py in:   " + file_path )
-if verbose :    print("    adding also path for:    " + os.path.realpath( file_path +'/../openFoam/python' ) )
+foamStructure   = readFoamStructure( verbose=args.verbose )
 
-foamStructure   = readFoamStructure()
+if args.entryPoint == "initStudy":
+    # create new study depending on available arguments
+    exitIfRepositoryIsNotClean()
+    if args.studyStructFolder and args.studyName:
+        newStudy = Study( studyName=args.studyName, studyStructFolder=args.studyStructFolder, verbose=args.verbose )
+    elif args.studyName : 
+        newStudy = Study( studyName=args.studyName, verbose=args.verbose )
+    elif args.studyStructFolder:
+        newStudy = Study( studyStructFolder=args.studyStructFolder, verbose=args.verbose )
+    else :
+        newStudy = Study( verbose=args.verbose )
 
-
-if entryPoint == "initStudy":
-    newStudy = Study( verbose=verbose )
-
-if entryPoint == "initFoam":
-    projectStruct = loadJson(findParentFolder('project.json') +'/' +'project.json')
+# delete
+elif args.entryPoint == "initFoam":
+    projectStruct = loadJson( findParentFolder('project.json') +'/' +'project.json', verbose=args.verbose )
     for studyFolder in projectStruct['foamFolders']:
         if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):
             print("creating study:     " +studyFolder )
             for element in foamStructure:
                 newAspect = Aspect(element, os.path.join(findParentFolder('project.json'), studyFolder) )
                 newAspect.create()
-            copyFileSafely( os.path.realpath( findFile(                         "study-documentation.md", "tools") ) 
-                          , findParentFolder("project.json") +"/" +studyFolder+ "/README-study.md" )
+            copyFileSafely( os.path.realpath( findFile( "study-documentation.md", "tools" ) ) 
+                          , os.path.join( findParentFolder("project.json"), +studyFolder, "/README-study.md" ) )
             while True:
                 print("Commit creation of study %s ? (y/n)" % studyFolder)
                 answer = input()
@@ -81,33 +103,35 @@ if entryPoint == "initFoam":
         else:
             print("skipping study >" + studyFolder + " since it already exists")
 
-elif entryPoint == "newCase":
-    currentCase = cfdAspectSelector()
-    currentCase.create()
+elif args.entryPoint == "newCase":
+    exitIfRepositoryIsNotClean()
+    newCaseXXX = Case( verbose=args.verbose )
+    if not newCaseXXX.createNew:
+        print("\nWARNING: this will overwrite existing files with default values")
+        input("Press Enter to continue...")
+    newCaseXXX.create()
 
-elif entryPoint == "initCase":
+# todo
+elif args.entryPoint == "initCase":
+    exitIfRepositoryIsNotClean()
     currentCase = cfdAspectSelector()
     currentCase.initCase()
 
-elif entryPoint == "symlinks":
-    currentCase = cfdAspectSelector()
-    currentCase.makeSymlinks()
+elif args.entryPoint == "upstreamLinks":
+    print("\n*** update Upstream-Links in ", os.path.basename(os.getcwd()), " ***" )
+    thisCase = Case( verbose=args.verbose )
+    thisCase.create()
+    thisCase.createUpstreamAspectLinks()
 
-elif entryPoint == "clone":
-    currentCase = cfdAspectSelector()
+elif args.entryPoint == "clone":
+    exitIfRepositoryIsNotClean()
+    currentCase = Case( verbose=args.verbose )
     currentCase.clone()
 
-elif entryPoint == "clear":
-    currentCase = cfdAspectSelector()
-    currentCase.clear()
-
-elif entryPoint == "commit":
-    currentCase = Case("run")
-    currentCase.commitChanges()
-
-elif entryPoint == "overview":
+# todo
+elif args.entryPoint == "overview":
     createDirSafely("doc")
-    files = os.listdir("doc")
+    files = sorted(os.listdir("doc"))
     for fileName in files:
         if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
             os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
@@ -115,9 +139,9 @@ elif entryPoint == "overview":
     else:
         print("Unabel to find RMarkdown file")
 
-elif entryPoint == "updateAllReports":
+elif args.entryPoint == "updateAllReports":
     while True:
-        print("Run reports after updating ? (y/n)")
+        print("Run all reports after updating report files? (y/n)")
         answer = input()
         answer = answer.lower()
         if answer in ["y", "yes"]:
@@ -135,7 +159,7 @@ elif entryPoint == "updateAllReports":
         if not os.path.exists("doc"):
             print("Directory >doc< doesn't exist in: " + os.getcwd() )
             exit(0)
-        files = os.listdir("doc")
+        files = sorted(os.listdir("doc"))
         for fileName in files:
             if fnmatch.fnmatch(fileName, "*verview*.Rmd"):
                 os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
@@ -143,30 +167,8 @@ elif entryPoint == "updateAllReports":
         else:
             print("Unabel to find RMarkdown file")
 
-elif entryPoint == "updateReport":
-    while True:
-        print("Run reports after updating ? (y/n)")
-        answer = input()
-        answer = answer.lower()
-        if answer in ["y", "yes"]:
-            runReports = True
-            break
-        elif answer in ["n", "no"]:
-            runReports = False
-            break
-    currentCase = cfdAspectSelector()
-    currentCase.copyReport(runReports)
+else:
+    print("ERROR no sofa-task defined")
+    sys.exit("nothing defined")
 
-elif entryPoint == "updateJson":
-    for folder in sorted(os.listdir(".")):
-        aspectName = ''.join([i for i in folder if not i.isdigit()])  # remove digits
-        if aspectName in foamStructure:
-            print("Updating .json in >%s" %folder)
-            currentCase = cfdAspectSelector(os.path.join("./", folder))
-            currentCase.updateJson()
-
-elif entryPoint == "test":
-    print("Nothing defined")
-
-
-if verbose:     print("\n*** finished sofa-tasks.py *** \n")
+if args.verbose:     print("\n*** finished sofa-tasks.py *** \n")

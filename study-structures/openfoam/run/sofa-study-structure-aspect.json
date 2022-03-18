@@ -1,0 +1,41 @@
+{
+    "files": [
+        {
+            "sourcePath": "../shared/Makefile_aspect.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../shared/sofa.aspect.json",
+            "targetPath": "sofa.aspect.json",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../shared/.gitignore_aspect_docs",
+            "targetPath": "doc/.gitignore",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "paraview-run-base-state.pvsm",
+            "targetPath": "shared/postStates/run-state-01.pvsm",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../../../../openFoam-reporting/runOverview/runOverview.Rmd",
+            "targetPath": "doc/runOverview.Rmd",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../../../../../tools/openFoam-reporting/runReport/runReport.Rmd",
+                // TODO ask for missing repositries
+            "targetPath": "shared/reportTemplates/runReport01.Rmd",
+            "isSymlink": false
+        }
+    ],
+    "folders": [
+        {
+            "relPath": "shared/postStates",
+            "createGitKeep": true
+        }
+    ]
+}

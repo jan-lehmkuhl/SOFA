@@ -11,7 +11,7 @@
 # import librarys
 # import json
 import os
-# import sys
+import sys
 # import shutil
 # import fnmatch
 # import subprocess
@@ -33,7 +33,7 @@ import os
 
 
 
-def walklevel(some_dir, level=-1):
+def walklevel(some_dir, level=-1, followlinks=False):
     # https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
     #   level=-1 walks through all files (os.walk default)
     #   level=0 lists only the current directory files 
@@ -41,7 +41,7 @@ def walklevel(some_dir, level=-1):
     some_dir = some_dir.rstrip(os.path.sep)
     assert os.path.isdir(some_dir)
     num_sep = some_dir.count(os.path.sep)
-    for root, dirs, files in os.walk(some_dir):
+    for root, dirs, files in os.walk(some_dir, followlinks=followlinks):
         yield root, dirs, files
         num_sep_this = root.count(os.path.sep)
         if ( num_sep + level <= num_sep_this ) and ( level != -1 ): 
@@ -49,22 +49,27 @@ def walklevel(some_dir, level=-1):
             del dirs[:]
 
 
-def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth=-1 ):
+def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth=-1 , allowSymlinks=False, relativeOutput=False):
     folderList = []
-    for subdir, dirs, files in walklevel( startFolder, directoryMaxDepth ):
+    for subdir, dirs, files in walklevel( startFolder, directoryMaxDepth , followlinks=allowSymlinks):
         for file in files:
             if file == containingFile :
+                if relativeOutput and subdir.startswith(startFolder+"/") :
+                    subdir = subdir[len(startFolder+"/"):]
+                else:
+                    print("WARNING intended relative childFolder return is not converted to relative: " +subdir )
                 folderList.append( subdir )
     if folderList == [] :
         print(  "ERROR: no SubFolders with >" +containingFile +"< inside in: " +startFolder +"\n") 
+    folderList = sorted(folderList, key=str.lower)
     return folderList
 
 
-def findParentFolder( containingFile, startFolder=os.getcwd() ):
+def findParentFolder( containingFile, startFolder=os.getcwd(), allowFail=False, verbose=False, searchDepth=6 ):
     wd = startFolder
     subdirs = os.listdir(os.getcwd())
     i = 0
-    while i < 4:
+    while i < searchDepth:
         if containingFile in subdirs:
             return wd
         else:
@@ -73,8 +78,12 @@ def findParentFolder( containingFile, startFolder=os.getcwd() ):
             subdirs = os.listdir(wd)
             i += 1
     else:
-        print("Could not find anything")
-        sys.exit(0)
+        if verbose or not allowFail: 
+            print("WARNING Could not find:  >", containingFile, "< in parent folders from: ", startFolder )
+        if allowFail: 
+            return None
+        else:
+            sys.exit(0)
 
 
 def findFolder(folderName, turnFolder):
@@ -108,4 +117,3 @@ def findFolder(folderName, turnFolder):
     else:
         print("Could not find folder >%s<" % turnFolder)
         return(False)
-

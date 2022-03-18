@@ -1,0 +1,16 @@
+{
+    "name"                  :   "",
+    "description"           :   "",
+    "notes"                 :[  
+        ""
+    ],
+
+
+    "caseLinks"             :[  "", 
+                                ""
+                            ],
+
+    "buildSettings" : {
+        "report"            :   ""
+    }    
+}

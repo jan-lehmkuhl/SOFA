@@ -20,8 +20,8 @@ case
 # universal geometry data
 # =====================================
 
-/stl*
-/vtk*
+# /stl/*
+/vtk/*
 
 /native/*/*.gml
 /native/*.zip

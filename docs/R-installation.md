@@ -1,16 +1,28 @@
 
+R CLI
+================================================================================
 
     cd tools/framework
     make installrequirementsR
-    R
+    sudo R 
 
-start R CLI with: `R` and execute:
+beside the normal package installation which is done by `install.packages("PACKAGE")` one particular have to be added manual: 
+~~~
+devtools::install_git("https://gitlab.com/sofa-framework/ofreportr-core")
+~~~
 
-    install.packages("rmarkdown")
-    install.packages("rmdformats")
-    install.packages("kableExtra")
-    install.packages("openssl")
-    # maybe a restart is required
+## troubleshooting
+* maybe a restart is required
+* often also an execution of the `*.Rmd` file with the `rstudio` GUI helps with installation issues 
 
-    q()
-    y   # save workspace
+
+
+R Studio Desktop
+================================================================================
+
+sometimes a additional manual execution within `R Studio Desktop` of `meshReport.Rmd` may also help:  
+https://rstudio.com/products/rstudio/download/#download
+
+    cd STUDY/mesh/MESHCASE
+    cd doc/meshReport
+    rstudio meshReport.Rmd

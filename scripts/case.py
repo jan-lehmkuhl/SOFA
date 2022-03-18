@@ -29,7 +29,7 @@ from folderHandling import findParentFolder
 
 
 
-def cfdAspectSelector(path=None):
+def cfdAspectSelector(path=None, verbose=False):
     # determines the aspectType of the case from the name of the containing folder
     #
     # Args:
@@ -50,13 +50,13 @@ def cfdAspectSelector(path=None):
         [i for i in caseFolder if not i.isdigit()])  # remove digits
     if aspectName in readFoamStructure():
         if aspectName == "cad":
-            return(CadCase(path))
+            return(CadCase(path=path,verbose=verbose))
         elif aspectName == "mesh":
-            return(MeshCase(path))
+            return(MeshCase(path=path,verbose=verbose))
         elif aspectName == "run":
-            return(RunCase(path))
+            return(RunCase(path=path,verbose=verbose))
         elif aspectName == "survey":
-            return(SurveyCase(path))
+            return(SurveyCase(path=path,verbose=verbose))
     else:
         print("Unknown aspect >%s< in caseFolder: >%s<" % (aspectName, caseFolder) )
         return(False)
@@ -65,32 +65,79 @@ def cfdAspectSelector(path=None):
 class Case(object):
     # base class to handle all operations related to cases
 
-    def __init__(self, aspectType=None, path="./"):
+    def __init__(self, storagePath=None, aspectType=None, caseStructure=None, verbose=False, path="./"):
         from aspect import readFoamStructure
+        from study import StudyStructure
+        import fnmatch
 
-        # name of class for debugging purpose
-        self.name = "Case"
-        # aspectType of class, e.g. cad, mesh ....
+        # store known values to self
+        # ================================================================================
+        self.className4 = "Case"    # only for debugging purpose
+        self.aspectRoot = storagePath
         self.aspectType = aspectType
-        # relative path to Aspect
-        self.path = path
-        # name of current case
-        self.caseName = os.path.basename(os.path.abspath(self.path))
-        # initialize variables 
+        self.verbose    = verbose
+        if self.verbose:
+            print("start case constructor")
+        currentDir  = os.path.basename( os.getcwd() )
+
+        # search for sofa environment provided information
+        # ================================================================================
+        # project handling
+        self.projectRoot    = findParentFolder( "project.json" )
+        if caseStructure == None :
+            self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
+            thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
+            self.studyName = os.path.basename(self.studyRoot)
+        # aspect handling
+        if self.aspectType == None: 
+            # read Case.aspectType from foldername
+            if currentDir in thisStudyStructure.aspectList:
+                self.aspectType     = currentDir
+                self.aspectRoot     = os.getcwd()
+        # case handling
+        if 'thisStudyStructure' in locals():
+            if currentDir[:-3] in thisStudyStructure.aspectList:
+                self.aspectType     = currentDir[:-3]
+                self.path           = os.getcwd()
+                self.caseName       = currentDir
+                if self.aspectRoot == None :
+                    self.aspectRoot = os.path.abspath(os.path.join(self.path, os.pardir))
+        if self.aspectType == None: 
+            sys.exit(1)
+
+        if caseStructure == None :
+            self.structure      = thisStudyStructure.aspectList[self.aspectType]['case000']
+        else:
+            self.structure      = caseStructure
+
+        if 'caseName' not in self.__dict__: 
+            self.createNew  = True
+            self.caseName   = self.nextCaseName( self.aspectRoot )
+            self.path       = os.path.join( self.aspectRoot, self.caseName )
+        else:
+            self.createNew  = False
+            for file in sorted(os.listdir( self.path )):
+                if fnmatch.fnmatch(file, "sofa."+ self.aspectType +"*.json"):
+                    if self.verbose: 
+                        print("with case-json:   "+ file+ "\tin: "+ self.path )
+                    self.pathToJson = os.path.join(self.path, file)
+
+
+        # store linked cases to self
+        # ================================================================================
         self.caseJson = None
         self.linkedCase = None
         self.linkedReport = None
         self.pathToLinkedCase = None
         self.pathToLinkedReport = None
         self.symlinksClean = False
-        # check if case .json exists
-        self.pathToJson = os.path.join(self.path, self.aspectType + ".json")
-        if os.path.exists(self.pathToJson):
+        if os.path.exists(self.path):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
             # extract linked cases from case.json according to foamStructure gen in project.json
             foamStructure   = readFoamStructure()
-            self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
+            if 'linkName' in foamStructure[self.aspectType]: 
+                self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
                 # differentiate between single links and a list of links (survey)
                 if isinstance(self.linkedCase, str):
@@ -104,6 +151,8 @@ class Case(object):
                 else:
                     print(
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
+        pass  # end linked cases search
+
 
     def nextCaseName(self, path="./"):
         # finds the next case name in a series of folder of type xxx123
@@ -124,6 +173,7 @@ class Case(object):
                     maxNo = currentNo
         CaseName = str(self.aspectType + format(maxNo + 1, "0>3d"))
         return(CaseName)
+
 
     def getStudyName(self):
         # finds the projectname of a case
@@ -150,6 +200,7 @@ class Case(object):
             print("Could not find project name")
             return(False)
 
+
     def create(self):
         # create a new case inside a Aspect depending on the aspectType of case
         #
@@ -158,22 +209,86 @@ class Case(object):
         # Return:
         #   side effects
         #
-        jsonPath = findFile(self.aspectType + ".json", "tools")
-        makePath = findFile(str("Makefile_case_" + self.aspectType + ".mk"), "tools")
-        gitignorePath = findFile(".gitignore_foam", "tools")
-        caseName = self.nextCaseName()
-        if (jsonPath and makePath):
-            createDirSafely(os.path.join(self.path, caseName))
-            ### Makefile
-            #copyFileSafely(makePath, os.path.join(self.path, caseName, "Makefile"))
-            createSymlinkSavely(makePath, os.path.join(
-                self.path, caseName, "Makefile"))
-            ### json
-            copyFileSafely(jsonPath, os.path.join(
-                self.path, caseName, self.aspectType + ".json"))
-            createSymlinkSavely(gitignorePath, os.path.join(
-                self.path, caseName, ".gitignore"))
+        from fileHandling import handleStudyStructFile
+        from fileHandling import handleStudyStructFolder
+        from fileHandling import copyRecursiveAndStage
+        if self.verbose:    print(  "creating case:         \t\t  >>  " +self.caseName +"  <<")
+
+        # create case folder
+        self.casePath = os.path.join( self.aspectRoot, self.caseName ) 
+        createDirSafely( self.casePath, debugRefPath=self.projectRoot )
+
+        # create caseXXX content
+        if 'folders' in self.structure : 
+            for thisFolder in self.structure['folders'] : 
+                handleStudyStructFolder( self.structure['localpath'], thisFolder, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
+        if 'files' in self.structure : 
+            for thisFile in self.structure['files'] : 
+                if 'onlyAtCaseCreation' in thisFile: 
+                    if thisFile['onlyAtCaseCreation'] and not self.createNew : 
+                        if self.verbose: 
+                            print("Skip onlyAtCreation file: "+ thisFile['targetPath'])
+                        continue
+                handleStudyStructFile( self.structure['localpath'], thisFile, self.casePath, self.verbose, debugRefPath=self.projectRoot ) 
+        if 'optional-file-bundles' in self.structure and not self.caseJson == None: 
+            for thisOption in self.structure['optional-file-bundles']:
+                try:
+                    optionValue = self.caseJson[  thisOption['jsonSwitch'][0]  ][  thisOption['jsonSwitch'][1]  ]   # TODO read for free key depth
+                except: 
+                    print("WARNING: optional-file-bundles are not specified in json")
+                    optionValue = ""
+                if optionValue in thisOption['jsonSwitchValues']:
+                    if self.verbose: print("handle optional file bundle: ", thisOption['name'])
+                    source = os.path.join(self.structure['localpath'], thisOption['path'])
+                    copyRecursiveAndStage( source, self.casePath, verbose=self.verbose )
+        if 'caseLinks' in self.structure : 
+            for thisFile in self.structure['caseLinks'] : 
+                createSymlinkSavely(  os.path.join(self.casePath, thisFile['sourcePath'])
+                                    , os.path.join(self.casePath, thisFile['targetPath']) , referencePath=self.casePath, verbose=self.verbose)
         return(True)
+
+
+    def createUpstreamAspectLinks(self):
+        from fileHandling import createSymlinkSavely
+        if self.verbose:    print(  "create upstream aspect links for:  \t  >>  " +self.caseName +"  <<")
+
+        # create upstreamAspectLink
+        if 'upstreamAspects' in self.structure : 
+            for thisUpstreamConnection in self.structure['upstreamAspects'] : 
+                # sort information
+                thisUpstreamAspect  = thisUpstreamConnection['upstreamAspect']
+                upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]     # TODO read for free key depth
+                upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
+
+                if thisUpstreamConnection['createDirectSymlink']: 
+                    createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
+
+                if 'specialLinks' in thisUpstreamConnection : 
+                    for thisLink in thisUpstreamConnection['specialLinks'] : 
+                        # define src/dst
+                        if thisUpstreamConnection['useCaseJsonWithoutAspect']:
+                            src         = os.path.join( '..','..',upstreamCase, thisLink['upstreamCasePath'] )
+                        else:
+                            if thisLink['upstreamCasePath'] =="":
+                                src     = upstreamTarget
+                            else: 
+                                src     = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
+                        dst = thisLink['targetPath']
+
+                        # create file
+                        if thisLink['separateFiles']:
+                            for element in sorted(os.listdir(src)):
+                                if thisLink['copyFile']: 
+                                    copyFileSafely( os.path.join(src,element), os.path.join(dst,element), overwrite=True, verbose=self.verbose )
+                                else:
+                                    createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
+                        else:
+                            if thisLink['copyFile']: 
+                                copyFileSafely( src, dst, overwrite=True, verbose=self.verbose )
+                            else:
+                                createSymlinkSavely( src, dst, verbose=self.verbose )
+        return(True)
+
 
     def clone(self):
         # create a clone of the current case
@@ -183,233 +298,61 @@ class Case(object):
         # Return:
         #   side effects: makes a clone of the case
         #
-        currentCase = os.path.basename(os.getcwd())
+        currentCase = self.path
         caseName = self.nextCaseName(os.pardir)
-        path = os.path.join(os.pardir, caseName)
+        clonePath = os.path.join(os.pardir, caseName)
         while True:
-            print("Clone case from >%s< to >%s< ? (y/n)" %
-                  (currentCase, caseName))
-            answer = input().lower()
-            if answer in ["y", "yes"]:
+            print("Clone case from >%s< to >%s< ? (Y/n)" % (currentCase, caseName))
+            answer1 = input().lower()
+            if answer1 in ["y", "yes",""]:
                 while True:
-                    print("Include results? (y/n)")
+                    print("Include results? (y/N)")
                     answer2 = input().lower()
                     if answer2 in ["y", "yes"]:
                         print("Cloning complete case >%s< to >%s<" % (currentCase, caseName))
                         shutil.copytree(os.path.join(os.pardir, currentCase),
-                                        path, symlinks=True)
+                                        clonePath, symlinks=True)
                         break
-                    if answer2 in ["n", "no"]:
+                    if answer2 in ["n", "no",""]:
                         print("Cloning case >%s< to >%s< without results" % (currentCase, caseName))
-                        os.makedirs(os.path.join(os.pardir, caseName))
-                        for name in os.listdir("."):
+                        os.makedirs(clonePath)
+                        for name in sorted( os.listdir(".") ):
                             if fnmatch.fnmatch(name, "[1-9]*") or fnmatch.fnmatch(name, "[0-9].[0-9]*"):
                                 continue
                             elif fnmatch.fnmatch(name, "processor*"):
-                                createDirSafely(os.path.join(path,name))
+                                createDirSafely(os.path.join(clonePath,name))
                                 for subDir in os.listdir(os.path.join("./", name)):
                                     if fnmatch.fnmatch(subDir, "[1-9]*") or fnmatch.fnmatch(subDir, "[0-9].[0-9]*"):
                                         continue
                                     else:
-                                        copyFolderSafely(os.path.join(name, subDir), os.path.join(path,name,subDir))
+                                        copyFolderSafely(os.path.join(name, subDir), os.path.join(clonePath,name,subDir))
                                 continue
                             elif fnmatch.fnmatch(name, "postProcessing*"):
                                 continue
                             elif fnmatch.fnmatch(name, "log*"):
                                 continue
                             elif os.path.isfile(name):
-                                copyFileSafely(name,os.path.join(path,name))
+                                copyFileSafely(name,os.path.join(clonePath,name))
                                 continue
                             else:
-                                copyFolderSafely(name,os.path.join(path,name))
+                                copyFolderSafely(name,os.path.join(clonePath,name))
                         break
                 while True:
-                    print("\nCommit cloning of >%s< to >%s< ? (y/n)" %
-                            (currentCase, caseName))
+                    # git handling
+                    os.system('git add %s' % clonePath)
+                    message = '[%s %s] #CLONE from >%s<' % (self.studyName, caseName, os.path.basename(currentCase))
+                    print("staged commit for %s with commit-message: \n\t%s" % (caseName, message) )
+                    print("\nCommit cloning of >%s< to >%s< ? (y/N)" % (os.path.basename(currentCase), caseName))
                     answer3 = input().lower()
                     if answer3 in ["y", "yes"]:
-                        studyName = self.getStudyName()
-                        os.system('git add %s' % path)
-                        os.system('git commit -m "[%s%s] #CLONE \'cloning case >%s< to >%s<\'"' % (
-                            studyName, caseName.capitalize(), currentCase, caseName))
+                        os.system('git commit -m "%s"' % message)
                         break
-                    elif answer3 in ["n", "no"]:
+                    elif answer3 in ["n", "no",""]:
                         break
+                    pass
                 break
-            if answer in ["n", "no"]:
+            if answer1 in ["n", "no"]:
                 break
-
-    def clear(self):
-        # removes all files, folders and symlinks from a case, but spares
-        # out the Makefile and the .json file of the case
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: removes folders
-        #
-        caseName = os.path.basename(os.getcwd())
-        while True:
-            print("Do you really want to clear case >%s< ? (y/n)" % caseName)
-            answer = input()
-            answer = answer.lower()
-            if answer in ["y", "yes"]:
-                for root, dirs, files in os.walk("./", topdown=False):
-                    for name in files:
-                        if name == "Makefile":
-                            continue
-                        if name == ".gitignore":
-                            continue
-                        elif name.endswith("json"):
-                            continue
-                        else:
-                            os.remove(os.path.join(root, name))
-                            print("Removing file >%s< from case" %
-                                  os.path.join(root, name))
-                    for name in dirs:
-                        if os.path.islink(os.path.join(root, name)):
-                            os.remove(os.path.join(root, name))
-                            print("Removing link >%s<" %
-                                  os.path.join(root, name))
-                        else:
-                            os.rmdir(os.path.join(root, name))
-                            print("Removing folder >%s< from case" %
-                                  os.path.join(root, name))
-                while True:
-                    print("Commit clearing of %s ? (y/n)" % caseName)
-                    answer = input()
-                    answer = answer.lower()
-                    if answer in ["y", "yes"]:
-                        studyName = self.getStudyName()
-                        os.system('git add .')
-                        os.system('git commit -m "[%s%s] #CLEAR \'cleared case >%s< in project >%s<\'"' 
-                                  % (studyName, caseName.capitalize(), caseName, studyName))
-                        break
-                    elif answer in ["n", "no"]:
-                        break
-                break
-            elif answer in ["n", "no"]:
-                break
-
-    def makeMainSymlink(self):
-        # links the folder stated in the case json into the directory
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects:  creates the main symlink
-        #
-        # make sure symlinks are clean but avoid double calling
-        if not self.symlinksClean:
-            self.removeSymlinks
-        # check if a file to link to has been specified in *.json file
-        if self.linkedCase:
-            # check if the file to link to exists
-            if self.pathToLinkedCase:
-                #os.symlink(self.pathToLinkedCase, self.linkedCase)
-                createSymlinkSavely(self.pathToLinkedCase, self.linkedCase)
-                #print("Create link to >%s<" % self.pathToLinkedCase)
-                return(True)
-        else:
-            print("No link specified for this case yet")
-            return(False)
-
-    def removeSymlinks(self):
-        # removes the symlinks from a case which have been created
-        # by the script
-        #
-        # Args:
-        #
-        # Result:
-        #   side effects : removes symlinks
-        #
-        # Lists of folders and extensions to delete
-        from aspect import readFoamStructure
-
-        extensions = [".stl", ".vtk"]
-        folder = ["polyMesh", "cadPics", "meshPics",
-                  "drafts", "meshReport", "layerSizing"]
-        foamStructure   = readFoamStructure()
-        for key in foamStructure:
-            folder.append(key)
-        # Traverse all subdirectories in case
-        for root, dirs, files in os.walk("./"):
-            for dirName in dirs:
-                if os.path.islink(os.path.join(root, dirName)):
-                    # remove digits from foldernames to compare with folder
-                    stripped = ''.join([i for i in dirName if not i.isdigit()])
-                    if stripped in folder:
-                        os.remove(os.path.join(root, dirName))
-                        print("Removing link >%s<" %
-                              os.path.join(root, dirName))
-            for fileName in files:
-                if os.path.islink(os.path.join(root, fileName)):
-                    # check if file extension is in extensions
-                    if os.path.splitext(os.path.join(root, fileName))[1] in extensions:
-                        os.remove(os.path.join(root, fileName))
-                        print("Removing link >%s<" %
-                              os.path.join(root, fileName))
-        self.symlinksClean = True
-
-    def copyReport(self, run = False):
-        # method to copy reports either from the template directory or
-        # reporting
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for mesh
-        #
-        if self.aspectType == "cad" :
-            print("Reports are not supported for >cad<")
-            exit(0)
-        elif self.aspectType == "survey" :
-            print("Reports are not yet supported for >cad<")
-            exit(0)
-        reportSrc = ""
-        if "report" not in self.caseJson["buildSettings"]:
-            print("No key >report< in %s. Upatding .json with default values " %self.pathToJson)
-            self.updateJson()
-        reportTemplate = self.caseJson["buildSettings"]["report"]
-        if reportTemplate in  os.listdir(os.path.join(self.path, "../doc")):
-            reportPath = os.path.join(self.path, "../doc", reportTemplate)
-            statesPath = os.path.join(self.path, "../doc/postStates")
-            for file in os.listdir(reportPath):
-                if fnmatch.fnmatch(file, '*.Rmd'):
-                    if self.aspectType == "mesh" :
-                        reportSrc = os.path.join(reportPath, file)
-                        reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
-                    elif self.aspectType == "run" :
-                        reportSrc = os.path.join(reportPath, file)
-                        reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
-                    createDirSafely( statesPath )
-                    createSymlinkSavely( statesPath, "postStates" )
-                    break
-            else: 
-                print("Unabel to find a report in >%s" %reportPath)
-                exit(0)
-        else:
-            print("Unabel to find >%s in")
-            exit(0)
-        if not reportSrc :
-            if self.aspectType == "mesh" :
-                reportSrc = findFile("meshReport.Rmd", "tools")
-                reportDst = os.path.join(self.path, "doc/meshReport/meshReport.Rmd")
-            if self.aspectType == "run" :
-                reportSrc = findFile("runReport.Rmd", "tools")
-                reportDst = os.path.join(self.path, "doc/runReport/runReport.Rmd")
-        print("Updating report in >%s" %self.caseName)
-        if not os.path.exists(os.path.dirname(reportDst)):
-            createDirSafely(os.path.dirname(reportDst))
-        if os.path.exists(reportDst):
-            print("Deleting > %s" %reportDst)
-            os.remove(reportDst)
-        copyFileSafely(src = reportSrc, dst = reportDst)  
-        if run:
-            cmd = ['R', '-e' , 'rmarkdown::render(\'' + reportDst + '\')']
-            #logFilePath = os.path.join("log",str("runReport" + ".log"))
-            runReport = subprocess.Popen(cmd)# , logFilePath)  
-            runReport.wait()    
 
 
     def commitInit(self):
@@ -435,220 +378,17 @@ class Case(object):
             elif answer in ["n", "no"]:
                 break
 
-    def commitChanges(self):
-        # asks user if he wants to commit changes to case
-        #
-        # Args:
-        #
-        # Result:
-        #   side effects:   commits changes of case
-        #
-        caseName = os.path.basename(os.getcwd())
-        while True:
-            print("Commit changes in %s ? (y/n)" % caseName)
-            answer = input()
-            answer = answer.lower()
-            if answer in ["y", "yes"]:
-                while True:
-                    print("Please enter a commit message:")
-                    message = input()
-                    if not message == "":
-                        break
-                studyName = self.getStudyName()
-                os.system('git add .')
-                os.system('git commit -m "[%s%s] #CHANGE \'%s\'"' %
-                          (studyName, caseName.capitalize(), message))
-                break
-            elif answer in ["n", "no"]:
-                break
 
-    def updateJson(self):
-        # update json file of a case with newest version from tools
-        #
-        # Args:
-        #
-        # Result:
-        #   side effects:   overwrite current .json
-        #
-
-        # find and load most recent version of json from framework
-        newJsonPath = findFile(self.aspectType + ".json", "tools")
-        newJson = loadJson(newJsonPath)
-        # check if present
-        if newJsonPath:
-            # loop first level of keys 
-            for key1 in self.caseJson:
-                # if found element is a string assign value
-                if isinstance(self.caseJson[key1], str):
-                    newJson[key1] = self.caseJson[key1]
-                # if found element is a dict iterate
-                elif isinstance(self.caseJson[key1], dict):
-                    # assign value 
-                    for key2 in self.caseJson[key1]:
-                        newJson[key1][key2] = self.caseJson[key1][key2]
-        else:
-            print("No version of %s found in framework" %str(self.aspectType + ".json"))
-        # save new Json file over old file
-        with open(os.path.join(self.path, self.aspectType + ".json"), 'w') as outfile:
-            json.dump(newJson, outfile, indent=4)
-
-
-class CadCase(Case):
-    # Specialized class for cad cases, which inherits from the base Case class
-
-    def __init__(self, path="./"):
-        # execute init of parent class
-        super().__init__("cad", path)
-        self.name = "CadCase"   # only for debugging purpose
-
-    def create(self):
-        # specialized method which creates all folders needed in
-        # a case of aspectType cad
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates directories
-        #
-        caseName = self.nextCaseName()
-        createDirSafely(os.path.join(self.path, caseName, "native"))
-        createDirSafely(os.path.join(self.path, caseName, "stl"))
-        createDirSafely(os.path.join(self.path, caseName, "vtk"))
-        createDirSafely(os.path.join(self.path, caseName, "doc/drafts"))
-        createDirSafely(os.path.join(self.path, caseName, "doc/cadPics"))
-        makePath =      findFile( "Makefile_case_cad.mk",   "tools")
-        gitignorePath = findFile( ".gitignore_cad",         "tools")
-        if makePath:
-            createSymlinkSavely(    makePath, 
-                                    os.path.join( self.path, caseName, "Makefile"))
-        createSymlinkSavely(    "tools/framework/docs/help-files/aspectPics.md" , 
-                                os.path.join( self.path, caseName, "doc/cadPics/help-cadPics.md" ) )
-        if gitignorePath:
-            createSymlinkSavely( gitignorePath, 
-                                 os.path.join( self.path, caseName, ".gitignore"))
-
-    def initCase(self):
-        if len(os.listdir(".")) <= 1:
-            createDirSafely("native")
-            createDirSafely("stl")
-            createDirSafely("vtk")
-            createDirSafely("doc/drafts")
-            createDirSafely("doc/cadPics")
-            createSymlinkSavely( "../../../tools/framework/docs/help-files/aspectPics.md" , "./doc/cadPics/help-cadPics.md" ) 
-            makePath =      findFile( "Makefile_case_cad.mk",   "tools")
-            gitignorePath = findFile( ".gitignore_cad",         "tools")
-            if makePath:
-                copyFileSafely( makePath,       "Makefile")
-            if gitignorePath:
-                copyFileSafely( gitignorePath,  ".gitignore")
-            self.commitInit()
-        else:
-            print("Case is already initialised. Please run >make clean< first")
-
-    def makeSymlinks(self):
-        print("Cases of aspectType >cad< do not support option symlinks")
-
-
-class MeshCase(Case):
-     # Specialized class for cad cases, which inherits from the base Case class
-
-    def __init__(self, path="./"):
-        super().__init__("mesh", path)
-        self.name = "MeshCase"
-        self.Builder = foamBuilder()
-
-    def makeSymlinks(self):
-        # specialized method to create all symlinks needed for a case
-        # of aspectType mesh
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for mesh
-        #
-        linkedGeometry = False
-        # if symlinks already exist, delete them
-        self.removeSymlinks()
-        if self.makeMainSymlink():
-            createDirSafely("constant/triSurface")
-            createDirSafely("doc")
-            createDirSafely( os.path.join( self.pathToLinkedCase, "doc" ) )
-            createDirSafely( os.path.join( self.pathToLinkedCase, "stl" ) )
-            createDirSafely( os.path.join( self.pathToLinkedCase, "vtk" ) )
-            for extension in ["stl", "vtk"]:
-                for element in os.listdir(os.path.join(self.pathToLinkedCase, extension)):
-                    if element.endswith("." + extension):
-                        createSymlinkSavely(os.path.join(self.pathToLinkedCase, extension, element), os.path.join(
-                            "./constant/triSurface/", element))
-                        if element.endswith(".stl"):
-                            linkedGeometry = True
-            for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
-                createSymlinkSavely(os.path.join(
-                    self.pathToLinkedCase, "doc", element), os.path.join("./doc", element))
-            self.copyReport(run=False)
-            if not linkedGeometry:
-                print("WARNING: Did not link to any geometry files")
-            return(True)
-
-    def initCase(self):
-        # specialised method to initialise a case of aspectType mesh
-        #
-        # Args:
-        #
-        # Returns:
-        #   side effects: creates directories, copies files makes symlinks
-        #
-        if os.path.isdir("./system"):
-            print(
-                "Case is already initialized. If you want to reinitialize please delete >system")
-        elif self.makeSymlinks():
-            meshReportPath = findFile("meshReport.Rmd", "tools")
-            layerSizingPath = findFile("layerSizing.Rmd", "tools")
-            #meshStatePath = findFile("mesh.pvsm", "tools")
-            if (meshReportPath and layerSizingPath ): # and meshStatePath):
-                self.Builder.makeMesh()
-                createDirSafely("doc/meshReport")
-                createDirSafely("doc/layerSizing")
-                createDirSafely("doc/meshPics")
-                createSymlinkSavely( "../../../tools/framework/docs/help-files/aspectPics.md" , "./doc/meshPics/help-meshPics.md" ) 
-                open("paraview.foam", "a").close()
-                self.copyReport()
-                #copyFileSafely(meshReportPath, "doc/meshReport/meshReport.Rmd")
-                copyFileSafely(layerSizingPath,"doc/layerSizing/layerSizing.Rmd")
-                #copyFileSafely(meshStatePath, "mesh.pvsm")
-                self.commitInit()
-
+#TODO remove specialized classes
 class RunCase(Case):
     # Class for run cases
 
-    def __init__(self, path=None):
-        super().__init__("run", path)
+    def __init__(self, path=None, verbose=False):
+        super().__init__(aspectType="run", path=path, verbose=verbose)
         self.name = "RunCase"
         if self.caseJson:
             self.Builder = foamBuilder(self.caseJson["buildSettings"])
 
-    def makeSymlinks(self):
-        # specialized method to create all symlinks needed for a case
-        # of aspectType run
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for run
-        #
-        self.removeSymlinks()
-        if self.makeMainSymlink():
-            createDirSafely("constant")
-            createDirSafely("doc")
-            createSymlinkSavely(  os.path.join( self.pathToLinkedCase, "constant/polyMesh")
-                                , os.path.join( "./constant/polyMesh" ))
-            createDirSafely( os.path.join( self.pathToLinkedCase, "doc") )
-            for element in os.listdir(os.path.join(self.pathToLinkedCase, "doc")):
-                currentPath = os.path.join(
-                    self.pathToLinkedCase, "doc", element)
-                createSymlinkSavely(currentPath, os.path.join("doc", element))
-            self.copyReport(run=False)
-            return(True)
 
     def initCase(self):
         # specialised method to initialise a case of aspectType run
@@ -661,34 +401,12 @@ class RunCase(Case):
         if os.path.isdir("./system"):
             print(
                 "Case is already initialized. If you want to reinitialize please delete >system")
-        elif self.makeSymlinks():
+        else:
             self.Builder.makeBase()
             self.Builder.makeTurbulence()
             self.Builder.makeDynamicMesh()
             self.Builder.makePorousZone()
-            self.commitInit()
-
-class SurveyCase(Case):
-    # Class for survey cases
-
-    def __init__(self, path=None):
-        super().__init__("survey", path)
-        self.name = "surveyCase"
-
-    def makeSymlinks(self):
-        # specialized method to create all symlinks needed for a case
-        # of type run
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: creates symlinks for run
-        #
-        self.removeSymlinks()
-        if False in self.pathToLinkedCase:
-            return(False)
-        for element in self.pathToLinkedCase:
-            createSymlinkSavely(element, os.path.basename(element))
+            # self.commitInit()
 
 
 class foamBuilder(object):
@@ -699,24 +417,6 @@ class foamBuilder(object):
         self.foamJson = loadJson(findFile("foamFiles.json", "tools"))
         self.setupPath = findFolder("openFoam-setup", "tools")
         self.foamCaseSettings = foamCaseSettings
-
-    def makeMesh(self):
-        # reads the file structure from foamFiles.json and copies all nessesary files
-        # listed there to create a mesh
-        #
-        # Args:
-        #
-        # Return:
-        #   side effects: builds an OpenFOAM structure for meshes
-        #
-        if self.foamJson:
-            if self.setupPath:
-                meshStruct = self.foamJson["mesh"]
-                for folder in meshStruct:
-                    createDirSafely(folder)
-                    for file in meshStruct[folder]:
-                        copyFileSafely(os.path.join(
-                            self.setupPath + meshStruct[folder][file]), os.path.join(folder, file))
 
     def makeBase(self):
         # reads the file structure from foamFiles.json and copies all nessesary files
@@ -737,7 +437,9 @@ class foamBuilder(object):
                         createDirSafely(folder)
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
-                                self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
+                                self.setupPath + baseStruct[folder][file]), 
+                                os.path.join(folder, file)) 
+                            os.system('git add -f ' + os.path.join(folder, file) )
                 else:
                     print("Unknown Solver >%s< specified in run.json" % solver)
 
@@ -760,7 +462,9 @@ class foamBuilder(object):
                         createDirSafely(folder)
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
-                                self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
+                                self.setupPath + baseStruct[folder][file]), 
+                                os.path.join(folder, file))
+                            os.system('git add -f ' + os.path.join(folder, file) )
                 else:
                     print("Unknown turbulence model >%s< specified in run.json" %
                           turbulenceModell)
@@ -785,6 +489,7 @@ class foamBuilder(object):
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
                                 self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
+                            os.system('git add -f ' + os.path.join(folder, file) )
 
     def makeDynamicMesh(self):
         # reads the file structure from foamFiles.json and copies all nessesary files
@@ -806,4 +511,4 @@ class foamBuilder(object):
                         for file in baseStruct[folder]:
                             copyFileSafely(os.path.join(
                                 self.setupPath + baseStruct[folder][file]), os.path.join(folder, file))
-
+                            os.system('git add -f ' + os.path.join(folder, file) )

@@ -16,12 +16,12 @@ import pickle
 import fnmatch
 import json
 import subprocess
-import openFoam
 
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.realpath( file_path +'/../../scripts' ) ) 
 
+from case import cfdAspectSelector
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
@@ -29,6 +29,9 @@ from fileHandling import copyFolderSafely
 from fileHandling import loadJson
 
 from procHandling import procHandler
+
+from case import Case
+
 
 def checkFoamVer():
     # retrieves the openFoam version from OS environment
@@ -94,6 +97,7 @@ class foamRunner(object):
     def __init__(self):
         # general info
         self.startSolving = datetime.datetime.now()  
+        self.case = Case( )
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
         # make sure 0.org exists or is retreived 
@@ -110,8 +114,8 @@ class foamRunner(object):
         # info about the state of case
         self.nProcFolder = self.getNoProcFolder()
         self.fileChangeDict = self.compareFileStates()
-        # info from run.json
-        self.runJson = loadJson("run.json")
+        # store infos from case-json
+        self.runJson = self.case.caseJson
         if self.runJson["runSettings"]["nCores"] == "" :
             self.nCores = 1
             print("Number of Cores is not specified in run.json, falling back to serial")
@@ -325,6 +329,7 @@ class foamRunner(object):
         except AssertionError:
             self.printFooterFailed()
             self.saveFileStates()
+            sys.exit(1)
         else:
             self.printFooter()
             self.saveFileStates()
@@ -347,7 +352,5 @@ if entryPoint == "run":
     runner.run()
 if entryPoint == "cleanRun":
     runner.clean()
-    builder = openFoam.cfdAspectSelector()
-    builder.makeSymlinks()
 if entryPoint == "view":
     runner.view()

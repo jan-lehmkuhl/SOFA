@@ -1,0 +1,78 @@
+{
+    "files": [
+        // created in case but linked and relative to study-structure
+        {
+            "sourcePath": "mesh.json",
+            "targetPath": "sofa.mesh.json",
+            "isSymlink": false,
+            "onlyAtCaseCreation": true
+        },
+        {
+            "sourcePath": "Makefile_case_mesh.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../../run/case000/.gitignore_foam",
+            "targetPath": ".gitignore",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../../shared/empty-file",
+            "targetPath": "pv.foam",
+            "isSymlink": false
+        }
+    ],
+
+    "optional-file-bundles": [
+        {
+            "name":             "Mesh-Bundle-1",
+            "jsonSwitch":       ["buildSettings", "defaultFiles" ],
+            "jsonSwitchValues": ["bundle-1","framework"],
+            "path":             "bundle-1"
+        }
+    ],
+
+    "caseLinks": [
+        // linked and relative from created case
+        {
+            "sourcePath": "../shared/postStates",
+            "targetPath": "postStates",
+            "isSymlink": true
+        }
+    ],
+
+    "upstreamAspects": [
+        // linking files to upstream case defined in case.json
+        {
+            "upstreamAspect":   "cad",
+            "caseJsonKey": [    "buildSettings", "cadLink" ],
+            "useCaseJsonWithoutAspect": false,
+            "createDirectSymlink": true,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "stl",
+                    "targetPath":       "constant/triSurface",
+                    "separateFiles":    true, 
+                    "copyFile":         false
+                }
+            ],
+            "isOptional":       true
+        },
+        {
+            "upstreamAspect":           "mesh/shared/reportTemplates",
+            "caseJsonKey": [            "buildSettings", "report" ],
+            "useCaseJsonWithoutAspect": false,
+            "createDirectSymlink":      false,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "",
+                    "targetPath":       "doc/meshReport/meshReport.Rmd",
+                    "separateFiles":    false,
+                    "copyFile":         true
+                }
+            ],
+            "isOptional":       true
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "files": [
+        {
+            "sourcePath": "../shared/Makefile_aspect.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "../shared/sofa.aspect.json",
+            "targetPath": "sofa.aspect.json",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../shared/.gitignore_aspect_docs",
+            "targetPath": "doc/.gitignore",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": "paraview-mesh-base-state.pvsm",
+            "targetPath": "shared/postStates/mesh-state-01.pvsm",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../../../../openFoam-reporting/meshOverview/meshOverview.Rmd",
+            "targetPath": "doc/meshOverview.Rmd",
+            "isSymlink": false
+        },
+        {
+            "sourcePath": "../../../../../tools/openFoam-reporting/meshReport/meshReport.Rmd",
+            "targetPath": "shared/reportTemplates/meshReport01.Rmd",
+            "isSymlink": false
+        }
+    ],
+    "folders": [
+        {
+            "relPath": "shared/postStates",
+            "createGitKeep": true
+        }
+    ]
+}

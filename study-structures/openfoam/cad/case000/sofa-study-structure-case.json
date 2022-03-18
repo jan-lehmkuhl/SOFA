@@ -1,0 +1,46 @@
+{
+    "files": [
+        {
+            "sourcePath": "cad.json",
+            "targetPath": "sofa.cad.json",
+            "isSymlink": false,
+            "onlyAtCaseCreation": true
+        },
+        {
+            "sourcePath": "Makefile_case_cad.mk",
+            "targetPath": "Makefile",
+            "isSymlink": true
+        },
+        {
+            "sourcePath": ".gitignore_cad",
+            "targetPath": ".gitignore",
+            "isSymlink": true
+        }
+    ],
+
+    "optional-file-bundles": [
+    ],
+
+    "folders": [
+        {
+            "relPath": "native",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "stl",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "vtk",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "doc/drafts",
+            "createGitKeep": true
+        },
+        {
+            "relPath": "doc/cadPics",
+            "createGitKeep": true
+        }
+    ]
+}

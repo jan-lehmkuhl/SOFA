@@ -8,8 +8,10 @@
 # SOFA files
 # =====================================
 
-# case description file
-*.case.info
+cad[0-9][0-9][0-9]
+mesh[0-9][0-9][0-9]
+postStates
+ARCHIVE-*.tar.bz2
 
 
 
@@ -20,7 +22,6 @@
 !constant/thermophysicalProperties
 !constant/turbulenceProperties
 !system/
-!0.org
 
 
 
@@ -61,6 +62,7 @@ mesh_outside.stl
 0/*
 0.*
 [1-9]*
+!0.org
 
 ## Fields that must get ignored
 */phi*
@@ -72,6 +74,7 @@ processor*
 ## logfiles
 log.*
 *log
+logs/*
 
 
 
@@ -93,7 +96,7 @@ dynamicCode
 # =============================================================================
 
 # paraview/ParaFoam
-*.foam
+# *.foam
 *.OpenFOAM
 # *.pvsm
 
@@ -106,9 +109,11 @@ postProcessing
 # R & Reporting
 # =====================================
 
+.Rhistory
 doc/*Report/*Report.Rmd
     # copied from aspect/doc/templateXX
 doc/*Report/*.Rdata
+doc/*Report/*.Rhistory
 doc/*Report/*.rds
 doc/*Report/*Report.html
 
