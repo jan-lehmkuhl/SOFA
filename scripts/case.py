@@ -284,7 +284,7 @@ class Case(object):
                                     createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
                         else:
                             if thisLink['copyFile']: 
-                                copyFileSafely( src, dst, overwrite=True, verbose=self.verbose )
+                                copyFileSafely( src, dst, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
                             else:
                                 createSymlinkSavely( src, dst, verbose=self.verbose )
         return(True)
@@ -332,7 +332,7 @@ class Case(object):
                             elif fnmatch.fnmatch(name, "log*"):
                                 continue
                             elif os.path.isfile(name):
-                                copyFileSafely(name,os.path.join(clonePath,name))
+                                copyFileSafely(name, os.path.join(clonePath,name), referencePath=self.projectRoot)
                                 continue
                             else:
                                 copyFolderSafely(name,os.path.join(clonePath,name))
