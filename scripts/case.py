@@ -83,7 +83,7 @@ class Case(object):
         # search for sofa environment provided information
         # ================================================================================
         # project handling
-        self.projectRoot    = findParentFolder( "project.json" )
+        self.projectRoot    = findParentFolder( "sofa.project.json" )
         if caseStructure == None :
             self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
@@ -134,7 +134,7 @@ class Case(object):
         if os.path.exists(self.path):
             # load case .json 
             self.caseJson = loadJson(self.pathToJson)
-            # extract linked cases from case.json according to foamStructure gen in project.json
+            # extract linked cases from case.json according to foamStructure gen in sofa.project.json
             foamStructure   = readFoamStructure()
             if 'linkName' in foamStructure[self.aspectType]: 
                 self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]

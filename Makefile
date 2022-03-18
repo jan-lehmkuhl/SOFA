@@ -16,7 +16,7 @@ include root-dummies/Makefile
 # framework installation and setup
 # ===================================================================
 
-exampleJsonValue     = $(shell node -p "require('./root-dummies/project.json').foamFolders[0]")
+exampleJsonValue     = $(shell node -p "require('./root-dummies/sofa.project.json').foamFolders[0]")
 
 requirementtest: 
 	@echo "show-json-value-afterwards:   " $(exampleJsonValue) 

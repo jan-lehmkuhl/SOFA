@@ -81,15 +81,15 @@ if args.entryPoint == "initStudy":
 
 # delete
 elif args.entryPoint == "initFoam":
-    projectStruct = loadJson( findParentFolder('project.json') +'/' +'project.json', verbose=args.verbose )
+    projectStruct = loadJson( findParentFolder('sofa.project.json') +'/' +'sofa.project.json', verbose=args.verbose )
     for studyFolder in projectStruct['foamFolders']:
-        if not os.path.exists(findParentFolder('project.json') +'/' +studyFolder):
+        if not os.path.exists(findParentFolder('sofa.project.json') +'/' +studyFolder):
             print("creating study:     " +studyFolder )
             for element in foamStructure:
-                newAspect = Aspect(element, os.path.join(findParentFolder('project.json'), studyFolder) )
+                newAspect = Aspect(element, os.path.join(findParentFolder('sofa.project.json'), studyFolder) )
                 newAspect.create()
             copyFileSafely( os.path.realpath( findFile( "study-documentation.md", "tools" ) ) 
-                          , os.path.join( findParentFolder("project.json"), +studyFolder, "/README-study.md" ) )
+                          , os.path.join( findParentFolder("sofa.project.json"), +studyFolder, "/README-study.md" ) )
             while True:
                 print("Commit creation of study %s ? (y/n)" % studyFolder)
                 answer = input()

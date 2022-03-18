@@ -19,11 +19,11 @@ dirpath = os.getcwd()
 # copy dummy files
 # -----------------------------------------------------------------------------
 shutil.copyfile( dirpath +"/tools/framework/root-dummies/Makefile"      , dirpath +"/Makefile" )
-shutil.copyfile( dirpath +"/tools/framework/root-dummies/project.json"  , dirpath +"/project.json" )
+shutil.copyfile( dirpath +"/tools/framework/root-dummies/sofa.project.json"  , dirpath +"/sofa.project.json" )
 shutil.copyfile( dirpath +"/tools/framework/root-dummies/.gitignore"    , dirpath +"/.gitignore" )
 shutil.copyfile( dirpath +"/tools/framework/root-dummies/.gitattributes", dirpath +"/.gitattributes" )
 os.system("git add Makefile")
-os.system("git add project.json")
+os.system("git add sofa.project.json")
 os.system("git add .gitignore")
 os.system("git add .gitattributes")
 
