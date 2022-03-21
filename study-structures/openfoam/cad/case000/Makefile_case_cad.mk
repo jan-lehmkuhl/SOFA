@@ -1,14 +1,14 @@
-# Makefile copied from ./tools/framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
+# Makefile copied from ./tools/sofa-framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
 
 
 ifneq      ("$(wildcard ../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../tools/framework
+    FRAMEWORK_PATH =    ../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../tools/framework
+    FRAMEWORK_PATH =    ../../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../../tools/framework
+    FRAMEWORK_PATH =    ../../../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../../../tools/framework
+    FRAMEWORK_PATH =    ../../../../../tools/sofa-framework
 else
     FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND
 endif

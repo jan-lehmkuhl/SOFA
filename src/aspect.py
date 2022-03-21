@@ -11,7 +11,7 @@ import json
 import os
 import sys
 
-sys.path.insert(1, './tools/framework/src') 
+sys.path.insert(1, './tools/sofa-framework/src') 
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely

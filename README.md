@@ -38,12 +38,12 @@ Get Started
 
 Access to GitLab with ssh
 ---------------------------------------------------------------------------------------------------
-the project downloads automatic the SOFA files from gitlab to `tools/framework`. Therefore you need ssh access to GitLab.  
+the project downloads automatic the SOFA files from gitlab to `tools/sofa-framework`. Therefore you need ssh access to GitLab.  
 
 
 init new project
 ---------------------------------------------------------------------------------------------------
-to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/framework/scripts/createHereNewSofaProject.sh` from a previous simulation project
+to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/sofa-framework/scripts/createHereNewSofaProject.sh` from a previous simulation project
 
     mkdir <new-project-folder>
     cd <new-project-folder>
@@ -78,12 +78,12 @@ install software requirements
 ---------------------------------------------------------------------------------------------------
 to work properly some features need special software. These should be installed after project init with:  
 
-    cd ./tools/framework
+    cd ./tools/sofa-framework
     make installrequirements
 
 to verifiy whether all required software works properly run: 
 
-    cd ./tools/framework
+    cd ./tools/sofa-framework
     make requirementtest
 
 

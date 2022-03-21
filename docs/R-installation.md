@@ -2,7 +2,7 @@
 R CLI
 ================================================================================
 
-    cd tools/framework
+    cd tools/sofa-framework
     make installrequirementsR
     sudo R 
 

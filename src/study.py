@@ -13,7 +13,7 @@ import sys
 # add additional path for import
 file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, file_path )
-sys.path.insert(1, './tools/framework/openFoam/python') 
+sys.path.insert(1, './tools/sofa-framework/openFoam/python') 
 
 from fileHandling import loadJson
 from fileHandling import handleStudyStructFile

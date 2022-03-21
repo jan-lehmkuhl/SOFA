@@ -1,5 +1,5 @@
 
-# simulation-projects root-Makefile in ./tools/framework
+# simulation-projects root-Makefile in ./tools/sofa-framework
 
 include global-make.mk
 include root-dummies/Makefile

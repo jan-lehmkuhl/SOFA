@@ -27,7 +27,7 @@
             "args":             [   "initStudy", 
                                     "--verbose", 
                                     "--studyName", "create-study/dummy",
-                                    "--studyStructFolder",  "tools/framework/study-structures/openfoam",
+                                    "--studyStructFolder",  "tools/sofa-framework/study-structures/openfoam",
                                 ],
             "console":          "integratedTerminal",
             "stopOnEntry":      true,
@@ -81,7 +81,7 @@
             "args":             [     "initStudy"
                                     , "--verbose"
                                     , "--studyName",          "newStudy"
-                                    , "--studyStructFolder",  "tools/framework/study-structures/openfoam"
+                                    , "--studyStructFolder",  "tools/sofa-framework/study-structures/openfoam"
                                 ],
             "stopOnEntry":      true,
             "justMyCode":       true,
