@@ -43,13 +43,13 @@ the project downloads automatic the SOFA files from gitlab to `tools/framework`.
 
 init new project
 ---------------------------------------------------------------------------------------------------
-to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/framework/bin/createHereNewProject.sh` from a previous simulation project
+to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/framework/scripts/createHereNewSofaProject.sh` from a previous simulation project
 
     mkdir <new-project-folder>
     cd <new-project-folder>
-    <path-to-any-simulation-project-repository>/bin/createHereNewProject.sh
+    <path-to-any-simulation-project-repository>/scripts/createHereNewSofaProject.sh
 
-or execute the content of `./bin/createHereNewProject.py` directly after downloading from gitlab in the new project folder.  
+or execute the content of `./scripts/createHereNewSofaProject.py` directly after downloading from gitlab in the new project folder.  
 
 ### Push a local repository to Gitlab
 If you want to share the repository on gitlab, you can create an empty project on gitlab and push the local created repository afterwards to gitlab. 
