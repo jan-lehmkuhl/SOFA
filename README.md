@@ -97,7 +97,9 @@ Therefore the needed/main information ist stored in a documentation file, a make
 
 documentation files (*.md)
 ---------------------------------------------------------------------------------------------------
-The documentation file should only contain the information, which is needed on a specific folder level. E.g in the root folder should only be the project specific information like who hired me to do something and which simulations will be perormed. More detailed information to the simulations will be in the documentation file in the related sub-folder
+The documentation file should only contain the information, which is needed on a specific folder level. 
+E.g in the root folder should only be the project specific information like who hired me to do something and which simulations will be perormed. 
+More detailed information to the simulations will be in the documentation file in the related sub-folder
 
 
 Makefiles
