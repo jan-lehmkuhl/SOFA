@@ -54,7 +54,7 @@ clean: clean-freecad-output clean-vtk
 
 # clone case to a new case with the next available running number 
 clone:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 clean-upstream-included: clean
 

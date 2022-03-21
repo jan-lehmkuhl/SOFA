@@ -11,7 +11,7 @@ import json
 import os
 import sys
 
-sys.path.insert(1, './tools/framework/scripts') 
+sys.path.insert(1, './tools/framework/src') 
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely

@@ -77,7 +77,7 @@ zip:
 
 # initialize case according to run.json
 init-case: upstream-links
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py initCase
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py initCase
 
 
 upstream-links:
@@ -85,12 +85,12 @@ upstream-links:
 	if [ -f "Allrun" ] ; then                                                   \
 		sed -i 's\MESHDIR=".*"\MESHDIR="./$(linkedMeshCase)"\' Allrun         ; \
 	fi
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py upstreamLinks
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 
 # clone this case to a new case with the next available running number 
 clone:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 
 # update report according to .json

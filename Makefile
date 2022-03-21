@@ -63,7 +63,7 @@ clean: badMagicNumberClean
 # delete python cache files 
 #    they can disturb execution
 badMagicNumberClean:
-	find . -wholename '*/scripts/fileHandling.pyc' -delete
+	find . -wholename '*/src/fileHandling.pyc' -delete
 	find . -wholename '*/__pycache__/*.cpython-*.pyc' -delete
 
 

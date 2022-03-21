@@ -80,17 +80,17 @@ zip:
 
 # reinitialize case and copies files again
 initCase: 
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py newCase
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py newCase
 
 
 upstream-links:
     # renew the upstreamLinks to cad 
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py upstreamLinks
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 
 # clone case to a new case with the next available running number 
 clone:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 
 clean-framework-mesh: 

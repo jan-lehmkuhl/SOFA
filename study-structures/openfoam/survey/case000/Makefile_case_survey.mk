@@ -20,13 +20,13 @@ endif
 
 
 init:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py initCase
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py initCase
 
 upstream-links:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py upstreamLinks
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 clone:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 mesh:
 	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py mesh
