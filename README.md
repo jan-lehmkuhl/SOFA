@@ -38,18 +38,18 @@ Get Started
 
 Access to GitLab with ssh
 ---------------------------------------------------------------------------------------------------
-the project downloads automatic the SOFA files from gitlab to `tools/framework`. Therefore you need ssh access to GitLab.  
+the project downloads automatic the SOFA files from gitlab to `tools/sofa-framework`. Therefore you need ssh access to GitLab.  
 
 
 init new project
 ---------------------------------------------------------------------------------------------------
-to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/framework/bin/createHereNewProject.sh` from a previous simulation project
+to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/sofa-framework/scripts/createHereNewSofaProject.sh` from a previous simulation project
 
     mkdir <new-project-folder>
     cd <new-project-folder>
-    <path-to-any-simulation-project-repository>/bin/createHereNewProject.sh
+    <path-to-any-simulation-project-repository>/scripts/createHereNewSofaProject.sh
 
-or execute the content of `./bin/createHereNewProject.py` directly after downloading from gitlab in the new project folder.  
+or execute the content of `./scripts/createHereNewSofaProject.py` directly after downloading from gitlab in the new project folder.  
 
 ### Push a local repository to Gitlab
 If you want to share the repository on gitlab, you can create an empty project on gitlab and push the local created repository afterwards to gitlab. 
@@ -78,12 +78,12 @@ install software requirements
 ---------------------------------------------------------------------------------------------------
 to work properly some features need special software. These should be installed after project init with:  
 
-    cd ./tools/framework
+    cd ./tools/sofa-framework
     make installrequirements
 
 to verifiy whether all required software works properly run: 
 
-    cd ./tools/framework
+    cd ./tools/sofa-framework
     make requirementtest
 
 
@@ -92,17 +92,20 @@ Usage
 ===================================================================================================
 
 The main idea of the SOFA framework is, that every information you need for a specific task in the simulation project is local available in the associated sub-folder and accessible by your text editor.  
-Therefore the needed/main information ist stored in a documentation file, a Makefile and a json-file. In addition there are subfolders with program specific files in lower folder levels.
+Therefore the needed/main information ist stored in a documentation file, a makefile and a json-file. In addition there are subfolders with program specific files in lower folder levels.
 
 
 documentation files (*.md)
 ---------------------------------------------------------------------------------------------------
-The documentation file should only contain the information, which is needed on a specific folder level. E.g in the root folder should only be the project specific information like who hired me to do something and which simulations will be perormed. More detailed information to the simulations will be in the documentation file in the related sub-folder
+The documentation file should only contain the information, which is needed on a specific folder level. 
+E.g in the root folder should only be the project specific information like who hired me to do something and which simulations will be perormed. 
+More detailed information to the simulations will be in the documentation file in the related sub-folder
 
 
 Makefiles
 ---------------------------------------------------------------------------------------------------
-The Makefiles contain the actions you can do as Makefile-Targets. Maybe they will lead you only to deeper folders.
+The makefiles contain the actions you can do as makefile-targets. 
+Maybe they will lead you only to deeper folders.
 
 
 json-files

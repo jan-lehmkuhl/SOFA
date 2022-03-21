@@ -1,14 +1,14 @@
-# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_case_mesh.mk
+# makefile copied from ./tools/sofa-framework/openFoam/dummies/makefiles/makefile_case_mesh.mk
 
 
 ifneq      ("$(wildcard ../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../tools/framework
+    FRAMEWORK_PATH =    ../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../tools/framework
+    FRAMEWORK_PATH =    ../../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../../tools/framework
+    FRAMEWORK_PATH =    ../../../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../../../tools/framework
+    FRAMEWORK_PATH =    ../../../../../tools/sofa-framework
 else
     FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND
 endif
@@ -80,17 +80,17 @@ zip:
 
 # reinitialize case and copies files again
 initCase: 
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py newCase
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py newCase
 
 
 upstream-links:
     # renew the upstreamLinks to cad 
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py upstreamLinks
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 
 # clone case to a new case with the next available running number 
 clone:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 
 clean-framework-mesh: 

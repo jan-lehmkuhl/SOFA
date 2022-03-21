@@ -1,5 +1,5 @@
 
-<!-- copied from tools/framework/openFoam/dummies/study-documentation.md -->
+<!-- copied from tools/sofa-framework/openFoam/dummies/study-documentation.md -->
 
 - [Task List](#task-list)
 - [Reality Description](#reality-description)

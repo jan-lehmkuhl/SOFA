@@ -10,12 +10,12 @@
             "name":             "initStudy",
             "type":             "python",
             "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
+            "program":          "${workspaceRoot}/tools/sofa-framework/src/sofa-tasks.py",
             "cwd":              "${workspaceRoot}",
             "args":             [     "initStudy"
                 , "--verbose"
                 , "--studyName",          "newStudy"
-                , "--studyStructFolder",  "tools/framework/study-structures/openfoam"
+                , "--studyStructFolder",  "tools/sofa-framework/study-structures/openfoam"
             ],
             "stopOnEntry":      true,
             "justMyCode":       true,
@@ -30,7 +30,7 @@
             "name":             "create newCase in run",
             "type":             "python",
             "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
+            "program":          "${workspaceRoot}/tools/sofa-framework/src/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/INSERT_STUDY_NAME/run",
             "args": [
                 "newCase",
@@ -49,7 +49,7 @@
             "name":             "upstreamLinks meshXXX",
             "type":             "python",
             "request":          "launch",
-            "program":          "${workspaceRoot}/tools/framework/scripts/sofa-tasks.py",
+            "program":          "${workspaceRoot}/tools/sofa-framework/src/sofa-tasks.py",
             "cwd":              "${workspaceRoot}/INSERT_STUDY_NAME/mesh/mesh001",
             "args": [
                 "upstreamLinks",

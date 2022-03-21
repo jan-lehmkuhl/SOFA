@@ -8,8 +8,8 @@
             "onlyAtCaseCreation": true
         },
         {
-            "sourcePath": "Makefile_case_mesh.mk",
-            "targetPath": "Makefile",
+            "sourcePath": "makefile_case_mesh.mk",
+            "targetPath": "makefile",
             "isSymlink": true
         },
         {

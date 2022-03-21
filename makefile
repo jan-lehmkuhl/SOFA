@@ -1,8 +1,8 @@
 
-# simulation-projects root-Makefile in ./tools/framework
+# simulation-projects root-makefile in ./tools/sofa-framework
 
 include global-make.mk
-include root-dummies/Makefile
+include root-dummies/makefile
 
 
 
@@ -63,7 +63,7 @@ clean: badMagicNumberClean
 # delete python cache files 
 #    they can disturb execution
 badMagicNumberClean:
-	find . -wholename '*/scripts/fileHandling.pyc' -delete
+	find . -wholename '*/src/fileHandling.pyc' -delete
 	find . -wholename '*/__pycache__/*.cpython-*.pyc' -delete
 
 

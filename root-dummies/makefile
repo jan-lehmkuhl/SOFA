@@ -1,13 +1,13 @@
 
-# project-root Makefile 
+# project-root makefile 
 
 
 
 # preparation
 # =============================================================================
 
-ifneq      ("$(wildcard tools/framework/global-make.mk)","")
-	include tools/framework/global-make.mk
+ifneq      ("$(wildcard tools/sofa-framework/global-make.mk)","")
+	include tools/sofa-framework/global-make.mk
 endif
 
 cfxFolder       = $(shell node -p "require('./sofa.project.json').cfxFolders[0]")
@@ -19,8 +19,8 @@ foamFolder      = $(shell node -p "require('./sofa.project.json').foamFolders[0]
 # =============================================================================
 
 installrequirements: 
-	make -C tools/framework installrequirements
-	make -C tools/framework requirementtest
+	make -C tools/sofa-framework installrequirements
+	make -C tools/sofa-framework requirementtest
 
 
 
@@ -30,22 +30,22 @@ installrequirements:
 initdocs:
 	$(mkdir) docs
 ifeq ($(OS),Windows_NT)
-	cp tools/framework/docs/dummies/Makefile docs
+	cp tools/sofa-framework/docs/dummies/makefile docs
 else
-	ln -s ../tools/framework/docs/dummies/Makefile docs/Makefile
+	ln -s ../tools/sofa-framework/docs/dummies/makefile docs/makefile
 endif
 	make -C docs init
 
 
 initstudy:
-	python3 tools/framework/scripts/sofa-tasks.py initStudy --verbose
+	python3 tools/sofa-framework/src/sofa-tasks.py initStudy --verbose
 
 
 initfoam: 
 	if [ ! -d docs ] ;                    then make initdocs    ; fi ;
 	if [ ! -d tools/openFoam-setup ];     then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
 	if [ ! -d tools/openFoam-reporting ]; then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/r_openfoam openFoam-reporting;        fi;
-	python3 tools/framework/scripts/sofa-tasks.py initFoam
+	python3 tools/sofa-framework/src/sofa-tasks.py initFoam
 
 
 

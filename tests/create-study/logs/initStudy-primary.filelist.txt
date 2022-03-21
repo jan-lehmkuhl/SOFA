@@ -5,13 +5,13 @@
 5 4.0K  run/
 3 4.0K  survey/
 1 5.0K  README.md
-1   70  sofa.study.json
+1   76  sofa.study.json
 
 ./cad:
 16K
 6 4.0K  cad001/
 3 4.0K  shared/
-1   76  Makefile -> ../../../tools/framework/study-structures/openfoam/shared/Makefile_aspect.mk
+1   81  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1   37  sofa.aspect.json
 
 ./cad/cad001:
@@ -20,8 +20,8 @@
 2 4.0K  native/
 2 4.0K  stl/
 2 4.0K  vtk/
-1   80  .gitignore -> ../../../../tools/framework/study-structures/openfoam/cad/case000/.gitignore_cad
-1   86  Makefile -> ../../../../tools/framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
+1   85  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/cad/case000/.gitignore_cad
+1   91  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/cad/case000/makefile_case_cad.mk
 1  259  sofa.cad.json
 
 ./cad/cad001/doc:
@@ -56,18 +56,18 @@
 2 4.0K  doc/
 2 4.0K  mesh001/
 4 4.0K  shared/
-1   76  Makefile -> ../../../tools/framework/study-structures/openfoam/shared/Makefile_aspect.mk
+1   81  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1   37  sofa.aspect.json
 
 ./mesh/doc:
 16K
-1   83  .gitignore -> ../../../../tools/framework/study-structures/openfoam/shared/.gitignore_aspect_docs
+1   88  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs
 1 8.9K  meshOverview.Rmd
 
 ./mesh/mesh001:
 12K
-1  81  .gitignore -> ../../../../tools/framework/study-structures/openfoam/run/case000/.gitignore_foam
-1  88  Makefile -> ../../../../tools/framework/study-structures/openfoam/mesh/case000/Makefile_case_mesh.mk
+1  86  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1  93  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
 1  20  postStates -> ../shared/postStates/
 1   0  pv.foam
 1 722  sofa.mesh.json
@@ -90,18 +90,18 @@
 2 4.0K  doc/
 2 4.0K  run001/
 4 4.0K  shared/
-1   76  Makefile -> ../../../tools/framework/study-structures/openfoam/shared/Makefile_aspect.mk
+1   81  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1   37  sofa.aspect.json
 
 ./run/doc:
 16K
-1   83  .gitignore -> ../../../../tools/framework/study-structures/openfoam/shared/.gitignore_aspect_docs
+1   88  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs
 1 9.1K  runOverview.Rmd
 
 ./run/run001:
 12K
-1  81  .gitignore -> ../../../../tools/framework/study-structures/openfoam/run/case000/.gitignore_foam
-1  86  Makefile -> ../../../../tools/framework/study-structures/openfoam/run/case000/Makefile_case_run.mk
+1  86  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1  91  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 1  20  postStates -> ../shared/postStates/
 1   0  pv.foam
 1 787  sofa.run.json
@@ -122,11 +122,11 @@
 ./survey:
 12K
 2 4.0K  survey001/
-1   76  Makefile -> ../../../tools/framework/study-structures/openfoam/shared/Makefile_aspect.mk
+1   81  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1   37  sofa.aspect.json
 
 ./survey/survey001:
 12K
-1  81  .gitignore -> ../../../../tools/framework/study-structures/openfoam/run/case000/.gitignore_foam
-1  92  Makefile -> ../../../../tools/framework/study-structures/openfoam/survey/case000/Makefile_case_survey.mk
+1  86  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1  97  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
 1 301  survey.json

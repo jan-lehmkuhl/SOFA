@@ -1,14 +1,14 @@
-# Makefile copied from ./tools/framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
+# makefile copied from ./tools/sofa-framework/study-structures/openfoam/cad/case000/makefile_case_cad.mk
 
 
 ifneq      ("$(wildcard ../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../tools/framework
+    FRAMEWORK_PATH =    ../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../tools/framework
+    FRAMEWORK_PATH =    ../../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../../tools/framework
+    FRAMEWORK_PATH =    ../../../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../../../tools/framework
+    FRAMEWORK_PATH =    ../../../../../tools/sofa-framework
 else
     FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND
 endif
@@ -54,7 +54,7 @@ clean: clean-freecad-output clean-vtk
 
 # clone case to a new case with the next available running number 
 clone:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py clone
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 clean-upstream-included: clean
 

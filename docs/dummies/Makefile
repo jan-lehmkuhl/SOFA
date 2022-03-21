@@ -1,11 +1,11 @@
 
-# docs Makefile
-# copied from ../tools/framework/docs/dummies/Makefile 
+# docs makefile
+# copied from ../tools/sofa-framework/docs/dummies/makefile 
 
-include ../tools/framework/global-make.mk
+include ../tools/sofa-framework/global-make.mk
 
 init: folderstructure
-	$(copy)  ../tools/framework/docs/dummies/main-project-readme.md   ../README.md
+	$(copy)  ../tools/sofa-framework/docs/dummies/main-project-readme.md   ../README.md
 
 folderstructure: 
 	for folder in             \

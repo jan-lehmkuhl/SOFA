@@ -15,9 +15,9 @@ tests: clean delete-logs primary-init re-init
 primary-init: clean
 	make run-init
 	mv logs/initStudy-tmp.log                     logs/initStudy-primary.log
-	@python3 ../../scripts/testing/isGitClean.py  logs/initStudy-primary.log
+	@python3 ../../src/testing/isGitClean.py  logs/initStudy-primary.log
 	cd dummy; ${listcontent}                 > ../logs/initStudy-primary.filelist.txt
-	@python3 ../../scripts/testing/isGitClean.py  logs/initStudy-primary.filelist.txt
+	@python3 ../../src/testing/isGitClean.py  logs/initStudy-primary.filelist.txt
 	@echo "primary-init test completed"
 
 
@@ -43,12 +43,12 @@ run-init:
 	git checkout .gitignore
 
 run-single:
-	python3 ../tools/framework/scripts/sofa-tasks.py   \
+	python3 ../tools/sofa-framework/src/sofa-tasks.py   \
 			initStudy   \
 			--verbose   \
 			--no-absolute-path   \
 			--studyName  create-study/dummy   \
-			--studyStructFolder tools/framework/study-structures/openfoam   \
+			--studyStructFolder tools/sofa-framework/study-structures/openfoam   \
 		> logs/initStudy-tmp.log
 	@echo "finished run-single"
 

@@ -20,7 +20,7 @@ import sys
 
 # add additional path for import
 # -------------------------------------------------------------------
-# sys.path.insert(1, './tools/framework/openFoam/python') 
+# sys.path.insert(1, './tools/sofa-framework/openFoam/python') 
 
 
 # load functions

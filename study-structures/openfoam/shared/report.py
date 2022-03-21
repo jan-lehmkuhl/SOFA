@@ -16,7 +16,7 @@ import subprocess
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, file_path ) 
-sys.path.insert(1, os.path.realpath( file_path +'/../../../scripts' ) ) 
+sys.path.insert(1, os.path.realpath( file_path +'/../../../src' ) ) 
 
 from case import Case
 

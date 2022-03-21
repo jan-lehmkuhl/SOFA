@@ -7,8 +7,8 @@
             "onlyAtCaseCreation": true
         },
         {
-            "sourcePath": "Makefile_case_run.mk",
-            "targetPath": "Makefile",
+            "sourcePath": "makefile_case_run.mk",
+            "targetPath": "makefile",
             "isSymlink": true
         },
         {

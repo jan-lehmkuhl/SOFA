@@ -1,14 +1,14 @@
-# Makefile copied from ./tools/framework/openFoam/dummies/makefiles/Makefile_aspect.mk
+# makefile copied from ./tools/sofa-framework/openFoam/dummies/makefiles/makefile_aspect.mk
 
 
 ifneq      ("$(wildcard ../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../tools/framework
+    FRAMEWORK_PATH =    ../tools/sofa-framework
 else ifneq ("$(wildcard ../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../tools/framework
+    FRAMEWORK_PATH =    ../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../tools/framework
+    FRAMEWORK_PATH =    ../../../tools/sofa-framework
 else ifneq ("$(wildcard ../../../../sofa.project.json)","")
-    FRAMEWORK_PATH =    ../../../../tools/framework
+    FRAMEWORK_PATH =    ../../../../tools/sofa-framework
 else
     FRAMEWORK_PATH = ERROR_NO_PROJECT_JSON_FOUND
 endif
@@ -30,7 +30,7 @@ default:
 
 newCase:
     # create a new case with the next available running number
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py newCase
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py newCase
 
 
 all-cases:
@@ -74,11 +74,11 @@ all-reports:
 	make show-overview-report
 
 overview-report:
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py overview
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py overview
 
 all-case-reports:
     # update all case reports to newest version and potentially run report generation
-	python3 ${FRAMEWORK_PATH}/scripts/sofa-tasks.py updateAllReports
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py updateAllReports
 
 
 rstudio:

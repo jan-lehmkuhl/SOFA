@@ -14,4 +14,4 @@ copyLaunchJsonToProject:
 
 
 linkLaunchJsonInProject:
-	cd ../../../../.vscode ; ln -s  ../tools/framework/debug/vscode/launch.json  .
+	cd ../../../../.vscode ; ln -s  ../tools/sofa-framework/debug/vscode/launch.json  .
