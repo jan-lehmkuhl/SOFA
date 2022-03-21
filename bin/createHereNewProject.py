@@ -34,10 +34,14 @@ os.system("git add .gitattributes")
 
 # alter ./.git/config
 # -----------------------------------------------------------------------------
-configfile=open("./.git/config", "a+")
-appendfile=open("./tools/framework/root-dummies/gitconfig-addition", "r")
-appendstring=appendfile.read()
-configfile.write("\n"+appendstring)
+if os.path.exists("./.git/config"):
+    configfile=open("./.git/config", "a+")
+    appendfile=open("./tools/framework/root-dummies/gitconfig-addition", "r")
+    appendstring=appendfile.read()
+    configfile.write("\n"+appendstring)
+else: 
+    pass # we are in a repository used as submodule
+
 
 # docs
 # -----------------------------------------------------------------------------
@@ -51,4 +55,4 @@ if not os.path.exists("./docs"):
 # first git commit
 # =================================================================================================
 
-os.system('git commit -m "[base] #INIT files"')
+os.system('git commit -m "[sofa-framework] INIT basic files and submodules"')
