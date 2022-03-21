@@ -1,5 +1,5 @@
 
-# project-root Makefile 
+# project-root makefile 
 
 
 
@@ -30,9 +30,9 @@ installrequirements:
 initdocs:
 	$(mkdir) docs
 ifeq ($(OS),Windows_NT)
-	cp tools/sofa-framework/docs/dummies/Makefile docs
+	cp tools/sofa-framework/docs/dummies/makefile docs
 else
-	ln -s ../tools/sofa-framework/docs/dummies/Makefile docs/Makefile
+	ln -s ../tools/sofa-framework/docs/dummies/makefile docs/makefile
 endif
 	make -C docs init
 

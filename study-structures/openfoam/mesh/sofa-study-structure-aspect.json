@@ -1,8 +1,8 @@
 {
     "files": [
         {
-            "sourcePath": "../shared/Makefile_aspect.mk",
-            "targetPath": "Makefile",
+            "sourcePath": "../shared/makefile_aspect.mk",
+            "targetPath": "makefile",
             "isSymlink": true
         },
         {

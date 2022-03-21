@@ -1,6 +1,6 @@
 
-# docs Makefile
-# copied from ../tools/sofa-framework/docs/dummies/Makefile 
+# docs makefile
+# copied from ../tools/sofa-framework/docs/dummies/makefile 
 
 include ../tools/sofa-framework/global-make.mk
 

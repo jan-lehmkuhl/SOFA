@@ -22,11 +22,11 @@ dirpath = os.getcwd()
 
 # copy dummy files
 # -----------------------------------------------------------------------------
-shutil.copyfile( dirpath +"/tools/sofa-framework/root-dummies/Makefile"      , dirpath +"/Makefile" )
+shutil.copyfile( dirpath +"/tools/sofa-framework/root-dummies/makefile"      , dirpath +"/makefile" )
 shutil.copyfile( dirpath +"/tools/sofa-framework/root-dummies/sofa.project.json"  , dirpath +"/sofa.project.json" )
 shutil.copyfile( dirpath +"/tools/sofa-framework/root-dummies/.gitignore"    , dirpath +"/.gitignore" )
 shutil.copyfile( dirpath +"/tools/sofa-framework/root-dummies/.gitattributes", dirpath +"/.gitattributes" )
-os.system("git add Makefile")
+os.system("git add makefile")
 os.system("git add sofa.project.json")
 os.system("git add .gitignore")
 os.system("git add .gitattributes")
@@ -48,7 +48,7 @@ else:
 if not os.path.exists("./docs"):
     os.system("make initdocs")
     os.system("git add README.md")
-    os.system("git add docs/Makefile")
+    os.system("git add docs/makefile")
 
 
 

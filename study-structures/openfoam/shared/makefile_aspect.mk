@@ -1,4 +1,4 @@
-# Makefile copied from ./tools/sofa-framework/openFoam/dummies/makefiles/Makefile_aspect.mk
+# makefile copied from ./tools/sofa-framework/openFoam/dummies/makefiles/makefile_aspect.mk
 
 
 ifneq      ("$(wildcard ../sofa.project.json)","")

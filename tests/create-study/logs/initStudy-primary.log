@@ -14,7 +14,7 @@ Copying file to      /create-study/dummy/sofa.study.json 	 from /tools/sofa-fram
 run through aspect:    		 >>>  cad  <<<
 Creating folder      /create-study/dummy/cad
 Creating folder      /create-study/dummy/cad/shared/postStates
-Creating link to     /create-study/dummy/cad/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/cad/../shared/Makefile_aspect.mk
+Creating link to     /create-study/dummy/cad/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/cad/../shared/makefile_aspect.mk
 Copying file to      /create-study/dummy/cad/sofa.aspect.json 	 from /tools/sofa-framework/study-structures/openfoam/shared/sofa.aspect.json
 start case constructor
 creating case:         		  >>  cad001  <<
@@ -25,12 +25,12 @@ Creating folder      /create-study/dummy/cad/cad001/vtk
 Creating folder      /create-study/dummy/cad/cad001/doc/drafts
 Creating folder      /create-study/dummy/cad/cad001/doc/cadPics
 Copying file to      /create-study/dummy/cad/cad001/sofa.cad.json 	 from /tools/sofa-framework/study-structures/openfoam/cad/case000/cad.json
-Creating link to     /create-study/dummy/cad/cad001/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
+Creating link to     /create-study/dummy/cad/cad001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/cad/case000/makefile_case_cad.mk
 Creating link to     /create-study/dummy/cad/cad001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/cad/case000/.gitignore_cad
 run through aspect:    		 >>>  mesh  <<<
 Creating folder      /create-study/dummy/mesh
 Creating folder      /create-study/dummy/mesh/shared/postStates
-Creating link to     /create-study/dummy/mesh/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/../shared/Makefile_aspect.mk
+Creating link to     /create-study/dummy/mesh/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/../shared/makefile_aspect.mk
 Copying file to      /create-study/dummy/mesh/sofa.aspect.json 	 from /tools/sofa-framework/study-structures/openfoam/shared/sofa.aspect.json
 missing parent folder of link:  /create-study/dummy/mesh/doc/.gitignore
 Creating folder      /create-study/dummy/mesh/doc
@@ -43,14 +43,14 @@ start case constructor
 creating case:         		  >>  mesh001  <<
 Creating folder      /create-study/dummy/mesh/mesh001
 Copying file to      /create-study/dummy/mesh/mesh001/sofa.mesh.json 	 from /tools/sofa-framework/study-structures/openfoam/mesh/case000/mesh.json
-Creating link to     /create-study/dummy/mesh/mesh001/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/Makefile_case_mesh.mk
+Creating link to     /create-study/dummy/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
 Creating link to     /create-study/dummy/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
 Copying file to      /create-study/dummy/mesh/mesh001/pv.foam 	 from /tools/sofa-framework/study-structures/openfoam/shared/empty-file
 Creating link to     /postStates 		 with pointer to   /../shared/postStates
 run through aspect:    		 >>>  run  <<<
 Creating folder      /create-study/dummy/run
 Creating folder      /create-study/dummy/run/shared/postStates
-Creating link to     /create-study/dummy/run/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/../shared/Makefile_aspect.mk
+Creating link to     /create-study/dummy/run/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/../shared/makefile_aspect.mk
 Copying file to      /create-study/dummy/run/sofa.aspect.json 	 from /tools/sofa-framework/study-structures/openfoam/shared/sofa.aspect.json
 missing parent folder of link:  /create-study/dummy/run/doc/.gitignore
 Creating folder      /create-study/dummy/run/doc
@@ -63,19 +63,19 @@ start case constructor
 creating case:         		  >>  run001  <<
 Creating folder      /create-study/dummy/run/run001
 Copying file to      /create-study/dummy/run/run001/sofa.run.json 	 from /tools/sofa-framework/study-structures/openfoam/run/case000/run.json
-Creating link to     /create-study/dummy/run/run001/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/Makefile_case_run.mk
+Creating link to     /create-study/dummy/run/run001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 Creating link to     /create-study/dummy/run/run001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 Copying file to      /create-study/dummy/run/run001/pv.foam 	 from /tools/sofa-framework/study-structures/openfoam/shared/empty-file
 Creating link to     /postStates 		 with pointer to   /../shared/postStates
 run through aspect:    		 >>>  survey  <<<
 Creating folder      /create-study/dummy/survey
-Creating link to     /create-study/dummy/survey/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/../shared/Makefile_aspect.mk
+Creating link to     /create-study/dummy/survey/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/../shared/makefile_aspect.mk
 Copying file to      /create-study/dummy/survey/sofa.aspect.json 	 from /tools/sofa-framework/study-structures/openfoam/shared/sofa.aspect.json
 start case constructor
 creating case:         		  >>  survey001  <<
 Creating folder      /create-study/dummy/survey/survey001
 Copying file to      /create-study/dummy/survey/survey001/survey.json 	 from /tools/sofa-framework/study-structures/openfoam/survey/case000/survey.json
-Creating link to     /create-study/dummy/survey/survey001/Makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/Makefile_case_survey.mk
+Creating link to     /create-study/dummy/survey/survey001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
 Creating link to     /create-study/dummy/survey/survey001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/../../run/case000/.gitignore_foam
 completed structure creation and staging of:   create-study/dummy
 

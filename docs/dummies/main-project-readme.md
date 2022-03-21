@@ -1,6 +1,6 @@
 
 <!-- main project readme -->
-<!-- copied from ../tools/sofa-framework/docs/dummies/Makefile  -->
+<!-- copied from ../tools/sofa-framework/docs/dummies/makefile  -->
 
 
 

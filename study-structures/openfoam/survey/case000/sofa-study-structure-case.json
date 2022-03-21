@@ -7,8 +7,8 @@
             "onlyAtCaseCreation": true
         },
         {
-            "sourcePath": "Makefile_case_survey.mk",
-            "targetPath": "Makefile",
+            "sourcePath": "makefile_case_survey.mk",
+            "targetPath": "makefile",
             "isSymlink": true
         },
         {

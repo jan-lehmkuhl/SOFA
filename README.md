@@ -92,7 +92,7 @@ Usage
 ===================================================================================================
 
 The main idea of the SOFA framework is, that every information you need for a specific task in the simulation project is local available in the associated sub-folder and accessible by your text editor.  
-Therefore the needed/main information ist stored in a documentation file, a Makefile and a json-file. In addition there are subfolders with program specific files in lower folder levels.
+Therefore the needed/main information ist stored in a documentation file, a makefile and a json-file. In addition there are subfolders with program specific files in lower folder levels.
 
 
 documentation files (*.md)
@@ -102,7 +102,8 @@ The documentation file should only contain the information, which is needed on a
 
 Makefiles
 ---------------------------------------------------------------------------------------------------
-The Makefiles contain the actions you can do as Makefile-Targets. Maybe they will lead you only to deeper folders.
+The makefiles contain the actions you can do as makefile-targets. 
+Maybe they will lead you only to deeper folders.
 
 
 json-files

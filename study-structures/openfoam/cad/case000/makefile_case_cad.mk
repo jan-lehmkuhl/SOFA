@@ -1,4 +1,4 @@
-# Makefile copied from ./tools/sofa-framework/study-structures/openfoam/cad/case000/Makefile_case_cad.mk
+# makefile copied from ./tools/sofa-framework/study-structures/openfoam/cad/case000/makefile_case_cad.mk
 
 
 ifneq      ("$(wildcard ../../sofa.project.json)","")
