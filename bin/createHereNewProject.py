@@ -7,14 +7,18 @@ import shutil
 # init repository
 # =================================================================================================
 
-os.system("git init")
-os.system("git submodule add git@gitlab.com:sofa-framework/core.git tools/framework ")
+if not os.path.exists(".git"):
+    os.system("git init")
+if not os.path.exists("tools/framework"):
+    os.system("git submodule add git@gitlab.com:sofa-framework/core.git tools/framework ")
+
 
 
 # copy first files
 # =================================================================================================
 dirpath = os.getcwd()
 # print("current directory is : " + dirpath)
+
 
 # copy dummy files
 # -----------------------------------------------------------------------------
@@ -27,6 +31,7 @@ os.system("git add sofa.project.json")
 os.system("git add .gitignore")
 os.system("git add .gitattributes")
 
+
 # alter ./.git/config
 # -----------------------------------------------------------------------------
 configfile=open("./.git/config", "a+")
@@ -36,9 +41,11 @@ configfile.write("\n"+appendstring)
 
 # docs
 # -----------------------------------------------------------------------------
-os.system("make initdocs")
-os.system("git add README.md")
-os.system("git add docs/Makefile")
+if not os.path.exists("./docs"):
+    os.system("make initdocs")
+    os.system("git add README.md")
+    os.system("git add docs/Makefile")
+
 
 
 # first git commit
