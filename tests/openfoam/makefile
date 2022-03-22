@@ -12,7 +12,7 @@ include ../../makefile.global.mk
 #   Main
 # ==========================================================
 
-tests: framework-chain
+tests: clean framework-chain
 	@echo "finished tests for openfoam"
 
 
@@ -57,6 +57,7 @@ mesh-overview:
 # ==========================================================
 
 clean: 
+	rm -f logs/*
 	make -C cad    clean-cases
 	make -C mesh   clean-cases
 	make -C run    clean-cases
