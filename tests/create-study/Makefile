@@ -1,13 +1,16 @@
 
+# makefile to test creating a new study from scratch
+
+
 SHELL := '/bin/bash'
 listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'   | sed -e 's/,/./g'
+.PHONY: $(shell sed -n -e '/^$$/ { n ; /^[^ .\#][^ ]*:/ { s/:.*$$// ; p ; } ; }' $(MAKEFILE_LIST))
 
 
 
 #   Main
 # ==========================================================
 
-.PHONY: tests
 tests: clean delete-logs primary-init re-init
 	@echo "finished tests for create-study"
 
