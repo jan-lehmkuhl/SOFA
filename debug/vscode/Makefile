@@ -2,7 +2,7 @@
 # preparation
 # =============================================================================
 
-include ../../global-make.mk
+include ../../makefile.global.mk
 
 
 # targets

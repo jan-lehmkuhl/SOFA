@@ -1,7 +1,7 @@
 
 # simulation-projects root-makefile in ./tools/sofa-framework
 
-include global-make.mk
+include makefile.global.mk
 include root-dummies/makefile
 
 

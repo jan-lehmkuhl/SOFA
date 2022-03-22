@@ -3,7 +3,7 @@
 
 
 SHELL := '/bin/bash'
-include ../../global-make.mk
+include ../../makefile.global.mk
 
 .PHONY: $(shell sed -n -e '/^$$/ { n ; /^[^ .\#][^ ]*:/ { s/:.*$$// ; p ; } ; }' $(MAKEFILE_LIST))
 
