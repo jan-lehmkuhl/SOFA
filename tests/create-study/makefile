@@ -3,7 +3,8 @@
 
 
 SHELL := '/bin/bash'
-listcontent = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'   | sed -e 's/,/./g'
+include ../../global-make.mk
+
 .PHONY: $(shell sed -n -e '/^$$/ { n ; /^[^ .\#][^ ]*:/ { s/:.*$$// ; p ; } ; }' $(MAKEFILE_LIST))
 
 
@@ -17,9 +18,9 @@ tests: clean delete-logs primary-init re-init
 
 primary-init: clean
 	make run-init
-	mv logs/initStudy-tmp.log                     logs/initStudy-primary.log
+	mv logs/initStudy-tmp.log                 logs/initStudy-primary.log
 	@python3 ../../src/testing/isGitClean.py  logs/initStudy-primary.log
-	cd dummy; ${listcontent}                 > ../logs/initStudy-primary.filelist.txt
+	@cd dummy; ${list_content}           > ../logs/initStudy-primary.filelist.txt
 	@python3 ../../src/testing/isGitClean.py  logs/initStudy-primary.filelist.txt
 	@echo "primary-init test completed"
 

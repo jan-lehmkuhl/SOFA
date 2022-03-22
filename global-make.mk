@@ -21,3 +21,9 @@ else
 
 endif
 
+
+#   testing helpers
+# ===================================================================
+
+list_content = ls --almost-all -g --no-group --time-style='+' --human-readable --group-directories-first --classify --recursive   | sed -re 's/^[^ ]* //'   | sed -e 's/,/./g'
+remove_full_path_with_sed = sed --in-place --regexp-extended --expression "s/(make.*'\/)(.*)(tests.*)/\1\3/g"
