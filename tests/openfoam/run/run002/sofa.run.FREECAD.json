@@ -1,0 +1,30 @@
+{
+    "name"                  :   "",
+    "description"           :   "",
+
+    "buildSettings" : {
+        "meshLink"          :   "mesh002",
+
+        "solver"            :   "",
+        "turbulenceModel"   :   "",
+
+        "dynamicMesh"       :   "False",
+        "porousZone"        :   "False",
+
+        "paraview"          :   "../shared/postStates/RUN.pvsm",
+        "report"            :   "runReport01.Rmd"
+    },
+
+    "runSettings" : {
+        "nCores"            :   "",
+
+        "renumberMesh"      :   "True",
+        "potentialFoam"     :   "True",
+        "solver"            :   "True",
+        "reconstructPar"    :   "True",
+        "foamLog"           :   "True",
+
+        "report"            :   "True"
+    }
+    
+}
