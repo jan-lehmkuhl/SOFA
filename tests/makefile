@@ -13,3 +13,6 @@ pipeline-tests:
 	@echo ""
 	@echo "*** pipeline tests completed ***"
 	@echo ""
+
+
+include makefile.project.mk
