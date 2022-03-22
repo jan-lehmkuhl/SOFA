@@ -1,0 +1,1737 @@
+make[1]: Entering directory '/tests/openfoam/mesh/mesh002'
+python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
+
+*** update Upstream-Links in  mesh002  ***
+Skip existing folder      /openfoam/mesh/mesh002
+Skip existing file        /openfoam/mesh/mesh002/pv.foam
+Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+if [ -f "Allmesh" ] ; then                               \
+	make mesh-allmesh                                  ; \
+else                                                     \
+	make frameworkmeshing                              ; \
+	make finalizeMesh                                  ; \
+fi ;
+make[2]: Entering directory '/tests/openfoam/mesh/mesh002'
+./Allmesh                                       
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 7-3bcbaf946ae9
+Exec   : blockMesh
+Date   : Mar 22 2022
+Time   : xx:xx:xx
+Host   : "sandy"
+PID    : xxxxxx
+I/O    : uncollated
+Case   : /home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Creating block mesh from
+    "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/system/blockMeshDict"
+Creating block edges
+No non-planar block faces defined
+Creating topology blocks
+Creating topology patches
+
+Creating block mesh topology
+--> FOAM Warning : 
+    From function Foam::polyMesh::polyMesh(const Foam::IOobject&, Foam::pointField&&, const cellShapeList&, const faceListList&, const wordList&, const Foam::PtrList<Foam::dictionary>&, const Foam::word&, const Foam::word&, bool)
+    in file meshes/polyMesh/polyMeshFromShapeMesh.C at line 873
+    Found 6 undefined faces in mesh; adding to default patch.
+
+Check topology
+
+	Basic statistics
+		Number of internal faces : 0
+		Number of boundary faces : 6
+		Number of defined boundary faces : 6
+		Number of undefined boundary faces : 0
+	Checking patch -> block consistency
+
+Creating block offsets
+Creating merge list .
+
+Creating polyMesh from blockMesh
+Creating patches
+Creating cells
+Creating points with scale 1
+    Block 0 cell size :
+        i : 0.00942857142857144
+        j : 0.00977683359954875 .. 0.00977683359954873
+        k : 0.00967843694183479 .. 0.0096784369418348
+
+There are no merge patch pairs edges
+
+Writing polyMesh
+----------------
+Mesh Information
+----------------
+  boundingBox: (-0.099 -0.049 -0.424000151154176) (0.099 0.273635508785109 0.0986354437049027)
+  nPoints: 41140
+  nCells: 37422
+  nFaces: 115875
+  nInternalFaces: 108657
+----------------
+Patches
+----------------
+  patch 0 (start: 108657 size: 7218) name: defaultFaces
+
+End
+
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 7-3bcbaf946ae9
+Exec   : surfaceFeatureExtract
+Date   : Mar 22 2022
+Time   : xx:xx:xx
+Host   : "sandy"
+PID    : xxxxxx
+I/O    : uncollated
+Case   : /home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Reading surfaceFeatureExtractDict
+
+Surface            : "Body001_Geometry.stl"
+
+
+Feature line extraction is only valid on closed manifold surfaces.
+Statistics:
+Triangles    : 11258
+Vertices     : 5631
+Bounding Box : (-0.0500000007450581 -1.09999999869629e-17 -0.375000149011612) (0.0500000007450581 0.22500005364418 0.0500000007450581)
+
+
+Constructing feature set from included angle 150
+Selecting edges purely based on geometric tests: no
+
+Initial feature set:
+    feature points : 0
+    feature edges  : 400
+    of which
+        region edges   : 400
+        external edges : 0
+        internal edges : 0
+
+
+Final feature set:
+    points : 400
+    of which
+        convex             : 0
+        concave            : 0
+        mixed              : 0
+        non-feature        : 400
+    edges  : 400
+    of which
+        external edges     : 236
+        internal edges     : 143
+        flat edges         : 21
+        open edges         : 0
+        multiply connected : 0
+
+Writing extendedFeatureEdgeMesh to "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
+
+Writing featureEdgeMesh to "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/constant/triSurface/Body001_Geometry.eMesh"
+
+ExecutionTime = x.xx s  ClockTime = x.xx s
+
+End
+
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 7-3bcbaf946ae9
+Exec   : snappyHexMesh -overwrite
+Date   : Mar 22 2022
+Time   : xx:xx:xx
+Host   : "sandy"
+PID    : xxxxxx
+I/O    : uncollated
+Case   : /home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Read mesh in = x.xx s
+
+Overall mesh bounding box  : (-0.099 -0.049 -0.424000151154176) (0.099 0.273635508785109 0.0986354437049027)
+Relative tolerance         : 1e-06
+Absolute matching distance : 6.4532599245864e-07
+
+Reading refinement surfaces.
+Read refinement surfaces in = x.xx s
+
+Reading refinement shells.
+Read refinement shells in = x.xx s
+
+Setting refinement level of surface to be consistent with shells.
+Checked shell refinement in = x.xx s
+
+Reading features.
+Read edgeMesh Body001_Geometry.eMesh
+    points      : 400
+    edges       : 400
+    boundingBox : (-0.0500000007450581 -1.09999999869629e-17 -0.375000149011612) (0.0500000007450581 0.22500005364418 0.0500000007450581)
+
+Refinement level according to distance to "Body001_Geometry.eMesh" (400 points, 400 edges).
+    level 0 for all cells within 0 metre.
+Read features in = x.xx s
+
+
+Determining initial surface intersections
+-----------------------------------------
+
+Edge intersection testing:
+    Number of edges             : 115875
+    Number of edges to retest   : 115875
+    Number of intersected edges : 2504
+Calculated surface intersections in = x.xx s
+
+Initial mesh : cells:37422  faces:115875  points:41140
+Cells per refinement level:
+    0	37422
+
+Adding patches for surface regions
+----------------------------------
+
+Patch Type                Region                        
+----- ----                ------                        
+Body001_Geometry:
+
+1     wall                face0                         
+2     wall                face1                         
+3     wall                face2                         
+4     wall                face3                         
+5     wall                face4                         
+
+Added patches in = x.xx s
+
+ Foam::decompositionMethod::New 
+{
+    method          none;
+    numberOfSubdomains 1;
+}
+
+Selecting decompositionMethod none
+Layer thickness specified as final layer and expansion ratio.
+
+Refinement phase
+----------------
+
+Found point (0 0 0) in cell 29914 on processor 0
+
+Feature refinement iteration 0
+------------------------------
+
+Marked for refinement due to explicit features             : 0 cells.
+Determined cells to refine in = x.xx s
+Selected for feature refinement : 0 cells (out of 37422)
+Stopping refining since too few cells selected.
+
+
+Surface refinement iteration 0
+------------------------------
+
+Marked for refinement due to surface intersection          : 0 cells.
+Determined cells to refine in = x.xx s
+Selected for refinement : 0 cells (out of 37422)
+Stopping refining since too few cells selected.
+
+
+Removing mesh beyond surface intersections
+------------------------------------------
+
+Found point (0 0 0) in global region 1 out of 2 regions.
+Keeping all cells in region 1 containing point (0 0 0)
+Selected for keeping : 7447 cells.
+Edge intersection testing:
+    Number of edges             : 23917
+    Number of edges to retest   : 3152
+    Number of intersected edges : 2504
+
+Shell refinement iteration 0
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 0 cells.
+Determined cells to refine in = x.xx s
+Selected for internal refinement : 0 cells (out of 7447)
+Stopping refining since too few cells selected.
+
+
+Dangling coarse cells refinement iteration 0
+--------------------------------------------
+
+Determined cells to refine in = x.xx s
+Selected for refinement : 0 cells (out of 7447)
+Stopping refining since too few cells selected.
+
+
+Dangling coarse cells refinement iteration 0
+--------------------------------------------
+
+Determined cells to refine in = x.xx s
+Selected for refinement : 0 cells (out of 7447)
+Stopping refining since too few cells selected.
+
+
+Splitting mesh at surface intersections
+---------------------------------------
+
+Introducing baffles for 2504 faces that are intersected by the surface.
+
+Edge intersection testing:
+    Number of edges             : 26421
+    Number of edges to retest   : 14992
+    Number of intersected edges : 5008
+Created baffles in = x.xx s
+
+
+After introducing baffles : cells:7447  faces:26421  points:9108
+Cells per refinement level:
+    0	7447
+
+Introducing baffles to block off problem cells
+----------------------------------------------
+
+markFacesOnProblemCells : marked 5648 additional internal faces to be converted into baffles.
+Analyzed problem cells in = x.xx s
+
+
+Introducing baffles to delete problem cells.
+
+Edge intersection testing:
+    Number of edges             : 32069
+    Number of edges to retest   : 16980
+    Number of intersected edges : 5008
+Created baffles in = x.xx s
+
+
+After introducing baffles : cells:7447  faces:32069  points:9108
+Cells per refinement level:
+    0	7447
+
+Remove unreachable sections of mesh
+-----------------------------------
+
+Keeping all cells in region 141 containing point (0 0 0)
+Selected for keeping : 4621 cells.
+Edge intersection testing:
+    Number of edges             : 15113
+    Number of edges to retest   : 0
+    Number of intersected edges : 2496
+Split mesh in = x.xx s
+
+
+After subsetting : cells:4621  faces:15113  points:5950
+Cells per refinement level:
+    0	4621
+
+Handling cells with snap problems
+---------------------------------
+
+Introducing baffles for 2496 faces that are intersected by the surface.
+
+Edge intersection testing:
+    Number of edges             : 15113
+    Number of edges to retest   : 6806
+    Number of intersected edges : 2496
+Created baffles in = x.xx s
+
+
+After introducing baffles : cells:4621  faces:15113  points:5950
+Cells per refinement level:
+    0	4621
+
+Introducing baffles to block off problem cells
+----------------------------------------------
+
+markFacesOnProblemCells : marked 0 additional internal faces to be converted into baffles.
+Analyzed problem cells in = x.xx s
+
+
+Introducing baffles to delete problem cells.
+
+Edge intersection testing:
+    Number of edges             : 15113
+    Number of edges to retest   : 0
+    Number of intersected edges : 2496
+Created baffles in = x.xx s
+
+
+After introducing baffles : cells:4621  faces:15113  points:5950
+Cells per refinement level:
+    0	4621
+
+Remove unreachable sections of mesh
+-----------------------------------
+
+Keeping all cells in region 0 containing point (0 0 0)
+Selected for keeping : 4621 cells.
+Edge intersection testing:
+    Number of edges             : 15113
+    Number of edges to retest   : 0
+    Number of intersected edges : 2496
+Split mesh in = x.xx s
+
+
+After subsetting : cells:4621  faces:15113  points:5950
+Cells per refinement level:
+    0	4621
+
+Merge free-standing baffles
+---------------------------
+
+freeStandingBaffles : detected 0 free-standing baffles out of 0
+
+Detected free-standing baffles : 0
+Merged free-standing baffles in = x.xx s
+
+
+dupNonManifoldPoints : Found : 0 non-manifold points (out of 5950)
+Edge intersection testing:
+    Number of edges             : 15113
+    Number of edges to retest   : 0
+    Number of intersected edges : 2496
+Detected unsplittable baffles : 0
+
+Merge refined boundary faces
+----------------------------
+
+Merging 0 sets of faces.
+
+No faces merged ...
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than 0.707106781186548.
+
+No straight edges simplified and no points removed ...
+Refined mesh : cells:4621  faces:15113  points:5950
+Cells per refinement level:
+    0	4621
+Writing mesh to time constant
+Wrote mesh in = x.xx s.
+Mesh refined in = x.xx s.
+
+Morphing phase
+--------------
+
+
+Snapping to features in 10 iterations ...
+Constructing mesh displacer ...
+Using mesh parameters 
+{
+    maxNonOrtho     65;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave      80;
+    minVol          1e-13;
+    minTetQuality   -1;
+    minArea         -1;
+    minTwist        0.01;
+    minDeterminant  0.001;
+    minFaceWeight   0.05;
+    minVolRatio     0.01;
+    minTriangleTwist -1;
+    nSmoothScale    4;
+    errorReduction  0.75;
+    relaxed
+    {
+        maxNonOrtho     75;
+    }
+}
+
+
+Checking initial mesh ...
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Detected 0 illegal faces (concave, zero area or negative cell pyramid volume)
+Checked initial mesh in = x.xx s
+
+
+Smoothing patch points ...
+Smoothing iteration 0
+Found 0 non-manifold point(s).
+
+Scaling iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+
+Smoothing iteration 1
+Found 0 non-manifold point(s).
+
+Scaling iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+
+Smoothing iteration 2
+Found 0 non-manifold point(s).
+
+Scaling iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+
+Patch points smoothed in = x.xx s
+
+
+
+Morph iteration 0
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.0018498590414493 min:4.89280583161572e-06 max:0.00538877032381839
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 238 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 2 points
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(-0.00404217817639532 -0.00356365559406899 0) avg:(4.37293563224585e-08 -0.000149599901701609 -1.39195903290606e-05)
+     feature  : max:(0.0058922723076764 -0.00590163842306579 -0.00362638461749926) avg:(-8.3822203702154e-08 -8.78844676403291e-05 -7.87111021277643e-05)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-4.14750073429895e-06 -7.72230217432588e-07 -1.3194209726378e-05) at mesh point 4707 coord (0.0499666021615505 0.0585451695950362 -0.00693206097310479) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 1
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.00171239501625934 min:5.81333230159826e-06 max:0.00521192243751566
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(0.00390952255672734 -0.00344670405940506 0) avg:(3.3342309838083e-08 -0.000135283503166031 -1.04922033158662e-05)
+     feature  : max:(0.0058333071142698 -0.00584267187335316 -0.00326374536323376) avg:(-7.40737687971952e-08 -8.84962250089035e-05 -7.49977057866394e-05)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-1.71323723212828e-05 -5.72097571284341e-06 -2.06269289780646e-05) at mesh point 4695 coord (0.049966318799121 0.048765944992359 -0.00694582220278934) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 2
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.00145525063321876 min:8.35069055865037e-07 max:0.00473987128853804
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(0.00355543159758851 -0.0031345312228109 0) avg:(4.81123781152366e-08 -0.000108480027669388 -4.6593963784337e-06)
+     feature  : max:(0.00559980248655492 -0.00560916314168741 -0.00261099483860339) avg:(-5.72458758518193e-08 -8.17290263621632e-05 -6.67554865845179e-05)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-4.07727518381482e-06 -6.37671613918568e-05 -2.14796510255213e-05) at mesh point 4671 coord (0.0500354469221381 0.0291636076603582 -0.00697191462091252) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 3
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.0011268343703254 min:3.25954364397833e-06 max:0.00390763062203665
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 238 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(0.00293115836687178 -0.00258416092892763 0) avg:(8.90404227266031e-08 -7.52658929225323e-05 1.60625508375718e-06)
+     feature  : max:(0.00509543057759574 -0.00510478326151387 -0.00182769425745422) avg:(-3.82401112280527e-08 -7.11323953804628e-05 -5.49745139955038e-05)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-3.89604735501644e-05 -0.000185045269111621 -1.02904163663416e-05) at mesh point 4659 coord (0.0501378665933326 0.0193290955237261 -0.00698661232728937) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 4
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.000794440806662132 min:2.01383411423547e-06 max:0.00274514100396239
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(0.00205916162511116 -0.0018153932172687 0) avg:(6.39692240407323e-08 -4.3096335256257e-05 5.86721632414458e-06)
+     feature  : max:(0.00427946746904392 -0.00428880760699618 -0.00109661356812801) avg:(-2.27236437541542e-08 -5.71689831520354e-05 -4.19861301934999e-05)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-3.22597072483972e-05 -0.000421393652032574 4.60673649614696e-06) at mesh point 3905 coord (0.0385394360780271 0.0101504066998877 -0.0327886479539627) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 5
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.000505389476157687 min:5.52941166641221e-07 max:0.00154280254663921
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(-0.000145179230893387 0.00148233300485859 0.000402307782102887) avg:(2.05345949963304e-08 -1.83832168837275e-05 6.87607254477898e-06)
+     feature  : max:(0.00320851487080672 -0.00321783862215819 -0.000548302742184537) avg:(-1.37200525649344e-08 -4.1280974027197e-05 -2.88939781419605e-05)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-0.00026649129173471 0.000153024283195236 -0.000666399965127747) at mesh point 3889 coord (-0.0143706312521112 -0.000108214691473381 -0.0373564917851897) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 6
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.000274735823353908 min:5.71564615915477e-07 max:0.000893405899848005
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(-8.40703703128371e-05 0.000858389205387916 0.000232968338604603) avg:(3.13551534041474e-09 -4.07999927779295e-06 4.95864739919937e-06)
+     feature  : max:(0.00205188691454514 -0.00206118864414612 -0.000219317606159397) avg:(-1.13605965595227e-08 -2.57342397316632e-05 -1.71435795754215e-05)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-0.000230396631533685 0.000214976974529805 -0.000587759987066808) at mesh point 3889 coord (-0.0146371225438459 4.4809591721855e-05 -0.0380228917503174) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 7
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:0.000131520647592502 min:9.35655066692083e-07 max:0.000420792920806847
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(4.61724014610967e-05 9.92882120981475e-05 0.000406296249653902) avg:(-1.37948001552238e-09 1.10170346532019e-06 1.90598736479318e-06)
+     feature  : max:(0.00104433846173407 -0.00105361499290166 -6.57931943692236e-05) avg:(-1.29966377438874e-08 -1.29116019092954e-05 -8.11355701174058e-06)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-0.000149661438553791 5.00094060343341e-05 -0.000387063131228222) at mesh point 3889 coord (-0.0148675191753796 0.00025978656625166 -0.0386106517373842) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 8
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:5.20797170941887e-05 min:8.15851135037078e-08 max:0.000488433100241571
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(0.000366379247914689 0.000323006408773974 0) avg:(-8.76546015068889e-10 1.17610338456781e-06 -2.85540433879249e-07)
+     feature  : max:(0.000373193239891455 -0.000382441706609865 -1.31579316819397e-05) avg:(-4.56791637122788e-08 -4.66413130437208e-06 -2.78769715349952e-06)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (1.29300607258436e-05 0.000141055358167833 9.24188340052246e-06) at mesh point 4127 coord (-0.0338751880922604 -0.00023442616254787 -0.0278604032567036) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+
+Morph iteration 9
+-----------------
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:1.41576908535404e-05 min:9.54219814015961e-08 max:0.000234213314850098
+Calculated surface displacement in = x.xx s
+
+
+Detecting near surfaces ...
+Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding displacement on features :
+   implicit features    : false
+   explicit features    : true
+   multi-patch features : false
+
+Detected 0 baffle edges out of 5000 edges.
+Initially selected 84 points out of 2502 for reverse attraction.
+Selected 236 points out of 2502 for reverse attraction.
+Stringing feature edges : changed 0 points
+Attraction:
+     linear   : max:(0.000175686082912775 0.000154887950221561 0) avg:(2.19141689087248e-09 1.99429489315068e-07 -7.36964689099909e-07)
+     feature  : max:(-7.38877773111034e-05 -1.63814821362668e-06 -8.82105166943939e-05) avg:(-3.65125494072311e-08 -9.73251708185564e-07 -4.47596943842507e-07)
+Feature analysis : total master points:2502 attraction to :
+    feature point   : 0
+    feature edge    : 84
+    nearest surface : 0
+    rest            : 2418
+
+--> FOAM Warning : Displacement (-7.38877773111034e-05 -1.63814821362668e-06 -8.82105166943939e-05) at mesh point 3694 coord (-0.00443531848705374 1.63814821361573e-06 -0.0496836528055122) points through the surrounding patch faces
+Smoothing displacement ...
+Iteration 0
+Iteration 10
+Iteration 20
+Iteration 30
+Iteration 40
+Iteration 50
+Iteration 60
+Iteration 70
+Iteration 80
+Iteration 90
+Displacement smoothed in = x.xx s
+
+
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Successfully moved mesh
+Moved mesh in = x.xx s
+
+
+Repatching faces according to nearest surface ...
+Repatched 0 faces in = x.xx s
+
+
+Edge intersection testing:
+    Number of edges             : 15113
+    Number of edges to retest   : 6812
+    Number of intersected edges : 2500
+Merging 826 sets of faces.
+
+Edge intersection testing:
+    Number of edges             : 14197
+    Number of edges to retest   : 3308
+    Number of intersected edges : 1584
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than 0.866025403784439.
+
+Removing 762 straight edge points ...
+
+Edge intersection testing:
+    Number of edges             : 14197
+    Number of edges to retest   : 3196
+    Number of intersected edges : 1584
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+
+Removing zero-sized patches:
+    defaultFaces type empty at position 0
+
+Snapped mesh : cells:4621  faces:14197  points:5098
+Cells per refinement level:
+    0	4621
+Writing mesh to time constant
+Wrote mesh in = x.xx s.
+Mesh snapped in = x.xx s.
+Checking final mesh ...
+Checking faces in error :
+    non-orthogonality > 65  degrees                        : 0
+    faces with face pyramid volume < 1e-13                 : 0
+    faces with face-decomposition tet quality < -1         : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.05        : 0
+    faces with volume ratio of neighbour cells < 0.01      : 0
+    faces with face twist < 0.01                           : 0
+    faces on cells with determinant < 0.001                : 0
+Finished meshing without any errors
+Finished meshing in = x.xx s.
+End
+
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 7-3bcbaf946ae9
+Exec   : surfaceToPatch constant/triSurface/Body001_Geometry.stl
+Date   : Mar 22 2022
+Time   : xx:xx:xx
+Host   : "sandy"
+PID    : xxxxxx
+I/O    : uncollated
+Case   : /home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create polyMesh for time = 0
+
+Reading surface from "constant/triSurface/Body001_Geometry.stl" ...
+Patching all boundary faces according to nearest surface triangle ...
+All boundary faces further away than 0.001 of mesh bounding box (-0.0499847733577159 -1.09498066673932e-17 -0.375000149011612) (0.0499784071584657 0.22475168216349 0.0497604799927962) will keep their patch label ...
+Before patching:
+    patch	size
+    face0	88
+    face1	280
+    face2	324
+    face3	806
+    face4	86
+
+Surface region 0 becomes boundary patch 0 with name face0
+Surface region 1 becomes boundary patch 1 with name face1
+Surface region 2 becomes boundary patch 2 with name face2
+Surface region 3 becomes boundary patch 3 with name face3
+Surface region 4 becomes boundary patch 4 with name face4
+Reusing patch face0 at 0
+Reusing patch face1 at 1
+Reusing patch face2 at 2
+Reusing patch face3 at 3
+Reusing patch face4 at 4
+Writing all 276 unmatched faces to faceSet unmatchedFaces
+Changed 0 boundary faces.
+
+End
+
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 7-3bcbaf946ae9
+Exec   : surfaceMeshTriangulate mesh_outside.stl
+Date   : Mar 22 2022
+Time   : xx:xx:xx
+Host   : "sandy"
+PID    : xxxxxx
+I/O    : uncollated
+Case   : /home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Extracting surface from boundaryMesh ...
+
+Including all processor patches.
+
+Reading mesh from time 0
+Create polyMesh for time = 0
+
+surfZone 0 : face3
+surfZone 1 : face1
+surfZone 2 : face0
+surfZone 3 : face4
+surfZone 4 : face2
+Writing merged surface to "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/mesh_outside.stl"
+End
+
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 7-3bcbaf946ae9
+Exec   : surfaceTransformPoints -scale (1000 1000 1000) mesh_outside.stl mesh_outside.stl
+Date   : Mar 22 2022
+Time   : xx:xx:xx
+Host   : "sandy"
+PID    : xxxxxx
+I/O    : uncollated
+Case   : /home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Reading surf from "mesh_outside.stl" ...
+Writing surf to "mesh_outside.stl" ...
+Scaling points by (1000 1000 1000)
+End
+
+mesh exists
+checkMesh  | tee log.checkMesh                  
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 7-3bcbaf946ae9
+Exec   : checkMesh
+Date   : Mar 22 2022
+Time   : xx:xx:xx
+Host   : "sandy"
+PID    : xxxxxx
+I/O    : uncollated
+Case   : /home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+--> FOAM Warning : 
+    From function static Foam::instantList Foam::timeSelector::select0(Foam::Time&, const Foam::argList&)
+    in file db/Time/timeSelector.C at line 269
+    No time specified or available, selecting 'constant'
+Create polyMesh for time = constant
+
+Time = constant
+
+Mesh stats
+    points:           5098
+    faces:            14197
+    internal faces:   12613
+    cells:            4621
+    faces per cell:   5.80177450768232
+    boundary patches: 5
+    point zones:      0
+    face zones:       0
+    cell zones:       0
+
+Overall number of cells of each type:
+    hexahedra:     3795
+    prisms:        692
+    wedges:        0
+    pyramids:      0
+    tet wedges:    4
+    tetrahedra:    0
+    polyhedra:     130
+    Breakdown of polyhedra by number of faces:
+        faces   number of cells
+            4   86
+            5   44
+
+Checking topology...
+    Boundary definition OK.
+    Cell to face addressing OK.
+    Point usage OK.
+    Upper triangular ordering OK.
+    Face vertices OK.
+    Number of regions: 1 (OK).
+
+Checking patch topology for multiply connected surfaces...
+                   Patch    Faces   Points                  Surface topology
+                   face0       88       96  ok (non-closed singly connected)
+                   face1      280      308  ok (non-closed singly connected)
+                   face2      324      430  ok (non-closed singly connected)
+                   face3      806      832  ok (non-closed singly connected)
+                   face4       86       92  ok (non-closed singly connected)
+
+Checking geometry...
+    Overall domain bounding box (-0.0499847733577159 -1.09498066673932e-17 -0.375000149011612) (0.0499784071584657 0.22475168216349 0.0497604799927962)
+    Mesh has 3 geometric (non-empty/wedge) directions (1 1 1)
+    Mesh has 3 solution (non-empty) directions (1 1 1)
+    Boundary openness (1.35192199750797e-16 -3.1073065182917e-17 -1.01744411490745e-16) OK.
+    Max cell openness = 2.40321553343322e-16 OK.
+    Max aspect ratio = 3.75493118548884 OK.
+    Minimum face area = 3.06931180010314e-05. Maximum face area = 0.000164636518081557.  Face area magnitudes OK.
+    Min volume = 1.86834964494071e-07. Max volume = 1.28580680886543e-06.  Total volume = 0.00402319493417503.  Cell volumes OK.
+    Mesh non-orthogonality Max: 36.8654915871679 average: 5.6774992066862
+    Non-orthogonality check OK.
+    Face pyramids OK.
+    Max skewness = 0.718962959975085 OK.
+    Coupled point location match (average 0) OK.
+
+Mesh OK.
+
+End
+
+make case-report                                 
+make[3]: Entering directory '/tests/openfoam/mesh/mesh002'
+python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
+
+*** update Upstream-Links in  mesh002  ***
+Skip existing folder      /openfoam/mesh/mesh002
+Skip existing file        /openfoam/mesh/mesh002/pv.foam
+Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
+
+R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> rmarkdown::render('doc/meshReport/meshReport.Rmd')
+  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
+   inline R code fragments
+
+  |                                                                              |....                                                                  |   6%
+label: setup (with options) 
+List of 2
+ $ echo   : logi TRUE
+ $ message: logi FALSE
+
+  |                                                                              |......                                                                |   9%
+   inline R code fragments
+
+  |                                                                              |........                                                              |  12%
+label: overview (with options) 
+List of 2
+ $ echo     : logi TRUE
+ $ out.width: chr "100%"
+
+  |                                                                              |...........                                                           |  15%
+  ordinary text without R code
+
+  |                                                                              |.............                                                         |  18%
+label: system (with options) 
+List of 2
+ $ echo     : logi TRUE
+ $ out.width: chr "100%"
+
+  |                                                                              |...............                                                       |  21%
+  ordinary text without R code
+
+  |                                                                              |.................                                                     |  24%
+label: Geometry (with options) 
+List of 3
+ $ echo     : logi TRUE
+ $ fig.cap  : chr "Geometry and dimensions of the domain"
+ $ out.width: chr "100%"
+
+  |                                                                              |...................                                                   |  27%
+  ordinary text without R code
+
+  |                                                                              |.....................                                                 |  30%
+label: Trisurface (with options) 
+List of 3
+ $ echo     : logi TRUE
+ $ fig.cap  : chr "Snapshot of the triangulated surfaces"
+ $ out.width: chr "100%"
+
+  |                                                                              |.......................                                               |  33%
+  ordinary text without R code
+
+  |                                                                              |.........................                                             |  36%
+label: Edges (with options) 
+List of 3
+ $ echo     : logi TRUE
+ $ fig.cap  : chr "Snapshot of the feature Edges"
+ $ out.width: chr "100%"
+
+  |                                                                              |............................                                          |  39%
+  ordinary text without R code
+
+  |                                                                              |..............................                                        |  42%
+label: baseCellSize (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |................................                                      |  45%
+  ordinary text without R code
+
+  |                                                                              |..................................                                    |  48%
+label: mesh-fig (with options) 
+List of 3
+ $ echo     : logi TRUE
+ $ fig.cap  : chr "Snapshot of the final mesh"
+ $ out.width: chr "100%"
+
+  |                                                                              |....................................                                  |  52%
+  ordinary text without R code
+
+  |                                                                              |......................................                                |  55%
+label: mesh-stats (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |........................................                              |  58%
+  ordinary text without R code
+
+  |                                                                              |..........................................                            |  61%
+label: cell-stats (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |.............................................                         |  64%
+  ordinary text without R code
+
+  |                                                                              |...............................................                       |  67%
+label: poly-stats (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |.................................................                     |  70%
+  ordinary text without R code
+
+  |                                                                              |...................................................                   |  73%
+label: patch-names (with options) 
+List of 3
+ $ echo     : logi TRUE
+ $ fig.cap  : chr "Names of patches in mesh"
+ $ out.width: chr "100%"
+
+  |                                                                              |.....................................................                 |  76%
+  ordinary text without R code
+
+  |                                                                              |.......................................................               |  79%
+label: patch-stats (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |.........................................................             |  82%
+  ordinary text without R code
+
+  |                                                                              |...........................................................           |  85%
+label: mesh-qual-stats (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |..............................................................        |  88%
+  ordinary text without R code
+
+  |                                                                              |................................................................      |  91%
+label: layer-gen-stats (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |..................................................................    |  94%
+  ordinary text without R code
+
+  |                                                                              |....................................................................  |  97%
+label: save data
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+/usr/bin/pandoc +RTS -K512m -RTS meshReport.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output meshReport.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --variable 'readthedown:true' --variable 'lightbox:true' --variable 'gallery:false' --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 4 --template /usr/local/lib/R/site-library/rmdformats/templates/template.html --highlight-style tango --variable theme=bootstrap --mathjax=rmdformats --include-in-header /tmpxxxx.html --variable code_folding=hide --variable code_menu=1 
+> 
+> 
+Start create case report
+make[3]: Leaving directory '/tests/openfoam/mesh/mesh002'
+make[2]: Leaving directory '/tests/openfoam/mesh/mesh002'
+make -C .. overview-report
+make[2]: Entering directory '/tests/openfoam/mesh'
+python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
+
+R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> rmarkdown::render('doc/meshOverview.Rmd')
+  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
+   inline R code fragments
+
+  |                                                                              |.....                                                                 |   7%
+label: setup (with options) 
+List of 2
+ $ echo   : logi TRUE
+ $ message: logi FALSE
+
+  |                                                                              |.......                                                               |  10%
+  ordinary text without R code
+
+  |                                                                              |..........                                                            |  14%
+label: meshDetails
+  |                                                                              |............                                                          |  17%
+  ordinary text without R code
+
+  |                                                                              |..............                                                        |  21%
+label: plot representative mesh cell size  (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |.................                                                     |  24%
+  ordinary text without R code
+
+  |                                                                              |...................                                                   |  28%
+label: plot cell count (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |......................                                                |  31%
+  ordinary text without R code
+
+  |                                                                              |........................                                              |  34%
+label: Table with mesh statistics
+  |                                                                              |...........................                                           |  38%
+  ordinary text without R code
+
+  |                                                                              |.............................                                         |  41%
+label: setup meshQuality (with options) 
+List of 2
+ $ echo   : logi TRUE
+ $ results: chr "asis"
+
+  |                                                                              |...............................                                       |  45%
+  ordinary text without R code
+
+  |                                                                              |..................................                                    |  48%
+label: plot non-orthogonality
+  |                                                                              |....................................                                  |  52%
+  ordinary text without R code
+
+  |                                                                              |.......................................                               |  55%
+label: plot skewness
+  |                                                                              |.........................................                             |  59%
+  ordinary text without R code
+
+  |                                                                              |...........................................                           |  62%
+label: plot aspect ratio
+  |                                                                              |..............................................                        |  66%
+  ordinary text without R code
+
+  |                                                                              |................................................                      |  69%
+label: plot minimal cellvolume
+  |                                                                              |...................................................                   |  72%
+  ordinary text without R code
+
+  |                                                                              |.....................................................                 |  76%
+label: setup boundaryLayer (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |........................................................              |  79%
+  ordinary text without R code
+
+  |                                                                              |..........................................................            |  83%
+label: plot No. boundray layer
+  |                                                                              |............................................................          |  86%
+  ordinary text without R code
+
+  |                                                                              |...............................................................       |  90%
+label: plot abolute boundary layer thickness
+  |                                                                              |.................................................................     |  93%
+  ordinary text without R code
+
+  |                                                                              |....................................................................  |  97%
+label: plot relative boundary layer thickness
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+/usr/bin/pandoc +RTS -K512m -RTS meshOverview.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output meshOverview.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --variable 'readthedown:true' --variable 'lightbox:true' --variable 'gallery:false' --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 4 --template /usr/local/lib/R/site-library/rmdformats/templates/template.html --highlight-style tango --variable theme=bootstrap --mathjax=rmdformats --include-in-header /tmpxxxx.html --variable code_folding=hide --variable code_menu=1 
+> 
+> 
+Skip existing folder      doc
+make[2]: Leaving directory '/tests/openfoam/mesh'
+make[1]: Leaving directory '/tests/openfoam/mesh/mesh002'

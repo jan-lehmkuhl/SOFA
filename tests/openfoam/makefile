@@ -16,7 +16,7 @@ tests: framework-chain
 	@echo "finished tests for openfoam"
 
 
-framework-chain: cad001 mesh001 mesh-overview
+framework-chain: cad001 mesh001 mesh002 mesh-overview
 	@echo "finished tests for framework-chain"
 
 
@@ -38,6 +38,13 @@ mesh001:
 	@python3 ../../src/testing/isGitClean.py    logs/mesh001-framework.log
 	@cd mesh/mesh001 ;  ${list_content} > ../../logs/mesh001-framework.files.txt
 	@python3 ../../src/testing/isGitClean.py    logs/mesh001-framework.files.txt
+
+mesh002: 
+	make -C mesh/mesh002  mesh   >              logs/mesh002-freecad.log
+	@${remove_full_path_with_sed}               logs/mesh002-freecad.log
+	@python3 ../../src/testing/isGitClean.py    logs/mesh002-freecad.log
+	@cd mesh/mesh002 ;  ${list_content} > ../../logs/mesh002-freecad.files.txt
+	@python3 ../../src/testing/isGitClean.py    logs/mesh002-freecad.files.txt
 
 
 mesh-overview:

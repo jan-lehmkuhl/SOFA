@@ -29,4 +29,10 @@ list_content = ls --almost-all -g --no-group --time-style='+' --human-readable -
 remove_full_path_with_sed = sed --in-place --regexp-extended --expression \
     "s/(make.*'\/)(.*)(tests.*)/\1\3/g; \
     s/([0-9]:[0-9]{2}:[0-9]{2}.[0-9]{6})/x:xx:xx.xxxxxx/g; \
+    s/([0-9]{2}:[0-9]{2}.[0-9]{2})/xx:xx:xx/g; \
+	s/(on )(.*)( using)/\1LocalMachine\3/g; \
+	s/(Date   : )(.*) [0-9]{2} [0-9]{4}/\1xxx xx xxxx/g; \
+	s/(Host   : )\".*\"/\1\"LocalMachine\"/g; \
+	s/(PID    : )[0-9]{7}/\1xxxxxx/g; \
+	s/( = )[0-9\.]* s/\1x.xx s/g; \
 	s/(.*\/tmp)(.*)(\.html.*)/\1xxxx\3/g"
