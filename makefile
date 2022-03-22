@@ -48,6 +48,7 @@ installrequirementsR:
 	sudo Rscript -e 'install.packages("shiny")'
 	sudo Rscript -e 'install.packages("ggplot2")'
 	sudo Rscript -e 'install.packages("devtools")'
+	sudo Rscript -e 'install.packages("fastmap")'
 
 
 
