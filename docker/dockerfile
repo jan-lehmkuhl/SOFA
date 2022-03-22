@@ -1,0 +1,17 @@
+FROM ubuntu
+
+# install std utils
+RUN apt update
+RUN apt-get install -y apt-utils
+RUN apt-get install -y software-properties-common
+RUN apt-get install -y wget
+RUN apt-get install -y gnupg
+RUN apt-get install -y vim
+RUN apt-get install -y git
+RUN apt-get install -y make
+
+# install OpenFOAM 7
+RUN sh -c "wget -O - https://dl.openfoam.org/gpg.key | apt-key add -"
+RUN add-apt-repository http://dl.openfoam.org/ubuntu
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends openfoam7
