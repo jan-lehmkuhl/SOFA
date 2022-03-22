@@ -15,4 +15,4 @@ pipeline-tests:
 	@echo ""
 
 
-include makefile.project.mk
+include ../root-dummies/makefile
