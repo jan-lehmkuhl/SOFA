@@ -6,13 +6,13 @@
 3 4.0K  doc/
 2 4.0K  log/
 2 4.0K  system/
-1   16  cad001 -> ../../cad/cad001/
-1  483  .fileStates.data
-1   83  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
-1   90  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-1   20  postStates -> ../shared/postStates/
+1 tiny  cad001 -> ../../cad/cad001/
+1 tiny  .fileStates.data
+1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+1 tiny  postStates -> ../shared/postStates/
 1    0  pv.foam
-1  672  sofa.mesh.FRAMEWORK.json
+1 tiny  sofa.mesh.FRAMEWORK.json
 
 ./1:
 4.0K
@@ -21,16 +21,16 @@
 ./1/polyMesh:
 868K
 1 1.7K  boundary
-1  702  cellLevel
-1  701  cellZones
+1 tiny  cellLevel
+1 tiny  cellZones
 1 330K  faces
-1  701  faceZones
-1  786  level0Edge
+1 tiny  faceZones
+1 tiny  level0Edge
 1  60K  neighbour
 1  71K  owner
-1  703  pointLevel
+1 tiny  pointLevel
 1 332K  points
-1  702  pointZones
+1 tiny  pointZones
 1  43K  surfaceIndex
 
 ./2:
@@ -40,16 +40,16 @@
 ./2/polyMesh:
 804K
 1 1.5K  boundary
-1  702  cellLevel
-1  701  cellZones
+1 tiny  cellLevel
+1 tiny  cellZones
 1 306K  faces
-1  701  faceZones
-1  786  level0Edge
+1 tiny  faceZones
+1 tiny  level0Edge
 1  60K  neighbour
 1  67K  owner
-1  703  pointLevel
+1 tiny  pointLevel
 1 295K  points
-1  702  pointZones
+1 tiny  pointZones
 1  41K  surfaceIndex
 
 ./constant:
@@ -66,22 +66,22 @@
 ./constant/polyMesh:
 804K
 1 1.5K  boundary
-1  702  cellLevel
-1  701  cellZones
+1 tiny  cellLevel
+1 tiny  cellZones
 1 306K  faces
-1  701  faceZones
-1  786  level0Edge
+1 tiny  faceZones
+1 tiny  level0Edge
 1  60K  neighbour
 1  67K  owner
-1  703  pointLevel
+1 tiny  pointLevel
 1 295K  points
-1  702  pointZones
+1 tiny  pointZones
 1  41K  surfaceIndex
 
 ./constant/triSurface:
 28K
 1 28K  Body001_Geometry.eMesh
-1  47  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
+1 tiny  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
 
 ./doc:
 4.0K
@@ -105,8 +105,8 @@
 32K
 1 1.4K  blockMeshDict
 1 1.3K  controlDict
-1  942  fvSchemes
-1  846  fvSolution
+1 tiny  fvSchemes
+1 tiny  fvSolution
 1 1.4K  meshQualityDict
 1 2.9K  snappyHexMeshDict
 1 1.1K  surfaceFeatureExtractDict

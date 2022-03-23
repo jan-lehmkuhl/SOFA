@@ -3,21 +3,21 @@
 5 4.0K  constant/
 3 4.0K  doc/
 2 4.0K  system/
-1  989  Allmesh*
-1   16  cad001 -> ../../cad/cad001/
-1   83  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1 tiny  Allmesh*
+1 tiny  cad001 -> ../../cad/cad001/
+1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 2.5K  log.blockMesh
-1 3.4K  log.checkMesh
+1 3.5K  log.checkMesh
 1  38K  log.snappyHexMesh
 1 2.3K  log.surfaceFeatureExtract
 1 1.4K  log.surfaceMeshTriangulate
 1 2.0K  log.surfaceToPatch
 1 1.2K  log.surfaceTransformPoints
-1   90  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
 1 581K  mesh_outside.stl
-1   20  postStates -> ../shared/postStates/
+1 tiny  postStates -> ../shared/postStates/
 1    0  pv.foam
-1  671  sofa.mesh.FC-EXPORT.json
+1 tiny  sofa.mesh.FC-EXPORT.json
 
 ./constant:
 12K
@@ -33,16 +33,16 @@
 808K
 2 4.0K  sets/
 1 1.5K  boundary
-1  709  cellLevel
-1  708  cellZones
+1 tiny  cellLevel
+1 tiny  cellZones
 1 306K  faces
-1  708  faceZones
-1  793  level0Edge
+1 tiny  faceZones
+1 tiny  level0Edge
 1  60K  neighbour
 1  67K  owner
-1  710  pointLevel
+1 tiny  pointLevel
 1 295K  points
-1  709  pointZones
+1 tiny  pointZones
 1  41K  surfaceIndex
 
 ./constant/polyMesh/sets:
@@ -52,7 +52,7 @@
 ./constant/triSurface:
 28K
 1 28K  Body001_Geometry.eMesh
-1  47  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
+1 tiny  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
 
 ./doc:
 4.0K
@@ -68,8 +68,8 @@
 28K
 1 1.4K  blockMeshDict
 1 1.2K  controlDict
-1  942  fvSchemes
-1  846  fvSolution
-1  934  meshQualityDict
+1 tiny  fvSchemes
+1 tiny  fvSolution
+1 tiny  meshQualityDict
 1 2.9K  snappyHexMeshDict
 1 1.1K  surfaceFeatureExtractDict

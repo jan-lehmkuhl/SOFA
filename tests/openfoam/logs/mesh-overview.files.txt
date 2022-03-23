@@ -1,5 +1,5 @@
 .:
-4.9M
-1   85  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs
-1 4.8M  meshOverview.html
+4.7M
+1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs
+1 4.7M  meshOverview.html
 1 8.9K  meshOverview.Rmd
