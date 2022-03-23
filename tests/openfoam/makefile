@@ -12,12 +12,16 @@ include ../../makefile.global.mk
 #   Main
 # ==========================================================
 
-tests: clean framework-chain
+tests: clean framework-chain freecad-chain mesh-overview
 	@echo "finished tests for openfoam"
 
 
-framework-chain: cad001 mesh001 mesh002 mesh-overview
+framework-chain: cad001 mesh001 run001 
 	@echo "finished tests for framework-chain"
+
+
+freecad-chain: mesh002 run002
+	@echo "finished tests for freecad-chain"
 
 
 
@@ -39,12 +43,27 @@ mesh001:
 	@cd mesh/mesh001 ;  ${list_content} > ../../logs/mesh001-framework.files.txt
 	@python3 ../../src/testing/isGitClean.py    logs/mesh001-framework.files.txt
 
+run001: 
+	make -C run/run001  run   >                 logs/run001-framework.log
+	@${remove_full_path_with_sed}               logs/run001-framework.log
+	@python3 ../../src/testing/isGitClean.py    logs/run001-framework.log
+	@cd run/run001 ;  ${list_content}   > ../../logs/run001-framework.files.txt
+	@python3 ../../src/testing/isGitClean.py    logs/run001-framework.files.txt
+
+
 mesh002: 
 	make -C mesh/mesh002  mesh   >              logs/mesh002-freecad.log
 	@${remove_full_path_with_sed}               logs/mesh002-freecad.log
 	@python3 ../../src/testing/isGitClean.py    logs/mesh002-freecad.log
 	@cd mesh/mesh002 ;  ${list_content} > ../../logs/mesh002-freecad.files.txt
 	@python3 ../../src/testing/isGitClean.py    logs/mesh002-freecad.files.txt
+
+run002: 
+	make -C run/run002  run   >                 logs/run002-freecad.log
+	@${remove_full_path_with_sed}               logs/run002-freecad.log
+	@python3 ../../src/testing/isGitClean.py    logs/run002-freecad.log
+	@cd run/run002 ;  ${list_content}   > ../../logs/run002-freecad.files.txt
+	@python3 ../../src/testing/isGitClean.py    logs/run002-freecad.files.txt
 
 
 mesh-overview:

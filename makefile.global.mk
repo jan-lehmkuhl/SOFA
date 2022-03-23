@@ -39,4 +39,5 @@ remove_full_path_with_sed = sed --in-place --regexp-extended --expression \
 	s/(Host   : )\".*\"/\1\"LocalMachine\"/g; \
 	s/(PID    : )[0-9]{7}/\1xxxxxx/g; \
 	s/( = )[0-9\.]* s/\1x.xx s/g; \
+	s/(Slaves : ).*/\1xxx/g; \
 	s/(.*\/tmp)(.*)(\.html.*)/\1xxxx\3/g"
