@@ -38,6 +38,7 @@ installrequirementsR:
 	sudo apt-get install libxml2-dev
 	sudo apt-get install libcurl4-openssl-dev
 	sudo apt-get install libgit2-dev
+	sudo apt-get install libfontconfig1-dev
 
 	# packages which can also be installed within `sudo R` shell
 	sudo Rscript -e 'install.packages("rmarkdown")'
