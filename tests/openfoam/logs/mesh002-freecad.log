@@ -22,7 +22,7 @@ make[2]: Entering directory '/tests/openfoam/mesh/mesh002'
 \*---------------------------------------------------------------------------*/
 Build  : 7-3bcbaf946ae9
 Exec   : blockMesh
-Date   : Mar 22 2022
+Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
@@ -97,7 +97,7 @@ End
 \*---------------------------------------------------------------------------*/
 Build  : 7-3bcbaf946ae9
 Exec   : surfaceFeatureExtract
-Date   : Mar 22 2022
+Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
@@ -167,7 +167,7 @@ End
 \*---------------------------------------------------------------------------*/
 Build  : 7-3bcbaf946ae9
 Exec   : snappyHexMesh -overwrite
-Date   : Mar 22 2022
+Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
@@ -1240,7 +1240,7 @@ End
 \*---------------------------------------------------------------------------*/
 Build  : 7-3bcbaf946ae9
 Exec   : surfaceToPatch constant/triSurface/Body001_Geometry.stl
-Date   : Mar 22 2022
+Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
@@ -1291,7 +1291,7 @@ End
 \*---------------------------------------------------------------------------*/
 Build  : 7-3bcbaf946ae9
 Exec   : surfaceMeshTriangulate mesh_outside.stl
-Date   : Mar 22 2022
+Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
@@ -1329,7 +1329,7 @@ End
 \*---------------------------------------------------------------------------*/
 Build  : 7-3bcbaf946ae9
 Exec   : surfaceTransformPoints -scale (1000 1000 1000) mesh_outside.stl mesh_outside.stl
-Date   : Mar 22 2022
+Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
@@ -1357,7 +1357,7 @@ checkMesh  | tee log.checkMesh
 \*---------------------------------------------------------------------------*/
 Build  : 7-3bcbaf946ae9
 Exec   : checkMesh
-Date   : Mar 22 2022
+Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
