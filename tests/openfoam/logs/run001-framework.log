@@ -1,4 +1,4 @@
-make[1]: Entering directory '/tests/openfoam/run/run001'
+make[x]: Entering directory '/tests/openfoam/run/run001'
 if [ -f "Allrun" ] ; then                                                   \
 	sed -i 's\MESHDIR=".*"\MESHDIR="./mesh001"\' Allrun         ; \
 fi
@@ -14,7 +14,7 @@ if [ -f "Allrun" ] ; then     \
 else                          \
 	make frameworkrun       ; \
 fi ;
-make[2]: Entering directory '/tests/openfoam/run/run001'
+make[x]: Entering directory '/tests/openfoam/run/run001'
 python3 ../../../tools/sofa-framework/openFoam/python/foamRun.py run
 
 ==========================================================================
@@ -33,9 +33,9 @@ Solving with OpenFoam 7 on LocalMachine using 2 cores
 Finished solving in x:xx:xx.xxxxxx
 ==========================================================================
 
-make[2]: Leaving directory '/tests/openfoam/run/run001'
+make[x]: Leaving directory '/tests/openfoam/run/run001'
 make -C .. overview-report
-make[2]: Entering directory '/tests/openfoam/run'
+make[x]: Entering directory '/tests/openfoam/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
@@ -134,5 +134,5 @@ label: yPlus
 > 
 > 
 Skip existing folder      doc
-make[2]: Leaving directory '/tests/openfoam/run'
-make[1]: Leaving directory '/tests/openfoam/run/run001'
+make[x]: Leaving directory '/tests/openfoam/run'
+make[x]: Leaving directory '/tests/openfoam/run/run001'

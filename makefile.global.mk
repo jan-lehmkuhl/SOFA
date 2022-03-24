@@ -35,6 +35,7 @@ list_content = ls --almost-all -g --no-group \
 
 remove_full_path_with_sed = sed --in-place --regexp-extended --expression \
     "s/(make.*'\/)(.*)(tests.*)/\1\3/g; \
+    s/(^make\[)[1-9](\]: )/\1x\2/g; \
     s/([0-9]:[0-9]{2}:[0-9]{2}.[0-9]{6})/x:xx:xx.xxxxxx/g; \
     s/([0-9]{2}:[0-9]{2}.[0-9]{2})/xx:xx:xx/g; \
 	s/(on )(.*)( using)/\1LocalMachine\3/g; \

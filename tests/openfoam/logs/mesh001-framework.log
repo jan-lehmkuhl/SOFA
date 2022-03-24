@@ -1,4 +1,4 @@
-make[1]: Entering directory '/tests/openfoam/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
 python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
 
 *** update Upstream-Links in  mesh001  ***
@@ -11,7 +11,7 @@ else                                                     \
 	make frameworkmeshing                              ; \
 	make finalizeMesh                                  ; \
 fi ;
-make[2]: Entering directory '/tests/openfoam/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
 python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py mesh
 decided to run surface features
 
@@ -30,8 +30,8 @@ Meshing with OpenFoam 7 on LocalMachine using 1 cores
 Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
 ==========================================================================
 
-make[2]: Leaving directory '/tests/openfoam/mesh/mesh001'
-make[2]: Entering directory '/tests/openfoam/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
 python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py finalizeMesh
 
 ==========================================================================
@@ -44,9 +44,9 @@ Finalizing mesh with OpenFoam 7 on LocalMachine using 1 cores
 Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
 ==========================================================================
 
-make[2]: Leaving directory '/tests/openfoam/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
 make -C .. overview-report
-make[2]: Entering directory '/tests/openfoam/mesh'
+make[x]: Entering directory '/tests/openfoam/mesh'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
@@ -163,5 +163,5 @@ label: plot relative boundary layer thickness
 > 
 > 
 Skip existing folder      doc
-make[2]: Leaving directory '/tests/openfoam/mesh'
-make[1]: Leaving directory '/tests/openfoam/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam/mesh'
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'

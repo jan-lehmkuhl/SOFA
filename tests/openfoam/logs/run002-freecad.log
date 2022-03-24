@@ -1,4 +1,4 @@
-make[1]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Entering directory '/tests/openfoam/run/run002'
 if [ -f "Allrun" ] ; then                                                   \
 	sed -i 's\MESHDIR=".*"\MESHDIR="./mesh002"\' Allrun         ; \
 fi
@@ -14,12 +14,12 @@ if [ -f "Allrun" ] ; then     \
 else                          \
 	make frameworkrun       ; \
 fi ;
-make[2]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Entering directory '/tests/openfoam/run/run002'
 make copy-0org-to-0
-make[3]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Entering directory '/tests/openfoam/run/run002'
 mkdir -p   0
 cp    -rf  0.org/*  0
-make[3]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam/run/run002'
 ./Allrun
 /*---------------------------------------------------------------------------*\
   =========                 |
@@ -1961,7 +1961,7 @@ End
 Finalising parallel run
 # check for existing results
 make case-report
-make[3]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Entering directory '/tests/openfoam/run/run002'
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 
 R version  x.x.x ...
@@ -1994,10 +1994,10 @@ List of 2
 
 
 Start create case report
-make[3]: Leaving directory '/tests/openfoam/run/run002'
-make[2]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam/run/run002'
 make -C .. overview-report
-make[2]: Entering directory '/tests/openfoam/run'
+make[x]: Entering directory '/tests/openfoam/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
@@ -2096,5 +2096,5 @@ label: yPlus
 > 
 > 
 Skip existing folder      doc
-make[2]: Leaving directory '/tests/openfoam/run'
-make[1]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam/run'
+make[x]: Leaving directory '/tests/openfoam/run/run002'
