@@ -33,7 +33,7 @@ list_content = ls --almost-all -g --no-group \
     | sed -re 's/^([0-9]{0,3})(\.[0-9])*([KM])/xxx\3/g' \
     | sed -re 's/([1-9] )([ 1-9]\.[0-9])([KM]  .*)/\1x.x\3/g'
 
-remove_full_path_with_sed = sed --in-place --regexp-extended --expression \
+remove_logs_variable_content = sed --in-place --regexp-extended --expression \
     "s/(make.*'\/)(.*)(tests.*)/\1\3/g; \
     s/(^make\[)[1-9](\]: )/\1x\2/g; \
     s/([0-9]:[0-9]{2}:[0-9]{2}.[0-9]{6})/x:xx:xx.xxxxxx/g; \
