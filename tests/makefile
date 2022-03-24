@@ -1,6 +1,9 @@
 
 # local test execution
-tests: pipeline-tests
+tests: pipeline-tests local-tests
+	@echo ""
+	@echo "*** local tests completed ***"
+	@echo ""
 
 
 gitlab-pipeline: 
@@ -13,6 +16,10 @@ pipeline-tests:
 	@echo ""
 	@echo "*** pipeline tests completed ***"
 	@echo ""
+
+
+local-tests: 
+	make -C openfoam
 
 
 include ../root-dummies/makefile

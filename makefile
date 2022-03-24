@@ -50,6 +50,10 @@ installrequirementsR:
 	sudo Rscript -e 'install.packages("devtools")'
 
 
+tests-local: 
+	make -C tests
+
+
 
 # project-setup
 # ===================================================================
