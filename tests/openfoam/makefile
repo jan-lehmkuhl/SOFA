@@ -43,6 +43,14 @@ mesh001:
 	@cd mesh/mesh001 ;  ${list_content} > ../../logs/mesh001-framework.files.txt
 	@python3 ../../src/testing/isGitClean.py    logs/mesh001-framework.files.txt
 
+write-mesh001-logs:
+# only to help debugging sed
+	git checkout                                logs/mesh001-framework.log
+	@${remove_full_path_with_sed}               logs/mesh001-framework.log
+	git checkout                                logs/mesh001-framework.files.txt
+	@cd mesh/mesh001 ;  ${list_content} > ../../logs/mesh001-framework.files.txt
+
+
 run001: 
 	make -C run/run001  run   >                 logs/run001-framework.log
 	@${remove_full_path_with_sed}               logs/run001-framework.log
