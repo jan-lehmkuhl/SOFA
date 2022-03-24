@@ -35,7 +35,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /sofa-framework/tests/openfoam/run/run002
+Case   : /tests/openfoam/run/run002
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -100,7 +100,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /sofa-framework/tests/openfoam/run/run002
+Case   : /tests/openfoam/run/run002
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -150,7 +150,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /sofa-framework/tests/openfoam/run/run002
+Case   : /tests/openfoam/run/run002
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -230,7 +230,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /sofa-framework/tests/openfoam/run/run002
+Case   : /tests/openfoam/run/run002
 nProcs : 2
 Slaves : xxx
 Pstream initialized with:

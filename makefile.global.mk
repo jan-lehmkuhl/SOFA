@@ -42,7 +42,7 @@ remove_full_path_with_sed = sed --in-place --regexp-extended --expression \
 	s/(Host   : )\".*\"/\1\"LocalMachine\"/g; \
 	s/(PID    : )[0-9]{4,7}/\1xxxxxx/g; \
 	s/( = )[0-9\.]* s/\1x.xx s/g; \
-	s/(Case   : )(\/.*)(\/sofa-framework.*)/\1\3/g; \
+	s/(Case   : )(\/.*)(\/tests.*)/\1\3/g; \
 	s/(Slaves : ).*/\1xxx/g; \
 	s/(.* in )([0-9][0-9\.]*) s/\1xxx s/g; \
 	s/(^R version )([0-9]\..*)/\1 x.x.x \.\.\./g; \
