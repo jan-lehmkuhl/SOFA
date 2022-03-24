@@ -1,16 +1,16 @@
 .:
 60K
-2 4.0K  0/
-2 4.0K  0.org/
-3 4.0K  100/
-2 4.0K  constant/
-3 4.0K  doc/
-2 4.0K  log/
-2 4.0K  logs/
-5 4.0K  postProcessing/
-5 4.0K  processor0/
-5 4.0K  processor1/
-2 4.0K  system/
+2 4.xK  0/
+2 4.xK  0.org/
+3 4.xK  100/
+2 4.xK  constant/
+3 4.xK  doc/
+2 4.xK  log/
+2 4.xK  logs/
+5 4.xK  postProcessing/
+5 4.xK  processor0/
+5 4.xK  processor1/
+2 4.xK  system/
 1 tiny  .fileStates.data
 1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
@@ -21,29 +21,29 @@
 
 ./0:
 20K
-1 1.4K  k
-1 1.3K  nut
-1 1.4K  omega
-1 1.2K  p
-1 1.9K  U
+1 1.xK  k
+1 1.xK  nut
+1 1.xK  omega
+1 1.xK  p
+1 1.xK  U
 
 ./0.org:
 20K
-1 1.4K  k
-1 1.3K  nut
-1 1.4K  omega
-1 1.2K  p
-1 1.9K  U
+1 1.xK  k
+1 1.xK  nut
+1 1.xK  omega
+1 1.xK  p
+1 1.xK  U
 
 ./100:
 236K
-2 4.0K  uniform/
+2 4.xK  uniform/
 1  86K  k
 1  65K  nut
 1  64K  omega
-1 1.1K  p
-1 1.3K  phi
-1 1.3K  U
+1 1.xK  p
+1 1.xK  phi
+1 1.xK  U
 
 ./100/uniform:
 4.0K
@@ -57,23 +57,23 @@
 
 ./doc:
 4.0K
-2 4.0K  runReport/
+2 4.xK  runReport/
 1 tiny  meshReport -> ../../../mesh/mesh001/doc/meshReport/
 
 ./doc/runReport:
-4.8M
-1 3.6K  run.rds
-1 4.8M  runReport.html
-1 7.2K  runReport.Rmd
+4.9M
+1 3.xK  run.rds
+1 4.xM  runReport.html
+1 7.xK  runReport.Rmd
 
 ./log:
 148K
-1 2.2K  decomposePar1.log
+1 2.xK  decomposePar1.log
 1 tiny  foamLog1.log
-1 2.2K  potentialFoam1.log
-1 1.3K  reconstructPar1.log
-1 1.9K  renumberMesh1.log
-1 8.3K  runReport.log
+1 2.xK  potentialFoam1.log
+1 1.xK  reconstructPar1.log
+1 1.xK  renumberMesh1.log
+1 8.xK  runReport.log
 1 115K  simpleFoam1.log
 
 ./logs:
@@ -83,12 +83,12 @@
 1 tiny  contGlobal_0
 1 tiny  contLocal_0
 1 tiny  executionTime_0
-1 3.2K  foamLog.awk
-1 1.6K  k_0
-1 1.7K  kFinalRes_0
+1 3.xK  foamLog.awk
+1 1.xK  k_0
+1 1.xK  kFinalRes_0
 1 tiny  kIters_0
-1 1.7K  omega_0
-1 1.8K  omegaFinalRes_0
+1 1.xK  omega_0
+1 1.xK  omegaFinalRes_0
 1 tiny  omegaIters_0
 1 tiny  p_0
 1 tiny  p_1
@@ -122,13 +122,13 @@
 
 ./postProcessing:
 12K
-3 4.0K  minMaxMagnitude/
-3 4.0K  probes/
-3 4.0K  residuals/
+3 4.xK  minMaxMagnitude/
+3 4.xK  probes/
+3 4.xK  residuals/
 
 ./postProcessing/minMaxMagnitude:
 4.0K
-2 4.0K  0/
+2 4.xK  0/
 
 ./postProcessing/minMaxMagnitude/0:
 20K
@@ -136,16 +136,16 @@
 
 ./postProcessing/probes:
 4.0K
-2 4.0K  0/
+2 4.xK  0/
 
 ./postProcessing/probes/0:
 16K
-1 5.1K  p
-1 6.3K  U
+1 5.xK  p
+1 6.xK  U
 
 ./postProcessing/residuals:
 4.0K
-2 4.0K  0/
+2 4.xK  0/
 
 ./postProcessing/residuals/0:
 12K
@@ -153,28 +153,28 @@
 
 ./processor0:
 12K
-2 4.0K  0/
-3 4.0K  100/
-3 4.0K  constant/
+2 4.xK  0/
+3 4.xK  100/
+3 4.xK  constant/
 
 ./processor0/0:
 24K
-1 1.4K  k
-1 1.8K  nut
-1 1.7K  omega
-1 1.2K  p
-1 1.4K  phi
-1 1.4K  U
+1 1.xK  k
+1 1.xK  nut
+1 1.xK  omega
+1 1.xK  p
+1 1.xK  phi
+1 1.xK  U
 
 ./processor0/100:
 136K
-2 4.0K  uniform/
+2 4.xK  uniform/
 1  45K  k
 1  35K  nut
 1  34K  omega
-1 1.2K  p
-1 1.4K  phi
-1 1.4K  U
+1 1.xK  p
+1 1.xK  phi
+1 1.xK  U
 
 ./processor0/100/uniform:
 4.0K
@@ -182,11 +182,11 @@
 
 ./processor0/constant:
 4.0K
-2 4.0K  polyMesh/
+2 4.xK  polyMesh/
 
 ./processor0/constant/polyMesh:
 420K
-1 1.8K  boundary
+1 1.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
 1  12K  cellProcAddressing
@@ -204,28 +204,28 @@
 
 ./processor1:
 12K
-2 4.0K  0/
-3 4.0K  100/
-3 4.0K  constant/
+2 4.xK  0/
+3 4.xK  100/
+3 4.xK  constant/
 
 ./processor1/0:
 24K
-1 1.4K  k
-1 1.8K  nut
-1 1.7K  omega
-1 1.2K  p
-1 1.4K  phi
-1 1.4K  U
+1 1.xK  k
+1 1.xK  nut
+1 1.xK  omega
+1 1.xK  p
+1 1.xK  phi
+1 1.xK  U
 
 ./processor1/100:
 136K
-2 4.0K  uniform/
+2 4.xK  uniform/
 1  45K  k
 1  35K  nut
 1  34K  omega
-1 1.2K  p
-1 1.4K  phi
-1 1.4K  U
+1 1.xK  p
+1 1.xK  phi
+1 1.xK  U
 
 ./processor1/100/uniform:
 4.0K
@@ -233,11 +233,11 @@
 
 ./processor1/constant:
 4.0K
-2 4.0K  polyMesh/
+2 4.xK  polyMesh/
 
 ./processor1/constant/polyMesh:
 412K
-1 1.8K  boundary
+1 1.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
 1  11K  cellProcAddressing
@@ -255,12 +255,12 @@
 
 ./system:
 36K
-1 1.1K  changeDictionaryDict
-1 1.4K  controlDict
-1 1.4K  createPatchDict
+1 1.xK  changeDictionaryDict
+1 1.xK  controlDict
+1 1.xK  createPatchDict
 1 tiny  decomposeParDict
-1 2.3K  fvSchemes
-1 2.9K  fvSolution
+1 2.xK  fvSchemes
+1 2.xK  fvSolution
 1 tiny  minMaxMagnitude
 1 tiny  probes
 1 tiny  residuals

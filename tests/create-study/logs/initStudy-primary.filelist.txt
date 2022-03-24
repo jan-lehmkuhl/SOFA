@@ -1,33 +1,33 @@
 .:
 28K
-4 4.0K  cad/
-5 4.0K  mesh/
-5 4.0K  run/
-3 4.0K  survey/
-1 5.0K  README.md
+4 4.xK  cad/
+5 4.xK  mesh/
+5 4.xK  run/
+3 4.xK  survey/
+1 5.xK  README.md
 1 tiny  sofa.study.json
 
 ./cad:
 16K
-6 4.0K  cad001/
-3 4.0K  shared/
+6 4.xK  cad001/
+3 4.xK  shared/
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1 tiny  sofa.aspect.json
 
 ./cad/cad001:
 28K
-4 4.0K  doc/
-2 4.0K  native/
-2 4.0K  stl/
-2 4.0K  vtk/
+4 4.xK  doc/
+2 4.xK  native/
+2 4.xK  stl/
+2 4.xK  vtk/
 1 tiny  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/cad/case000/.gitignore_cad
 1 tiny  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/cad/case000/makefile_case_cad.mk
 1 tiny  sofa.cad.json
 
 ./cad/cad001/doc:
 8.0K
-2 4.0K  cadPics/
-2 4.0K  drafts/
+2 4.xK  cadPics/
+2 4.xK  drafts/
 
 ./cad/cad001/doc/cadPics:
 0
@@ -46,23 +46,23 @@
 
 ./cad/shared:
 4.0K
-2 4.0K  postStates/
+2 4.xK  postStates/
 
 ./cad/shared/postStates:
 0
 
 ./mesh:
 20K
-2 4.0K  doc/
-2 4.0K  mesh001/
-4 4.0K  shared/
+2 4.xK  doc/
+2 4.xK  mesh001/
+4 4.xK  shared/
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1 tiny  sofa.aspect.json
 
 ./mesh/doc:
 16K
 1 tiny  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs
-1 8.9K  meshOverview.Rmd
+1 8.xK  meshOverview.Rmd
 
 ./mesh/mesh001:
 12K
@@ -74,8 +74,8 @@
 
 ./mesh/shared:
 8.0K
-2 4.0K  postStates/
-2 4.0K  reportTemplates/
+2 4.xK  postStates/
+2 4.xK  reportTemplates/
 
 ./mesh/shared/postStates:
 148K
@@ -83,20 +83,20 @@
 
 ./mesh/shared/reportTemplates:
 8.0K
-1 5.6K  meshReport01.Rmd
+1 5.xK  meshReport01.Rmd
 
 ./run:
 20K
-2 4.0K  doc/
-2 4.0K  run001/
-4 4.0K  shared/
+2 4.xK  doc/
+2 4.xK  run001/
+4 4.xK  shared/
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1 tiny  sofa.aspect.json
 
 ./run/doc:
 16K
 1 tiny  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs
-1 9.1K  runOverview.Rmd
+1 9.xK  runOverview.Rmd
 
 ./run/run001:
 12K
@@ -108,8 +108,8 @@
 
 ./run/shared:
 8.0K
-2 4.0K  postStates/
-2 4.0K  reportTemplates/
+2 4.xK  postStates/
+2 4.xK  reportTemplates/
 
 ./run/shared/postStates:
 168K
@@ -117,11 +117,11 @@
 
 ./run/shared/reportTemplates:
 8.0K
-1 7.2K  runReport01.Rmd
+1 7.xK  runReport01.Rmd
 
 ./survey:
 12K
-2 4.0K  survey001/
+2 4.xK  survey001/
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
 1 tiny  sofa.aspect.json
 

@@ -1,11 +1,11 @@
 .:
 40K
-3 4.0K  1/
-3 4.0K  2/
-5 4.0K  constant/
-3 4.0K  doc/
-2 4.0K  log/
-2 4.0K  system/
+3 4.xK  1/
+3 4.xK  2/
+5 4.xK  constant/
+3 4.xK  doc/
+2 4.xK  log/
+2 4.xK  system/
 1 tiny  cad001 -> ../../cad/cad001/
 1 tiny  .fileStates.data
 1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
@@ -16,11 +16,11 @@
 
 ./1:
 4.0K
-2 4.0K  polyMesh/
+2 4.xK  polyMesh/
 
 ./1/polyMesh:
 868K
-1 1.7K  boundary
+1 1.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
 1 330K  faces
@@ -35,11 +35,11 @@
 
 ./2:
 4.0K
-2 4.0K  polyMesh/
+2 4.xK  polyMesh/
 
 ./2/polyMesh:
 804K
-1 1.5K  boundary
+1 1.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
 1 306K  faces
@@ -54,9 +54,9 @@
 
 ./constant:
 12K
-2 4.0K  extendedFeatureEdgeMesh/
-2 4.0K  polyMesh/
-2 4.0K  triSurface/
+2 4.xK  extendedFeatureEdgeMesh/
+2 4.xK  polyMesh/
+2 4.xK  triSurface/
 
 ./constant/extendedFeatureEdgeMesh:
 100K
@@ -65,7 +65,7 @@
 
 ./constant/polyMesh:
 804K
-1 1.5K  boundary
+1 1.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
 1 306K  faces
@@ -85,29 +85,29 @@
 
 ./doc:
 4.0K
-2 4.0K  meshReport/
+2 4.xK  meshReport/
 
 ./doc/meshReport:
 1.4M
-1 1.3K  mesh.rds
-1 1.4M  meshReport.html
-1 5.6K  meshReport.Rmd
+1 1.xK  mesh.rds
+1 1.xM  meshReport.html
+1 5.xK  meshReport.Rmd
 
 ./log:
 68K
-1 2.5K  blockMesh1.log
-1 6.6K  checkMesh1.log
-1 9.0K  meshReport.log
+1 2.xK  blockMesh1.log
+1 6.xK  checkMesh1.log
+1 9.xK  meshReport.log
 1  38K  snappyHexMesh1.log
-1 2.8K  surfaceFeatures1.log
+1 2.xK  surfaceFeatures1.log
 
 ./system:
 32K
-1 1.4K  blockMeshDict
-1 1.3K  controlDict
+1 1.xK  blockMeshDict
+1 1.xK  controlDict
 1 tiny  fvSchemes
 1 tiny  fvSolution
-1 1.4K  meshQualityDict
-1 2.9K  snappyHexMeshDict
-1 1.1K  surfaceFeatureExtractDict
-1 1.6K  surfaceFeaturesDict
+1 1.xK  meshQualityDict
+1 2.xK  snappyHexMeshDict
+1 1.xK  surfaceFeatureExtractDict
+1 1.xK  surfaceFeaturesDict
