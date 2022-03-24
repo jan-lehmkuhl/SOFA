@@ -1,5 +1,5 @@
 .:
-676K
+xxxK
 5 x.xK  constant/
 3 x.xK  doc/
 2 x.xK  system/
@@ -20,17 +20,17 @@
 1 tiny  sofa.mesh.FC-EXPORT.json
 
 ./constant:
-12K
+xxxK
 2 x.xK  extendedFeatureEdgeMesh/
 3 x.xK  polyMesh/
 2 x.xK  triSurface/
 
 ./constant/extendedFeatureEdgeMesh:
-72K
+xxxK
 1 71K  Body001_Geometry.extendedFeatureEdgeMesh
 
 ./constant/polyMesh:
-808K
+xxxK
 2 x.xK  sets/
 1 x.xK  boundary
 1 tiny  cellLevel
@@ -46,26 +46,26 @@
 1  41K  surfaceIndex
 
 ./constant/polyMesh/sets:
-4.0K
+xxxK
 1 x.xK  unmatchedFaces
 
 ./constant/triSurface:
-28K
+xxxK
 1 28K  Body001_Geometry.eMesh
 1 tiny  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
 
 ./doc:
-4.0K
+xxxK
 2 x.xK  meshReport/
 
 ./doc/meshReport:
-1.4M
+xxxM
 1 x.xK  mesh.rds
 1 x.xM  meshReport.html
 1 x.xK  meshReport.Rmd
 
 ./system:
-28K
+xxxK
 1 x.xK  blockMeshDict
 1 x.xK  controlDict
 1 tiny  fvSchemes

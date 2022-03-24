@@ -30,6 +30,7 @@ list_content = ls --almost-all -g --no-group \
     | sed -re 's/^[^ ]* //'   \
     | sed -e 's/,/./g'  \
     | sed -re 's/([1-9] )( [ 1-9][0-9]{0,2})(  [a-zA-Z]*)/\1tiny\3/g' \
+    | sed -re 's/^([0-9]{0,3})(\.[0-9])*([KM])/xxx\3/g' \
     | sed -re 's/([1-9] )([ 1-9]\.[0-9])([KM]  .*)/\1x.x\3/g'
 
 remove_full_path_with_sed = sed --in-place --regexp-extended --expression \

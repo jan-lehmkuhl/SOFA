@@ -1,5 +1,5 @@
 .:
-204K
+xxxK
 2 x.xK  0/
 2 x.xK  0.org/
 3 x.xK  constant/
@@ -21,7 +21,7 @@
 1 tiny  sofa.run.FREECAD.json
 
 ./0:
-380K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -30,7 +30,7 @@
 1 177K  U
 
 ./0.org:
-20K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -38,13 +38,13 @@
 1 x.xK  U
 
 ./constant:
-12K
+xxxK
 3 x.xK  polyMesh/
 1 tiny  transportProperties
 1 tiny  turbulenceProperties
 
 ./constant/polyMesh:
-736K
+xxxK
 2 x.xK  sets/
 1 x.xK  boundary
 1 tiny  cellLevel
@@ -60,27 +60,27 @@
 1  41K  surfaceIndex
 
 ./constant/polyMesh/sets:
-4.0K
+xxxK
 1 x.xK  unmatchedFaces
 
 ./doc:
-4.0K
+xxxK
 2 x.xK  runReport/
 1 tiny  meshReport -> ../../../mesh/mesh002/doc/meshReport/
 
 ./doc/runReport:
-8.0K
+xxxK
 1 x.xK  runReport.Rmd
 
 ./processor0:
-16K
+xxxK
 2 x.xK  0/
 3 x.xK  100/
 3 x.xK  104/
 3 x.xK  constant/
 
 ./processor0/0:
-196K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -89,7 +89,7 @@
 1  87K  U
 
 ./processor0/100:
-324K
+xxxK
 2 x.xK  uniform/
 1  36K  k
 1  44K  nut
@@ -99,11 +99,11 @@
 1  87K  U
 
 ./processor0/100/uniform:
-4.0K
+xxxK
 1 799  time
 
 ./processor0/104:
-324K
+xxxK
 2 x.xK  uniform/
 1  36K  k
 1  44K  nut
@@ -113,15 +113,15 @@
 1  87K  U
 
 ./processor0/104/uniform:
-4.0K
+xxxK
 1 799  time
 
 ./processor0/constant:
-4.0K
+xxxK
 3 x.xK  polyMesh/
 
 ./processor0/constant/polyMesh:
-424K
+xxxK
 2 x.xK  sets/
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
@@ -137,18 +137,18 @@
 1 115K  points
 
 ./processor0/constant/polyMesh/sets:
-4.0K
+xxxK
 1 x.xK  unmatchedFaces
 
 ./processor1:
-16K
+xxxK
 2 x.xK  0/
 3 x.xK  100/
 3 x.xK  104/
 3 x.xK  constant/
 
 ./processor1/0:
-212K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -157,7 +157,7 @@
 1  98K  U
 
 ./processor1/100:
-352K
+xxxK
 2 x.xK  uniform/
 1  38K  k
 1  45K  nut
@@ -167,11 +167,11 @@
 1  93K  U
 
 ./processor1/100/uniform:
-4.0K
+xxxK
 1 799  time
 
 ./processor1/104:
-352K
+xxxK
 2 x.xK  uniform/
 1  38K  k
 1  45K  nut
@@ -181,15 +181,15 @@
 1  93K  U
 
 ./processor1/104/uniform:
-4.0K
+xxxK
 1 799  time
 
 ./processor1/constant:
-4.0K
+xxxK
 3 x.xK  polyMesh/
 
 ./processor1/constant/polyMesh:
-420K
+xxxK
 2 x.xK  sets/
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
@@ -205,11 +205,11 @@
 1 110K  points
 
 ./processor1/constant/polyMesh/sets:
-4.0K
+xxxK
 1 x.xK  unmatchedFaces
 
 ./system:
-24K
+xxxK
 1 x.xK  changeDictionaryDict
 1 x.xK  controlDict
 1 x.xK  createPatchDict

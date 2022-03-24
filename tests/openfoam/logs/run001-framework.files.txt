@@ -1,5 +1,5 @@
 .:
-60K
+xxxK
 2 x.xK  0/
 2 x.xK  0.org/
 3 x.xK  100/
@@ -20,7 +20,7 @@
 1 tiny  sofa.run.FRAMEWORK.json
 
 ./0:
-20K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -28,7 +28,7 @@
 1 x.xK  U
 
 ./0.org:
-20K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -36,7 +36,7 @@
 1 x.xK  U
 
 ./100:
-236K
+xxxK
 2 x.xK  uniform/
 1  86K  k
 1  65K  nut
@@ -46,28 +46,28 @@
 1 x.xK  U
 
 ./100/uniform:
-4.0K
+xxxK
 1 799  time
 
 ./constant:
-8.0K
+xxxK
 1 tiny  polyMesh -> ../../../mesh/mesh001/constant/polyMesh/
 1 929  transportProperties
 1 886  turbulenceProperties
 
 ./doc:
-4.0K
+xxxK
 2 x.xK  runReport/
 1 tiny  meshReport -> ../../../mesh/mesh001/doc/meshReport/
 
 ./doc/runReport:
-4.8M
+xxxM
 1 x.xK  run.rds
 1 x.xM  runReport.html
 1 x.xK  runReport.Rmd
 
 ./log:
-148K
+xxxK
 1 x.xK  decomposePar1.log
 1 tiny  foamLog1.log
 1 x.xK  potentialFoam1.log
@@ -77,7 +77,7 @@
 1 115K  simpleFoam1.log
 
 ./logs:
-164K
+xxxK
 1 tiny  clockTime_0
 1 tiny  contCumulative_0
 1 tiny  contGlobal_0
@@ -121,44 +121,44 @@
 1 tiny  UzIters_0
 
 ./postProcessing:
-12K
+xxxK
 3 x.xK  minMaxMagnitude/
 3 x.xK  probes/
 3 x.xK  residuals/
 
 ./postProcessing/minMaxMagnitude:
-4.0K
+xxxK
 2 x.xK  0/
 
 ./postProcessing/minMaxMagnitude/0:
-20K
+xxxK
 1 18K  fieldMinMax.dat
 
 ./postProcessing/probes:
-4.0K
+xxxK
 2 x.xK  0/
 
 ./postProcessing/probes/0:
-16K
+xxxK
 1 x.xK  p
 1 x.xK  U
 
 ./postProcessing/residuals:
-4.0K
+xxxK
 2 x.xK  0/
 
 ./postProcessing/residuals/0:
-12K
+xxxK
 1 12K  residuals.dat
 
 ./processor0:
-12K
+xxxK
 2 x.xK  0/
 3 x.xK  100/
 3 x.xK  constant/
 
 ./processor0/0:
-24K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -167,7 +167,7 @@
 1 x.xK  U
 
 ./processor0/100:
-136K
+xxxK
 2 x.xK  uniform/
 1  45K  k
 1  35K  nut
@@ -177,15 +177,15 @@
 1 x.xK  U
 
 ./processor0/100/uniform:
-4.0K
+xxxK
 1 799  time
 
 ./processor0/constant:
-4.0K
+xxxK
 2 x.xK  polyMesh/
 
 ./processor0/constant/polyMesh:
-420K
+xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
@@ -203,13 +203,13 @@
 1 tiny  pointZones
 
 ./processor1:
-12K
+xxxK
 2 x.xK  0/
 3 x.xK  100/
 3 x.xK  constant/
 
 ./processor1/0:
-24K
+xxxK
 1 x.xK  k
 1 x.xK  nut
 1 x.xK  omega
@@ -218,7 +218,7 @@
 1 x.xK  U
 
 ./processor1/100:
-136K
+xxxK
 2 x.xK  uniform/
 1  45K  k
 1  35K  nut
@@ -228,15 +228,15 @@
 1 x.xK  U
 
 ./processor1/100/uniform:
-4.0K
+xxxK
 1 799  time
 
 ./processor1/constant:
-4.0K
+xxxK
 2 x.xK  polyMesh/
 
 ./processor1/constant/polyMesh:
-412K
+xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
@@ -254,7 +254,7 @@
 1 tiny  pointZones
 
 ./system:
-36K
+xxxK
 1 x.xK  changeDictionaryDict
 1 x.xK  controlDict
 1 x.xK  createPatchDict
