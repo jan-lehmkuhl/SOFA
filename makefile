@@ -31,14 +31,14 @@ installrequirements: installrequirementsR
 # install https://nodejs.org/en/download/ for macOS
 
 installrequirementsR: 
-	sudo apt-get install r-base
-	sudo apt-get install pandoc
-	sudo apt-get install xml2
-	sudo apt-get install libssl-dev
-	sudo apt-get install libxml2-dev
-	sudo apt-get install libcurl4-openssl-dev
-	sudo apt-get install libgit2-dev
-	sudo apt-get install libfontconfig1-dev
+	sudo apt-get install -y r-base
+	sudo apt-get install -y pandoc
+	sudo apt-get install -y xml2
+	sudo apt-get install -y libssl-dev
+	sudo apt-get install -y libxml2-dev
+	sudo apt-get install -y libcurl4-openssl-dev
+	sudo apt-get install -y libgit2-dev
+	sudo apt-get install -y libfontconfig1-dev
 
 	# packages which can also be installed within `sudo R` shell
 	sudo Rscript -e 'install.packages("rmarkdown")'
