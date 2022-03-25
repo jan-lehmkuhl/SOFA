@@ -50,6 +50,7 @@ installrequirementsR:
 	sudo Rscript -e 'install.packages("ggplot2")'
 	sudo Rscript -e 'install.packages("devtools")'
 	sudo Rscript -e 'install.packages("fastmap")'
+	sudo Rscript -e 'install.packages("rjson")'
 
 
 
