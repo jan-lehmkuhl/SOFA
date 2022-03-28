@@ -25,32 +25,9 @@ requirementtest:
 	@simpleFoam -help      | grep Using
 	@R          --version  | grep "R version"
 
-installrequirements: installrequirementsR
-	sudo apt-get update
-	sudo apt-get install nodejs
-# install https://nodejs.org/en/download/ for macOS
-
-installrequirementsR: 
-	sudo apt-get install -y r-base
-	sudo apt-get install -y pandoc
-	sudo apt-get install -y xml2
-	sudo apt-get install -y libssl-dev
-	sudo apt-get install -y libxml2-dev
-	sudo apt-get install -y libcurl4-openssl-dev
-	sudo apt-get install -y libgit2-dev
-	sudo apt-get install -y libfontconfig1-dev
-
-	# packages which can also be installed within `sudo R` shell
-	sudo Rscript -e 'install.packages("rmarkdown")'
-	sudo Rscript -e 'install.packages("rmdformats")'
-	sudo Rscript -e 'install.packages("kableExtra")'
-	sudo Rscript -e 'install.packages("openssl")'
-	sudo Rscript -e 'install.packages("withr")'
-	sudo Rscript -e 'install.packages("shiny")'
-	sudo Rscript -e 'install.packages("ggplot2")'
-	sudo Rscript -e 'install.packages("devtools")'
-	sudo Rscript -e 'install.packages("fastmap")'
-	sudo Rscript -e 'install.packages("rjson")'
+installrequirements: 
+	sudo scripts/install-deb-packages.sh
+	sudo scripts/install-r-packages.sh
 
 
 
