@@ -27,6 +27,7 @@
     "optional-file-bundles": [
         {
             "name":             "Mesh-Bundle-1",
+            "onlyAtCaseCreation": true,
             "jsonSwitch":       ["buildSettings", "defaultFiles" ],
             "jsonSwitchValues": ["bundle-1","framework"],
             "path":             "bundle-1"

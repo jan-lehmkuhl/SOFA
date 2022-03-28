@@ -237,7 +237,8 @@ class Case(object):
                 except: 
                     print("WARNING: optional-file-bundles are not specified in json")
                     optionValue = ""
-                if optionValue in thisOption['jsonSwitchValues']:
+                if (    optionValue in thisOption['jsonSwitchValues'] and 
+                        not thisOption['onlyAtCaseCreation']) :
                     if self.verbose: print("handle optional file bundle: ", thisOption['name'])
                     source = os.path.join(self.structure['localpath'], thisOption['path'])
                     copyRecursiveAndStage( source, self.casePath, verbose=self.verbose )
