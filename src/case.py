@@ -68,6 +68,7 @@ class Case(object):
     def __init__(self, storagePath=None, aspectType=None, caseStructure=None, verbose=False, path="./"):
         from aspect import readFoamStructure
         from study import StudyStructure
+        from fileHandling import convertToRelativePath
         import fnmatch
 
         # store known values to self
@@ -87,7 +88,7 @@ class Case(object):
         if caseStructure == None :
             self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
             thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
-            self.studyName = os.path.basename(self.studyRoot)
+            self.studyName = convertToRelativePath(self.studyRoot, self.projectRoot, verbose=verbose)
         # aspect handling
         if self.aspectType == None: 
             # read Case.aspectType from foldername
