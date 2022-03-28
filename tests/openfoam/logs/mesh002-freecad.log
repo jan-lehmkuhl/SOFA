@@ -37,7 +37,7 @@ allowSystemOperations : Allowing user-supplied system call operations
 Create time
 
 Creating block mesh from
-    "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/system/blockMeshDict"
+    "/tests/openfoam/mesh/mesh002/system/blockMeshDict"
 Creating block edges
 No non-planar block faces defined
 Creating topology blocks
@@ -150,9 +150,9 @@ Final feature set:
         open edges         : 0
         multiply connected : 0
 
-Writing extendedFeatureEdgeMesh to "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
+Writing extendedFeatureEdgeMesh to "/tests/openfoam/mesh/mesh002/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
 
-Writing featureEdgeMesh to "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/constant/triSurface/Body001_Geometry.eMesh"
+Writing featureEdgeMesh to "/tests/openfoam/mesh/mesh002/constant/triSurface/Body001_Geometry.eMesh"
 
 ExecutionTime = x.xx s  ClockTime = x.xx s
 
@@ -1317,7 +1317,7 @@ surfZone 1 : face1
 surfZone 2 : face0
 surfZone 3 : face4
 surfZone 4 : face2
-Writing merged surface to "/home/jan/workspace/sofa-test/tools/sofa-framework/tests/openfoam/mesh/mesh002/mesh_outside.stl"
+Writing merged surface to "/tests/openfoam/mesh/mesh002/mesh_outside.stl"
 End
 
 /*---------------------------------------------------------------------------*\
