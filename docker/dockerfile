@@ -7,11 +7,20 @@ RUN apt-get install -y software-properties-common
 RUN apt-get install -y wget
 RUN apt-get install -y gnupg
 RUN apt-get install -y vim
+RUN apt-get install -y nano
 RUN apt-get install -y git
 RUN apt-get install -y make
+RUN apt-get install -y sudo
+
+RUN useradd --user-group --create-home --shell /bin/bash foam ;\
+	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # install OpenFOAM 7
 RUN sh -c "wget -O - https://dl.openfoam.org/gpg.key | apt-key add -"
 RUN add-apt-repository http://dl.openfoam.org/ubuntu
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends openfoam7
+
+RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc 
+
+USER foam
