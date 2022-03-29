@@ -1449,7 +1449,7 @@ Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 
 R version  x.x.x ...
-Copyright (C) 2020 The R Foundation for Statistical Computing
+Copyright (C) xxxx The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -1620,7 +1620,7 @@ make[x]: Entering directory '/tests/openfoam/mesh'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
-Copyright (C) 2020 The R Foundation for Statistical Computing
+Copyright (C) xxxx The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
