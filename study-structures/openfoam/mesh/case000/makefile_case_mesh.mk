@@ -146,10 +146,10 @@ freecad-mesh-setup-fetch: clean
 
 
 mesh-allmesh: 
-	./Allmesh                                       
+	./Allmesh
 	@test -e constant/polyMesh/points && echo "mesh exists" || (echo "mesh not exists"; exit 1)
-	checkMesh  | tee log.checkMesh                  
-	make case-report                                 
+	checkMesh  | tee log.checkMesh
+	make case-report
 
 
 clean-freecad-mesh:
