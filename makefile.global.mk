@@ -49,5 +49,6 @@ remove_logs_variable_content = sed --in-place --regexp-extended --expression \
 	s/(.* in )([0-9][0-9\.]*) s/\1xxx s/g; \
 	s/(^R version )([0-9]\..*)/\1 x.x.x \.\.\./g; \
 	s/(Copyright \(C\) )([0-9]{4})/\1xxxx/g; \
+	s/( --mathjax=rmdformats )/ /g; \
 	s/(.*template \/)([a-z]\S*)(\.html.*)/\1XXX\.html\3/g; \
 	s/(.*\/tmp)(.*)(\.html.*)/\1xxxx\3/g"
