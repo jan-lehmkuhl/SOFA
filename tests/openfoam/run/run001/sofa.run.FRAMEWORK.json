@@ -1,0 +1,28 @@
+{
+    "name"                  :   "",
+    "description"           :   "",
+
+    "buildSettings" : {
+        "meshLink"          :   "mesh001",
+        "report"            :   "runReport01.Rmd",
+
+        "solver"            :   "simpleFoam",
+        "turbulenceModel"   :   "kOmegaSST",
+
+        "dynamicMesh"       :   "False",
+        "porousZone"        :   "False" 
+    },
+
+    "runSettings" : {
+        "nCores"            :   "2",
+
+        "renumberMesh"      :   "True",
+        "potentialFoam"     :   "True",
+        "solver"            :   "True",
+        "reconstructPar"    :   "True",
+        "foamLog"           :   "True",
+
+        "report"            :   "True"
+    }
+    
+}

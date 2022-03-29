@@ -1,0 +1,53 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      surfaceFeatureExtractDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surface1
+{
+    surfaces
+    (
+        "Body001_Geometry.stl"
+    );
+
+    // Identify a feature when angle between faces < includedAngle
+    includedAngle   150;   
+    writeObj                yes;
+}
+
+
+    // Output the curvature of the surface
+    curvature               no;
+
+    // Output the proximity of feature points and edges to each other
+    featureProximity        no;
+
+    // The maximum search distance to use when looking for other feature
+    // points and edges
+    maxFeatureProximity     1;
+
+    // Out put the closeness of surface elements to other surface elements.
+    closeness               no;
+
+    // Write features to obj format for postprocessing
+    writeObj                yes;
+    verboseObj              no;
+
+    // Write surface proximity and curvature fields to vtk format
+    // for postprocessing
+    writeVTK                no;
+}
+
+
+// ************************************************************************* //

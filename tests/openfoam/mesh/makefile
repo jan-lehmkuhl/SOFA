@@ -1,0 +1,1 @@
+../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk

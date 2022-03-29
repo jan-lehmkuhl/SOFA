@@ -1,0 +1,1 @@
+../../../tools/sofa-framework/study-structures/openfoam/cad/case000/makefile_case_cad.mk

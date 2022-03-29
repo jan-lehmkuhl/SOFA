@@ -1,7 +1,7 @@
 
 # simulation-projects root-makefile in ./tools/sofa-framework
 
-include global-make.mk
+include makefile.global.mk
 include root-dummies/makefile
 
 
@@ -28,6 +28,10 @@ requirementtest:
 installrequirements: 
 	sudo scripts/install-deb-packages.sh
 	sudo scripts/install-r-packages.sh
+
+
+tests-local: 
+	make -C tests
 
 
 

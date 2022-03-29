@@ -1,0 +1,348 @@
+---
+title: "Mesh overview"
+author: "Sebastian Tueck"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+params:
+  cad_soft: "ST9 (109.00.15.005x64)"
+  tri_soft: "9.2.0"
+  edge_soft: "5.4.0"
+output:
+  rmdformats::readthedown:
+     self_contained: true
+     thumbnails: false
+     lightbox: true
+     gallery: false
+     highlight: tango
+     toc_depth: 4
+     code_folding: hide 
+ # html_document:
+ #     code_folding: hide
+ #     toc: true
+ #     toc_depth: 4
+ #     theme: united
+ #     highlight: zenburn
+ #     number_sections: true
+ #     toc_float:
+ #       collapsed: false
+---
+
+```{r setup, echo = TRUE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, python.reticulate = FALSE)
+
+################################################################################
+# Check if OFReportR is installed and if not install it 
+################################################################################
+
+if(!is.element("OFReportR", installed.packages()[, 1]))  {
+  print("Needed package OFReportR is not present. It will be installed now.")
+  if(!is.element("devtools", installed.packages()[, 1])) {
+    print("Needed package devtools is not present. It will be installed now.")
+    install.packages("devtools",repos="http://lib.stat.cmu.edu/R/CRAN")
+  }
+  library("devtools",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+  devtools::install_git("https://gitlab.com/sofa-framework/ofreportr-core")
+}
+library("OFReportR",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+
+load_or_install("knitr")
+load_or_install("data.table")
+load_or_install("ggplot2")
+load_or_install("plotly")
+load_or_install("kableExtra")
+load_or_install("stringr")
+
+################################################################################
+# Load necessary Data
+################################################################################
+
+studyPath <- ".."
+
+# list all .rds files present in mesh
+rDataPaths <- list.files(path = "..", pattern = "mesh.rds", recursive = TRUE, full.names = TRUE)
+
+# initialize variables
+
+meshDetails       <- data.table()
+cellSize          <- data.table()
+meshStats         <- data.table()
+meshQualityStats  <- data.table()
+layerCoverage     <- data.table()
+
+# loop over paths of .rds files
+for (path in rDataPaths) {
+  # extract name of mesh from path
+  meshName <- str_split(path , pattern = "/" )[[1]][2]
+  # save data to temporary variable
+  temp <- readRDS(path)
+  # extract and combine data into single dta.tables
+  meshDetails <- rbind(meshDetails, invert_frame(temp$meshDetails, "V1"))
+  cellSize <- rbind(cellSize, temp$cellSize[, case := meshName ])
+  meshStats <- rbind(meshStats, invert_frame(temp$meshStats, "Description")[, case := meshName ])
+  meshQualityStats <- rbind(meshQualityStats, temp$meshQualityStats[, case := meshName ])
+  layerCoverage <- rbind(layerCoverage, temp$layerCoverage[, case := meshName ])
+}
+
+```
+
+# Index
+
+[Run Overview](../../run/doc/runOverview.html)
+
+# Meshdetails
+
+```{r meshDetails}
+
+if ( length(meshDetails) != 0 ) {
+  meshDetails[, "blockMesh cell size":=NULL]
+}
+
+knitr::kable(meshDetails, caption = "Size of background mesh undistorted cells") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+
+
+```
+
+# Representative cell Size
+
+```{r plot representative mesh cell size , echo=TRUE}
+
+if ( length(cellSize) != 0 ) {
+
+  meltCellSize <- melt(cellSize, id.vars = "case")
+  
+  ggCellSize <- ggplot(meltCellSize, aes(x=case, y=value, fill=variable)) +  
+    geom_bar(stat="identity", position="dodge") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Cell sizes of meshes") +
+    xlab("Mesh") + 
+    ylab("Cell size (m)")
+  
+  plCellSize <- ggplotly(ggCellSize)
+  
+  plCellSize
+}
+
+```
+
+# Mesh statistics
+
+```{r plot cell count, echo=TRUE}
+
+if ( length(meshStats) != 0 ) {
+
+  meltMeshStats <- melt(meshStats, id.vars = "case")
+  meltMeshStats[, value:=as.numeric(value)]
+  
+  ggCellcount <- ggplot(meltMeshStats[variable=="cells"], aes(x=case, y=value, fill=case)) +  
+    geom_bar(stat="identity",position="dodge") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Number of cells in mesh") +
+    xlab("Mesh") + 
+    ylab("Number of cells")
+  
+  plCellcount <- ggplotly(ggCellcount)
+  
+  plCellcount
+
+}
+
+```
+
+```{r Table with mesh statistics}
+
+knitr::kable(meshStats, caption = "General data regarding the mesh") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+# Mesh quality
+
+```{r setup meshQuality, echo=TRUE,results="asis"}
+
+if ( length(meshQualityStats) != 0 ) {
+
+  meshQualityStats[, Max:= as.numeric(Max)]
+  
+}
+
+```
+
+## Non-orthogonality
+
+```{r plot non-orthogonality}
+
+if ( length(meshQualityStats) != 0 ) {
+
+  ggOrtho <- ggplot(meshQualityStats[Decription=="non-orthogonality"], aes(x=case, y=Max, fill =case)) +  
+    geom_bar(stat="identity") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Non-Orthogonality of meshes") +
+    coord_cartesian(ylim=c(floor(min(meshQualityStats[Decription=="non-orthogonality"]$Max)/10)*10,
+                           ceiling(max(meshQualityStats[Decription=="non-orthogonality"]$Max)/10)*10)) + 
+    geom_hline(yintercept=65) + 
+    xlab("Mesh") + 
+    ylab("Non-orthogonality (°)")
+  
+  plOrtho <- ggplotly(ggOrtho)
+  
+  plOrtho
+}
+
+```
+
+## Skewness
+
+```{r plot skewness}
+
+if ( length(meshQualityStats) != 0 ) {
+
+  ggSkew <- ggplot(meshQualityStats[Decription=="skewness"], aes(x=case, y=Max, fill =case)) +  
+    geom_bar(stat="identity") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Skewness of meshes") +
+    coord_cartesian(ylim=c(floor(min(meshQualityStats[Decription=="skewness"]$Max)/1)*1,
+                           ceiling(max(meshQualityStats[Decription=="skewness"]$Max)/1)*1)) + 
+    geom_hline(yintercept=4) + 
+    xlab("Mesh") + 
+    ylab("Skewness (-)")
+  
+  plSkew <- ggplotly(ggSkew)
+  
+  plSkew
+
+}
+
+```
+
+## Aspect ratio
+
+```{r plot aspect ratio}
+
+if ( length(meshQualityStats) != 0 ) {
+
+  ggAspect <- ggplot(meshQualityStats[Decription=="aspect ratio"], aes(x=case, y=Max, fill =case)) +  
+    geom_bar(stat="identity") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Aspect ratio of meshes") +
+    coord_cartesian(ylim=c(floor(min(meshQualityStats[Decription=="aspect ratio"]$Max)/10)*10,
+                           ceiling(max(meshQualityStats[Decription=="aspect ratio"]$Max)/10)*10)) + 
+    #geom_hline(yintercept=65) + 
+    xlab("Mesh") + 
+    ylab("Aspect ratio (-)")
+  
+  plAspect <- ggplotly(ggAspect)
+  
+  plAspect
+
+}
+
+```
+
+## Minimal cellvolume
+
+```{r plot minimal cellvolume}
+
+if ( length(meshQualityStats) != 0 ) {
+
+  ggVolume <- ggplot(meshQualityStats[Decription=="volume"], aes(x=case, y=Max, fill =case)) +  
+    geom_bar(stat="identity") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Minimal cellvolume of meshes") +
+    xlab("Mesh") + 
+    ylab("Minimal cellvolume (m³)")
+  
+  plVolume <- ggplotly(ggVolume)
+  
+  plVolume
+
+}
+
+```
+
+# Boundary Layer 
+
+Boundary layer are crucial for the exact modeling of turbulence and therefore  drag and heat conduction applications on walls. The following table gives an overview of the layer generation on the walls.   
+
+```{r setup boundaryLayer, echo=TRUE}
+
+if ( length(layerCoverage) != 0 ) {
+
+  meltLayerCoverage <- melt(layerCoverage, id.vars = c("patch", "case"))
+  meltLayerCoverage[,value := as.numeric(value)]
+
+}
+
+```
+
+## Number of layers
+
+```{r plot No. boundray layer}
+
+if ( length(layerCoverage) != 0 ) {
+
+  ggLayer <- ggplot(meltLayerCoverage[variable=="layers"], aes(x=case, y=value, fill =patch)) +  
+    geom_bar(stat="identity", position="dodge") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Number of boundary layers") +
+    xlab("Mesh") + 
+    ylab("Number of boundary layers")
+  
+  plLayer <- ggplotly(ggLayer)
+  
+  plLayer
+}
+
+```
+
+## Absolute thickness of layers
+
+```{r plot abolute boundary layer thickness}
+
+if ( length(layerCoverage) != 0 ) {
+
+  ggThickness <- ggplot(meltLayerCoverage[variable=="overall [m]"], aes(x=case, y=value, fill =patch)) +  
+    geom_bar(stat="identity", position="dodge") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Absolute thickness of boundary layers") +
+    xlab("Mesh") + 
+    ylab("Thickness of boundary layers (m)")
+  
+  plThickness <- ggplotly(ggThickness)
+  
+  plThickness
+
+}
+
+```
+
+## Relative thickness of layers
+
+```{r plot relative boundary layer thickness}
+
+if ( length(layerCoverage) != 0 ) {
+
+  ggRelThickness <- ggplot(meltLayerCoverage[variable=="thickness [%]"], aes(x=case, y=value, fill =patch)) +  
+    geom_bar(stat="identity", position="dodge") + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    ggtitle("Thickness relative to intended thickness of boundary layers") +
+    xlab("Mesh") + 
+    ylab("Relative thickness of boundary layers (%)")
+  
+  plRelThickness <- ggplotly(ggRelThickness)
+  
+  plRelThickness
+  
+}
+
+```
+

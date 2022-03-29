@@ -1,0 +1,300 @@
+---
+author: "Sebastian Tueck"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+params:
+  cad_ver: "ST9 (109.00.15.005x64)"
+  tri_ver: "9.2.0"
+  edge_ver: "5.4.0"
+output:
+   rmdformats::readthedown:
+     self_contained: true
+     thumbnails: false
+     lightbox: true
+     gallery: false
+     highlight: tango
+     toc_depth: 4
+     code_folding: hide
+ # html_document:
+ #     code_folding: hide
+ #     toc: true
+ #     toc_depth: 4
+ #     theme: united
+ #     highlight: zenburn
+ #     number_sections: true
+ #     toc_float:
+ #       collapsed: false
+---
+
+```{r setup, echo = TRUE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, python.reticulate = FALSE)
+
+casePath <- "../.."
+
+################################################################################
+# Check if OFReportR is installed and if not install it 
+################################################################################
+
+if(!is.element("OFReportR", installed.packages()[, 1]))  {
+  print("Needed package OFReportR is not present. It will be installed now.")
+  if(!is.element("devtools", installed.packages()[, 1])) {
+    print("Needed package devtools is not present. It will be installed now.")
+    install.packages("devtools",repos="http://lib.stat.cmu.edu/R/CRAN")
+  }
+  library("devtools",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+  devtools::install_git("https://gitlab.com/sofa-framework/ofreportr-core")
+}
+library("OFReportR",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+
+load_or_install("knitr")
+load_or_install("data.table")
+load_or_install("ggplot2")
+load_or_install("kableExtra")
+load_or_install("scales")
+load_or_install("gridExtra")
+load_or_install("rjson")
+load_or_install("rmdformats")
+load_or_install("plotly")
+load_or_install("reshape2")
+load_or_install("lubridate")
+
+############################################################################
+# Load Data
+############################################################################
+
+BCTable               <- load_BC(casePath)
+fvSchemes             <- load_fvSchemes(casePath) 
+transportProperties   <- load_transport(casePath) 
+turbulenceProperties  <- load_turbulence(casePath) 
+
+```
+
+# Case overview
+
+```{r caseDetails}
+
+caseSetup <- extract_runDetails(casePath = casePath)
+
+title <- paste0("Run report of ", caseSetup[V1 == "Name"]$V2)
+ 
+ knitr::kable(caseSetup, caption = "Mesh setup", col.names = c(" "," ")) %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+---
+title: `r title`
+---
+
+# Fluid properties
+
+```{r transportProperties, echo=TRUE}
+
+knitr::kable(transportProperties, caption = "Properties of used fluid(s)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+# Turbulence modelling
+
+```{r turbulenceProperties, echo=TRUE}
+
+knitr::kable(turbulenceProperties, caption = "Settings for turbulence modelling") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+# Boundary conditions
+
+## Pressure p
+
+```{r BC_p, echo=TRUE}
+
+options(knitr.kable.NA = '')
+knitr::kable(BCTable[BCTable$variable == "p",], caption = "Boundary conditions") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+## Velocity U
+
+```{r BC_U, echo=TRUE}
+
+options(knitr.kable.NA = '')
+knitr::kable(BCTable[BCTable$variable == "U",], caption = "Boundary conditions for velocity U") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+## Turbulent kinetic energy k
+
+```{r BC_k, echo=TRUE}
+
+options(knitr.kable.NA = '')
+knitr::kable(BCTable[BCTable$variable == "k",], caption = "Boundary conditions for turbulent kinetic energy k") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+## Specific dissipation rate w
+
+```{r BC_w, echo=TRUE}
+
+options(knitr.kable.NA = '')
+knitr::kable(BCTable[BCTable$variable == "omega",], caption = "Boundary conditions for specific dissipation rate w") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+## Turbulent viscosity nut
+
+```{r BC_nut, echo=TRUE}
+
+options(knitr.kable.NA = '')
+knitr::kable(BCTable[BCTable$variable == "nut",], caption = "Boundary conditions turbulent viscosity nut") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+
+# Numerics
+
+## Interpolation Schemes
+
+```{r fvSchemes, echo=TRUE}
+
+knitr::kable(fvSchemes, caption = "Discretisation schemes") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+# Run Details
+
+## Residuals
+
+```{r residuals}
+
+if (length(dir(casePath, pattern = "^logs")) == 1) {
+  residuals <- extract_residualsLog(casePath = casePath)
+} else {
+  residuals <- extract_multiResiduals(casePath = casePath)
+}
+
+if (length(residuals) != 0 ) {
+
+  meltResiduals <- melt(residuals, id.vars = "Time")
+  
+  ggResiduals <-  ggplot(meltResiduals, aes(x = Time, y = value, colour=variable)) + geom_line() +
+         scale_y_log10() +
+         ggtitle("Plot of residuals") +
+         xlab("Time") +
+         ylab("Residual [-]")+
+         theme_bw() + 
+         theme(legend.title = element_blank())
+  
+   plResiduals <- ggplotly(ggResiduals)
+   
+   plResiduals
+}
+
+```
+
+## Continuity
+
+```{r continuity}
+
+continuity <- extract_continuity(casePath)
+
+if (length(continuity) != 0) {
+  # melt continuity for plotting
+  meltContinuity <- melt(continuity, id.vars = "time")
+  # make all values positive for logarithmic plotting
+  meltContinuity$value <- abs(meltContinuity$value)
+  # create ggplot2
+  ggContinuity <- ggplot(meltContinuity, aes(x = time, y = value, colour = variable)) + geom_line() +
+      scale_y_log10() +
+      ggtitle("Plot of continuity errors") +
+      xlab("Time") + 
+      ylab("Magnitude of continuity error [-]")+
+      theme_bw() + 
+      theme(legend.title = element_blank())
+  
+  plContinuity <- ggplotly(ggContinuity)
+  
+  plContinuity
+  
+} else {
+  meltContinuity <- data.table()
+}
+
+
+```
+
+## yPlus
+
+
+```{r yPlus}
+
+# extract yPlus values
+yPlus <- extract_multiyPlus(casePath)
+
+
+if (length(yPlus) != 0) {
+  # melt data.table for plotting 
+  meltYPlus <- melt(yPlus, id.vars = c("time","patch")) 
+  # create a ggplot 2
+  ggYPlus <-  ggplot(meltYPlus, aes(x = time, y = value, colour = variable)) + geom_line() +
+    xlab("Time") + 
+    ylab("yPlus value [-]") +
+    theme_bw()+
+    facet_wrap( ~ patch, ncol=2) 
+  
+  ggYPlus
+} else {
+  meltYPlus <- data.table()
+}
+  
+```
+
+
+## Min and Max values
+
+```{r minMax improved}
+
+minMax <- extract_multiMinMax(casePath = casePath)
+
+if (length(minMax) != 0) {
+
+  meltMinMax <- melt(minMax, id.vars = c("Time","Variable"))
+  
+  ggMinMax <- ggplot(meltMinMax, aes(x = Time, y = value, colour = variable)) + geom_line() +
+                  xlab("Iteration") + 
+                  ylab("Value") +
+                  theme_bw()+
+                  theme(legend.title = element_blank()) + 
+                  facet_wrap( ~ Variable, ncol=2,scales = "free_y")
+  
+  ggMinMax
+
+} else {
+  meltMinMax <- data.table()
+}
+
+```
+
+# Results
+
+
+```{r save}
+
+results <- list(caseDetails = caseSetup, 
+                BCTable = BCTable,
+                fvSchemes = fvSchemes,
+                transportProperties = transportProperties,
+                turbulenceProperties = turbulenceProperties,
+                residuals = residuals, 
+                yPlus = yPlus, 
+                continuity = continuity, 
+                minMax = minMax)
+
+saveRDS(results, "run.rds")
+
+```

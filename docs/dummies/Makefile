@@ -2,7 +2,7 @@
 # docs makefile
 # copied from ../tools/sofa-framework/docs/dummies/makefile 
 
-include ../tools/sofa-framework/global-make.mk
+include ../tools/sofa-framework/makefile.global.mk
 
 init: folderstructure
 	$(copy)  ../tools/sofa-framework/docs/dummies/main-project-readme.md   ../README.md

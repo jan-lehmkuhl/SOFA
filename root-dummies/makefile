@@ -6,8 +6,8 @@
 # preparation
 # =============================================================================
 
-ifneq      ("$(wildcard tools/sofa-framework/global-make.mk)","")
-	include tools/sofa-framework/global-make.mk
+ifneq      ("$(wildcard tools/sofa-framework/makefile.global.mk)","")
+	include tools/sofa-framework/makefile.global.mk
 endif
 
 cfxFolder       = $(shell node -p "require('./sofa.project.json').cfxFolders[0]")

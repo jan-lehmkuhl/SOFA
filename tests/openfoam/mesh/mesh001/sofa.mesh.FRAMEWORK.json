@@ -1,0 +1,24 @@
+{
+    "name"                  :   "",
+    "description"           :   "",
+ 
+    "buildSettings" : {
+        "cadLink"           :   "cad001",
+        "defaultFiles"      :   "",
+        "paraview"          :   "../shared/postStates/mesh-inspection.pvsm",
+        "report"            :   "meshReport01.Rmd"
+    },
+
+    "meshSettings" : {
+        "nCores"            :   "1",
+        
+        "blockMesh"         :   "True",
+        "surfaceFeatures"   :   "True",
+        "snappyHexMesh"     :   "True",
+        "checkMesh"         :   "True",
+        "topoSet"           :   "False",
+        "createPatches"     :   "False",
+
+        "report"            :   "True"
+    }
+}

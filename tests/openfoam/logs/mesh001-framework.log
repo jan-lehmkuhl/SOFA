@@ -1,0 +1,167 @@
+make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
+python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
+
+*** update Upstream-Links in  mesh001  ***
+Skip existing folder      /openfoam/mesh/mesh001
+Skip existing file        /openfoam/mesh/mesh001/pv.foam
+Copying file to      /openfoam/mesh/mesh001/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+if [ -f "Allmesh" ] ; then                               \
+	make mesh-allmesh                                  ; \
+else                                                     \
+	make frameworkmeshing                              ; \
+	make finalizeMesh                                  ; \
+fi ;
+make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
+python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py mesh
+decided to run surface features
+
+==========================================================================
+Meshing with OpenFoam 7 on LocalMachine using 1 cores
+==========================================================================
+
+ - Cleaning Case                  - Cleaning Case                  --> finished after x:xx:xx.xxxxxx           
+ - Excecuting surfaceFeatures     - Excecuting surfaceFeatures     --> finished after x:xx:xx.xxxxxx           
+ - Excecuting blockMesh           - Excecuting blockMesh           --> finished after x:xx:xx.xxxxxx           
+ - Excecuting snappyHexMesh       - Excecuting snappyHexMesh       --> finished after x:xx:xx.xxxxxx           
+ - Excecuting checkMesh           - Excecuting checkMesh           --> finished after x:xx:xx.xxxxxx           
+ - Generating mesh report         - Generating mesh report         --> finished after x:xx:xx.xxxxxx           
+
+==========================================================================
+Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
+==========================================================================
+
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
+python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py finalizeMesh
+
+==========================================================================
+Finalizing mesh with OpenFoam 7 on LocalMachine using 1 cores
+==========================================================================
+
+ - Copying mesh                   - Copying mesh                   --> finished after x:xx:xx.xxxxxx           
+
+==========================================================================
+Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
+==========================================================================
+
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
+make -C .. overview-report
+make[x]: Entering directory '/tests/openfoam/mesh'
+python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
+
+R version  x.x.x ...
+Copyright (C) xxxx The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> rmarkdown::render('doc/meshOverview.Rmd')
+  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
+   inline R code fragments
+
+  |                                                                              |.....                                                                 |   7%
+label: setup (with options) 
+List of 2
+ $ echo   : logi TRUE
+ $ message: logi FALSE
+
+  |                                                                              |.......                                                               |  10%
+  ordinary text without R code
+
+  |                                                                              |..........                                                            |  14%
+label: meshDetails
+  |                                                                              |............                                                          |  17%
+  ordinary text without R code
+
+  |                                                                              |..............                                                        |  21%
+label: plot representative mesh cell size  (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |.................                                                     |  24%
+  ordinary text without R code
+
+  |                                                                              |...................                                                   |  28%
+label: plot cell count (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |......................                                                |  31%
+  ordinary text without R code
+
+  |                                                                              |........................                                              |  34%
+label: Table with mesh statistics
+  |                                                                              |...........................                                           |  38%
+  ordinary text without R code
+
+  |                                                                              |.............................                                         |  41%
+label: setup meshQuality (with options) 
+List of 2
+ $ echo   : logi TRUE
+ $ results: chr "asis"
+
+  |                                                                              |...............................                                       |  45%
+  ordinary text without R code
+
+  |                                                                              |..................................                                    |  48%
+label: plot non-orthogonality
+  |                                                                              |....................................                                  |  52%
+  ordinary text without R code
+
+  |                                                                              |.......................................                               |  55%
+label: plot skewness
+  |                                                                              |.........................................                             |  59%
+  ordinary text without R code
+
+  |                                                                              |...........................................                           |  62%
+label: plot aspect ratio
+  |                                                                              |..............................................                        |  66%
+  ordinary text without R code
+
+  |                                                                              |................................................                      |  69%
+label: plot minimal cellvolume
+  |                                                                              |...................................................                   |  72%
+  ordinary text without R code
+
+  |                                                                              |.....................................................                 |  76%
+label: setup boundaryLayer (with options) 
+List of 1
+ $ echo: logi TRUE
+
+  |                                                                              |........................................................              |  79%
+  ordinary text without R code
+
+  |                                                                              |..........................................................            |  83%
+label: plot No. boundray layer
+  |                                                                              |............................................................          |  86%
+  ordinary text without R code
+
+  |                                                                              |...............................................................       |  90%
+label: plot abolute boundary layer thickness
+  |                                                                              |.................................................................     |  93%
+  ordinary text without R code
+
+  |                                                                              |....................................................................  |  97%
+label: plot relative boundary layer thickness
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+/usr/bin/pandoc +RTS -K512m -RTS meshOverview.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output meshOverview.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --variable 'readthedown:true' --variable 'lightbox:true' --variable 'gallery:false' --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 4 --template /XXX.html.html --highlight-style tango --variable theme=bootstrap --include-in-header /tmpxxxx.html --variable code_folding=hide --variable code_menu=1 
+> 
+> 
+Skip existing folder      doc
+make[x]: Leaving directory '/tests/openfoam/mesh'
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'

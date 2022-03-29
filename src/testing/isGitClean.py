@@ -26,6 +26,9 @@ if not isGitChanged == 0:   # zero means clean
     print("ERROR git changes in: " +args.file)
     gitDiff = subprocess. getoutput("git diff " +args.file)
     print (gitDiff)
-    raise SystemExit("ERROR raise SystemExit: git changes in:   " +args.file)
+    if os.path.isfile("debug-mode"):
+        with open ('debug-mode', 'a') as f: f.write ("git changes in: " +args.file +"\n")
+    else:
+        raise SystemExit("ERROR raise SystemExit: git changes in:   " +args.file)
 else:
     print("no git changes in:   " +args.file)

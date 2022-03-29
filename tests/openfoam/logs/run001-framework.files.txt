@@ -1,0 +1,266 @@
+.:
+xxxK
+2 x.xK  0/
+2 x.xK  0.org/
+3 x.xK  100/
+2 x.xK  constant/
+3 x.xK  doc/
+2 x.xK  log/
+2 x.xK  logs/
+5 x.xK  postProcessing/
+5 x.xK  processor0/
+5 x.xK  processor1/
+2 x.xK  system/
+1 tiny  .fileStates.data
+1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
+1 tiny  mesh001 -> ../../mesh/mesh001/
+1 tiny  postStates -> ../shared/postStates/
+1    0  pv.foam
+1 tiny  sofa.run.FRAMEWORK.json
+
+./0:
+xxxK
+1 x.xK  k
+1 x.xK  nut
+1 x.xK  omega
+1 x.xK  p
+1 x.xK  U
+
+./0.org:
+xxxK
+1 x.xK  k
+1 x.xK  nut
+1 x.xK  omega
+1 x.xK  p
+1 x.xK  U
+
+./100:
+xxxK
+2 x.xK  uniform/
+1  86K  k
+1  65K  nut
+1  64K  omega
+1 x.xK  p
+1 x.xK  phi
+1 x.xK  U
+
+./100/uniform:
+xxxK
+1 799  time
+
+./constant:
+xxxK
+1 tiny  polyMesh -> ../../../mesh/mesh001/constant/polyMesh/
+1 929  transportProperties
+1 886  turbulenceProperties
+
+./doc:
+xxxK
+2 x.xK  runReport/
+1 tiny  meshReport -> ../../../mesh/mesh001/doc/meshReport/
+
+./doc/runReport:
+xxxM
+1 x.xK  run.rds
+1 x.xM  runReport.html
+1 x.xK  runReport.Rmd
+
+./log:
+xxxK
+1 x.xK  decomposePar1.log
+1 tiny  foamLog1.log
+1 x.xK  potentialFoam1.log
+1 x.xK  reconstructPar1.log
+1 x.xK  renumberMesh1.log
+1 x.xK  runReport.log
+1 115K  simpleFoam1.log
+
+./logs:
+xxxK
+1 tiny  clockTime_0
+1 tiny  contCumulative_0
+1 tiny  contGlobal_0
+1 tiny  contLocal_0
+1 tiny  executionTime_0
+1 x.xK  foamLog.awk
+1 x.xK  k_0
+1 x.xK  kFinalRes_0
+1 tiny  kIters_0
+1 x.xK  omega_0
+1 x.xK  omegaFinalRes_0
+1 tiny  omegaIters_0
+1 tiny  p_0
+1 tiny  p_1
+1 tiny  p_2
+1 tiny  p_3
+1 tiny  p_4
+1 tiny  p_5
+1 tiny  pFinalRes_0
+1 tiny  pFinalRes_1
+1 tiny  pFinalRes_2
+1 tiny  pFinalRes_3
+1 tiny  pFinalRes_4
+1 tiny  pFinalRes_5
+1 tiny  pIters_0
+1 tiny  pIters_1
+1 tiny  pIters_2
+1 tiny  pIters_3
+1 tiny  pIters_4
+1 tiny  pIters_5
+1 tiny  Separator_0
+1 tiny  Time_0
+1 tiny  Ux_0
+1 tiny  UxFinalRes_0
+1 tiny  UxIters_0
+1 tiny  Uy_0
+1 tiny  UyFinalRes_0
+1 tiny  UyIters_0
+1 tiny  Uz_0
+1 tiny  UzFinalRes_0
+1 tiny  UzIters_0
+
+./postProcessing:
+xxxK
+3 x.xK  minMaxMagnitude/
+3 x.xK  probes/
+3 x.xK  residuals/
+
+./postProcessing/minMaxMagnitude:
+xxxK
+2 x.xK  0/
+
+./postProcessing/minMaxMagnitude/0:
+xxxK
+1 18K  fieldMinMax.dat
+
+./postProcessing/probes:
+xxxK
+2 x.xK  0/
+
+./postProcessing/probes/0:
+xxxK
+1 x.xK  p
+1 x.xK  U
+
+./postProcessing/residuals:
+xxxK
+2 x.xK  0/
+
+./postProcessing/residuals/0:
+xxxK
+1 12K  residuals.dat
+
+./processor0:
+xxxK
+2 x.xK  0/
+3 x.xK  100/
+3 x.xK  constant/
+
+./processor0/0:
+xxxK
+1 x.xK  k
+1 x.xK  nut
+1 x.xK  omega
+1 x.xK  p
+1 x.xK  phi
+1 x.xK  U
+
+./processor0/100:
+xxxK
+2 x.xK  uniform/
+1  45K  k
+1  35K  nut
+1  34K  omega
+1 x.xK  p
+1 x.xK  phi
+1 x.xK  U
+
+./processor0/100/uniform:
+xxxK
+1 799  time
+
+./processor0/constant:
+xxxK
+2 x.xK  polyMesh/
+
+./processor0/constant/polyMesh:
+xxxK
+1 x.xK  boundary
+1 tiny  boundaryProcAddressing
+1 tiny  cellLevel
+1  12K  cellProcAddressing
+1 tiny  cellZones
+1  41K  faceProcAddressing
+1 149K  faces
+1 tiny  faceZones
+1 tiny  level0Edge
+1  29K  neighbour
+1  32K  owner
+1 tiny  pointLevel
+1  14K  pointProcAddressing
+1 100K  points
+1 tiny  pointZones
+
+./processor1:
+xxxK
+2 x.xK  0/
+3 x.xK  100/
+3 x.xK  constant/
+
+./processor1/0:
+xxxK
+1 x.xK  k
+1 x.xK  nut
+1 x.xK  omega
+1 x.xK  p
+1 x.xK  phi
+1 x.xK  U
+
+./processor1/100:
+xxxK
+2 x.xK  uniform/
+1  45K  k
+1  35K  nut
+1  34K  omega
+1 x.xK  p
+1 x.xK  phi
+1 x.xK  U
+
+./processor1/100/uniform:
+xxxK
+1 799  time
+
+./processor1/constant:
+xxxK
+2 x.xK  polyMesh/
+
+./processor1/constant/polyMesh:
+xxxK
+1 x.xK  boundary
+1 tiny  boundaryProcAddressing
+1 tiny  cellLevel
+1  11K  cellProcAddressing
+1 tiny  cellZones
+1  36K  faceProcAddressing
+1 149K  faces
+1 tiny  faceZones
+1 tiny  level0Edge
+1  29K  neighbour
+1  33K  owner
+1 tiny  pointLevel
+1  13K  pointProcAddressing
+1  95K  points
+1 tiny  pointZones
+
+./system:
+xxxK
+1 x.xK  changeDictionaryDict
+1 x.xK  controlDict
+1 x.xK  createPatchDict
+1 tiny  decomposeParDict
+1 x.xK  fvSchemes
+1 x.xK  fvSolution
+1 tiny  minMaxMagnitude
+1 tiny  probes
+1 tiny  residuals
