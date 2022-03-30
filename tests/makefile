@@ -11,6 +11,14 @@ gitlab-pipeline:
 	make pipeline-tests
 
 
+#   Debugging
+# ==========================================================
+
+debug:
+	make -C create-study debug
+	make -C openfoam debug
+
+
 pipeline-tests:
 	make -C create-study
 	@echo ""

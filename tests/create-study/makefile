@@ -31,6 +31,19 @@ clean:
 
 
 
+#   Debugging
+# ==========================================================
+
+debug: 
+	touch debug-mode
+	make
+	@echo "DEBUG-MODE log: "
+	@cat debug-mode
+	@sleep 2
+	@rm debug-mode
+
+
+
 #   Helper-Targets
 # ==========================================================
 
