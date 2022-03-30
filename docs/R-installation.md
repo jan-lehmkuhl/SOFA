@@ -2,14 +2,10 @@
 R CLI
 ================================================================================
 
+## installation
     cd tools/sofa-framework
     make installrequirementsR
-    sudo R 
 
-beside the normal package installation which is done by `install.packages("PACKAGE")` one particular have to be added manual: 
-~~~
-devtools::install_git("https://gitlab.com/sofa-framework/ofreportr-core")
-~~~
 
 ## troubleshooting
 * maybe a restart is required
