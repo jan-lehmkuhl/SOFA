@@ -2,7 +2,7 @@
 SOFA - Simulation and Optimization Framework for general purpose Applications 
 ===================================================================================================
 
-the aim of this repository is to deliver a framework to improve the opperational efficiency for simple and complex simulation projects and therefore accelerate and improve the project output.  
+The aim of this repository is to deliver a framework to improve the operational efficiency for simple and complex simulation projects and therefore accelerate and improve the project output.  
 Actual the development is mainly for OpenFOAM and Dakota under Linux, but in general every scriptable based simulation tool should work or can be integrated.  
 To achieve this multiple measures are addressed:  
 
@@ -18,8 +18,8 @@ To achieve this multiple measures are addressed:
 * prepared standard documentation in markdown, where the related content is created
   * reduce thinking time for necessary topics and content
   * reduce documentation barrier like open an extra program and files at different places
-  * allows automatic target group related documentation like short reports for your boss or long reports with all numerical information for your colleage
-* seperate storage of mesh and setup files
+  * allows automatic target group related documentation like short reports for your boss or long reports with all numerical information for your colleague
+* separate storage of mesh and setup files
   * allows to use the same mesh for different calculations like parameter studies
   * easy mesh replacement for multiple calculations
 * use prepared OpenFoam-Setup-Files
@@ -36,14 +36,9 @@ To achieve this multiple measures are addressed:
 Get Started
 ===================================================================================================
 
-Access to GitLab with ssh
----------------------------------------------------------------------------------------------------
-the project downloads automatic the SOFA files from gitlab to `tools/sofa-framework`. Therefore you need ssh access to GitLab.  
-
-
 init new project
 ---------------------------------------------------------------------------------------------------
-to create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/sofa-framework/scripts/createHereNewSofaProject.sh` from a previous simulation project
+To create a new project create and go to the new empty project folder and execute there `ANYPROJECT/tools/sofa-framework/scripts/createHereNewSofaProject.sh` from a previous simulation project
 
     mkdir <new-project-folder>
     cd <new-project-folder>
@@ -76,7 +71,8 @@ be aware, that the submodules are probably behind the origin/master commit
 
 install software requirements
 ---------------------------------------------------------------------------------------------------
-to work properly some features need special software. These should be installed after project init with:  
+To work properly some features need special software. 
+These should be installed after project init with:  
 
     cd ./tools/sofa-framework
     make installrequirements
