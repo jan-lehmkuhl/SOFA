@@ -36,8 +36,8 @@ missing parent folder of link:  /create-study/dummy/mesh/doc/.gitignore
 Creating folder      /create-study/dummy/mesh/doc
 Creating link to     /create-study/dummy/mesh/doc/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/../shared/.gitignore_aspect_docs
 Copying file to      /create-study/dummy/mesh/shared/postStates/mesh-state-01.pvsm 	 from /tools/sofa-framework/study-structures/openfoam/mesh/paraview-mesh-base-state.pvsm
-Copying file to      /create-study/dummy/mesh/doc/meshOverview.Rmd 	 from /tools/openFoam-reporting/meshOverview/meshOverview.Rmd
-Copying file to      /create-study/dummy/mesh/shared/reportTemplates/meshReport01.Rmd 	 from /tools/openFoam-reporting/meshReport/meshReport.Rmd
+Copying file to      /create-study/dummy/mesh/doc/meshOverview.Rmd 	 from /tools/sofa-framework/study-structures/openfoam/mesh/reports/meshOverview.Rmd
+Copying file to      /create-study/dummy/mesh/shared/reportTemplates/meshReport01.Rmd 	 from /tools/sofa-framework/study-structures/openfoam/mesh/reports/meshReport.Rmd
 Creating folder      /create-study/dummy/mesh/shared/reportTemplates
 start case constructor
 creating case:         		  >>  mesh001  <<
@@ -56,8 +56,8 @@ missing parent folder of link:  /create-study/dummy/run/doc/.gitignore
 Creating folder      /create-study/dummy/run/doc
 Creating link to     /create-study/dummy/run/doc/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/../shared/.gitignore_aspect_docs
 Copying file to      /create-study/dummy/run/shared/postStates/run-state-01.pvsm 	 from /tools/sofa-framework/study-structures/openfoam/run/paraview-run-base-state.pvsm
-Copying file to      /create-study/dummy/run/doc/runOverview.Rmd 	 from /tools/openFoam-reporting/runOverview/runOverview.Rmd
-Copying file to      /create-study/dummy/run/shared/reportTemplates/runReport01.Rmd 	 from /tools/openFoam-reporting/runReport/runReport.Rmd
+Copying file to      /create-study/dummy/run/doc/runOverview.Rmd 	 from /tools/sofa-framework/study-structures/openfoam/run/reports/runOverview.Rmd
+Copying file to      /create-study/dummy/run/shared/reportTemplates/runReport01.Rmd 	 from /tools/sofa-framework/study-structures/openfoam/run/reports/runReport.Rmd
 Creating folder      /create-study/dummy/run/shared/reportTemplates
 start case constructor
 creating case:         		  >>  run001  <<

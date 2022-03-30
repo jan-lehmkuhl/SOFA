@@ -21,12 +21,12 @@
             "isSymlink": false
         },
         {
-            "sourcePath": "../../../../openFoam-reporting/meshOverview/meshOverview.Rmd",
+            "sourcePath": "reports/meshOverview.Rmd",
             "targetPath": "doc/meshOverview.Rmd",
             "isSymlink": false
         },
         {
-            "sourcePath": "../../../../../tools/openFoam-reporting/meshReport/meshReport.Rmd",
+            "sourcePath": "reports/meshReport.Rmd",
             "targetPath": "shared/reportTemplates/meshReport01.Rmd",
             "isSymlink": false
         }

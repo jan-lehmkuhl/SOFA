@@ -21,13 +21,12 @@
             "isSymlink": false
         },
         {
-            "sourcePath": "../../../../openFoam-reporting/runOverview/runOverview.Rmd",
+            "sourcePath": "reports/runOverview.Rmd",
             "targetPath": "doc/runOverview.Rmd",
             "isSymlink": false
         },
         {
-            "sourcePath": "../../../../../tools/openFoam-reporting/runReport/runReport.Rmd",
-                // TODO ask for missing repositries
+            "sourcePath": "reports/runReport.Rmd",
             "targetPath": "shared/reportTemplates/runReport01.Rmd",
             "isSymlink": false
         }
