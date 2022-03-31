@@ -7,8 +7,11 @@ tests: pipeline-tests local-tests
 
 
 gitlab-pipeline: 
-	make -C tools  replace-submodule-softlinks-with-clones
 	make pipeline-tests
+	@echo ""
+	@echo "*** pipeline tests completed ***"
+	@echo ""
+
 
 
 #   Debugging
@@ -21,9 +24,6 @@ debug:
 
 pipeline-tests:
 	make -C create-study
-	@echo ""
-	@echo "*** pipeline tests completed ***"
-	@echo ""
 
 
 local-tests: 
