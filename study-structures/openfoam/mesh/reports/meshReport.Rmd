@@ -1,0 +1,224 @@
+---
+author: "Sebastian Tueck"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+params:
+  cad_ver: "ST9 (109.00.15.005x64)"
+  tri_ver: "9.2.0"
+  edge_ver: "5.4.0"
+output:
+ rmdformats::readthedown:
+     self_contained: true
+     thumbnails: false
+     lightbox: true
+     gallery: false
+     highlight: tango
+     toc_depth: 4
+     code_folding: hide 
+ # html_document:
+ #     code_folding: hide
+ #     toc: true
+ #     toc_depth: 4
+ #     theme: united
+ #     highlight: zenburn
+ #     number_sections: true
+ #     toc_float:
+ #       collapsed: false
+---
+
+```{r setup, echo = TRUE,message=FALSE}
+
+casePath <- "../.."
+
+################################################################################
+# Check if OFReportR is installed and if not install it 
+################################################################################
+
+if(!is.element("OFReportR", installed.packages()[, 1]))  {
+  print("Needed package OFReportR is not present. It will be installed now.")
+  if(!is.element("devtools", installed.packages()[, 1])) {
+    print("Needed package devtools is not present. It will be installed now.")
+    install.packages("devtools",repos="http://lib.stat.cmu.edu/R/CRAN")
+  }
+  library("devtools",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+  devtools::install_git("https://gitlab.com/sofa-framework/ofreportr-core")
+}
+library("OFReportR",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+
+load_or_install("knitr")
+load_or_install("data.table")
+load_or_install("ggplot2")
+load_or_install("kableExtra")
+load_or_install("scales")
+load_or_install("rmdformats")
+
+############################################################################
+# Load Data
+############################################################################
+
+# load mesh stats with RFoam 
+mesh <- load_meshStats(casePath)
+
+title <- paste("Mesh report for", mesh$meshDetails[V1=="Case"]$V2 ) 
+
+# create programm data.table
+SolidEdge <- data.table(Programm = "Solid Edge", Version = "ST9 (109.00.15.005x64)")
+Salome    <- data.table(Programm = "Salome Meca", Version = "9.2.0")
+Paraview  <- data.table(Programm = "Paraview", Version = "5.4.0")
+OF        <- data.table(Programm = "OpenFoam", Version = mesh$meshDetails[V1=="OpenFOAM version"]$V2)
+
+programVersions <- rbind(SolidEdge, Salome, Paraview, OF)
+
+```
+
+---
+title: `r title`
+---
+
+```{r overview, echo=TRUE, out.width = '100%'}
+
+if (length(mesh$meshDetails) !=0 ) {
+
+  details <- copy(mesh$meshDetails)
+  
+  names(details) <- c("","")
+
+  knitr::kable(details, caption = "Overview of applied programs") %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+}
+
+
+```
+
+# System 
+
+```{r system, echo=TRUE, out.width = '100%'}
+
+knitr::kable(programVersions, caption = "Overview of applied programs") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+# Geometry and Dimensions
+
+```{r Geometry, echo=TRUE, fig.cap="Geometry and dimensions of the domain", out.width = '100%'}
+
+DimPic    <- list.files(paste0(casePath, "/doc/drafts"), recursive = TRUE, full.names = TRUE)
+
+if (length(DimPic) >= 1 ){
+  knitr::include_graphics(DimPic)
+}
+
+```
+
+# Triangulated Surfaces
+
+```{r Trisurface, echo=TRUE, fig.cap="Snapshot of the triangulated surfaces", out.width = '100%'}
+
+triSurfacePic  <- list.files(paste0(casePath, "/doc/cadPics"), recursive = TRUE, full.names = TRUE)
+
+if (length(triSurfacePic) >= 1 ){
+  knitr::include_graphics(triSurfacePic)
+}
+
+
+```
+
+# Feature Edges
+
+```{r Edges, echo=TRUE, fig.cap = "Snapshot of the feature Edges", out.width = '100%'}
+
+featuresPath <- list.files(casePath, pattern = "edges.png", recursive = TRUE, full.names = TRUE)
+
+if (length(featuresPath) >= 1) {
+  knitr::include_graphics(featuresPath)
+}
+
+```
+
+# Background mesh 
+
+```{r baseCellSize, echo=TRUE}
+
+knitr::kable(mesh[["cellSize"]], caption = "Size of background mesh undistorted cells") %>%
+  kable_styling(bootstrap_options = c("striped"))
+
+```
+
+# Final mesh
+
+```{r mesh-fig, echo=TRUE, fig.cap="Snapshot of the final mesh", out.width = '100%'}
+
+meshPic <- list.files(paste0(casePath,"/doc/meshPics"), recursive = TRUE, full.names = TRUE)
+
+if (length(meshPic) >= 1 ){
+  knitr::include_graphics(meshPic)
+}
+
+```
+
+## General data
+
+```{r mesh-stats, echo=TRUE}
+
+knitr::kable(mesh[["meshStats"]], caption = "General data regarding the mesh") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+```{r cell-stats, echo=TRUE}
+
+knitr::kable(mesh[["cellStats"]], caption = "Composition of celltypes") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+```{r poly-stats, echo=TRUE}
+
+knitr::kable(mesh[["polyhedraStats"]], caption = "Decomposition of polyhedra") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+## Patches (boundary and internal)
+
+```{r patch-names, echo=TRUE, fig.cap="Names of patches in mesh", out.width = '100%'}
+
+patchPic <- list.files(casePath, pattern = "patches.png", recursive = TRUE, full.names = TRUE)
+
+if (length(patchPic) >= 1 ){
+  knitr::include_graphics(patchPic)
+}
+
+```
+
+```{r patch-stats, echo=TRUE}
+
+knitr::kable(mesh[["patchStats"]], caption = "Decomposition of patches") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+## Mesh quality statistic
+
+```{r mesh-qual-stats, echo=TRUE}
+
+knitr::kable(mesh[["meshQualityStats"]], caption = "Quality of the mesh") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+## Boundary Layer 
+
+```{r layer-gen-stats, echo=TRUE}
+
+knitr::kable(mesh[["layerCoverage"]], caption = "Statistic on layer generation") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+```{r save data}
+
+saveRDS(mesh, "mesh.rds")
+
+```
+

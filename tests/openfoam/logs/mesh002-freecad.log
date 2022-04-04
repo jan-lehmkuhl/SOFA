@@ -12,7 +12,7 @@ else                                                     \
 	make finalizeMesh                                  ; \
 fi ;
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
-./Allmesh                                       
+./Allmesh
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
@@ -1347,7 +1347,7 @@ Scaling points by (1000 1000 1000)
 End
 
 mesh exists
-checkMesh  | tee log.checkMesh                  
+checkMesh  | tee log.checkMesh
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
@@ -1438,7 +1438,7 @@ Mesh OK.
 
 End
 
-make case-report                                 
+make case-report
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
 python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
 

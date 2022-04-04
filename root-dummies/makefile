@@ -38,14 +38,8 @@ endif
 
 
 initstudy:
+	if [ ! -d docs ] ; then make initdocs    ; fi ;
 	python3 tools/sofa-framework/src/sofa-tasks.py initStudy --verbose
-
-
-initfoam: 
-	if [ ! -d docs ] ;                    then make initdocs    ; fi ;
-	if [ ! -d tools/openFoam-setup ];     then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/openFoamSetup.git openFoam-setup;     fi;
-	if [ ! -d tools/openFoam-reporting ]; then cd tools ; git submodule add git@gitlab.com:HS-GM_OpenFOAM/r_openfoam openFoam-reporting;        fi;
-	python3 tools/sofa-framework/src/sofa-tasks.py initFoam
 
 
 

@@ -1,0 +1,313 @@
+---
+author: "Sebastian Tueck"
+title: "Overview"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+# params:
+#   cad_ver: "ST9 (109.00.15.005x64)"
+#   tri_ver: "9.2.0"
+#   edge_ver: "5.4.0"
+output:
+   rmdformats::readthedown:
+     self_contained: true
+     thumbnails: false
+     lightbox: true
+     gallery: false
+     highlight: tango
+     toc_depth: 4
+     code_folding: hide
+ # html_document:
+ #     code_folding: hide
+ #     toc: true
+ #     toc_depth: 4
+ #     theme: united
+ #     highlight: zenburn
+ #     number_sections: true
+ #     toc_float:
+ #       collapsed: false
+---
+
+```{r setup, echo = TRUE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, python.reticulate = FALSE)
+
+casePath <- "../"
+
+################################################################################
+# Check if OFReportR is installed and if not install it 
+################################################################################
+
+if(!is.element("OFReportR", installed.packages()[, 1]))  {
+  print("Needed package OFReportR is not present. It will be installed now.")
+  if(!is.element("devtools", installed.packages()[, 1])) {
+    print("Needed package devtools is not present. It will be installed now.")
+    install.packages("devtools",repos="http://lib.stat.cmu.edu/R/CRAN")
+  }
+  library("devtools",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+  devtools::install_git("https://gitlab.com/sofa-framework/ofreportr-core")
+}
+library("OFReportR",character.only=TRUE,quietly=TRUE,verbose=FALSE)
+
+load_or_install("knitr")
+load_or_install("data.table")
+load_or_install("ggplot2")
+load_or_install("kableExtra")
+load_or_install("scales")
+load_or_install("gridExtra")
+load_or_install("rjson")
+load_or_install("rmdformats")
+load_or_install("plotly")
+load_or_install("stringr")
+
+
+############################################################################
+# Load Data
+############################################################################
+
+studyPath <- ".."
+
+# list all .rds files present in mesh
+rDataPaths <- list.files(path = "..", pattern = "run.rds", recursive = TRUE, full.names = TRUE)
+
+# initialize variables
+# cases           <- list() 
+
+caseDetails           <- data.table()
+residuals             <- data.table()
+yPlus                 <- data.table()
+continuity            <- data.table()
+minMax                <- data.table()
+centerU               <- data.table()
+holeVerticalU         <- data.table()
+holeHorizontalU       <- data.table()
+centerP               <- data.table()
+holeVerticalP         <- data.table()
+holeHorizontalP       <- data.table()
+monitorPoints         <- data.table()
+turbulenceProperties  <- data.table()
+transportProperties   <- data.table()
+fvSchemes             <- data.table()
+BCTable               <- data.table()
+
+# loop over paths of .rds files
+for (path in rDataPaths) {
+  # extract name of mesh from path
+  runName <- str_split(path , pattern = "/" )[[1]][2]
+  # optionally save all files in a list
+  #cases[[meshName]] <- readRDS(path)
+  # save data to temporary variable
+  temp <- readRDS(path)
+  #extract and combine data into single dta.tables
+  turbulenceProperties  <- rbind(turbulenceProperties, temp$turbulenceProperties[,case := runName ], fill=TRUE)
+  transportProperties   <- rbind(transportProperties, temp$transportProperties[,case := runName ], fill=TRUE)
+  fvSchemes             <- rbind(fvSchemes, temp$fvSchemes[,case := runName ], fill=TRUE)
+  BCTable               <- rbind(BCTable, temp$BCTable[,case := runName ], fill=TRUE)
+  caseDetails           <- rbind(caseDetails, invert_frame(temp$caseDetails, byColumnName = "V1"), fill=TRUE)
+  residuals             <- rbind(residuals, temp$residuals[,case := runName ], fill=TRUE)
+  # yPlus                 <- rbind(yPlus, temp$yPlus[,case := runName ], fill=TRUE)
+  continuity            <- rbind(continuity, temp$continuity[,case := runName ], fill=TRUE)
+  minMax                <- rbind(minMax, temp$minMax[,case := runName ], fill=TRUE)
+  # centerU               <- rbind(centerU, temp$centerU[,case := runName ], fill=TRUE)
+  # holeVerticalU         <- rbind(holeVerticalU, temp$holeVerticalU[,case := runName ], fill=TRUE)
+  # holeHorizontalU       <- rbind(holeHorizontalU, temp$holeHorizontalU[,case := runName ], fill=TRUE)
+  # centerP               <- rbind(centerP, temp$centerP[,case := runName ], fill=TRUE)
+  # holeVerticalP         <- rbind(holeVerticalP, temp$holeVerticalP[,case := runName ], fill=TRUE)
+  # holeHorizontalP       <- rbind(holeHorizontalP, temp$holeHorizontalP[,case := runName ], fill=TRUE)
+  # monitorPoints         <- rbind(monitorPoints, temp$monitorPoints[,case := runName ], fill=TRUE)
+}
+
+conTurbulenceProperties <- concentrate_Tables(turbulenceProperties)
+conTransportProperties  <- concentrate_Tables(transportProperties)
+conFvSchemes            <- concentrate_Tables(fvSchemes)
+conBCTable              <- concentrate_Tables(BCTable)
+
+```
+
+# Index 
+
+[Mesh Overview](../../mesh/doc/meshOverview.html)
+
+# General Data
+
+```{r case Details}
+
+ knitr::kable(caseDetails, caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+## Fluid properties
+
+```{r Fluid properties}
+
+ knitr::kable(conTransportProperties, caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+## Turbulence properties
+
+```{r Turbulence properties}
+
+ knitr::kable(conTurbulenceProperties, caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+## Boundary conditions
+
+### Velocity U
+
+```{r BC velocity}
+
+ knitr::kable(conBCTable[variable == "U"], caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+### Pressure p
+
+```{r BC pressure}
+
+ knitr::kable(conBCTable[variable == "p"], caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+### Turbulent kinetic energy k
+
+```{r BC turbulent kinetic energy k}
+
+ knitr::kable(conBCTable[variable == "k"], caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+### Specific dissipation rate w
+
+```{r BC specific dissipation rate w}
+
+ knitr::kable(conBCTable[variable == "omega"], caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+### Turbulent viscosity nut
+
+```{r BC Turbulent viscosity nut}
+
+ knitr::kable(conBCTable[variable == "nut"], caption = "Mesh setup") %>%
+   kable_styling(bootstrap_options = c("striped"))
+
+```
+
+## Plot of excecutionTime
+
+```{r Excecution}
+
+exeTime <- copy(caseDetails[, c("Name", "Excecution time (s)")])
+
+exeTime[, `Excecution time (h)` := (as.double(`Excecution time (s)`) / 3600) ]
+
+ggExeTime <- ggplot(exeTime, aes( x=Name, y=`Excecution time (h)`, fill = Name)) + 
+  geom_bar(stat="identity") + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  coord_cartesian(ylim=c(floor(min(exeTime$`Excecution time (h)`, na.rm = TRUE)/1)*1, 
+                         ceiling(max(exeTime$`Excecution time (h)`, na.rm = TRUE)/1)*1)) + 
+  ggtitle("Time of execution") +
+  xlab("Case") +
+  ylab("Execution time [h]")
+
+plExeTime <- ggplotly(ggExeTime)
+
+plExeTime
+```
+
+# Residuals
+
+```{r residuals}
+
+meltResiduals <- melt(residuals, id.vars = c("Time", "case"))
+
+residualPlots <- list()
+
+for (var in unique(meltResiduals$variable)){
+  residualsTemp <- copy(meltResiduals[variable == var])
+  ggResiduals <-  ggplot(residualsTemp, aes(x = Time, y = value, colour=case)) + geom_line() +
+       scale_y_log10() +
+       ggtitle(paste("Residuals of", var)) +
+       xlab("Time") +
+       ylab("Residual [-]")+
+       theme_bw() + 
+       guides(colour=guide_legend(ncol=2))
+  plResiduals <- ggplotly(ggResiduals)
+  plot <- list(plResiduals)
+  residualPlots <- c(residualPlots, plot)
+}
+
+htmltools::tagList(setNames(residualPlots, NULL))
+
+```
+
+
+# Continuity
+
+```{r continuity}
+
+meltContinuity <- melt(continuity, id.vars = c("time", "case"))
+meltContinuity$value <-abs(meltContinuity$value)
+
+continuityPlots <- list()
+
+for (var in unique(meltContinuity$variable)){
+   if (is.na(var))  {
+    warning("removed NA variable in ")
+    next
+  }
+  continuitytemp <- copy(meltContinuity[variable == var])
+  ggContinuity <-  ggplot(continuitytemp, aes(x = time, y = value, colour=case)) + geom_line() +
+       scale_y_log10() +
+       ggtitle(paste(var, "continuity error")) +
+       xlab("Iteration") +
+       ylab("Magnitude of continuity error [-]")+
+       theme_bw() + 
+       guides(colour=guide_legend(ncol=2))
+  plContinuity <- ggplotly(ggContinuity)
+  plot <- list(plContinuity)
+  continuityPlots <- c(continuityPlots, plot)
+}
+
+htmltools::tagList(setNames(continuityPlots, NULL))
+
+
+```
+
+# yPlus
+
+```{r yPlus}
+
+meltYPlus <- melt(yPlus, id.vars = c("time", "patch", "case"))
+
+yPlusPlots <- list()
+
+for (patchIter in unique(meltYPlus$patch)) {
+  if (is.na(patchIter))  {
+    warning(paste("removed NA patch(es) for case(s): "), toString(unique(meltYPlus[is.na(patch)]$case)))
+    next
+  }
+  ggYPlus <- ggplot(meltYPlus[patch == patchIter], aes(x=case, y=value, fill = variable)) + 
+    geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) + 
+    theme_bw() + 
+    ggtitle(paste("yPlus values of patch", patchIter)) +
+    xlab("Case") +
+    ylab("yPlus[-]")
+  plYPlus <- ggplotly(ggYPlus)
+  plot <- list(plYPlus)
+  yPlusPlots <- c(yPlusPlots, plot)
+}
+
+htmltools::tagList(setNames(yPlusPlots, NULL))
+
+```
+
+
+
