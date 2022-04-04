@@ -26,8 +26,8 @@ requirementtest:
 	@R          --version  | grep "R version"
 
 installrequirements: 
-	sudo scripts/install-deb-packages.sh
-	sudo scripts/install-r-packages.sh
+	sudo docker/install-deb-packages.sh
+	sudo docker/install-r-packages.sh
 
 
 tests-local: 
