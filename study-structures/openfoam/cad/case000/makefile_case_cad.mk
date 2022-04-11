@@ -17,6 +17,7 @@ jsonfile        = $(shell find . -name 'sofa.cad*.json')
 paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview")
 
 
+include ${FRAMEWORK_PATH}/makefile.global.mk
 ifneq ("$(wildcard ./special-targets.mk)","")
     include special-targets.mk
 endif
@@ -141,4 +142,5 @@ frameworkview:
 # opens paraview with the referenced state file
 paraview: 
 	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
+	@${remove_paraview_variable_parts} $(paraviewFile)
 	paraview --state=$(paraviewFile)  

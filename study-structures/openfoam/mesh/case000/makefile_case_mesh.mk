@@ -18,6 +18,7 @@ linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink"
 paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
 
 
+include ${FRAMEWORK_PATH}/makefile.global.mk
 ifneq ("$(wildcard ./special-targets.mk)","")
     include special-targets.mk
 endif
@@ -188,8 +189,9 @@ clean-report:
 
 # opens paraview with the referenced state file
 paraview: 
-	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
-	paraview --state=$(paraviewFile)  
+	# Remove variable parts from Paraview state file
+	@${remove_paraview_variable_parts} $(paraviewFile)
+	paraview --state=$(paraviewFile)
 
 
 # opens Paraview without specified state
