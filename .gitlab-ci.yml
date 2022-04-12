@@ -31,7 +31,7 @@ docker-build-main:
     - docker build --pull --tag "$CI_REGISTRY_IMAGE" docker
     - docker push "$CI_REGISTRY_IMAGE"
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push" && '$CI_COMMIT_BRANCH == "master"'
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "master"
       changes:
         - .gitlab-ci.yml
         - docker/**/*
