@@ -27,6 +27,7 @@ docker-build-main:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
+    - echo "running pipeline on branch.. $CI_COMMIT_BRANCH because of a.. $CI_PIPELINE_SOURCE"
     - docker build --pull --tag "$CI_REGISTRY_IMAGE" docker
     - docker push "$CI_REGISTRY_IMAGE"
   rules:
@@ -39,7 +40,7 @@ docker-build-main:
 make-test:
   stage: test
   script:
-    - "echo 'PIPELINE_OUTPUT'"
+    - echo "running pipeline on branch.. $CI_COMMIT_BRANCH because of a.. $CI_PIPELINE_SOURCE"
     - "make -C ./tests/ gitlab-pipeline"
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
