@@ -6,10 +6,12 @@ include root-dummies/makefile
 
 
 
-# General user settings
+# general
 # ===================================================================
 
-# project-folder      	= new-project-folder
+.PHONY: docker-interactive
+docker-interactive:
+	make -C docker run-interactive
 
 
 
