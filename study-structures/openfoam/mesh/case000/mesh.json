@@ -9,7 +9,7 @@
     "buildSettings" : {
         "cadLink"           :   "",
         "defaultFiles"      :   "bundle-1",
-        "paraview"          :   "../shared/postStates/mesh-state-01.pvsm",
+        "paraviewState"     :   "../shared/postStates/mesh-state-01.pvsm",
         "report"            :   "meshReport01.Rmd"
     },
 

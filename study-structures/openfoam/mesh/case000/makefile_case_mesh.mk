@@ -15,7 +15,7 @@ endif
 
 jsonFile        = $(shell find . -name 'sofa.mesh*.json')
 linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
-paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
+paraviewState   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk
@@ -190,8 +190,8 @@ clean-report:
 # opens paraview with the referenced state file
 paraview: 
 	# Remove variable parts from Paraview state file
-	@${remove_paraview_variable_parts} $(paraviewFile)
-	paraview --state=$(paraviewFile)
+	@${remove_paraview_variable_parts} $(paraviewState)
+	paraview --state=$(paraviewState)
 
 
 # opens Paraview without specified state

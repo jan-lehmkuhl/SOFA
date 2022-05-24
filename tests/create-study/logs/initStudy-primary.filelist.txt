@@ -70,7 +70,7 @@ xxxK
 1 tiny  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
 1 tiny  postStates -> ../shared/postStates/
 1 tiny  pv.foam
-1 722  sofa.mesh.json
+1 759  sofa.mesh.json
 
 ./mesh/shared:
 xxxK
@@ -104,7 +104,7 @@ xxxK
 1 tiny  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 1 tiny  postStates -> ../shared/postStates/
 1 tiny  pv.foam
-1 787  sofa.run.json
+1 824  sofa.run.json
 
 ./run/shared:
 xxxK

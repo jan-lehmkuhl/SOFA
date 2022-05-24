@@ -15,7 +15,7 @@ endif
 
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
-paraviewFile     = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
+paraviewState    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
 linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings.cadLink")
@@ -169,11 +169,15 @@ clean-freecad:
 	rm -f constant/polyMesh
 
 
+
+# PostProcessing
+# =============================================================================
+
 # opens paraview with the referenced state file
 paraview: 
 	# Remove variable parts from Paraview state file
-	@${remove_paraview_variable_parts} $(paraviewFile)
-	paraview --state=$(paraviewFile)
+	@${remove_paraview_variable_parts} $(paraviewState)
+	paraview --state=$(paraviewState)
 
 
 # opens Paraview without specified state

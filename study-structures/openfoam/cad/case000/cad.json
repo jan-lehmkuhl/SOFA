@@ -7,7 +7,7 @@
 
 
     "buildSettings" : {
-        "paraview"          :   "../shared/postStates/CAD.pvsm",
+        "paraviewState"     :   "../shared/postStates/CAD.pvsm",
         "report"            :   ""
     }
 
