@@ -60,7 +60,7 @@ view:
 
 
 # remove all calculated files
-clean: clean-run clean-freecad clean-report upstream-links
+clean: clean-run clean-freecad clean-report clean-paraview upstream-links
 	find . -empty -type d -delete
 	make -C ${FRAMEWORK_PATH}  clean
 
@@ -197,3 +197,6 @@ paraview-exports:
 	@if [ -f "${paraviewScript}" ] ; then   \
 		pvbatch ${paraviewScript}         ; \
 	fi ;
+
+clean-paraview:
+	rm -rf doc/paraview

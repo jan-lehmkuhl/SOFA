@@ -47,7 +47,7 @@ view:
 	make paraview-exports
 
 
-clean: clean-freecad-output clean-vtk
+clean: clean-freecad-output clean-vtk clean-paraview
 	find . -empty -type d -delete
 	make -C ${FRAMEWORK_PATH}  clean
 
@@ -154,3 +154,6 @@ paraview-exports:
 	@if [ -f "${paraviewScript}" ] ; then   \
 		pvbatch ${paraviewScript}         ; \
 	fi ;
+
+clean-paraview:
+	rm -rf doc/paraview

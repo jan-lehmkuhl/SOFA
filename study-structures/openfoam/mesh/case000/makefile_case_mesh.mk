@@ -59,7 +59,7 @@ view:
 
 
 # remove all from commited sources created files and links
-clean: clean-freecad-mesh clean-framework-mesh clean-report
+clean: clean-freecad-mesh clean-framework-mesh clean-report clean-paraview
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
@@ -219,3 +219,6 @@ paraview-exports:
 	@if [ -f "${paraviewScript}" ] ; then   \
 		pvbatch ${paraviewScript}         ; \
 	fi ;
+
+clean-paraview:
+	rm -rf doc/paraview
