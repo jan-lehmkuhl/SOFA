@@ -16,6 +16,7 @@
         "porousZone"        :   "False",
 
         "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
+        "paraviewScript"    :   "",
         "report"            :   "runReport01.Rmd"
     },
 

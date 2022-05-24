@@ -8,6 +8,7 @@
 
     "buildSettings" : {
         "paraviewState"     :   "../shared/postStates/CAD.pvsm",
+        "paraviewScript"    :   "",
         "report"            :   ""
     }
 

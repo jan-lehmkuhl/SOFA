@@ -1996,6 +1996,9 @@ List of 2
 Start create case report
 make[x]: Leaving directory '/tests/openfoam/run/run002'
 make[x]: Leaving directory '/tests/openfoam/run/run002'
+make paraview-exports
+make[x]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam/run/run002'
 make -C .. overview-report
 make[x]: Entering directory '/tests/openfoam/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview

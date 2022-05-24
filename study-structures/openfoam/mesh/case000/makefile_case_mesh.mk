@@ -16,6 +16,7 @@ endif
 jsonFile        = $(shell find . -name 'sofa.mesh*.json')
 linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
 paraviewState   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
+paraviewScript  = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk
@@ -42,6 +43,7 @@ mesh: upstream-links
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
+	make paraview-exports
 	make -C .. overview-report
 
 
@@ -187,6 +189,10 @@ clean-report:
 	rm -rf doc/meshReport
 
 
+
+# PostProcessing
+# =============================================================================
+
 # opens paraview with the referenced state file
 paraview: 
 	# Remove variable parts from Paraview state file
@@ -205,4 +211,11 @@ paraview-empty-state:
 	else                                                                        \
 		echo "*** start paraFoam"                                             ; \
 		paraFoam                                                              ; \
+	fi ;
+
+
+paraview-exports: 
+	@mkdir --parents doc/paraview
+	@if [ -f "${paraviewScript}" ] ; then   \
+		pvbatch ${paraviewScript}         ; \
 	fi ;

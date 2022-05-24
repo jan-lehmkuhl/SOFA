@@ -1615,6 +1615,9 @@ label: save data
 Start create case report
 make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
 make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
+make paraview-exports
+make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
 make -C .. overview-report
 make[x]: Entering directory '/tests/openfoam/mesh'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview

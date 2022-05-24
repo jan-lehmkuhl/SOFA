@@ -10,6 +10,7 @@
         "cadLink"           :   "",
         "defaultFiles"      :   "bundle-1",
         "paraviewState"     :   "../shared/postStates/mesh-state-01.pvsm",
+        "paraviewScript"    :   "",
         "report"            :   "meshReport01.Rmd"
     },
 

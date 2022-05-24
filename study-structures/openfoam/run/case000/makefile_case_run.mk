@@ -16,6 +16,7 @@ endif
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
 paraviewState    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
+paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
 linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings.cadLink")
@@ -43,6 +44,7 @@ run: upstream-links
 	else                          \
 		make frameworkrun       ; \
 	fi ;
+	make paraview-exports
 	make -C .. overview-report
 
 
@@ -188,4 +190,10 @@ paraview-empty-state:
 	else                                                                        \
 		echo "*** start paraFoam -builtin"                                    ; \
 		paraFoam -builtin                                                     ; \
+	fi ;
+
+paraview-exports: 
+	@mkdir --parents doc/paraview
+	@if [ -f "${paraviewScript}" ] ; then   \
+		pvbatch ${paraviewScript}         ; \
 	fi ;
