@@ -59,7 +59,17 @@
             "justMyCode":       true,
             "showReturnValue":  true,
             "console":          "integratedTerminal"
-        }
+        },
 
+
+        {
+            "name":             "Python: Current File in run001",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${file}",
+            "cwd":              "${workspaceRoot}/INSERT_STUDY_NAME/run/run001",
+            "stopOnEntry":      true,
+            "console":          "integratedTerminal"
+        }
     ]
 }
