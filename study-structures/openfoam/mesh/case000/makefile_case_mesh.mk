@@ -17,6 +17,7 @@ jsonFile        = $(shell find . -name 'sofa.mesh*.json')
 linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
 paraviewState   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
 paraviewScript  = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
+rReport         = $(shell node -p "require('$(jsonFile)').buildSettings.report")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk
@@ -44,7 +45,9 @@ mesh: upstream-links
 		make finalizeMesh                                  ; \
 	fi ;
 	make paraview-exports
-	make -C .. overview-report
+	@if [ "${rReport}" != "" ] ; then     \
+		make -C .. overview-report      ; \
+	fi ;
 
 
 meshshow: mesh

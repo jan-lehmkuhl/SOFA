@@ -41,7 +41,6 @@ if args.verbose :   print("    with report.py in:       " + file_path )
 
 # default part
 if True: 
-    print("Start create case report")
     thisCase = Case( verbose=parser.parse_args().verbose )
 
     # search for report destination
@@ -55,8 +54,12 @@ if True:
 
     # execute R report
     if reportDst == None:
-        print("no report defined")
+        print("no R report is defined")
+    elif (  'report' in thisCase.caseJson['buildSettings']
+            and thisCase.caseJson['buildSettings']['report'] == ""):
+        print("no R report is specified in sofa.*.json")
     else: 
+        print("start creating R case report")
         cmd = ['R', '-e' , 'rmarkdown::render(\'' + reportDst + '\')']
         #logFilePath = os.path.join("log",str("runReport" + ".log"))
         runReport = subprocess.Popen(cmd)# , logFilePath)  
