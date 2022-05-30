@@ -61,6 +61,21 @@
             "console":          "integratedTerminal"
         },
 
+        {
+            "name":             "caseReport",
+            "type":             "python",
+            "request":          "launch",
+            "program":          "${workspaceRoot}/tools/sofa-framework/study-structures/openfoam/shared/report.py",
+            "cwd":              "${workspaceRoot}/INSERT_STUDY_NAME/mesh/mesh001",
+            "args": [
+                "--verbose"
+            ],
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+            "console":          "integratedTerminal"
+        },
+
 
         {
             "name":             "Python: Current File in run001",
