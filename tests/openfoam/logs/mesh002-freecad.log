@@ -1,8 +1,8 @@
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
-
 *** update Upstream-Links in  mesh002  ***
 Skip existing folder      /openfoam/mesh/mesh002
 Skip existing file        /openfoam/mesh/mesh002/pv.foam
+remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
 Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
 ./Allmesh
@@ -1433,10 +1433,10 @@ End
 
 make case-report
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
-
 *** update Upstream-Links in  mesh002  ***
 Skip existing folder      /openfoam/mesh/mesh002
 Skip existing file        /openfoam/mesh/mesh002/pv.foam
+remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
 Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 

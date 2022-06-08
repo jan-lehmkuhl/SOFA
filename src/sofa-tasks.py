@@ -118,7 +118,7 @@ elif args.entryPoint == "initCase":
     currentCase.initCase()
 
 elif args.entryPoint == "upstreamLinks":
-    print("\n*** update Upstream-Links in ", os.path.basename(os.getcwd()), " ***" )
+    print("*** update Upstream-Links in ", os.path.basename(os.getcwd()), " ***" )
     thisCase = Case( verbose=args.verbose )
     thisCase.create()
     thisCase.createUpstreamAspectLinks()
