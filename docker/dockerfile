@@ -28,22 +28,25 @@ RUN ./install-r-packages.sh
 WORKDIR /
 
 
-# install OpenFOAM 7
+#   install OpenFOAM 7
 # ==========================================================
-RUN useradd --user-group --create-home --shell /bin/bash foam ;\
-	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 RUN sh -c "wget -O - https://dl.openfoam.org/gpg.key | apt-key add -"
 RUN add-apt-repository http://dl.openfoam.org/ubuntu
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends openfoam7
 
-RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc 
-
+# create separate user with login shell
+RUN useradd --user-group --create-home --shell /bin/bash foam ;\
+	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER foam
+RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc 
+USER root
+
+
 
 
 # closing
 # ==========================================================
 
+USER foam
 WORKDIR /
