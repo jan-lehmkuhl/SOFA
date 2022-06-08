@@ -109,6 +109,10 @@ postProcessing
 # Reporting
 # =====================================
 
+## general exports
+doc/plain-text-exports
+
+
 ## R reports
 .Rhistory
 doc/*Report/*Report.Rmd
