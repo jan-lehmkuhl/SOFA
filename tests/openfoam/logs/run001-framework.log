@@ -1,21 +1,11 @@
 make[x]: Entering directory '/tests/openfoam/run/run001'
-if [ -f "Allrun" ] ; then                                                   \
-	sed -i 's\MESHDIR=".*"\MESHDIR="./mesh001"\' Allrun         ; \
-fi
-python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
 
 *** update Upstream-Links in  run001  ***
 Skip existing folder      /openfoam/run/run001
 Skip existing file        /openfoam/run/run001/pv.foam
 Creating link to     constant/polyMesh 		 with pointer to   ../../mesh/mesh001/constant/polyMesh
 Copying file to      /openfoam/run/run001/doc/runReport/runReport.Rmd 	 from /openfoam/run/shared/reportTemplates/runReport01.Rmd
-if [ -f "Allrun" ] ; then     \
-	make run-allrun         ; \
-else                          \
-	make frameworkrun       ; \
-fi ;
 make[x]: Entering directory '/tests/openfoam/run/run001'
-python3 ../../../tools/sofa-framework/openFoam/python/foamRun.py run
 
 ==========================================================================
 Solving with OpenFoam 7 on LocalMachine using 2 cores
@@ -37,7 +27,6 @@ make[x]: Leaving directory '/tests/openfoam/run/run001'
 make paraview-exports
 make[x]: Entering directory '/tests/openfoam/run/run001'
 make[x]: Leaving directory '/tests/openfoam/run/run001'
-make -C .. overview-report
 make[x]: Entering directory '/tests/openfoam/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
