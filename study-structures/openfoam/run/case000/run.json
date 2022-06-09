@@ -15,7 +15,8 @@
         "dynamicMesh"       :   "False",
         "porousZone"        :   "False",
 
-        "paraview"          :   "../shared/postStates/run-state-01.pvsm",
+        "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
+        "paraviewScript"    :   "",
         "report"            :   "runReport01.Rmd"
     },
 

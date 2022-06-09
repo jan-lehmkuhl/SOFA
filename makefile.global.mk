@@ -22,9 +22,19 @@ else
 endif
 
 
-#   testing helpers
+#   helper actions
 # ===================================================================
 
+#   Paraview
+# ----------------------------------------------------------
+
+remove_paraview_variable_parts = sed --in-place --regexp-extended --expression \
+	"s/(<Element index=\"0\" value=\")(.*)(pv\.foam\"\/>)/\1\3/g"
+
+
+
+#   testing
+# ----------------------------------------------------------
 list_content = ls --almost-all -g --no-group \
     --time-style='+' --human-readable --group-directories-first --classify --recursive  \
     | sed -re 's/^[^ ]* //'   \

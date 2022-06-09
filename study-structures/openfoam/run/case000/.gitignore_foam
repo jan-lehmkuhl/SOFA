@@ -106,9 +106,14 @@ postProcessing
 
 
 
-# R & Reporting
+# Reporting
 # =====================================
 
+## general exports
+doc/plain-text-exports
+
+
+## R reports
 .Rhistory
 doc/*Report/*Report.Rmd
     # copied from aspect/doc/templateXX
@@ -119,5 +124,10 @@ doc/*Report/*Report.html
 
 doc/meshReport
     # link in runXXX to meshReport
+
+
+## paraview
+doc/paraview
+
 
 # End of https://www.gitignore.io/api/openfoam

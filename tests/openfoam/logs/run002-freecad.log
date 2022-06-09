@@ -1993,8 +1993,11 @@ List of 2
  $ message: logi FALSE
 
 
-Start create case report
+start creating R case report
 make[x]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam/run/run002'
+make paraview-exports
+make[x]: Entering directory '/tests/openfoam/run/run002'
 make[x]: Leaving directory '/tests/openfoam/run/run002'
 make -C .. overview-report
 make[x]: Entering directory '/tests/openfoam/run'

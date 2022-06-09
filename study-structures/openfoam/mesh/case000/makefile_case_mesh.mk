@@ -15,9 +15,12 @@ endif
 
 jsonFile        = $(shell find . -name 'sofa.mesh*.json')
 linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
-paraviewFile    = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
+paraviewState   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
+paraviewScript  = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
+rReport         = $(shell node -p "require('$(jsonFile)').buildSettings.report")
 
 
+include ${FRAMEWORK_PATH}/makefile.global.mk
 ifneq ("$(wildcard ./special-targets.mk)","")
     include special-targets.mk
 endif
@@ -41,7 +44,10 @@ mesh: upstream-links
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
-	make -C .. overview-report
+	make paraview-exports
+	@if [ "${rReport}" != "" ] ; then     \
+		make -C .. overview-report      ; \
+	fi ;
 
 
 meshshow: mesh
@@ -56,7 +62,7 @@ view:
 
 
 # remove all from commited sources created files and links
-clean: clean-freecad-mesh clean-framework-mesh clean-report
+clean: clean-freecad-mesh clean-framework-mesh clean-report clean-paraview
 	rm -rf constant/polyMesh/*
 	rm -rf constant/triSurface
 	find . -empty -type d -delete
@@ -186,10 +192,15 @@ clean-report:
 	rm -rf doc/meshReport
 
 
+
+# PostProcessing
+# =============================================================================
+
 # opens paraview with the referenced state file
 paraview: 
-	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
-	paraview --state=$(paraviewFile)  
+	# Remove variable parts from Paraview state file
+	@${remove_paraview_variable_parts} $(paraviewState)
+	paraview --state=$(paraviewState)
 
 
 # opens Paraview without specified state
@@ -204,3 +215,13 @@ paraview-empty-state:
 		echo "*** start paraFoam"                                             ; \
 		paraFoam                                                              ; \
 	fi ;
+
+
+paraview-exports: 
+	@mkdir --parents doc/paraview
+	@if [ -f "${paraviewScript}" ] ; then   \
+		pvbatch ${paraviewScript}         ; \
+	fi ;
+
+clean-paraview:
+	rm -rf doc/paraview

@@ -15,12 +15,14 @@ endif
 
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
-paraviewFile     = $(shell node -p "require('$(jsonFile)').buildSettings.paraview")
+paraviewState    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
+paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
 linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings.cadLink")
 
 
+include ${FRAMEWORK_PATH}/makefile.global.mk
 ifneq ("$(wildcard ./special-targets.mk)","")
     include special-targets.mk
 endif
@@ -42,6 +44,7 @@ run: upstream-links
 	else                          \
 		make frameworkrun       ; \
 	fi ;
+	make paraview-exports
 	make -C .. overview-report
 
 
@@ -57,7 +60,7 @@ view:
 
 
 # remove all calculated files
-clean: clean-run clean-freecad clean-report upstream-links
+clean: clean-run clean-freecad clean-report clean-paraview upstream-links
 	find . -empty -type d -delete
 	make -C ${FRAMEWORK_PATH}  clean
 
@@ -168,10 +171,15 @@ clean-freecad:
 	rm -f constant/polyMesh
 
 
+
+# PostProcessing
+# =============================================================================
+
 # opens paraview with the referenced state file
 paraview: 
-	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
-	paraview --state=$(paraviewFile)  
+	# Remove variable parts from Paraview state file
+	@${remove_paraview_variable_parts} $(paraviewState)
+	paraview --state=$(paraviewState)
 
 
 # opens Paraview without specified state
@@ -183,3 +191,12 @@ paraview-empty-state:
 		echo "*** start paraFoam -builtin"                                    ; \
 		paraFoam -builtin                                                     ; \
 	fi ;
+
+paraview-exports: 
+	@mkdir --parents doc/paraview
+	@if [ -f "${paraviewScript}" ] ; then   \
+		pvbatch ${paraviewScript}         ; \
+	fi ;
+
+clean-paraview:
+	rm -rf doc/paraview

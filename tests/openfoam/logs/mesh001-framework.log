@@ -45,7 +45,9 @@ Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
 ==========================================================================
 
 make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
-make -C .. overview-report
+make paraview-exports
+make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
 make[x]: Entering directory '/tests/openfoam/mesh'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 

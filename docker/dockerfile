@@ -47,6 +47,21 @@ RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc
 USER root
 
 
+#   install Paraview
+# ==========================================================
+# install separate paraview for pvpython inside pvbatch
+
+# download paraview from https://www.paraview.org/download/
+ARG  PARAVIEW_VERSION=5.7
+ARG  PARAVIEW_DOWNLOAD=ParaView-5.7.0-MPI-Linux-Python3.7-64bit
+RUN wget --quiet --output-document - \ 
+    "https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v${PARAVIEW_VERSION}&type=binary&os=Linux&downloadFile=${PARAVIEW_DOWNLOAD}.tar.gz"  \
+    | tar -xz --directory=/opt  -f - 
+
+# make pvpython and pvbatch available in your $PATH
+RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvbatch /bin
+RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvpython /bin
+
 
 
 # closing

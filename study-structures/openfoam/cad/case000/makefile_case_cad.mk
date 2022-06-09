@@ -14,9 +14,11 @@ else
 endif
 
 jsonfile        = $(shell find . -name 'sofa.cad*.json')
-paraviewFile    = $(shell node -p "require('$(jsonfile)').buildSettings.paraview")
+paraviewState   = $(shell node -p "require('$(jsonfile)').buildSettings.paraviewState")
+paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
 
 
+include ${FRAMEWORK_PATH}/makefile.global.mk
 ifneq ("$(wildcard ./special-targets.mk)","")
     include special-targets.mk
 endif
@@ -35,15 +37,17 @@ freecad:
 	@read -p "press ENTER to continue ..." dummy
 	make freecad-gui
 	make freecad-stl-push
+	make paraview-exports
 
 
 view:
 	if [   -f native/geometry.FCStd ]; then   make freecad-gui              ; fi
 	if [ ! -f native/geometry.FCStd ]; then   make frameworkview               ; fi
 	make paraview
+	make paraview-exports
 
 
-clean: clean-freecad-output clean-vtk
+clean: clean-freecad-output clean-vtk clean-paraview
 	find . -empty -type d -delete
 	make -C ${FRAMEWORK_PATH}  clean
 
@@ -130,7 +134,7 @@ clean-freecad-output:
 
 
 
-# Paraview
+# PostProcessing
 # =============================================================================
 
 # open paraview
@@ -141,4 +145,15 @@ frameworkview:
 # opens paraview with the referenced state file
 paraview: 
 	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
-	paraview --state=$(paraviewFile)  
+	@${remove_paraview_variable_parts} $(paraviewState)
+	paraview --state=$(paraviewState)
+
+
+paraview-exports: 
+	@mkdir --parents doc/paraview
+	@if [ -f "${paraviewScript}" ] ; then   \
+		pvbatch ${paraviewScript}         ; \
+	fi ;
+
+clean-paraview:
+	rm -rf doc/paraview
