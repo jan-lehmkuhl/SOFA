@@ -1,49 +1,56 @@
 FROM ubuntu:20.04
 
 
-# install std utils
+#   install std utils
 # ==========================================================
-RUN apt update
+RUN apt-get update
 RUN apt-get install -y apt-utils
 RUN apt-get install -y software-properties-common
+RUN apt-get install -y sudo
 RUN apt-get install -y wget
+RUN apt-get install -y curl
+RUN apt-get install -y libglu1
+RUN apt-get install -y ca-certificates
 RUN apt-get install -y gnupg
 RUN apt-get install -y vim
 RUN apt-get install -y nano
 RUN apt-get install -y git
 RUN apt-get install -y make
-RUN apt-get install -y sudo
+RUN apt-get install -y nodejs
 
 
-# install from SOFA needed tools
+#   install R reporting tools
 # ==========================================================
 
 RUN mkdir -p /scripts
-COPY install-deb-packages.sh /scripts
+COPY install-r-deb-packages.sh /scripts
 COPY install-r-packages.sh /scripts
 WORKDIR /scripts
-RUN chmod +x install-deb-packages.sh
-RUN ./install-deb-packages.sh
+RUN chmod +x install-r-deb-packages.sh
+RUN ./install-r-deb-packages.sh
 RUN ./install-r-packages.sh
 WORKDIR /
 
 
-# install OpenFOAM 7
+#   install OpenFOAM 7
 # ==========================================================
-RUN useradd --user-group --create-home --shell /bin/bash foam ;\
-	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 RUN sh -c "wget -O - https://dl.openfoam.org/gpg.key | apt-key add -"
 RUN add-apt-repository http://dl.openfoam.org/ubuntu
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends openfoam7
 
-RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc 
-
+# create separate user with login shell
+RUN useradd --user-group --create-home --shell /bin/bash foam ;\
+	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER foam
+RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc 
+USER root
+
+
 
 
 # closing
 # ==========================================================
 
+USER foam
 WORKDIR /

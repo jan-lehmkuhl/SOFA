@@ -9,8 +9,6 @@ apt-get update
 # general needed packages
 apt-get install -y dirmngr
 apt-get install -y apt-transport-https
-apt-get install -y ca-certificates
-apt-get install -y nodejs
 
 
 # add R repository
