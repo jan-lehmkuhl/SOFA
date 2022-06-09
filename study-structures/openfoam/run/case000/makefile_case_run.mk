@@ -39,13 +39,13 @@ all:
 
 
 run: upstream-links
-	if [ -f "Allrun" ] ; then     \
+	@if [ -f "Allrun" ] ; then    \
 		make run-allrun         ; \
 	else                          \
 		make frameworkrun       ; \
 	fi ;
 	make paraview-exports
-	make -C .. overview-report
+	@make -C .. overview-report
 
 
 mesh: 
@@ -61,7 +61,7 @@ view:
 
 # remove all calculated files
 clean: clean-run clean-freecad clean-report clean-paraview upstream-links
-	find . -empty -type d -delete
+	@find . -empty -type d -delete
 	make -C ${FRAMEWORK_PATH}  clean
 
 clean-upstream-included: clean
@@ -84,11 +84,11 @@ init-case: upstream-links
 
 
 upstream-links:
-    # renew the upstreamLinks to mesh
-	if [ -f "Allrun" ] ; then                                                   \
+	@# renew the upstreamLinks to mesh
+	@if [ -f "Allrun" ] ; then                                                   \
 		sed -i 's\MESHDIR=".*"\MESHDIR="./$(linkedMeshCase)"\' Allrun         ; \
 	fi
-	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
+	@python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 
 # clone this case to a new case with the next available running number 
@@ -115,9 +115,9 @@ rstudio:
 
 
 clean-report: 
-	rm -f  .Rhistory
-	rm -rf doc/meshReport
-	rm -f  doc/runReport/.Rhistory
+	@rm -f  .Rhistory
+	@rm -rf doc/meshReport
+	@rm -f  doc/runReport/.Rhistory
 
 
 
@@ -126,13 +126,13 @@ clean-report:
 
 # run case according to run.json
 frameworkrun:
-	python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py run
+	@python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py run
 
 
 # erase all results
 clean-run:
-	python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py cleanRun
-	rm -rf logs
+	@python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py cleanRun
+	@rm -rf logs
 
 
 
@@ -146,21 +146,21 @@ freecad-gui:
 # can be used to overwrite the dummy settings
 freecad-case-setup-fetch: 
 	mv  ../../cad/$(linkedCadCase)/case/0  ../../cad/$(linkedCadCase)/case/0.org
-	rm  -rf 0.org
-	rm  -rf constant
-	rm  -rf system
+	@rm  -rf 0.org
+	@rm  -rf constant
+	@rm  -rf system
 	mv  ../../cad/$(linkedCadCase)/case/* .
 	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(linkedMeshCase)"\' Allrun
 	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
 
 
 copy-0org-to-0:
-	mkdir -p   0
+	@mkdir -p   0
 	cp    -rf  0.org/*  0
 
 
 run-allrun:
-	make copy-0org-to-0
+	@make copy-0org-to-0
 	./Allrun
 	# check for existing results
 	@find . -maxdepth 4 -type f -wholename "*/uniform/time" 2>/dev/null | grep -q . || (echo "ERROR did recognize a run to process"; exit 1)
@@ -168,7 +168,7 @@ run-allrun:
 
 
 clean-freecad: 
-	rm -f constant/polyMesh
+	@rm -f constant/polyMesh
 
 
 
@@ -199,4 +199,4 @@ paraview-exports:
 	fi ;
 
 clean-paraview:
-	rm -rf doc/paraview
+	@rm -rf doc/paraview

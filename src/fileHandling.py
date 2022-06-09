@@ -55,7 +55,7 @@ def convertToRelativePath( absolutePath, referencePath ,verbose=False):
             print(  "cannot create relative path from: ", absolutePath, " for Reference: ", referencePath )
         return absolutePath
 
-def createDirSafely(dst, debugRefPath=None):
+def createDirSafely(dst, debugRefPath=None, verbose=False):
     # creates a directory recursively if it doesn't exist
     #
     # Args:
@@ -65,12 +65,15 @@ def createDirSafely(dst, debugRefPath=None):
     #   side effects
     #
     # FIXME add warning for relative path
+    if '/tools/sofa-framework/tests/' in os.getcwd(): 
+        verbose = True
+
     dstShort = convertToRelativePath( dst, debugRefPath )
     if not os.path.isdir(dst):
         print("Creating folder     ", dstShort )
         os.makedirs(dst)
     else:
-        print("Skip existing folder     ", dstShort )
+        if verbose: print("Skip existing folder     ", dstShort )
 
 def createDir(dst):
     # creates a directory recursively if it doesn't exist
@@ -144,6 +147,9 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
     # Return:
     #   side effects
     #
+    if '/tools/sofa-framework/tests/' in os.getcwd(): 
+        verbose = True
+
     if referencePath == None:
         referencePath = os.getcwd()
     if os.path.islink(src):
@@ -165,7 +171,7 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
                         createDirSafely( os.path.dirname(dst), debugRefPath=referencePath ) 
                     shutil.copyfile(src, dst)
                 else:
-                    print("Skip existing file       ", dstShort )
+                    if verbose: print("Skip existing file       ", dstShort )
             else:
                 print("Skipping >%s< because it is a directory" % src)
         else:

@@ -1,16 +1,9 @@
 make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
-python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
-
 *** update Upstream-Links in  mesh001  ***
 Skip existing folder      /openfoam/mesh/mesh001
 Skip existing file        /openfoam/mesh/mesh001/pv.foam
+remove for replacing:  /openfoam/mesh/mesh001/doc/meshReport/meshReport.Rmd
 Copying file to      /openfoam/mesh/mesh001/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
-if [ -f "Allmesh" ] ; then                               \
-	make mesh-allmesh                                  ; \
-else                                                     \
-	make frameworkmeshing                              ; \
-	make finalizeMesh                                  ; \
-fi ;
 make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
 python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py mesh
 decided to run surface features

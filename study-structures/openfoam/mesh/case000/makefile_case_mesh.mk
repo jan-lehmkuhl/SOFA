@@ -38,7 +38,7 @@ all:
 
 mesh: upstream-links
     # NOTE: update cad folder before
-	if [ -f "Allmesh" ] ; then                               \
+	@if [ -f "Allmesh" ] ; then                               \
 		make mesh-allmesh                                  ; \
 	else                                                     \
 		make frameworkmeshing                              ; \
@@ -63,15 +63,15 @@ view:
 
 # remove all from commited sources created files and links
 clean: clean-freecad-mesh clean-framework-mesh clean-report clean-paraview
-	rm -rf constant/polyMesh/*
-	rm -rf constant/triSurface
-	find . -empty -type d -delete
-	rm -f pvScriptMesh.py
+	@rm -rf constant/polyMesh/*
+	@rm -rf constant/triSurface
+	@find . -empty -type d -delete
+	@rm -f pvScriptMesh.py
 	make -C ${FRAMEWORK_PATH}  clean
-	make upstream-links
+	@make upstream-links
 
 clean-upstream-included: clean
-	make -C ../../cad/$(linkedCadCase) clean-upstream-included
+	@make -C ../../cad/$(linkedCadCase) clean-upstream-included
 
 
 # creates a zipped file of the current run
@@ -91,7 +91,7 @@ initCase:
 
 upstream-links:
     # renew the upstreamLinks to cad 
-	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
+	@python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 
 # clone case to a new case with the next available running number 
@@ -100,10 +100,10 @@ clone:
 
 
 clean-framework-mesh: 
-	rm -f  .fileStates.data
-	rm -rf [0-9]/polyMesh/*
-	rm -rf constant/extendedFeatureEdgeMesh/*
-	rm -rf log/*
+	@rm -f  .fileStates.data
+	@rm -rf [0-9]/polyMesh/*
+	@rm -rf constant/extendedFeatureEdgeMesh/*
+	@rm -rf log/*
 
 
 # run case report according to .json
@@ -159,10 +159,10 @@ mesh-allmesh:
 
 
 clean-freecad-mesh:
-	rm -f log.* 
-	rm -f mesh_outside.stl
-	rm -f *_Geometry.fms
-	# rm -rf gmsh
+	@rm -f log.* 
+	@rm -f mesh_outside.stl
+	@rm -f *_Geometry.fms
+	@# rm -rf gmsh
 
 
 
@@ -189,7 +189,7 @@ cleanMesh:
 	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py cleanMesh
 
 clean-report:
-	rm -rf doc/meshReport
+	@rm -rf doc/meshReport
 
 
 
@@ -224,4 +224,4 @@ paraview-exports:
 	fi ;
 
 clean-paraview:
-	rm -rf doc/paraview
+	@rm -rf doc/paraview

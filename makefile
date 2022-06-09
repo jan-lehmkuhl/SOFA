@@ -44,13 +44,12 @@ tests-local:
 # PHONY says make to execute even when the depending targets haven't been updated
 
 clean: badMagicNumberClean
-	# echo; pwd; ls -la
 
 # delete python cache files 
 #    they can disturb execution
 badMagicNumberClean:
-	find . -wholename '*/src/fileHandling.pyc' -delete
-	find . -wholename '*/__pycache__/*.cpython-*.pyc' -delete
+	@find . -wholename '*/src/fileHandling.pyc' -delete
+	@find . -wholename '*/__pycache__/*.cpython-*.pyc' -delete
 
 
 # ideas
