@@ -58,6 +58,9 @@ parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
 args = parser.parse_args()
 
 # verbose output
+if '/tools/sofa-framework/tests/' in os.getcwd(): 
+    args.verbose = True
+    args.noAbsolutePathOutput = True
 if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
 if args.verbose :   print("    with passed entryPoint:  " + args.entryPoint  )
 if not args.noAbsolutePathOutput:

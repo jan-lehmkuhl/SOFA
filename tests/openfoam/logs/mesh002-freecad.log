@@ -1,9 +1,23 @@
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  mesh002  ***
+start case constructor
+with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam/mesh/mesh002
+creating case:         		  >>  mesh002  <<
 Skip existing folder      /openfoam/mesh/mesh002
+Skip onlyAtCreation file: sofa.mesh.json
+Skip correct link    /openfoam/mesh/mesh002/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+Skip correct link    /openfoam/mesh/mesh002/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
 Skip existing file        /openfoam/mesh/mesh002/pv.foam
+create upstream aspect links for:  	  >>  mesh002  <<
+Skip correct link    cad001 		 with pointer to   ../../cad/cad001
+Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
 remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
 Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+
+*** finished sofa-tasks.py *** 
+
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
 ./Allmesh
 /*---------------------------------------------------------------------------*\
@@ -1433,11 +1447,25 @@ End
 
 make case-report
 make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  mesh002  ***
+start case constructor
+with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam/mesh/mesh002
+creating case:         		  >>  mesh002  <<
 Skip existing folder      /openfoam/mesh/mesh002
+Skip onlyAtCreation file: sofa.mesh.json
+Skip correct link    /openfoam/mesh/mesh002/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+Skip correct link    /openfoam/mesh/mesh002/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
 Skip existing file        /openfoam/mesh/mesh002/pv.foam
+create upstream aspect links for:  	  >>  mesh002  <<
+Skip correct link    cad001 		 with pointer to   ../../cad/cad001
+Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
 remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
 Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+
+*** finished sofa-tasks.py *** 
+
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 
 R version  x.x.x ...
@@ -1726,6 +1754,11 @@ label: plot relative boundary layer thickness
 /usr/bin/pandoc +RTS -K512m -RTS meshOverview.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output meshOverview.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --variable 'readthedown:true' --variable 'lightbox:true' --variable 'gallery:false' --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 4 --template /XXX.html.html --highlight-style tango --variable theme=bootstrap --include-in-header /tmpxxxx.html --variable code_folding=hide --variable code_menu=1 
 > 
 > 
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  overview
 Skip existing folder      doc
+
+*** finished sofa-tasks.py *** 
+
 make[x]: Leaving directory '/tests/openfoam/mesh'
 make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
