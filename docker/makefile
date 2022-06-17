@@ -20,7 +20,7 @@ run-interactive:
 	# choose what is good
 	@if [ -d "../.git" ]; then \
 		echo "This is a standalone git-repository" ;\
-		echo "Hello world" ;\
+		make run-interactive-core ;\
 	elif [ -f "../.git" ]; then \
 		echo "This git-repository is a submodule" ;\
 		make run-interactive-project ;\
