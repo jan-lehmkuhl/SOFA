@@ -28,11 +28,11 @@
 
     "caseLinks": [
         // linked and relative from created case
-        {
-            "sourcePath": "../shared/postStates",
-            "targetPath": "postStates",
-            "isSymlink": true
-        }
+        // {
+        //     "sourcePath": "../shared/postStates",
+        //     "targetPath": "postStates",
+        //     "isSymlink": true
+        // }
     ],
 
     "upstreamAspects": [

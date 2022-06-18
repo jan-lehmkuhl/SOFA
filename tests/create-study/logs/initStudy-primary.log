@@ -46,7 +46,6 @@ Copying file to      /create-study/dummy/mesh/mesh001/sofa.mesh.json 	 from /too
 Creating link to     /create-study/dummy/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
 Creating link to     /create-study/dummy/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
 Copying file to      /create-study/dummy/mesh/mesh001/pv.foam 	 from /tools/sofa-framework/study-structures/openfoam/shared/empty-file
-Creating link to     /postStates 		 with pointer to   /../shared/postStates
 run through aspect:    		 >>>  run  <<<
 Creating folder      /create-study/dummy/run
 Creating folder      /create-study/dummy/run/shared/postStates
@@ -66,7 +65,6 @@ Copying file to      /create-study/dummy/run/run001/sofa.run.json 	 from /tools/
 Creating link to     /create-study/dummy/run/run001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 Creating link to     /create-study/dummy/run/run001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 Copying file to      /create-study/dummy/run/run001/pv.foam 	 from /tools/sofa-framework/study-structures/openfoam/shared/empty-file
-Creating link to     /postStates 		 with pointer to   /../shared/postStates
 run through aspect:    		 >>>  survey  <<<
 Creating folder      /create-study/dummy/survey
 Creating link to     /create-study/dummy/survey/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/../shared/makefile_aspect.mk
