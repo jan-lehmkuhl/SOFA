@@ -65,7 +65,11 @@ def createDirSafely(dst, debugRefPath=None, verbose=False):
     #   side effects
     #
     # FIXME add warning for relative path
-    if '/tools/sofa-framework/tests/' in os.getcwd(): 
+
+    from folderHandling import findParentFolder
+
+    # enable verbose mode for all test runs
+    if os.path.join(findParentFolder(".gitlab-ci.yml"), 'tests') in os.getcwd(): 
         verbose = True
 
     dstShort = convertToRelativePath( dst, debugRefPath )
@@ -146,8 +150,11 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
     #
     # Return:
     #   side effects
-    #
-    if '/tools/sofa-framework/tests/' in os.getcwd(): 
+
+    from folderHandling import findParentFolder
+
+    # enable verbose mode for all test runs
+    if os.path.join(findParentFolder(".gitlab-ci.yml"), 'tests') in os.getcwd(): 
         verbose = True
 
     if referencePath == None:

@@ -12,7 +12,7 @@ include ../../makefile.global.mk
 #   Main
 # ==========================================================
 
-tests: clean framework-chain freecad-chain mesh-overview
+tests: clean-and-remove-logs framework-chain freecad-chain mesh-overview
 	@echo "finished tests for openfoam"
 
 
@@ -96,8 +96,11 @@ mesh-overview:
 # ==========================================================
 
 clean: 
-	rm -f logs/*
+	git checkout -- logs
 	make -C cad    clean-cases
 	make -C mesh   clean-cases
 	make -C run    clean-cases
 	make -C survey clean-cases
+
+clean-and-remove-logs: clean
+	rm -f logs/*

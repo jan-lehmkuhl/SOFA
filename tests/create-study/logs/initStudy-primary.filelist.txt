@@ -68,7 +68,6 @@ xxxK
 xxxK
 1 tiny  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 tiny  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-1 tiny  postStates -> ../shared/postStates/
 1 tiny  pv.foam
 1 759  sofa.mesh.json
 
@@ -102,7 +101,6 @@ xxxK
 xxxK
 1 tiny  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 tiny  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
-1 tiny  postStates -> ../shared/postStates/
 1 tiny  pv.foam
 1 824  sofa.run.json
 

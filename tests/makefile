@@ -16,6 +16,11 @@ gitlab-pipeline:
 	@echo ""
 
 
+clean:
+	make -C create-study clean
+	make -C openfoam clean
+
+
 
 #   Debugging
 # ==========================================================
