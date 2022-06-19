@@ -140,7 +140,7 @@ elif args.entryPoint == "overview":
             os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
             break
     else:
-        print("Unabel to find RMarkdown file")
+        print("Found no RMarkdown file for OverviewReports")
 
 elif args.entryPoint == "updateAllReports":
     while True:
@@ -168,7 +168,7 @@ elif args.entryPoint == "updateAllReports":
                 os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
                 break
         else:
-            print("Unabel to find RMarkdown file")
+            print("Found no RMarkdown file for OverviewReports")
 
 else:
     print("ERROR no sofa-task defined")
