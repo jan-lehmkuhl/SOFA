@@ -1971,14 +1971,4 @@ make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make paraview-exports
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
-make[x]: Entering directory '/tests/openfoam-paraview/run'
-python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
-starting sofa-tasks.py in verbose mode
-    with passed entryPoint:  overview
-Skip existing folder      doc
-Found no RMarkdown file for OverviewReports
-
-*** finished sofa-tasks.py *** 
-
-make[x]: Leaving directory '/tests/openfoam-paraview/run'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
