@@ -1,0 +1,9 @@
+{
+    "name"                  :   "only stl",
+    "description"           :   "from openfoam-paraview/cad001",
+ 
+    "buildSettings" : {
+        "report"            :   ""
+    }
+
+}

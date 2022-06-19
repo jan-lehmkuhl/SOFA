@@ -58,6 +58,9 @@ parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
 args = parser.parse_args()
 
 # verbose output
+if '/tools/sofa-framework/tests/' in os.getcwd(): 
+    args.verbose = True
+    args.noAbsolutePathOutput = True
 if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
 if args.verbose :   print("    with passed entryPoint:  " + args.entryPoint  )
 if not args.noAbsolutePathOutput:
@@ -137,7 +140,7 @@ elif args.entryPoint == "overview":
             os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
             break
     else:
-        print("Unabel to find RMarkdown file")
+        print("Found no RMarkdown file for OverviewReports")
 
 elif args.entryPoint == "updateAllReports":
     while True:
@@ -165,7 +168,7 @@ elif args.entryPoint == "updateAllReports":
                 os.system('R -e "rmarkdown::render(\'doc/' + fileName + '\')"')
                 break
         else:
-            print("Unabel to find RMarkdown file")
+            print("Found no RMarkdown file for OverviewReports")
 
 else:
     print("ERROR no sofa-task defined")

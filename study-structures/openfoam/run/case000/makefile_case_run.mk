@@ -17,6 +17,7 @@ jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
 paraviewState    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
 paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
+rReport          = $(shell node -p "require('$(jsonFile)').buildSettings.report")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
 linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').buildSettings.cadLink")
@@ -45,7 +46,9 @@ run: upstream-links
 		make frameworkrun       ; \
 	fi ;
 	make paraview-exports
-	@make -C .. overview-report
+	@if [ "${rReport}" != "" ] ; then     \
+		make -C .. overview-report      ; \
+	fi ;
 
 
 mesh: 

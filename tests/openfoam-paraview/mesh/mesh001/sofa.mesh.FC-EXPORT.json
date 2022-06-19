@@ -6,7 +6,7 @@
         "cadLink"           :   "cad001",
         "defaultFiles"      :   "",
         "paraview"          :   "../shared/postStates/mesh-inspection.pvsm",
-        "report"            :   "meshReport01.Rmd"
+        "report"            :   ""
     },
 
     "meshSettings" : {

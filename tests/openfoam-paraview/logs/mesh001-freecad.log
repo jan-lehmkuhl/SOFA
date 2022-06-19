@@ -1,10 +1,23 @@
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
-*** update Upstream-Links in  mesh002  ***
-Skip existing folder      /openfoam/mesh/mesh002
-Skip existing file        /openfoam/mesh/mesh002/pv.foam
-remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
-Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  upstreamLinks
+*** update Upstream-Links in  mesh001  ***
+start case constructor
+with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam-paraview/mesh/mesh001
+creating case:         		  >>  mesh001  <<
+Skip existing folder      /openfoam-paraview/mesh/mesh001
+Skip onlyAtCreation file: sofa.mesh.json
+Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+Skip correct link    /openfoam-paraview/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
+create upstream aspect links for:  	  >>  mesh001  <<
+Skip correct link    cad001 		 with pointer to   ../../cad/cad001
+Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
+Skipping >/home/jan/isac/klimdim/src/tools/sofa-framework/tests/openfoam-paraview/mesh/shared/reportTemplates< because it is a directory
+
+*** finished sofa-tasks.py *** 
+
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 ./Allmesh
 /*---------------------------------------------------------------------------*\
   =========                 |
@@ -20,7 +33,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -30,7 +43,7 @@ allowSystemOperations : Allowing user-supplied system call operations
 Create time
 
 Creating block mesh from
-    "/tests/openfoam/mesh/mesh002/system/blockMeshDict"
+    "/tests/openfoam-paraview/mesh/mesh001/system/blockMeshDict"
 Creating block edges
 No non-planar block faces defined
 Creating topology blocks
@@ -95,7 +108,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -143,9 +156,9 @@ Final feature set:
         open edges         : 0
         multiply connected : 0
 
-Writing extendedFeatureEdgeMesh to "/tests/openfoam/mesh/mesh002/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
+Writing extendedFeatureEdgeMesh to "/tests/openfoam-paraview/mesh/mesh001/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
 
-Writing featureEdgeMesh to "/tests/openfoam/mesh/mesh002/constant/triSurface/Body001_Geometry.eMesh"
+Writing featureEdgeMesh to "/tests/openfoam-paraview/mesh/mesh001/constant/triSurface/Body001_Geometry.eMesh"
 
 ExecutionTime = x.xx s  ClockTime = x.xx s
 
@@ -165,7 +178,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1238,7 +1251,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1289,7 +1302,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1310,7 +1323,7 @@ surfZone 1 : face1
 surfZone 2 : face0
 surfZone 3 : face4
 surfZone 4 : face2
-Writing merged surface to "/tests/openfoam/mesh/mesh002/mesh_outside.stl"
+Writing merged surface to "/tests/openfoam-paraview/mesh/mesh001/mesh_outside.stl"
 End
 
 /*---------------------------------------------------------------------------*\
@@ -1327,7 +1340,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1355,7 +1368,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1432,300 +1445,30 @@ Mesh OK.
 End
 
 make case-report
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
-*** update Upstream-Links in  mesh002  ***
-Skip existing folder      /openfoam/mesh/mesh002
-Skip existing file        /openfoam/mesh/mesh002/pv.foam
-remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
-Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  upstreamLinks
+*** update Upstream-Links in  mesh001  ***
+start case constructor
+with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam-paraview/mesh/mesh001
+creating case:         		  >>  mesh001  <<
+Skip existing folder      /openfoam-paraview/mesh/mesh001
+Skip onlyAtCreation file: sofa.mesh.json
+Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+Skip correct link    /openfoam-paraview/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
+create upstream aspect links for:  	  >>  mesh001  <<
+Skip correct link    cad001 		 with pointer to   ../../cad/cad001
+Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
+Skipping >/home/jan/isac/klimdim/src/tools/sofa-framework/tests/openfoam-paraview/mesh/shared/reportTemplates< because it is a directory
+
+*** finished sofa-tasks.py *** 
+
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
-
-R version  x.x.x ...
-Copyright (C) xxxx The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> rmarkdown::render('doc/meshReport/meshReport.Rmd')
-  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
-   inline R code fragments
-
-  |                                                                              |....                                                                  |   6%
-label: setup (with options) 
-List of 2
- $ echo   : logi TRUE
- $ message: logi FALSE
-
-  |                                                                              |......                                                                |   9%
-   inline R code fragments
-
-  |                                                                              |........                                                              |  12%
-label: overview (with options) 
-List of 2
- $ echo     : logi TRUE
- $ out.width: chr "100%"
-
-  |                                                                              |...........                                                           |  15%
-  ordinary text without R code
-
-  |                                                                              |.............                                                         |  18%
-label: system (with options) 
-List of 2
- $ echo     : logi TRUE
- $ out.width: chr "100%"
-
-  |                                                                              |...............                                                       |  21%
-  ordinary text without R code
-
-  |                                                                              |.................                                                     |  24%
-label: Geometry (with options) 
-List of 3
- $ echo     : logi TRUE
- $ fig.cap  : chr "Geometry and dimensions of the domain"
- $ out.width: chr "100%"
-
-  |                                                                              |...................                                                   |  27%
-  ordinary text without R code
-
-  |                                                                              |.....................                                                 |  30%
-label: Trisurface (with options) 
-List of 3
- $ echo     : logi TRUE
- $ fig.cap  : chr "Snapshot of the triangulated surfaces"
- $ out.width: chr "100%"
-
-  |                                                                              |.......................                                               |  33%
-  ordinary text without R code
-
-  |                                                                              |.........................                                             |  36%
-label: Edges (with options) 
-List of 3
- $ echo     : logi TRUE
- $ fig.cap  : chr "Snapshot of the feature Edges"
- $ out.width: chr "100%"
-
-  |                                                                              |............................                                          |  39%
-  ordinary text without R code
-
-  |                                                                              |..............................                                        |  42%
-label: baseCellSize (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |................................                                      |  45%
-  ordinary text without R code
-
-  |                                                                              |..................................                                    |  48%
-label: mesh-fig (with options) 
-List of 3
- $ echo     : logi TRUE
- $ fig.cap  : chr "Snapshot of the final mesh"
- $ out.width: chr "100%"
-
-  |                                                                              |....................................                                  |  52%
-  ordinary text without R code
-
-  |                                                                              |......................................                                |  55%
-label: mesh-stats (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |........................................                              |  58%
-  ordinary text without R code
-
-  |                                                                              |..........................................                            |  61%
-label: cell-stats (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |.............................................                         |  64%
-  ordinary text without R code
-
-  |                                                                              |...............................................                       |  67%
-label: poly-stats (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |.................................................                     |  70%
-  ordinary text without R code
-
-  |                                                                              |...................................................                   |  73%
-label: patch-names (with options) 
-List of 3
- $ echo     : logi TRUE
- $ fig.cap  : chr "Names of patches in mesh"
- $ out.width: chr "100%"
-
-  |                                                                              |.....................................................                 |  76%
-  ordinary text without R code
-
-  |                                                                              |.......................................................               |  79%
-label: patch-stats (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |.........................................................             |  82%
-  ordinary text without R code
-
-  |                                                                              |...........................................................           |  85%
-label: mesh-qual-stats (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |..............................................................        |  88%
-  ordinary text without R code
-
-  |                                                                              |................................................................      |  91%
-label: layer-gen-stats (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |..................................................................    |  94%
-  ordinary text without R code
-
-  |                                                                              |....................................................................  |  97%
-label: save data
-  |                                                                              |......................................................................| 100%
-  ordinary text without R code
-
-
-/usr/bin/pandoc +RTS -K512m -RTS meshReport.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output meshReport.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --variable 'readthedown:true' --variable 'lightbox:true' --variable 'gallery:false' --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 4 --template /XXX.html.html --highlight-style tango --variable theme=bootstrap --include-in-header /tmpxxxx.html --variable code_folding=hide --variable code_menu=1 
-> 
-> 
-start creating R case report
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
+no R report is specified in sofa.*.json
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make paraview-exports
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
-make[x]: Entering directory '/tests/openfoam/mesh'
-python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
-
-R version  x.x.x ...
-Copyright (C) xxxx The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> rmarkdown::render('doc/meshOverview.Rmd')
-  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
-   inline R code fragments
-
-  |                                                                              |.....                                                                 |   7%
-label: setup (with options) 
-List of 2
- $ echo   : logi TRUE
- $ message: logi FALSE
-
-  |                                                                              |.......                                                               |  10%
-  ordinary text without R code
-
-  |                                                                              |..........                                                            |  14%
-label: meshDetails
-  |                                                                              |............                                                          |  17%
-  ordinary text without R code
-
-  |                                                                              |..............                                                        |  21%
-label: plot representative mesh cell size  (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |.................                                                     |  24%
-  ordinary text without R code
-
-  |                                                                              |...................                                                   |  28%
-label: plot cell count (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |......................                                                |  31%
-  ordinary text without R code
-
-  |                                                                              |........................                                              |  34%
-label: Table with mesh statistics
-  |                                                                              |...........................                                           |  38%
-  ordinary text without R code
-
-  |                                                                              |.............................                                         |  41%
-label: setup meshQuality (with options) 
-List of 2
- $ echo   : logi TRUE
- $ results: chr "asis"
-
-  |                                                                              |...............................                                       |  45%
-  ordinary text without R code
-
-  |                                                                              |..................................                                    |  48%
-label: plot non-orthogonality
-  |                                                                              |....................................                                  |  52%
-  ordinary text without R code
-
-  |                                                                              |.......................................                               |  55%
-label: plot skewness
-  |                                                                              |.........................................                             |  59%
-  ordinary text without R code
-
-  |                                                                              |...........................................                           |  62%
-label: plot aspect ratio
-  |                                                                              |..............................................                        |  66%
-  ordinary text without R code
-
-  |                                                                              |................................................                      |  69%
-label: plot minimal cellvolume
-  |                                                                              |...................................................                   |  72%
-  ordinary text without R code
-
-  |                                                                              |.....................................................                 |  76%
-label: setup boundaryLayer (with options) 
-List of 1
- $ echo: logi TRUE
-
-  |                                                                              |........................................................              |  79%
-  ordinary text without R code
-
-  |                                                                              |..........................................................            |  83%
-label: plot No. boundray layer
-  |                                                                              |............................................................          |  86%
-  ordinary text without R code
-
-  |                                                                              |...............................................................       |  90%
-label: plot abolute boundary layer thickness
-  |                                                                              |.................................................................     |  93%
-  ordinary text without R code
-
-  |                                                                              |....................................................................  |  97%
-label: plot relative boundary layer thickness
-  |                                                                              |......................................................................| 100%
-  ordinary text without R code
-
-
-/usr/bin/pandoc +RTS -K512m -RTS meshOverview.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output meshOverview.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --variable 'readthedown:true' --variable 'lightbox:true' --variable 'gallery:false' --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 4 --template /XXX.html.html --highlight-style tango --variable theme=bootstrap --include-in-header /tmpxxxx.html --variable code_folding=hide --variable code_menu=1 
-> 
-> 
-Skip existing folder      doc
-make[x]: Leaving directory '/tests/openfoam/mesh'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'

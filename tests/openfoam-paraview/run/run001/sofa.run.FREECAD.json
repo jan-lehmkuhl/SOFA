@@ -3,7 +3,7 @@
     "description"           :   "",
 
     "buildSettings" : {
-        "meshLink"          :   "mesh002",
+        "meshLink"          :   "mesh001",
 
         "solver"            :   "",
         "turbulenceModel"   :   "",
@@ -12,7 +12,7 @@
         "porousZone"        :   "False",
 
         "paraview"          :   "../shared/postStates/RUN.pvsm",
-        "report"            :   "runReport01.Rmd"
+        "report"            :   ""
     },
 
     "runSettings" : {

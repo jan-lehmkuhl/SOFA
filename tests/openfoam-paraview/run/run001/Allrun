@@ -17,7 +17,7 @@ source "$FOAMDIR/etc/config.sh/unset" 2> /dev/null
 source "$FOAMDIR/etc/bashrc"
 
 # Copy mesh from mesh case dir if available
-MESHDIR="./mesh002"
+MESHDIR="./mesh001"
 if [ -f "$MESHDIR"/constant/polyMesh/faces ]
 then
     rm -r constant/polyMesh 2> /dev/null

@@ -1,0 +1,3 @@
+.:
+xxxK
+1 85  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs

@@ -12,15 +12,6 @@
         }
     ],
 
-    "caseLinks": [
-        // linked and relative from created case
-        {
-            "sourcePath": "../shared/postStates",
-            "targetPath": "postStates",
-            "isSymlink": true
-        }
-    ],
-
     "folders": [
         {
             "relPath": "shared/postStates",
