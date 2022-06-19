@@ -1,28 +1,28 @@
-make[x]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
-*** update Upstream-Links in  run002  ***
+*** update Upstream-Links in  run001  ***
 start case constructor
-with case-json:   sofa.run.FREECAD.json	in: /tests/openfoam/run/run002
-creating case:         		  >>  run002  <<
-Skip existing folder      /openfoam/run/run002
+with case-json:   sofa.run.FREECAD.json	in: /tests/openfoam-paraview/run/run001
+creating case:         		  >>  run001  <<
+Skip existing folder      /openfoam-paraview/run/run001
 Skip onlyAtCreation file: sofa.run.json
-Skip correct link    /openfoam/run/run002/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
-Skip correct link    /openfoam/run/run002/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
-Skip existing file        /openfoam/run/run002/pv.foam
-create upstream aspect links for:  	  >>  run002  <<
-Skip correct link    mesh002 		 with pointer to   ../../mesh/mesh002
-Creating link to     constant/polyMesh 		 with pointer to   ../../mesh/mesh002/constant/polyMesh
-Skip correct link    doc/meshReport 		 with pointer to   ../../mesh/mesh002/doc/meshReport
-remove for replacing:  /openfoam/run/run002/doc/runReport/runReport.Rmd
-Copying file to      /openfoam/run/run002/doc/runReport/runReport.Rmd 	 from /openfoam/run/shared/reportTemplates/runReport01.Rmd
+Skip correct link    /openfoam-paraview/run/run001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
+Skip correct link    /openfoam-paraview/run/run001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+Skip existing file        /openfoam-paraview/run/run001/pv.foam
+create upstream aspect links for:  	  >>  run001  <<
+Skip correct link    mesh001 		 with pointer to   ../../mesh/mesh001
+Creating link to     constant/polyMesh 		 with pointer to   ../../mesh/mesh001/constant/polyMesh
+Skip correct link    doc/meshReport 		 with pointer to   ../../mesh/mesh001/doc/meshReport
+remove for replacing:  /openfoam-paraview/run/run001/doc/runReport/runReport.Rmd
+Copying file to      /openfoam-paraview/run/run001/doc/runReport/runReport.Rmd 	 from /openfoam-paraview/run/shared/reportTemplates/runReport01.Rmd
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Entering directory '/tests/openfoam/run/run002'
-make[x]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
+make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 cp    -rf  0.org/*  0
-make[x]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 ./Allrun
 /*---------------------------------------------------------------------------*\
   =========                 |
@@ -38,7 +38,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/run/run002
+Case   : /tests/openfoam-paraview/run/run001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -103,7 +103,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/run/run002
+Case   : /tests/openfoam-paraview/run/run001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -153,7 +153,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/run/run002
+Case   : /tests/openfoam-paraview/run/run001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -233,7 +233,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/run/run002
+Case   : /tests/openfoam-paraview/run/run001
 nProcs : 2
 Slaves : xxx
 Pstream initialized with:
@@ -1964,7 +1964,7 @@ End
 Finalising parallel run
 # check for existing results
 make case-report
-make[x]: Entering directory '/tests/openfoam/run/run002'
+make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 
 R version  x.x.x ...
@@ -1997,12 +1997,12 @@ List of 2
 
 
 start creating R case report
-make[x]: Leaving directory '/tests/openfoam/run/run002'
-make[x]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
+make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make paraview-exports
-make[x]: Entering directory '/tests/openfoam/run/run002'
-make[x]: Leaving directory '/tests/openfoam/run/run002'
-make[x]: Entering directory '/tests/openfoam/run'
+make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
+make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
+make[x]: Entering directory '/tests/openfoam-paraview/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
@@ -2033,78 +2033,12 @@ List of 2
  $ echo   : logi TRUE
  $ message: logi FALSE
 
-  |                                                                              |........                                                              |  11%
-  ordinary text without R code
 
-  |                                                                              |..........                                                            |  15%
-label: case Details
-  |                                                                              |.............                                                         |  19%
-  ordinary text without R code
-
-  |                                                                              |................                                                      |  22%
-label: Fluid properties
-  |                                                                              |..................                                                    |  26%
-  ordinary text without R code
-
-  |                                                                              |.....................                                                 |  30%
-label: Turbulence properties
-  |                                                                              |.......................                                               |  33%
-  ordinary text without R code
-
-  |                                                                              |..........................                                            |  37%
-label: BC velocity
-  |                                                                              |.............................                                         |  41%
-  ordinary text without R code
-
-  |                                                                              |...............................                                       |  44%
-label: BC pressure
-  |                                                                              |..................................                                    |  48%
-  ordinary text without R code
-
-  |                                                                              |....................................                                  |  52%
-label: BC turbulent kinetic energy k
-  |                                                                              |.......................................                               |  56%
-  ordinary text without R code
-
-  |                                                                              |.........................................                             |  59%
-label: BC specific dissipation rate w
-  |                                                                              |............................................                          |  63%
-  ordinary text without R code
-
-  |                                                                              |...............................................                       |  67%
-label: BC Turbulent viscosity nut
-  |                                                                              |.................................................                     |  70%
-  ordinary text without R code
-
-  |                                                                              |....................................................                  |  74%
-label: Excecution
-  |                                                                              |......................................................                |  78%
-  ordinary text without R code
-
-  |                                                                              |.........................................................             |  81%
-label: residuals
-  |                                                                              |............................................................          |  85%
-  ordinary text without R code
-
-  |                                                                              |..............................................................        |  89%
-label: continuity
-  |                                                                              |.................................................................     |  93%
-  ordinary text without R code
-
-  |                                                                              |...................................................................   |  96%
-label: yPlus
-  |                                                                              |......................................................................| 100%
-  ordinary text without R code
-
-
-/usr/bin/pandoc +RTS -K512m -RTS runOverview.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output runOverview.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --variable 'readthedown:true' --variable 'lightbox:true' --variable 'gallery:false' --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 4 --template /XXX.html.html --highlight-style tango --variable theme=bootstrap --include-in-header /tmpxxxx.html --variable code_folding=hide --variable code_menu=1 
-> 
-> 
 starting sofa-tasks.py in verbose mode
     with passed entryPoint:  overview
 Skip existing folder      doc
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Leaving directory '/tests/openfoam/run'
-make[x]: Leaving directory '/tests/openfoam/run/run002'
+make[x]: Leaving directory '/tests/openfoam-paraview/run'
+make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'

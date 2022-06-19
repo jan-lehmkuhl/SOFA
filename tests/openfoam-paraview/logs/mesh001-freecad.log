@@ -1,24 +1,24 @@
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
-*** update Upstream-Links in  mesh002  ***
+*** update Upstream-Links in  mesh001  ***
 start case constructor
-with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam/mesh/mesh002
-creating case:         		  >>  mesh002  <<
-Skip existing folder      /openfoam/mesh/mesh002
+with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam-paraview/mesh/mesh001
+creating case:         		  >>  mesh001  <<
+Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
-Skip correct link    /openfoam/mesh/mesh002/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-Skip correct link    /openfoam/mesh/mesh002/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
-Skip existing file        /openfoam/mesh/mesh002/pv.foam
-create upstream aspect links for:  	  >>  mesh002  <<
+Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+Skip correct link    /openfoam-paraview/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
+create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
 Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
-remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
-Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+remove for replacing:  /openfoam-paraview/mesh/mesh001/doc/meshReport/meshReport.Rmd
+Copying file to      /openfoam-paraview/mesh/mesh001/doc/meshReport/meshReport.Rmd 	 from /openfoam-paraview/mesh/shared/reportTemplates/meshReport01.Rmd
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 ./Allmesh
 /*---------------------------------------------------------------------------*\
   =========                 |
@@ -34,7 +34,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -44,7 +44,7 @@ allowSystemOperations : Allowing user-supplied system call operations
 Create time
 
 Creating block mesh from
-    "/tests/openfoam/mesh/mesh002/system/blockMeshDict"
+    "/tests/openfoam-paraview/mesh/mesh001/system/blockMeshDict"
 Creating block edges
 No non-planar block faces defined
 Creating topology blocks
@@ -109,7 +109,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -157,9 +157,9 @@ Final feature set:
         open edges         : 0
         multiply connected : 0
 
-Writing extendedFeatureEdgeMesh to "/tests/openfoam/mesh/mesh002/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
+Writing extendedFeatureEdgeMesh to "/tests/openfoam-paraview/mesh/mesh001/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
 
-Writing featureEdgeMesh to "/tests/openfoam/mesh/mesh002/constant/triSurface/Body001_Geometry.eMesh"
+Writing featureEdgeMesh to "/tests/openfoam-paraview/mesh/mesh001/constant/triSurface/Body001_Geometry.eMesh"
 
 ExecutionTime = x.xx s  ClockTime = x.xx s
 
@@ -179,7 +179,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1252,7 +1252,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1303,7 +1303,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1324,7 +1324,7 @@ surfZone 1 : face1
 surfZone 2 : face0
 surfZone 3 : face4
 surfZone 4 : face2
-Writing merged surface to "/tests/openfoam/mesh/mesh002/mesh_outside.stl"
+Writing merged surface to "/tests/openfoam-paraview/mesh/mesh001/mesh_outside.stl"
 End
 
 /*---------------------------------------------------------------------------*\
@@ -1341,7 +1341,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1369,7 +1369,7 @@ Time   : xx:xx:xx
 Host   : "LocalMachine"
 PID    : xxxxxx
 I/O    : uncollated
-Case   : /tests/openfoam/mesh/mesh002
+Case   : /tests/openfoam-paraview/mesh/mesh001
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
@@ -1446,23 +1446,23 @@ Mesh OK.
 End
 
 make case-report
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
-*** update Upstream-Links in  mesh002  ***
+*** update Upstream-Links in  mesh001  ***
 start case constructor
-with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam/mesh/mesh002
-creating case:         		  >>  mesh002  <<
-Skip existing folder      /openfoam/mesh/mesh002
+with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam-paraview/mesh/mesh001
+creating case:         		  >>  mesh001  <<
+Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
-Skip correct link    /openfoam/mesh/mesh002/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-Skip correct link    /openfoam/mesh/mesh002/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
-Skip existing file        /openfoam/mesh/mesh002/pv.foam
-create upstream aspect links for:  	  >>  mesh002  <<
+Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+Skip correct link    /openfoam-paraview/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
+create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
 Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
-remove for replacing:  /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd
-Copying file to      /openfoam/mesh/mesh002/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+remove for replacing:  /openfoam-paraview/mesh/mesh001/doc/meshReport/meshReport.Rmd
+Copying file to      /openfoam-paraview/mesh/mesh001/doc/meshReport/meshReport.Rmd 	 from /openfoam-paraview/mesh/shared/reportTemplates/meshReport01.Rmd
 
 *** finished sofa-tasks.py *** 
 
@@ -1633,12 +1633,12 @@ label: save data
 > 
 > 
 start creating R case report
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make paraview-exports
-make[x]: Entering directory '/tests/openfoam/mesh/mesh002'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
-make[x]: Entering directory '/tests/openfoam/mesh'
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam-paraview/mesh'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
@@ -1760,5 +1760,5 @@ Skip existing folder      doc
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Leaving directory '/tests/openfoam/mesh'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh002'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'

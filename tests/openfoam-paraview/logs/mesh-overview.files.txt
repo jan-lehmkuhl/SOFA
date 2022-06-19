@@ -1,0 +1,5 @@
+.:
+xxxM
+1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/shared/.gitignore_aspect_docs
+1 x.xM  meshOverview.html
+1 x.xK  meshOverview.Rmd
