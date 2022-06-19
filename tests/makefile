@@ -18,7 +18,7 @@ gitlab-pipeline:
 
 clean:
 	make -C create-study clean
-	make -C openfoam clean
+	make -C openfoam-r-reports clean
 
 
 
@@ -27,7 +27,7 @@ clean:
 
 debug:
 	make -C create-study debug
-	make -C openfoam debug
+	make -C openfoam-r-reports debug
 
 
 
@@ -43,7 +43,7 @@ pipeline-tests:
 #   Local tests
 # ------------------------------------------------
 additional-local-tests:
-	make -C openfoam
+	make -C openfoam-r-reports
 	@echo "local-tests succeeded"
 
 
