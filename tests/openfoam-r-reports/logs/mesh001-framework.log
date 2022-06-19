@@ -1,24 +1,24 @@
-make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
 starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  mesh001  ***
 start case constructor
-with case-json:   sofa.mesh.FRAMEWORK.json	in: /tests/openfoam/mesh/mesh001
+with case-json:   sofa.mesh.FRAMEWORK.json	in: /tests/openfoam-r-reports/mesh/mesh001
 creating case:         		  >>  mesh001  <<
-Skip existing folder      /openfoam/mesh/mesh001
+Skip existing folder      /openfoam-r-reports/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
-Skip correct link    /openfoam/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-Skip correct link    /openfoam/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
-Skip existing file        /openfoam/mesh/mesh001/pv.foam
+Skip correct link    /openfoam-r-reports/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
+Skip correct link    /openfoam-r-reports/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Skip existing file        /openfoam-r-reports/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
 Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
-remove for replacing:  /openfoam/mesh/mesh001/doc/meshReport/meshReport.Rmd
-Copying file to      /openfoam/mesh/mesh001/doc/meshReport/meshReport.Rmd 	 from /openfoam/mesh/shared/reportTemplates/meshReport01.Rmd
+remove for replacing:  /openfoam-r-reports/mesh/mesh001/doc/meshReport/meshReport.Rmd
+Copying file to      /openfoam-r-reports/mesh/mesh001/doc/meshReport/meshReport.Rmd 	 from /openfoam-r-reports/mesh/shared/reportTemplates/meshReport01.Rmd
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
 python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py mesh
 decided to run surface features
 
@@ -37,8 +37,8 @@ Meshing with OpenFoam 7 on LocalMachine using 1 cores
 Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
 ==========================================================================
 
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
-make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
 python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py finalizeMesh
 
 ==========================================================================
@@ -51,11 +51,11 @@ Finalizing mesh with OpenFoam 7 on LocalMachine using 1 cores
 Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
 ==========================================================================
 
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'
 make paraview-exports
-make[x]: Entering directory '/tests/openfoam/mesh/mesh001'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
-make[x]: Entering directory '/tests/openfoam/mesh'
+make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'
+make[x]: Entering directory '/tests/openfoam-r-reports/mesh'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
@@ -177,5 +177,5 @@ Skip existing folder      doc
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Leaving directory '/tests/openfoam/mesh'
-make[x]: Leaving directory '/tests/openfoam/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/mesh'
+make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'

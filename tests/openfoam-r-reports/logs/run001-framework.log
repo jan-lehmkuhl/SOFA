@@ -1,25 +1,25 @@
-make[x]: Entering directory '/tests/openfoam/run/run001'
+make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
 starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  run001  ***
 start case constructor
-with case-json:   sofa.run.FRAMEWORK.json	in: /tests/openfoam/run/run001
+with case-json:   sofa.run.FRAMEWORK.json	in: /tests/openfoam-r-reports/run/run001
 creating case:         		  >>  run001  <<
-Skip existing folder      /openfoam/run/run001
+Skip existing folder      /openfoam-r-reports/run/run001
 Skip onlyAtCreation file: sofa.run.json
-Skip correct link    /openfoam/run/run001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
-Skip correct link    /openfoam/run/run001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
-Skip existing file        /openfoam/run/run001/pv.foam
+Skip correct link    /openfoam-r-reports/run/run001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
+Skip correct link    /openfoam-r-reports/run/run001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+Skip existing file        /openfoam-r-reports/run/run001/pv.foam
 create upstream aspect links for:  	  >>  run001  <<
 Skip correct link    mesh001 		 with pointer to   ../../mesh/mesh001
 Creating link to     constant/polyMesh 		 with pointer to   ../../mesh/mesh001/constant/polyMesh
 Skip correct link    doc/meshReport 		 with pointer to   ../../mesh/mesh001/doc/meshReport
-remove for replacing:  /openfoam/run/run001/doc/runReport/runReport.Rmd
-Copying file to      /openfoam/run/run001/doc/runReport/runReport.Rmd 	 from /openfoam/run/shared/reportTemplates/runReport01.Rmd
+remove for replacing:  /openfoam-r-reports/run/run001/doc/runReport/runReport.Rmd
+Copying file to      /openfoam-r-reports/run/run001/doc/runReport/runReport.Rmd 	 from /openfoam-r-reports/run/shared/reportTemplates/runReport01.Rmd
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Entering directory '/tests/openfoam/run/run001'
+make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
 
 ==========================================================================
 Solving with OpenFoam 7 on LocalMachine using 2 cores
@@ -37,11 +37,11 @@ Solving with OpenFoam 7 on LocalMachine using 2 cores
 Finished solving in x:xx:xx.xxxxxx
 ==========================================================================
 
-make[x]: Leaving directory '/tests/openfoam/run/run001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
 make paraview-exports
-make[x]: Entering directory '/tests/openfoam/run/run001'
-make[x]: Leaving directory '/tests/openfoam/run/run001'
-make[x]: Entering directory '/tests/openfoam/run'
+make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
+make[x]: Entering directory '/tests/openfoam-r-reports/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
 
 R version  x.x.x ...
@@ -145,5 +145,5 @@ Skip existing folder      doc
 
 *** finished sofa-tasks.py *** 
 
-make[x]: Leaving directory '/tests/openfoam/run'
-make[x]: Leaving directory '/tests/openfoam/run/run001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/run'
+make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
