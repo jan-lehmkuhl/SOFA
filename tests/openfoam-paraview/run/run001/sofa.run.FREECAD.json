@@ -3,7 +3,7 @@
     "description"           :   "",
 
     "buildSettings" : {
-        "meshLink"          :   "mesh002",
+        "meshLink"          :   "mesh001",
 
         "solver"            :   "",
         "turbulenceModel"   :   "",
