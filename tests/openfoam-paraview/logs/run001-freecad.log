@@ -13,9 +13,8 @@ Skip existing file        /openfoam-paraview/run/run001/pv.foam
 create upstream aspect links for:  	  >>  run001  <<
 Skip correct link    mesh001 		 with pointer to   ../../mesh/mesh001
 Creating link to     constant/polyMesh 		 with pointer to   ../../mesh/mesh001/constant/polyMesh
-Skip correct link    doc/meshReport 		 with pointer to   ../../mesh/mesh001/doc/meshReport
-remove for replacing:  /openfoam-paraview/run/run001/doc/runReport/runReport.Rmd
-Copying file to      /openfoam-paraview/run/run001/doc/runReport/runReport.Rmd 	 from /openfoam-paraview/run/shared/reportTemplates/runReport01.Rmd
+Unabel to find (728) >../../mesh/mesh001/doc/meshReport<
+Skipping >/home/jan/isac/klimdim/src/tools/sofa-framework/tests/openfoam-paraview/run/shared/reportTemplates< because it is a directory
 
 *** finished sofa-tasks.py *** 
 
@@ -1966,37 +1965,7 @@ Finalising parallel run
 make case-report
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
-
-R version  x.x.x ...
-Copyright (C) xxxx The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> rmarkdown::render('doc/runReport/runReport.Rmd')
-  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
-   inline R code fragments
-
-  |                                                                              |.....                                                                 |   7%
-label: setup (with options) 
-List of 2
- $ echo   : logi TRUE
- $ message: logi FALSE
-
-
-start creating R case report
+no R report is specified in sofa.*.json
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make paraview-exports
@@ -2004,39 +1973,10 @@ make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Entering directory '/tests/openfoam-paraview/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview
-
-R version  x.x.x ...
-Copyright (C) xxxx The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> rmarkdown::render('doc/runOverview.Rmd')
-  |                                                                              |                                                                      |   0%  |                                                                              |...                                                                   |   4%
-   inline R code fragments
-
-  |                                                                              |.....                                                                 |   7%
-label: setup (with options) 
-List of 2
- $ echo   : logi TRUE
- $ message: logi FALSE
-
-
 starting sofa-tasks.py in verbose mode
     with passed entryPoint:  overview
 Skip existing folder      doc
+Unabel to find RMarkdown file
 
 *** finished sofa-tasks.py *** 
 
