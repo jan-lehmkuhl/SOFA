@@ -16,7 +16,7 @@ tests: clean-and-remove-logs framework-chain mesh-overview
 	@echo "finished tests for openfoam"
 
 
-framework-chain: cad001 mesh001 run001 
+framework-chain: mesh001 run001 
 	@echo "finished tests for framework-chain"
 
 
@@ -43,14 +43,6 @@ write-mesh001-logs:
 
 #   Single Tests
 # ==========================================================
-
-cad001:
-	make -C cad/cad001  stl     >               logs/cad001.log
-	${remove_logs_variable_content}             logs/cad001.log
-	@python3 ../../src/testing/isGitClean.py    logs/cad001.log
-	@cd cad ; ${list_content}              > ../logs/cad001.files.txt
-	@python3 ../../src/testing/isGitClean.py    logs/cad001.files.txt
-
 
 mesh001: 
 	make -C mesh/mesh001  mesh   >              logs/mesh001-framework.log
