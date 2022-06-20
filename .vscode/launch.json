@@ -80,6 +80,20 @@
             "justMyCode":       true,
             "showReturnValue":  true,
         },
+        {
+            "name":             "tests/of-rreport/run001 upstreamLinks",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests/openfoam-r-reports/run/run001",
+            "program":          "${workspaceRoot}/src/sofa-tasks.py",
+            "args":             [   "upstreamLinks", 
+                                    "--verbose", 
+                                ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
 
 
 
