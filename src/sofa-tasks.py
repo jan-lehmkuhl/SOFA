@@ -57,8 +57,8 @@ parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
 # store all parsed arguments to args
 args = parser.parse_args()
 
-# verbose output
-if '/tools/sofa-framework/tests/' in os.getcwd(): 
+# enable verbose mode for all test runs
+if os.path.join(findParentFolder(".gitlab-ci.yml"), 'tests') in os.getcwd(): 
     args.verbose = True
     args.noAbsolutePathOutput = True
 if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
