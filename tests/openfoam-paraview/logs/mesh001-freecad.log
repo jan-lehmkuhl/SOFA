@@ -13,7 +13,7 @@ Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
 Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
-Skipping >/home/jan/isac/klimdim/src/tools/sofa-framework/tests/openfoam-paraview/mesh/shared/reportTemplates< because it is a directory
+Unabel to find (984) >/home/jan/workspace/sofa-core/tests/openfoam-paraview/mesh/shared/reportTemplates< in >/home/jan/workspace/sofa-core/tests<
 
 *** finished sofa-tasks.py *** 
 
@@ -1460,7 +1460,7 @@ Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
 Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
-Skipping >/home/jan/isac/klimdim/src/tools/sofa-framework/tests/openfoam-paraview/mesh/shared/reportTemplates< because it is a directory
+Unabel to find (984) >/home/jan/workspace/sofa-core/tests/openfoam-paraview/mesh/shared/reportTemplates< in >/home/jan/workspace/sofa-core/tests<
 
 *** finished sofa-tasks.py *** 
 
