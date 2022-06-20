@@ -139,7 +139,7 @@ def createSymlinkSavely(src, dst, referencePath=None, verbose=False ):
         else:
             print("Unabel to create target >%s< since it exists" % dst)
     else:
-        print("Unabel to find (728) >%s<" % src)
+        print("Unabel to find (728) >%s< for link creation as >%s<" % (src, dstShort) )
 
 def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False ):
     # copies a file if it exists
@@ -165,10 +165,10 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
     else:
         src = os.path.abspath(src)
         dst = os.path.abspath(dst)
+        srcShort = convertToRelativePath( src, referencePath, verbose )
+        dstShort = convertToRelativePath( dst, referencePath, verbose )
         if os.path.exists(src):
             if not os.path.isdir(src):
-                srcShort = convertToRelativePath( src, referencePath, verbose )
-                dstShort = convertToRelativePath( dst, referencePath, verbose )
                 if overwrite and os.path.exists(dst): 
                     if verbose: print("remove for replacing: ", dstShort)
                     os.remove(dst)
@@ -182,7 +182,7 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
             else:
                 print("Skipping >%s< because it is a directory" % src)
         else:
-            print("Unabel to find (984) >%s< in >%s<" % (src, referencePath) )
+            print("Unabel to find (984) >%s< for copying to >%s<" % (srcShort, dstShort) )
 
 def copyFile(src, dst):
     try:
