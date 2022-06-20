@@ -21,6 +21,10 @@ else
 
 endif
 
+# set localisation for fixed ls sorting
+export LC_ALL=en_US.UTF-8
+
+
 
 #   helper actions
 # ===================================================================
