@@ -15,8 +15,6 @@ xxxK
 1 139K  log.simpleFoam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 1 tiny  mesh001 -> ../../mesh/mesh001/
-1 tiny  mesh002 -> ../../mesh/mesh002
-1 tiny  postStates -> ../shared/postStates/
 1 tiny  pv.foam
 1 tiny  pvScript.py
 1 tiny  sofa.run.FREECAD.json
