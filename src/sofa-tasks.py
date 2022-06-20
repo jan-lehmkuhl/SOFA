@@ -37,9 +37,8 @@ from case import Case
 
 def exitIfRepositoryIsNotClean(): 
     if hasRepositoryStagedFiles(): 
-        print("\nERROR: this git repository has already staged files")
-        print(  "       please unstage or commit them and try again\n")
-        sys.exit(1)
+        raise SystemExit(  "\nERROR: this git repository has already staged files  \
+                            \n       please unstage or commit them and try again\n")
 
 
 
@@ -171,7 +170,6 @@ elif args.entryPoint == "updateAllReports":
             print("Found no RMarkdown file for OverviewReports")
 
 else:
-    print("ERROR no sofa-task defined")
-    sys.exit("nothing defined")
+    raise SystemExit("ERROR no sofa-task defined")
 
 if args.verbose:     print("\n*** finished sofa-tasks.py *** \n")

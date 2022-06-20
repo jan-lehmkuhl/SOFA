@@ -264,10 +264,7 @@ def loadJson(jsonPath, verbose=False):
             jsonPy = json.loads( jsonStr, object_pairs_hook=collections.OrderedDict )
             return(jsonPy)
     else:
-        print(" ")
-        print("ERROR: json file >%s< does not exist" % jsonPath)
-        print("    current directory is: " +os.getcwd() +"\n")
-        sys.exit(1)
+        raise SystemExit("ERROR missing json file: " +jsonPath)
 
 
 def handleStudyStructFolder( studyStructHome, fileAttributes, targetFolder, verbose=False, debugRefPath=None ):

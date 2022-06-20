@@ -104,7 +104,7 @@ class Case(object):
                 if self.aspectRoot == None :
                     self.aspectRoot = os.path.abspath(os.path.join(self.path, os.pardir))
         if self.aspectType == None: 
-            sys.exit(1)
+            raise SystemExit("ERROR no aspectType detected")
 
         if caseStructure == None :
             self.structure      = thisStudyStructure.aspectList[self.aspectType]['case000']
