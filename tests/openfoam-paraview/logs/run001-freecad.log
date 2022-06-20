@@ -13,8 +13,8 @@ Skip existing file        /openfoam-paraview/run/run001/pv.foam
 create upstream aspect links for:  	  >>  run001  <<
 Skip correct link    mesh001 		 with pointer to   ../../mesh/mesh001
 Creating link to     constant/polyMesh 		 with pointer to   ../../mesh/mesh001/constant/polyMesh
-Unabel to find (728) >../../mesh/mesh001/doc/meshReport<
-Skipping >/home/jan/isac/klimdim/src/tools/sofa-framework/tests/openfoam-paraview/run/shared/reportTemplates< because it is a directory
+Unabel to find (728) >../../mesh/mesh001/doc/meshReport< for link creation as >doc/meshReport<
+Unabel to find (984) >/openfoam-paraview/run/shared/reportTemplates< for copying to >/openfoam-paraview/run/run001/doc/runReport/runReport.Rmd<
 
 *** finished sofa-tasks.py *** 
 

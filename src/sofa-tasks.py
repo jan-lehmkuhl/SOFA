@@ -37,9 +37,8 @@ from case import Case
 
 def exitIfRepositoryIsNotClean(): 
     if hasRepositoryStagedFiles(): 
-        print("\nERROR: this git repository has already staged files")
-        print(  "       please unstage or commit them and try again\n")
-        sys.exit(1)
+        raise SystemExit(  "\nERROR: this git repository has already staged files  \
+                            \n       please unstage or commit them and try again\n")
 
 
 
@@ -57,8 +56,8 @@ parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
 # store all parsed arguments to args
 args = parser.parse_args()
 
-# verbose output
-if '/tools/sofa-framework/tests/' in os.getcwd(): 
+# enable verbose mode for all test runs
+if os.path.join(findParentFolder(".gitlab-ci.yml"), 'tests') in os.getcwd(): 
     args.verbose = True
     args.noAbsolutePathOutput = True
 if args.verbose :   print("starting sofa-tasks.py in verbose mode" )
@@ -171,7 +170,6 @@ elif args.entryPoint == "updateAllReports":
             print("Found no RMarkdown file for OverviewReports")
 
 else:
-    print("ERROR no sofa-task defined")
-    sys.exit("nothing defined")
+    raise SystemExit("ERROR no sofa-task defined")
 
 if args.verbose:     print("\n*** finished sofa-tasks.py *** \n")

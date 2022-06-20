@@ -165,8 +165,7 @@ class Study(object):
         print("\nstart structure creation of:       " +self.name  )
         print(  "    with study type:               " +self.studyStructure.name )
         if not os.path.exists(self.path):
-            print("\nERROR: " +self.path +" dont exists")
-            sys.exit(1)
+            raise SystemExit("\nERROR: " +self.path +" dont exists")
         print("")
 
         # loop all study files

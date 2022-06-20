@@ -15,7 +15,6 @@ xxxK
 1 x.xK  log.surfaceTransformPoints
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
 1 581K  mesh_outside.stl
-1 tiny  postStates -> ../shared/postStates/
 1    0  pv.foam
 1 tiny  sofa.mesh.FC-EXPORT.json
 

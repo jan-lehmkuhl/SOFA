@@ -29,6 +29,6 @@ if not isGitChanged == 0:   # zero means clean
     if os.path.isfile("debug-mode"):
         with open ('debug-mode', 'a') as f: f.write ("git changes in: " +args.file +"\n")
     else:
-        raise SystemExit("ERROR raise SystemExit: git changes in:   " +args.file)
+        raise SystemExit("ERROR: git changes in:   " +args.file)
 else:
     print("no git changes in:   " +args.file)
