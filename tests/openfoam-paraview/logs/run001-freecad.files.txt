@@ -12,7 +12,7 @@ xxxK
 1 x.xK  log.createPatch
 1 x.xK  log.decomposePar
 1 x.xK  log.potentialFoam
-1 139K  log.simpleFoam
+1 xxxK  log.simpleFoam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 1 tiny  mesh001 -> ../../mesh/mesh001/
 1 tiny  pv.foam
@@ -25,8 +25,8 @@ xxxK
 1 x.xK  nut
 1 x.xK  omega
 1 x.xK  p
-1 182K  phi
-1 177K  U
+1 xxxK  phi
+1 xxxK  U
 
 ./0.org:
 xxxK
@@ -48,13 +48,13 @@ xxxK
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
-1 306K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
 1  60K  neighbour
 1  67K  owner
 1 tiny  pointLevel
-1 221K  points
+1 xxxK  points
 1 tiny  pointZones
 1  41K  surfaceIndex
 
@@ -125,13 +125,13 @@ xxxK
 1 tiny  cellLevel
 1  12K  cellProcAddressing
 1  39K  faceProcAddressing
-1 149K  faces
+1 xxxK  faces
 1 tiny  level0Edge
 1  29K  neighbour
 1  32K  owner
 1 tiny  pointLevel
 1  14K  pointProcAddressing
-1 115K  points
+1 xxxK  points
 
 ./processor0/constant/polyMesh/sets:
 xxxK
@@ -193,13 +193,13 @@ xxxK
 1 tiny  cellLevel
 1  11K  cellProcAddressing
 1  36K  faceProcAddressing
-1 149K  faces
+1 xxxK  faces
 1 tiny  level0Edge
 1  29K  neighbour
 1  33K  owner
 1 tiny  pointLevel
 1  13K  pointProcAddressing
-1 110K  points
+1 xxxK  points
 
 ./processor1/constant/polyMesh/sets:
 xxxK

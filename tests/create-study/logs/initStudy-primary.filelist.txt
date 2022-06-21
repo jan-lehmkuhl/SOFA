@@ -78,7 +78,7 @@ xxxK
 
 ./mesh/shared/postStates:
 xxxK
-1 148K  mesh-state-01.pvsm
+1 xxxK  mesh-state-01.pvsm
 
 ./mesh/shared/reportTemplates:
 xxxK
@@ -111,7 +111,7 @@ xxxK
 
 ./run/shared/postStates:
 xxxK
-1 166K  run-state-01.pvsm
+1 xxxK  run-state-01.pvsm
 
 ./run/shared/reportTemplates:
 xxxK

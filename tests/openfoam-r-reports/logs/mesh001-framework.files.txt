@@ -22,13 +22,13 @@ xxxK
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
-1 330K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
 1  60K  neighbour
 1  71K  owner
 1 tiny  pointLevel
-1 332K  points
+1 xxxK  points
 1 tiny  pointZones
 1  43K  surfaceIndex
 
@@ -41,13 +41,13 @@ xxxK
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
-1 306K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
 1  60K  neighbour
 1  67K  owner
 1 tiny  pointLevel
-1 295K  points
+1 xxxK  points
 1 tiny  pointZones
 1  41K  surfaceIndex
 
@@ -59,27 +59,27 @@ xxxK
 
 ./constant/extendedFeatureEdgeMesh:
 xxxK
-1 27K  Body001_Geometry_edgeMesh.obj
-1 71K  Body001_Geometry.extendedFeatureEdgeMesh
+1 xxxK  Body001_Geometry_edgeMesh.obj
+1 xxxK  Body001_Geometry.extendedFeatureEdgeMesh
 
 ./constant/polyMesh:
 xxxK
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
-1 306K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
 1  60K  neighbour
 1  67K  owner
 1 tiny  pointLevel
-1 295K  points
+1 xxxK  points
 1 tiny  pointZones
 1  41K  surfaceIndex
 
 ./constant/triSurface:
 xxxK
-1 28K  Body001_Geometry.eMesh
+1 xxxK  Body001_Geometry.eMesh
 1 tiny  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
 
 ./doc:

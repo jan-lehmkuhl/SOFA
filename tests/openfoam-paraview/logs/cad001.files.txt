@@ -14,7 +14,7 @@ xxxK
 
 ./cad001/native:
 xxxK
-1 91K  geometry.FCStd
+1 xxxK  geometry.FCStd
 
 ./cad001/stl:
 xxxM

@@ -77,7 +77,7 @@ xxxK
 1 x.xK  reconstructPar1.log
 1 x.xK  renumberMesh1.log
 1 x.xK  runReport.log
-1 115K  simpleFoam1.log
+1 xxxK  simpleFoam1.log
 
 ./logs:
 xxxK
@@ -135,7 +135,7 @@ xxxK
 
 ./postProcessing/minMaxMagnitude/0:
 xxxK
-1 18K  fieldMinMax.dat
+1 xxxK  fieldMinMax.dat
 
 ./postProcessing/probes:
 xxxK
@@ -152,7 +152,7 @@ xxxK
 
 ./postProcessing/residuals/0:
 xxxK
-1 12K  residuals.dat
+1 xxxK  residuals.dat
 
 ./processor0:
 xxxK
@@ -195,14 +195,14 @@ xxxK
 1  12K  cellProcAddressing
 1 tiny  cellZones
 1  41K  faceProcAddressing
-1 149K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
 1  29K  neighbour
 1  32K  owner
 1 tiny  pointLevel
 1  14K  pointProcAddressing
-1 100K  points
+1 xxxK  points
 1 tiny  pointZones
 
 ./processor1:
@@ -246,7 +246,7 @@ xxxK
 1  11K  cellProcAddressing
 1 tiny  cellZones
 1  36K  faceProcAddressing
-1 149K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
 1  29K  neighbour
