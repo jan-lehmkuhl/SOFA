@@ -51,12 +51,12 @@ xxxK
 1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  60K  neighbour
-1  67K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
 1 xxxK  points
 1 tiny  pointZones
-1  41K  surfaceIndex
+1 xxxK  surfaceIndex
 
 ./constant/polyMesh/sets:
 xxxK
@@ -82,18 +82,18 @@ xxxK
 1 x.xK  nut
 1 x.xK  omega
 1 x.xK  p
-1  91K  phi
-1  87K  U
+1 xxxK  phi
+1 xxxK  U
 
 ./processor0/100:
 xxxK
 2 x.xK  uniform/
-1  36K  k
-1  44K  nut
-1  32K  omega
-1  26K  p
-1  91K  phi
-1  87K  U
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
 
 ./processor0/100/uniform:
 xxxK
@@ -102,12 +102,12 @@ xxxK
 ./processor0/104:
 xxxK
 2 x.xK  uniform/
-1  36K  k
-1  44K  nut
-1  32K  omega
-1  26K  p
-1  91K  phi
-1  87K  U
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
 
 ./processor0/104/uniform:
 xxxK
@@ -123,14 +123,14 @@ xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1  12K  cellProcAddressing
-1  39K  faceProcAddressing
+1 xxxK  cellProcAddressing
+1 xxxK  faceProcAddressing
 1 xxxK  faces
 1 tiny  level0Edge
-1  29K  neighbour
-1  32K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1  14K  pointProcAddressing
+1 xxxK  pointProcAddressing
 1 xxxK  points
 
 ./processor0/constant/polyMesh/sets:
@@ -150,18 +150,18 @@ xxxK
 1 x.xK  nut
 1 x.xK  omega
 1 x.xK  p
-1  93K  phi
-1  98K  U
+1 xxxK  phi
+1 xxxK  U
 
 ./processor1/100:
 xxxK
 2 x.xK  uniform/
-1  38K  k
-1  45K  nut
-1  33K  omega
-1  30K  p
-1  94K  phi
-1  93K  U
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
 
 ./processor1/100/uniform:
 xxxK
@@ -170,12 +170,12 @@ xxxK
 ./processor1/104:
 xxxK
 2 x.xK  uniform/
-1  38K  k
-1  45K  nut
-1  33K  omega
-1  30K  p
-1  94K  phi
-1  93K  U
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
 
 ./processor1/104/uniform:
 xxxK
@@ -191,14 +191,14 @@ xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1  11K  cellProcAddressing
-1  36K  faceProcAddressing
+1 xxxK  cellProcAddressing
+1 xxxK  faceProcAddressing
 1 xxxK  faces
 1 tiny  level0Edge
-1  29K  neighbour
-1  33K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1  13K  pointProcAddressing
+1 xxxK  pointProcAddressing
 1 xxxK  points
 
 ./processor1/constant/polyMesh/sets:

@@ -8,7 +8,7 @@ xxxK
 1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 x.xK  log.blockMesh
 1 x.xK  log.checkMesh
-1  38K  log.snappyHexMesh
+1 xxxK  log.snappyHexMesh
 1 x.xK  log.surfaceFeatureExtract
 1 x.xK  log.surfaceMeshTriangulate
 1 x.xK  log.surfaceToPatch
@@ -37,12 +37,12 @@ xxxK
 1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  60K  neighbour
-1  67K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
 1 xxxK  points
 1 tiny  pointZones
-1  41K  surfaceIndex
+1 xxxK  surfaceIndex
 
 ./constant/polyMesh/sets:
 xxxK

@@ -46,7 +46,7 @@ list_content = ls --almost-all -g --no-group \
     | sed -re 's/([1-9] )( *[ 1-9][0-9]{0,2})(  [a-zA-Z]*)/\1tiny\3/g' \
     | sed -re 's/^([0-9]{0,3})(\.[0-9])*([KM])/xxx\3/g' \
     | sed -re 's/([1-9] )([ 1-9]\.[0-9])([KM]  .*)/\1x.x\3/g' \
-    | sed -re 's/^([0-9] )?([0-9]{0,3})(\.[0-9])*([KM]  )/\1xxx\4/g'
+    | sed -re 's/^([0-9] )?( ?[0-9]{0,3})(\.[0-9])*([KM]  )/\1xxx\4/g'
 
 # SED notes: 
 #   - remove empty double lines

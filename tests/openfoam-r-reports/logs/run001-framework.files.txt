@@ -37,9 +37,9 @@ xxxK
 ./100:
 xxxK
 2 x.xK  uniform/
-1  86K  k
-1  65K  nut
-1  64K  omega
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
 1 x.xK  p
 1 x.xK  phi
 1 x.xK  U
@@ -172,9 +172,9 @@ xxxK
 ./processor0/100:
 xxxK
 2 x.xK  uniform/
-1  45K  k
-1  35K  nut
-1  34K  omega
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
 1 x.xK  p
 1 x.xK  phi
 1 x.xK  U
@@ -192,16 +192,16 @@ xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1  12K  cellProcAddressing
+1 xxxK  cellProcAddressing
 1 tiny  cellZones
-1  41K  faceProcAddressing
+1 xxxK  faceProcAddressing
 1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  29K  neighbour
-1  32K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1  14K  pointProcAddressing
+1 xxxK  pointProcAddressing
 1 xxxK  points
 1 tiny  pointZones
 
@@ -223,9 +223,9 @@ xxxK
 ./processor1/100:
 xxxK
 2 x.xK  uniform/
-1  45K  k
-1  35K  nut
-1  34K  omega
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
 1 x.xK  p
 1 x.xK  phi
 1 x.xK  U
@@ -243,17 +243,17 @@ xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1  11K  cellProcAddressing
+1 xxxK  cellProcAddressing
 1 tiny  cellZones
-1  36K  faceProcAddressing
+1 xxxK  faceProcAddressing
 1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  29K  neighbour
-1  33K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1  13K  pointProcAddressing
-1  95K  points
+1 xxxK  pointProcAddressing
+1 xxxK  points
 1 tiny  pointZones
 
 ./system:
