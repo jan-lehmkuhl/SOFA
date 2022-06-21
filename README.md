@@ -2,9 +2,14 @@
 SOFA - Simulation and Optimization Framework for general purpose Applications 
 ===================================================================================================
 
-The aim of this repository is to deliver a framework to improve the operational efficiency for simple and complex simulation projects and therefore accelerate and improve the project output.  
+The aim of this command-line based frameworks is to improve operational efficiency for simple and complex simulation projects and therefore accelerate and improve the project output.  
+This is mainly achieved by automatization, standardization and extensive use of a git as version control system.  
+
 Actual the development is mainly for OpenFOAM and Dakota under Linux, but in general every scriptable based simulation tool should work or can be integrated.  
-To achieve this multiple measures are addressed:  
+
+
+Some Features
+------------------------------------------------------------
 
 * automatic creation and usage of standard folders and files
   * improve orientation in the project for you and your colleages
