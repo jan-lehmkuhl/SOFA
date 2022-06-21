@@ -2,7 +2,7 @@
 xxxK
 4 x.xK  cad001/
 1 tiny  makefile -> ../../tools/sofa-framework/study-structures/openfoam/shared/makefile_aspect.mk
-1    3  sofa.aspect.json
+1 tiny  sofa.aspect.json
 
 ./cad001:
 xxxK

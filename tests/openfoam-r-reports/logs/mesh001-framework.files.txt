@@ -10,7 +10,7 @@ xxxK
 1 tiny  .fileStates.data
 1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-1    0  pv.foam
+1 tiny  pv.foam
 1 tiny  sofa.mesh.FRAMEWORK.json
 
 ./1:

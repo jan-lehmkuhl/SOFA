@@ -97,7 +97,7 @@ xxxK
 
 ./processor0/100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor0/104:
 xxxK
@@ -111,7 +111,7 @@ xxxK
 
 ./processor0/104/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor0/constant:
 xxxK
@@ -165,7 +165,7 @@ xxxK
 
 ./processor1/100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor1/104:
 xxxK
@@ -179,7 +179,7 @@ xxxK
 
 ./processor1/104/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor1/constant:
 xxxK

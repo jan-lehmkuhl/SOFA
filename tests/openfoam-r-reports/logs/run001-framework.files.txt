@@ -15,7 +15,7 @@ xxxK
 1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 1 tiny  mesh001 -> ../../mesh/mesh001/
-1    0  pv.foam
+1 tiny  pv.foam
 1 tiny  sofa.run.FRAMEWORK.json
 
 ./0:
@@ -46,13 +46,13 @@ xxxK
 
 ./100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./constant:
 xxxK
 1 tiny  polyMesh -> ../../../mesh/mesh001/constant/polyMesh/
-1 929  transportProperties
-1 886  turbulenceProperties
+1 tiny  transportProperties
+1 tiny  turbulenceProperties
 
 ./doc:
 xxxK
@@ -181,7 +181,7 @@ xxxK
 
 ./processor0/100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor0/constant:
 xxxK
@@ -232,7 +232,7 @@ xxxK
 
 ./processor1/100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor1/constant:
 xxxK
