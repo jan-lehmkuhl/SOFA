@@ -10,7 +10,7 @@ xxxK
 1 tiny  .fileStates.data
 1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-1    0  pv.foam
+1 tiny  pv.foam
 1 tiny  sofa.mesh.FRAMEWORK.json
 
 ./1:
@@ -22,15 +22,15 @@ xxxK
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
-1 330K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  60K  neighbour
-1  71K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1 332K  points
+1 xxxK  points
 1 tiny  pointZones
-1  43K  surfaceIndex
+1 xxxK  surfaceIndex
 
 ./2:
 xxxK
@@ -41,15 +41,15 @@ xxxK
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
-1 306K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  60K  neighbour
-1  67K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1 295K  points
+1 xxxK  points
 1 tiny  pointZones
-1  41K  surfaceIndex
+1 xxxK  surfaceIndex
 
 ./constant:
 xxxK
@@ -59,27 +59,27 @@ xxxK
 
 ./constant/extendedFeatureEdgeMesh:
 xxxK
-1 27K  Body001_Geometry_edgeMesh.obj
-1 71K  Body001_Geometry.extendedFeatureEdgeMesh
+1 xxxK  Body001_Geometry_edgeMesh.obj
+1 xxxK  Body001_Geometry.extendedFeatureEdgeMesh
 
 ./constant/polyMesh:
 xxxK
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
-1 306K  faces
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  60K  neighbour
-1  67K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1 295K  points
+1 xxxK  points
 1 tiny  pointZones
-1  41K  surfaceIndex
+1 xxxK  surfaceIndex
 
 ./constant/triSurface:
 xxxK
-1 28K  Body001_Geometry.eMesh
+1 xxxK  Body001_Geometry.eMesh
 1 tiny  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
 
 ./doc:
@@ -101,7 +101,7 @@ xxxK
 1 x.xK  blockMesh1.log
 1 x.xK  checkMesh1.log
 1 x.xK  meshReport.log
-1  38K  snappyHexMesh1.log
+1 xxxK  snappyHexMesh1.log
 1 x.xK  surfaceFeatures1.log
 
 ./system:

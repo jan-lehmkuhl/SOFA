@@ -15,7 +15,7 @@ xxxK
 1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
 1 tiny  mesh001 -> ../../mesh/mesh001/
-1    0  pv.foam
+1 tiny  pv.foam
 1 tiny  sofa.run.FRAMEWORK.json
 
 ./0:
@@ -37,22 +37,22 @@ xxxK
 ./100:
 xxxK
 2 x.xK  uniform/
-1  86K  k
-1  65K  nut
-1  64K  omega
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
 1 x.xK  p
 1 x.xK  phi
 1 x.xK  U
 
 ./100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./constant:
 xxxK
 1 tiny  polyMesh -> ../../../mesh/mesh001/constant/polyMesh/
-1 929  transportProperties
-1 886  turbulenceProperties
+1 tiny  transportProperties
+1 tiny  turbulenceProperties
 
 ./doc:
 xxxK
@@ -77,7 +77,7 @@ xxxK
 1 x.xK  reconstructPar1.log
 1 x.xK  renumberMesh1.log
 1 x.xK  runReport.log
-1 115K  simpleFoam1.log
+1 xxxK  simpleFoam1.log
 
 ./logs:
 xxxK
@@ -135,7 +135,7 @@ xxxK
 
 ./postProcessing/minMaxMagnitude/0:
 xxxK
-1 18K  fieldMinMax.dat
+1 xxxK  fieldMinMax.dat
 
 ./postProcessing/probes:
 xxxK
@@ -152,7 +152,7 @@ xxxK
 
 ./postProcessing/residuals/0:
 xxxK
-1 12K  residuals.dat
+1 xxxK  residuals.dat
 
 ./processor0:
 xxxK
@@ -172,16 +172,16 @@ xxxK
 ./processor0/100:
 xxxK
 2 x.xK  uniform/
-1  45K  k
-1  35K  nut
-1  34K  omega
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
 1 x.xK  p
 1 x.xK  phi
 1 x.xK  U
 
 ./processor0/100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor0/constant:
 xxxK
@@ -192,17 +192,17 @@ xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1  12K  cellProcAddressing
+1 xxxK  cellProcAddressing
 1 tiny  cellZones
-1  41K  faceProcAddressing
-1 149K  faces
+1 xxxK  faceProcAddressing
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  29K  neighbour
-1  32K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1  14K  pointProcAddressing
-1 100K  points
+1 xxxK  pointProcAddressing
+1 xxxK  points
 1 tiny  pointZones
 
 ./processor1:
@@ -223,16 +223,16 @@ xxxK
 ./processor1/100:
 xxxK
 2 x.xK  uniform/
-1  45K  k
-1  35K  nut
-1  34K  omega
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
 1 x.xK  p
 1 x.xK  phi
 1 x.xK  U
 
 ./processor1/100/uniform:
 xxxK
-1 799  time
+1 tiny  time
 
 ./processor1/constant:
 xxxK
@@ -243,17 +243,17 @@ xxxK
 1 x.xK  boundary
 1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1  11K  cellProcAddressing
+1 xxxK  cellProcAddressing
 1 tiny  cellZones
-1  36K  faceProcAddressing
-1 149K  faces
+1 xxxK  faceProcAddressing
+1 xxxK  faces
 1 tiny  faceZones
 1 tiny  level0Edge
-1  29K  neighbour
-1  33K  owner
+1 xxxK  neighbour
+1 xxxK  owner
 1 tiny  pointLevel
-1  13K  pointProcAddressing
-1  95K  points
+1 xxxK  pointProcAddressing
+1 xxxK  points
 1 tiny  pointZones
 
 ./system:

@@ -21,6 +21,10 @@ else
 
 endif
 
+# set localisation for fixed ls sorting
+export LC_ALL=en_US.UTF-8
+
+
 
 #   helper actions
 # ===================================================================
@@ -39,9 +43,19 @@ list_content = ls --almost-all -g --no-group \
     --time-style='+' --human-readable --group-directories-first --classify --recursive  \
     | sed -re 's/^[^ ]* //'   \
     | sed -e 's/,/./g'  \
-    | sed -re 's/([1-9] )( [ 1-9][0-9]{0,2})(  [a-zA-Z]*)/\1tiny\3/g' \
+    | sed -re 's/([1-9] )( *[ 1-9][0-9]{0,2})(  [a-zA-Z]*)/\1tiny\3/g' \
     | sed -re 's/^([0-9]{0,3})(\.[0-9])*([KM])/xxx\3/g' \
-    | sed -re 's/([1-9] )([ 1-9]\.[0-9])([KM]  .*)/\1x.x\3/g'
+    | sed -re 's/([1-9] )([ 1-9]\.[0-9])([KM]  .*)/\1x.x\3/g' \
+    | sed -re 's/^([0-9] )?( ?[0-9]{0,3})(\.[0-9])*([KM]  )/\1xxx\4/g'
+
+# SED notes: 
+#   - remove empty double lines
+#   - replace , by .
+#   - replace plain digigs by tiny
+#   - replace folder summary
+#   - replace numbers with dots (optional)
+#   - replace numbers with multiplier
+
 
 remove_logs_variable_content = sed --in-place --regexp-extended --expression \
     "s/(make.*'\/)(.*)(tests.*)/\1\3/g; \
@@ -51,7 +65,7 @@ remove_logs_variable_content = sed --in-place --regexp-extended --expression \
 	s/(on )(.*)( using)/\1LocalMachine\3/g; \
 	s/(Date   : )(.*) [0-9]{2} [0-9]{4}/\1xxx xx xxxx/g; \
 	s/(Host   : )\".*\"/\1\"LocalMachine\"/g; \
-	s/(PID    : )[0-9]{4,7}/\1xxxxxx/g; \
+	s/(PID    : )[0-9]{3,7}/\1xxxxxx/g; \
 	s/( = )[0-9\.]* s/\1x.xx s/g; \
 	s/(Case   : )(\/.*)(\/tests.*)/\1\3/g; \
 	s/(\")(\/.*)(\/tests.*\")/\1\3/g; \
