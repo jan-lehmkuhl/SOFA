@@ -1468,7 +1468,7 @@ python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 no R report is specified in sofa.*.json
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
-make paraview-exports
+make paraview-macro
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'

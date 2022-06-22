@@ -44,7 +44,7 @@ mesh: upstream-links
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
-	make paraview-exports
+	make paraview-macro
 	@if [ "${rReport}" != "" ] ; then     \
 		make -C .. overview-report      ; \
 	fi ;
@@ -217,7 +217,7 @@ paraview-empty-state:
 	fi ;
 
 
-paraview-exports: 
+paraview-macro: 
 	@mkdir --parents doc/paraview
 	@if [ -f "${paraviewMacro}" ] ; then   \
 		pvbatch ${paraviewMacro}         ; \

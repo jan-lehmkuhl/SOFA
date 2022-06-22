@@ -37,14 +37,14 @@ freecad:
 	@read -p "press ENTER to continue ..." dummy
 	make freecad-gui
 	make freecad-stl-push
-	make paraview-exports
+	make paraview-macro
 
 
 view:
 	if [   -f native/geometry.FCStd ]; then   make freecad-gui              ; fi
 	if [ ! -f native/geometry.FCStd ]; then   make frameworkview               ; fi
 	make paraview
-	make paraview-exports
+	make paraview-macro
 
 
 clean: clean-freecad-output clean-vtk clean-paraview
@@ -149,7 +149,7 @@ paraview:
 	paraview --state=$(paraviewState)
 
 
-paraview-exports: 
+paraview-macro: 
 	@mkdir --parents doc/paraview
 	@if [ -f "${paraviewMacro}" ] ; then   \
 		pvbatch ${paraviewMacro}         ; \

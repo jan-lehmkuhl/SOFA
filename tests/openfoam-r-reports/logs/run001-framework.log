@@ -38,7 +38,7 @@ Finished solving in x:xx:xx.xxxxxx
 ==========================================================================
 
 make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
-make paraview-exports
+make paraview-macro
 make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
 make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
 make[x]: Entering directory '/tests/openfoam-r-reports/run'

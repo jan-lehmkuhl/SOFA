@@ -46,7 +46,7 @@ run: upstream-links
 	else                          \
 		make frameworkrun       ; \
 	fi ;
-	make paraview-exports
+	make paraview-macro
 	@if [ "${rReport}" != "" ] ; then     \
 		make -C .. overview-report      ; \
 	fi ;
@@ -196,7 +196,7 @@ paraview-empty-state:
 		paraFoam -builtin                                                     ; \
 	fi ;
 
-paraview-exports: 
+paraview-macro: 
 	@mkdir --parents doc/paraview
 	@if [ -f "${paraviewMacro}" ] ; then   \
 		pvbatch ${paraviewMacro}         ; \
