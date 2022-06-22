@@ -15,7 +15,7 @@ endif
 
 jsonfile        = $(shell find . -name 'sofa.cad*.json')
 paraviewState   = $(shell node -p "require('$(jsonfile)').buildSettings.paraviewState")
-paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
+paraviewMacro   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk
@@ -151,8 +151,8 @@ paraview:
 
 paraview-exports: 
 	@mkdir --parents doc/paraview
-	@if [ -f "${paraviewScript}" ] ; then   \
-		pvbatch ${paraviewScript}         ; \
+	@if [ -f "${paraviewMacro}" ] ; then   \
+		pvbatch ${paraviewMacro}         ; \
 	fi ;
 
 clean-paraview:

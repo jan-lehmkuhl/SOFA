@@ -16,7 +16,7 @@ endif
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
 paraviewState    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
-paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
+paraviewMacro    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
 rReport          = $(shell node -p "require('$(jsonFile)').buildSettings.report")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
@@ -198,8 +198,8 @@ paraview-empty-state:
 
 paraview-exports: 
 	@mkdir --parents doc/paraview
-	@if [ -f "${paraviewScript}" ] ; then   \
-		pvbatch ${paraviewScript}         ; \
+	@if [ -f "${paraviewMacro}" ] ; then   \
+		pvbatch ${paraviewMacro}         ; \
 	fi ;
 
 clean-paraview:
