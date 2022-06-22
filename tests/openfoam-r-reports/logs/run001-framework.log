@@ -19,6 +19,9 @@ Copying file to      /openfoam-r-reports/run/run001/doc/runReport/runReport.Rmd 
 
 *** finished sofa-tasks.py *** 
 
+make python-pre
+make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
 make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
 
 ==========================================================================
@@ -37,6 +40,9 @@ Solving with OpenFoam 7 on LocalMachine using 2 cores
 Finished solving in x:xx:xx.xxxxxx
 ==========================================================================
 
+make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
+make python-post
+make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
 make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
 make paraview-macro
 make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'

@@ -14,6 +14,8 @@ else
 endif
 
 jsonfile        = $(shell find . -name 'sofa.cad*.json')
+pythonPreScript  = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPreExec")
+pythonPostScript = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPostExec")
 paraviewState   = $(shell node -p "require('$(jsonfile)').buildSettings.paraviewState")
 paraviewMacro   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
 
@@ -35,8 +37,10 @@ stl:
 freecad:
 	@echo; echo "*** execute >WRITE MESH< inside freecad to provide stl files in >meshCase< ***" ;echo
 	@read -p "press ENTER to continue ..." dummy
+	make python-pre
 	make freecad-gui
 	make freecad-stl-push
+	make python-post
 	make paraview-macro
 
 
@@ -61,6 +65,16 @@ clone:
 	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 clean-upstream-included: clean
+
+
+python-pre: 
+	@if [ -f "${pythonPreScript}" ] ; then   \
+		python3 ${pythonPreScript}         ; \
+	fi ;
+python-post: 
+	@if [ -f "${pythonPostScript}" ] ; then   \
+		python3 ${pythonPostScript}         ; \
+	fi ;
 
 
 

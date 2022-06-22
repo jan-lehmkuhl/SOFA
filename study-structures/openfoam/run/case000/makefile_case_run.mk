@@ -15,6 +15,8 @@ endif
 
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
+pythonPreScript  = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPreExec")
+pythonPostScript = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPostExec")
 paraviewState    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
 paraviewMacro    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
 rReport          = $(shell node -p "require('$(jsonFile)').buildSettings.report")
@@ -41,11 +43,13 @@ all:
 rerun: clean run
 
 run: upstream-links
+	make python-pre
 	@if [ -f "Allrun" ] ; then    \
 		make run-allrun         ; \
 	else                          \
 		make frameworkrun       ; \
 	fi ;
+	make python-post
 	make paraview-macro
 	@if [ "${rReport}" != "" ] ; then     \
 		make -C .. overview-report      ; \
@@ -122,6 +126,16 @@ clean-report:
 	@rm -f  .Rhistory
 	@rm -rf doc/meshReport
 	@rm -f  doc/runReport/.Rhistory
+
+
+python-pre: 
+	@if [ -f "${pythonPreScript}" ] ; then   \
+		python3 ${pythonPreScript}         ; \
+	fi ;
+python-post: 
+	@if [ -f "${pythonPostScript}" ] ; then   \
+		python3 ${pythonPostScript}         ; \
+	fi ;
 
 
 

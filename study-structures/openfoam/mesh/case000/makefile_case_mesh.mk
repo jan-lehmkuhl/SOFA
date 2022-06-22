@@ -15,6 +15,8 @@ endif
 
 jsonFile        = $(shell find . -name 'sofa.mesh*.json')
 linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
+pythonPreScript = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPreExec")
+pythonPostScript= $(shell node -p "require('$(jsonFile)').buildSettings.pythonPostExec")
 paraviewState   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
 paraviewMacro   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
 rReport         = $(shell node -p "require('$(jsonFile)').buildSettings.report")
@@ -38,12 +40,14 @@ all:
 
 mesh: upstream-links
     # NOTE: update cad folder before
+	make python-pre
 	@if [ -f "Allmesh" ] ; then                               \
 		make mesh-allmesh                                  ; \
 	else                                                     \
 		make frameworkmeshing                              ; \
 		make finalizeMesh                                  ; \
 	fi ;
+	make python-post
 	make paraview-macro
 	@if [ "${rReport}" != "" ] ; then     \
 		make -C .. overview-report      ; \
@@ -122,6 +126,15 @@ show-overview-report:
 
 rstudio:
 	rstudio doc/meshReport/meshReport.Rmd
+
+python-pre: 
+	@if [ -f "${pythonPreScript}" ] ; then   \
+		python3 ${pythonPreScript}         ; \
+	fi ;
+python-post: 
+	@if [ -f "${pythonPostScript}" ] ; then   \
+		python3 ${pythonPostScript}         ; \
+	fi ;
 
 
 

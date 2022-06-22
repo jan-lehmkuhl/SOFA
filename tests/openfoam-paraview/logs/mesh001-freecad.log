@@ -17,6 +17,9 @@ Unabel to find (984) >/openfoam-paraview/mesh/shared/reportTemplates< for copyin
 
 *** finished sofa-tasks.py *** 
 
+make python-pre
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 ./Allmesh
 /*---------------------------------------------------------------------------*\
@@ -1467,6 +1470,9 @@ Unabel to find (984) >/openfoam-paraview/mesh/shared/reportTemplates< for copyin
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 no R report is specified in sofa.*.json
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
+make python-post
+make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make paraview-macro
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
