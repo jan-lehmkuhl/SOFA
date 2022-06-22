@@ -38,6 +38,7 @@ all:
 	make -C ../../mesh/$(linkedMeshCase)
 	make run 
 
+rerun: clean run
 
 run: upstream-links
 	@if [ -f "Allrun" ] ; then    \
@@ -52,7 +53,7 @@ run: upstream-links
 
 
 mesh: 
-	make -C $(linkedMeshCase) mesh
+	make -C ../../mesh/$(linkedMeshCase) mesh
 
 
 # opens reports & paraview
