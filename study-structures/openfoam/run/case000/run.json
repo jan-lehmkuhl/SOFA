@@ -15,8 +15,10 @@
         "dynamicMesh"       :   "False",
         "porousZone"        :   "False",
 
+        "pythonPreExec"     :   "",
+        "pythonPostExec"    :   "",
         "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
-        "paraviewScript"    :   "",
+        "paraviewMacro"     :   "",
         "report"            :   "runReport01.Rmd"
     },
 

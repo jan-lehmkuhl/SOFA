@@ -18,6 +18,10 @@ Unabel to find (984) >/openfoam-paraview/run/shared/reportTemplates< for copying
 
 *** finished sofa-tasks.py *** 
 
+make python-pre
+make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
+Hello Python-Pre-Script
+make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 cp    -rf  0.org/*  0
@@ -1968,7 +1972,11 @@ python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/report.py
 no R report is specified in sofa.*.json
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
-make paraview-exports
+make python-post
+make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
+Hello Python-Post-Script
+make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
+make paraview-macro
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'

@@ -7,8 +7,10 @@
 
 
     "buildSettings" : {
+        "pythonPreExec"     :   "",
+        "pythonPostExec"    :   "",
         "paraviewState"     :   "../shared/postStates/CAD.pvsm",
-        "paraviewScript"    :   "",
+        "paraviewMacro"     :   "",
         "report"            :   ""
     }
 

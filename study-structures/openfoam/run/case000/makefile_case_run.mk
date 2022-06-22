@@ -15,8 +15,10 @@ endif
 
 jsonFile         = $(shell find . -name 'sofa.run*.json')
 linkedMeshCase   = $(shell node -p "require('$(jsonFile)').buildSettings.meshLink")
+pythonPreScript  = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPreExec")
+pythonPostScript = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPostExec")
 paraviewState    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
-paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
+paraviewMacro    = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
 rReport          = $(shell node -p "require('$(jsonFile)').buildSettings.report")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
@@ -38,21 +40,24 @@ all:
 	make -C ../../mesh/$(linkedMeshCase)
 	make run 
 
+rerun: clean run
 
 run: upstream-links
+	make python-pre
 	@if [ -f "Allrun" ] ; then    \
 		make run-allrun         ; \
 	else                          \
 		make frameworkrun       ; \
 	fi ;
-	make paraview-exports
+	make python-post
+	make paraview-macro
 	@if [ "${rReport}" != "" ] ; then     \
 		make -C .. overview-report      ; \
 	fi ;
 
 
 mesh: 
-	make -C $(linkedMeshCase) mesh
+	make -C ../../mesh/$(linkedMeshCase) mesh
 
 
 # opens reports & paraview
@@ -121,6 +126,16 @@ clean-report:
 	@rm -f  .Rhistory
 	@rm -rf doc/meshReport
 	@rm -f  doc/runReport/.Rhistory
+
+
+python-pre: 
+	@if [ -f "${pythonPreScript}" ] ; then   \
+		python3 ${pythonPreScript}         ; \
+	fi ;
+python-post: 
+	@if [ -f "${pythonPostScript}" ] ; then   \
+		python3 ${pythonPostScript}         ; \
+	fi ;
 
 
 
@@ -195,10 +210,10 @@ paraview-empty-state:
 		paraFoam -builtin                                                     ; \
 	fi ;
 
-paraview-exports: 
+paraview-macro: 
 	@mkdir --parents doc/paraview
-	@if [ -f "${paraviewScript}" ] ; then   \
-		pvbatch ${paraviewScript}         ; \
+	@if [ -f "${paraviewMacro}" ] ; then   \
+		pvbatch ${paraviewMacro}         ; \
 	fi ;
 
 clean-paraview:

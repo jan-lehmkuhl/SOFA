@@ -18,6 +18,9 @@ Copying file to      /openfoam-r-reports/mesh/mesh001/doc/meshReport/meshReport.
 
 *** finished sofa-tasks.py *** 
 
+make python-pre
+make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'
 make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
 python3 ../../../tools/sofa-framework/openFoam/python/foamMesh.py mesh
 decided to run surface features
@@ -52,7 +55,10 @@ Finished mesh with [32mgood[0m quality in x:xx:xx.xxxxxx
 ==========================================================================
 
 make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'
-make paraview-exports
+make python-post
+make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
+make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'
+make paraview-macro
 make[x]: Entering directory '/tests/openfoam-r-reports/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-r-reports/mesh/mesh001'
 make[x]: Entering directory '/tests/openfoam-r-reports/mesh'

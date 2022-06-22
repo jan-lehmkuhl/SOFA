@@ -9,8 +9,11 @@
     "buildSettings" : {
         "cadLink"           :   "",
         "defaultFiles"      :   "bundle-1",
+
+        "pythonPreExec"     :   "",
+        "pythonPostExec"    :   "",
         "paraviewState"     :   "../shared/postStates/mesh-state-01.pvsm",
-        "paraviewScript"    :   "",
+        "paraviewMacro"     :   "",
         "report"            :   "meshReport01.Rmd"
     },
 

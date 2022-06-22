@@ -14,8 +14,10 @@ else
 endif
 
 jsonfile        = $(shell find . -name 'sofa.cad*.json')
+pythonPreScript  = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPreExec")
+pythonPostScript = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPostExec")
 paraviewState   = $(shell node -p "require('$(jsonfile)').buildSettings.paraviewState")
-paraviewScript   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewScript")
+paraviewMacro   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk
@@ -35,16 +37,18 @@ stl:
 freecad:
 	@echo; echo "*** execute >WRITE MESH< inside freecad to provide stl files in >meshCase< ***" ;echo
 	@read -p "press ENTER to continue ..." dummy
+	make python-pre
 	make freecad-gui
 	make freecad-stl-push
-	make paraview-exports
+	make python-post
+	make paraview-macro
 
 
 view:
 	if [   -f native/geometry.FCStd ]; then   make freecad-gui              ; fi
 	if [ ! -f native/geometry.FCStd ]; then   make frameworkview               ; fi
 	make paraview
-	make paraview-exports
+	make paraview-macro
 
 
 clean: clean-freecad-output clean-vtk clean-paraview
@@ -61,6 +65,16 @@ clone:
 	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 clean-upstream-included: clean
+
+
+python-pre: 
+	@if [ -f "${pythonPreScript}" ] ; then   \
+		python3 ${pythonPreScript}         ; \
+	fi ;
+python-post: 
+	@if [ -f "${pythonPostScript}" ] ; then   \
+		python3 ${pythonPostScript}         ; \
+	fi ;
 
 
 
@@ -149,10 +163,10 @@ paraview:
 	paraview --state=$(paraviewState)
 
 
-paraview-exports: 
+paraview-macro: 
 	@mkdir --parents doc/paraview
-	@if [ -f "${paraviewScript}" ] ; then   \
-		pvbatch ${paraviewScript}         ; \
+	@if [ -f "${paraviewMacro}" ] ; then   \
+		pvbatch ${paraviewMacro}         ; \
 	fi ;
 
 clean-paraview:

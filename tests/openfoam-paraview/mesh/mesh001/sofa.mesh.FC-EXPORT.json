@@ -5,7 +5,11 @@
     "buildSettings" : {
         "cadLink"           :   "cad001",
         "defaultFiles"      :   "",
-        "paraview"          :   "../shared/postStates/mesh-inspection.pvsm",
+
+        "pythonPreExec"     :   "../../run/shared/scripts/pre1.py",
+        "pythonPostExec"    :   "../../run/shared/scripts/post1.py",
+        "paraviewState"     :   "",
+        "paraviewMacro"     :   "",
         "report"            :   ""
     },
 
