@@ -19,6 +19,7 @@ Unabel to find (984) >/openfoam-paraview/mesh/shared/reportTemplates< for copyin
 
 make python-pre
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+Hello Python-Pre-Script
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 ./Allmesh
@@ -1473,6 +1474,7 @@ make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make python-post
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+Hello Python-Post-Script
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make paraview-macro
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
