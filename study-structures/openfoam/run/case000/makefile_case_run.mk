@@ -217,4 +217,6 @@ paraview-macro:
 	fi ;
 
 clean-paraview:
+	@rm -rf doc/exports
+	@rm -rf doc/plain-text-exports
 	@rm -rf doc/paraview

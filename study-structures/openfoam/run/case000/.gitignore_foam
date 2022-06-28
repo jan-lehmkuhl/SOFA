@@ -109,6 +109,7 @@ postProcessing
 # =====================================
 
 ## general exports
+doc/exports
 doc/plain-text-exports
 doc/paraview
 
