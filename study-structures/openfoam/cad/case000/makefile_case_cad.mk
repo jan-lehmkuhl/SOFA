@@ -164,8 +164,8 @@ paraview:
 
 
 paraview-macro: 
-	@mkdir --parents doc/paraview
 	@if [ -f "${paraviewMacro}" ] ; then   \
+		mkdir --parents doc/exports      ; \
 		pvbatch ${paraviewMacro}         ; \
 	fi ;
 
