@@ -3,7 +3,7 @@ xxxK
 3 x.xK  1/
 3 x.xK  2/
 5 x.xK  constant/
-4 x.xK  doc/
+3 x.xK  doc/
 2 x.xK  log/
 2 x.xK  system/
 1 tiny  cad001 -> ../../cad/cad001/
@@ -85,16 +85,12 @@ xxxK
 ./doc:
 xxxK
 2 x.xK  meshReport/
-2 x.xK  paraview/
 
 ./doc/meshReport:
 xxxM
 1 x.xK  mesh.rds
 1 x.xM  meshReport.html
 1 x.xK  meshReport.Rmd
-
-./doc/paraview:
-0
 
 ./log:
 xxxK

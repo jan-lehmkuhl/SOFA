@@ -1,7 +1,6 @@
 .:
 xxxK
 5 x.xK  constant/
-3 x.xK  doc/
 2 x.xK  system/
 1 tiny  Allmesh*
 1 tiny  cad001 -> ../../cad/cad001/
@@ -52,13 +51,6 @@ xxxK
 xxxK
 1 xxxK  Body001_Geometry.eMesh
 1 tiny  Body001_Geometry.stl -> ../../../../cad/cad001/stl/Body001_Geometry.stl
-
-./doc:
-xxxK
-2 x.xK  paraview/
-
-./doc/paraview:
-0
 
 ./system:
 xxxK

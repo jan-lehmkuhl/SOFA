@@ -3,7 +3,6 @@ xxxK
 2 x.xK  0/
 2 x.xK  0.org/
 3 x.xK  constant/
-3 x.xK  doc/
 6 x.xK  processor0/
 6 x.xK  processor1/
 2 x.xK  system/
@@ -61,13 +60,6 @@ xxxK
 ./constant/polyMesh/sets:
 xxxK
 1 x.xK  unmatchedFaces
-
-./doc:
-xxxK
-2 x.xK  paraview/
-
-./doc/paraview:
-0
 
 ./processor0:
 xxxK
