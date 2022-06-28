@@ -10,6 +10,7 @@
 
 cad[0-9][0-9][0-9]
 mesh[0-9][0-9][0-9]
+postExports
 ARCHIVE-*.tar.bz2
 
 

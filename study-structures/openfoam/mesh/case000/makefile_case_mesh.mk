@@ -239,3 +239,4 @@ paraview-macro:
 clean-paraview:
 	@rm -rf doc/exports
 	@rm -rf doc/paraview
+	@rm -rf postExports
