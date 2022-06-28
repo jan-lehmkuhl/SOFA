@@ -4,7 +4,7 @@ xxxK
 2 x.xK  0.org/
 3 x.xK  100/
 2 x.xK  constant/
-4 x.xK  doc/
+3 x.xK  doc/
 2 x.xK  log/
 2 x.xK  logs/
 5 x.xK  postProcessing/
@@ -56,12 +56,8 @@ xxxK
 
 ./doc:
 xxxK
-2 x.xK  paraview/
 2 x.xK  runReport/
 1 tiny  meshReport -> ../../../mesh/mesh001/doc/meshReport/
-
-./doc/paraview:
-0
 
 ./doc/runReport:
 xxxM

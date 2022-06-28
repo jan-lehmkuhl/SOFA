@@ -10,7 +10,7 @@
 
 cad[0-9][0-9][0-9]
 mesh[0-9][0-9][0-9]
-postStates
+postExports
 ARCHIVE-*.tar.bz2
 
 
@@ -110,7 +110,9 @@ postProcessing
 # =====================================
 
 ## general exports
+doc/exports
 doc/plain-text-exports
+doc/paraview
 
 
 ## R reports
@@ -125,9 +127,6 @@ doc/*Report/*Report.html
 doc/meshReport
     # link in runXXX to meshReport
 
-
-## paraview
-doc/paraview
 
 
 # End of https://www.gitignore.io/api/openfoam

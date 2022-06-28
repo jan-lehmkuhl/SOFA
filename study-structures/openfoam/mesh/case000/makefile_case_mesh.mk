@@ -231,10 +231,12 @@ paraview-empty-state:
 
 
 paraview-macro: 
-	@mkdir --parents doc/paraview
 	@if [ -f "${paraviewMacro}" ] ; then   \
+		mkdir --parents doc/exports      ; \
 		pvbatch ${paraviewMacro}         ; \
 	fi ;
 
 clean-paraview:
+	@rm -rf doc/exports
 	@rm -rf doc/paraview
+	@rm -rf postExports
