@@ -102,7 +102,7 @@ clean-vtk:
 
 freecad-gui:
 	if [ ! -f native/geometry.FCStd ]; then cp ${FRAMEWORK_PATH}/openFoam/dummies/cad/geometry.FCStd  native/geometry.FCStd; fi
-	freecad-daily native/geometry.FCStd
+	freecad native/geometry.FCStd
 
 
 freecad-stl-push: 
