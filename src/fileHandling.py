@@ -12,6 +12,8 @@ import json
 import errno
 import collections
 
+from testing.isThisATest import isThisAnInternalSofaTest
+
 
 def findFile(fileName, turnFolder):
     # FIXME move to separate
@@ -68,8 +70,7 @@ def createDirSafely(dst, debugRefPath=None, verbose=False):
 
     from folderHandling import findParentFolder
 
-    # enable verbose mode for all test runs
-    if os.path.join(findParentFolder(".gitlab-ci.yml"), 'tests') in os.getcwd(): 
+    if isThisAnInternalSofaTest():
         verbose = True
 
     dstShort = convertToRelativePath( dst, debugRefPath )
@@ -151,10 +152,8 @@ def copyFileSafely(src, dst, referencePath=None, overwrite=False, verbose=False 
     # Return:
     #   side effects
 
-    from folderHandling import findParentFolder
 
-    # enable verbose mode for all test runs
-    if os.path.join(findParentFolder(".gitlab-ci.yml"), 'tests') in os.getcwd(): 
+    if isThisAnInternalSofaTest():
         verbose = True
 
     if referencePath == None:
