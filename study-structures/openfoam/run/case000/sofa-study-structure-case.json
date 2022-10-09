@@ -38,7 +38,7 @@
     "upstreamAspects": [
         {
             "upstreamAspect":   "mesh",
-            "caseJsonKey": [    "buildSettings", "meshLink" ],
+            "caseJsonKey": [    "sofaAspectLinks", "meshLink" ],
             "useCaseJsonWithoutAspect": false,
             "createDirectSymlink": true,
             "specialLinks": [

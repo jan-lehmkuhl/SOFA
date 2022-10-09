@@ -50,7 +50,7 @@
             "type":             "python",
             "request":          "launch",
             "program":          "${workspaceRoot}/tools/sofa-framework/src/sofa-tasks.py",
-            "cwd":              "${workspaceRoot}/model/thermal/mesh/mesh001",
+            "cwd":              "${workspaceRoot}/LOCAL_STUDY/mesh/mesh001",
             "args": [
                 "upstreamLinks",
                 "--verbose"

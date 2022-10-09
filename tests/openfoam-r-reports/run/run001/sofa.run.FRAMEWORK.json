@@ -2,8 +2,21 @@
     "name"                  :   "",
     "description"           :   "",
 
+
+    "sofaAspectLinks" : {
+        "meshLink"          :   "mesh001"
+    },
+
+    "caseExecutions" : {
+        "pythonPreExec"     :   "",
+        "pythonPostExec"    :   "",
+
+        "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
+        "paraviewMacro"     :   ""
+    },
+
     "buildSettings" : {
-        "meshLink"          :   "mesh001",
+        "defaultFiles"      :   "",
         "report"            :   "runReport01.Rmd",
 
         "solver"            :   "simpleFoam",

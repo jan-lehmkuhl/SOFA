@@ -5,12 +5,17 @@
         ""
     ],
 
+    "sofaAspectLinks" : {
+    },
 
-    "buildSettings" : {
+    "caseExecutions" : {
         "pythonPreExec"     :   "",
         "pythonPostExec"    :   "",
         "paraviewState"     :   "../shared/postStates/CAD.pvsm",
-        "paraviewMacro"     :   "",
+        "paraviewMacro"     :   ""
+    },
+
+    "buildSettings" : {
         "report"            :   ""
     }
 
