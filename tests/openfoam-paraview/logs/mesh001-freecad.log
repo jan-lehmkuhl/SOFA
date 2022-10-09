@@ -13,7 +13,6 @@ Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
 Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
-Unabel to find (984) >/openfoam-paraview/mesh/shared/reportTemplates< for copying to >/openfoam-paraview/mesh/mesh001/doc/meshReport/meshReport.Rmd<
 
 *** finished sofa-tasks.py *** 
 
@@ -1464,7 +1463,6 @@ Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
 Skip correct link    constant/triSurface/Body001_Geometry.stl 		 with pointer to   ../../cad/cad001/stl/Body001_Geometry.stl
-Unabel to find (984) >/openfoam-paraview/mesh/shared/reportTemplates< for copying to >/openfoam-paraview/mesh/mesh001/doc/meshReport/meshReport.Rmd<
 
 *** finished sofa-tasks.py *** 
 
