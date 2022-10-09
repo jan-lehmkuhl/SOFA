@@ -14,12 +14,12 @@ else
 endif
 
 jsonFile        = $(shell find . -name 'sofa.mesh*.json')
-linkedCadCase   = $(shell node -p "require('$(jsonFile)').buildSettings.cadLink")
-pythonPreScript = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPreExec")
-pythonPostScript= $(shell node -p "require('$(jsonFile)').buildSettings.pythonPostExec")
-paraviewState   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewState")
-paraviewMacro   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
-rReport         = $(shell node -p "require('$(jsonFile)').buildSettings.report")
+linkedCadCase   = $(shell node -p "require('$(jsonFile)').sofaAspectLinks.cadLink")
+pythonPreScript = $(shell node -p "require('$(jsonFile)').caseExecutions.pythonPreExec")
+pythonPostScript= $(shell node -p "require('$(jsonFile)').caseExecutions.pythonPostExec")
+paraviewState   = $(shell node -p "require('$(jsonFile)').caseExecutions.paraviewState")
+paraviewMacro   = $(shell node -p "require('$(jsonFile)').caseExecutions.paraviewMacro")
+rReport         = $(shell node -p "require('$(jsonFile)').caseExecutions.RMarkdownReport")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk

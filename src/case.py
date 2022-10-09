@@ -138,7 +138,7 @@ class Case(object):
             # extract linked cases from case.json according to foamStructure gen in sofa.project.json
             foamStructure   = readFoamStructure()
             if 'linkName' in foamStructure[self.aspectType]: 
-                self.linkedCase = self.caseJson["buildSettings"][foamStructure[self.aspectType]["linkName"]]
+                self.linkedCase = self.caseJson["sofaAspectLinks"][foamStructure[self.aspectType]["linkName"]]
             if self.linkedCase:
                 # differentiate between single links and a list of links (survey)
                 if isinstance(self.linkedCase, str):
@@ -259,36 +259,38 @@ class Case(object):
             for thisUpstreamConnection in self.structure['upstreamAspects'] : 
                 # sort information
                 thisUpstreamAspect  = thisUpstreamConnection['upstreamAspect']
-                upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]     # TODO read for free key depth
+                upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]
+                    # TODO read for free key depth
                 upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
 
-                if thisUpstreamConnection['createDirectSymlink']: 
-                    createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
+                if upstreamCase != "":
+                    if thisUpstreamConnection['createDirectSymlink']: 
+                        createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
 
-                if 'specialLinks' in thisUpstreamConnection : 
-                    for thisLink in thisUpstreamConnection['specialLinks'] : 
-                        # define src/dst
-                        if thisUpstreamConnection['useCaseJsonWithoutAspect']:
-                            src         = os.path.join( '..','..',upstreamCase, thisLink['upstreamCasePath'] )
-                        else:
-                            if thisLink['upstreamCasePath'] =="":
-                                src     = upstreamTarget
-                            else: 
-                                src     = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
-                        dst = thisLink['targetPath']
-
-                        # create file
-                        if thisLink['separateFiles']:
-                            for element in sorted(os.listdir(src)):
-                                if thisLink['copyFile']: 
-                                    copyFileSafely( os.path.join(src,element), os.path.join(dst,element), overwrite=True, verbose=self.verbose )
-                                else:
-                                    createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
-                        else:
-                            if thisLink['copyFile']: 
-                                copyFileSafely( src, dst, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
+                    if 'specialLinks' in thisUpstreamConnection : 
+                        for thisLink in thisUpstreamConnection['specialLinks'] : 
+                            # define src/dst
+                            if thisUpstreamConnection['useCaseJsonWithoutAspect']:
+                                src         = os.path.join( '..','..',upstreamCase, thisLink['upstreamCasePath'] )
                             else:
-                                createSymlinkSavely( src, dst, verbose=self.verbose )
+                                if thisLink['upstreamCasePath'] =="":
+                                    src     = upstreamTarget
+                                else: 
+                                    src     = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
+                            dst = thisLink['targetPath']
+
+                            # create file
+                            if thisLink['separateFiles']:
+                                for element in sorted(os.listdir(src)):
+                                    if thisLink['copyFile']: 
+                                        copyFileSafely( os.path.join(src,element), os.path.join(dst,element), overwrite=True, verbose=self.verbose )
+                                    else:
+                                        createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
+                            else:
+                                if thisLink['copyFile']: 
+                                    copyFileSafely( src, dst, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
+                                else:
+                                    createSymlinkSavely( src, dst, verbose=self.verbose )
         return(True)
 
 

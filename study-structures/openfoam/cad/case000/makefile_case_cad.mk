@@ -14,10 +14,10 @@ else
 endif
 
 jsonfile        = $(shell find . -name 'sofa.cad*.json')
-pythonPreScript  = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPreExec")
-pythonPostScript = $(shell node -p "require('$(jsonFile)').buildSettings.pythonPostExec")
-paraviewState   = $(shell node -p "require('$(jsonfile)').buildSettings.paraviewState")
-paraviewMacro   = $(shell node -p "require('$(jsonFile)').buildSettings.paraviewMacro")
+pythonPreScript  = $(shell node -p "require('$(jsonFile)').caseExecutions.pythonPreExec")
+pythonPostScript = $(shell node -p "require('$(jsonFile)').caseExecutions.pythonPostExec")
+paraviewState   = $(shell node -p "require('$(jsonfile)').caseExecutions.paraviewState")
+paraviewMacro   = $(shell node -p "require('$(jsonFile)').caseExecutions.paraviewMacro")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk
@@ -102,7 +102,7 @@ clean-vtk:
 
 freecad-gui:
 	if [ ! -f native/geometry.FCStd ]; then cp ${FRAMEWORK_PATH}/openFoam/dummies/cad/geometry.FCStd  native/geometry.FCStd; fi
-	freecad-daily native/geometry.FCStd
+	freecad native/geometry.FCStd
 
 
 freecad-stl-push: 

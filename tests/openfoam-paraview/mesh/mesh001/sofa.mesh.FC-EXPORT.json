@@ -2,15 +2,22 @@
     "name"                  :   "",
     "description"           :   "",
 
-    "buildSettings" : {
-        "cadLink"           :   "cad001",
-        "defaultFiles"      :   "",
+    "sofaAspectLinks" : {
+        "cadLink"           :   "cad001"
+    },
 
+    "caseExecutions" : {
         "pythonPreExec"     :   "../../run/shared/scripts/pre1.py",
         "pythonPostExec"    :   "../../run/shared/scripts/post1.py",
+
         "paraviewState"     :   "",
         "paraviewMacro"     :   "",
-        "report"            :   ""
+
+        "RMarkdownReport"   :   ""
+    },
+
+    "buildSettings" : {
+        "defaultFiles"      :   ""
     },
 
     "meshSettings" : {

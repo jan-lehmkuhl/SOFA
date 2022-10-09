@@ -1,12 +1,23 @@
 {
     "name"                  :   "",
     "description"           :   "",
- 
+
+    "sofaAspectLinks" : {
+        "cadLink"           :   "cad001"
+    },
+
+    "caseExecutions" : {
+        "pythonPreExec"     :   "",
+        "pythonPostExec"    :   "",
+
+        "paraviewState"     :   "../shared/postStates/mesh-inspection.pvsm",
+        "paraviewMacro"     :   "",
+
+        "RMarkdownReport"   :   "meshReport01.Rmd"
+    },
+
     "buildSettings" : {
-        "cadLink"           :   "cad001",
-        "defaultFiles"      :   "",
-        "paraview"          :   "../shared/postStates/mesh-inspection.pvsm",
-        "report"            :   "meshReport01.Rmd"
+        "defaultFiles"      :   ""
     },
 
     "meshSettings" : {

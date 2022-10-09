@@ -23,6 +23,7 @@ from fileHandling import copyFileSafely
 from fileHandling import loadJson
 from fileHandling import hasRepositoryStagedFiles
 from folderHandling import findParentFolder
+from testing.isThisATest import isThisAnInternalSofaTest
 
 from study import Study 
 
@@ -56,8 +57,7 @@ parser.add_argument( '--studyStructFolder', nargs='?', const=1, type=str )
 # store all parsed arguments to args
 args = parser.parse_args()
 
-# enable verbose mode for all test runs
-if os.path.join(findParentFolder(".gitlab-ci.yml"), 'tests') in os.getcwd(): 
+if isThisAnInternalSofaTest():
     args.verbose = True
     args.noAbsolutePathOutput = True
 if args.verbose :   print("starting sofa-tasks.py in verbose mode" )

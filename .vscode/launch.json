@@ -67,6 +67,21 @@
         },
 
         {
+            "name":             "tests/openfoam-paraview/mesh/mesh001 report",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests/openfoam-paraview/mesh/mesh001",
+            "program":          "${workspaceRoot}/study-structures/openfoam/shared/report.py",
+            "args":             [
+                                    "--verbose", 
+                                ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
+
+        {
             "name":             "tests/of-para/run001 upstreamLinks",
             "type":             "python",
             "request":          "launch",

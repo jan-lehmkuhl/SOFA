@@ -47,7 +47,7 @@
         // linking files to upstream case defined in case.json
         {
             "upstreamAspect":   "cad",
-            "caseJsonKey": [    "buildSettings", "cadLink" ],
+            "caseJsonKey": [    "sofaAspectLinks", "cadLink" ],
             "useCaseJsonWithoutAspect": false,
             "createDirectSymlink": true,
             "specialLinks": [
@@ -62,7 +62,7 @@
         },
         {
             "upstreamAspect":           "mesh/shared/reportTemplates",
-            "caseJsonKey": [            "buildSettings", "report" ],
+            "caseJsonKey": [            "caseExecutions", "RMarkdownReport" ],
             "useCaseJsonWithoutAspect": false,
             "createDirectSymlink":      false,
             "specialLinks": [

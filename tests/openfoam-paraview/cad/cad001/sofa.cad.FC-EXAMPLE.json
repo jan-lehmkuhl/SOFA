@@ -1,9 +1,9 @@
 {
     "name"                  :   "FreeCAD-Example 90deg pipe bend",
     "description"           :   "https://gitlab.com/schlupp/example-cfdof-workflow",
- 
-    "buildSettings" : {
-        "report"            :   ""
+
+    "caseExecutions" : {
+        "RMarkdownReport"   :   ""
     }
 
 }

@@ -25,7 +25,8 @@
         "statusBar.border": "#f5a2ac",
         "statusBar.debuggingBorder": "#a2f5eb",
         "titleBar.border": "#f5a2ac",
-        "tab.activeBorder": "#fad0d5"
+        "tab.activeBorder": "#fad0d5",
+        "commandCenter.border": "#15202b99"
     },
     "peacock.color": "#f5a2ac"
 }

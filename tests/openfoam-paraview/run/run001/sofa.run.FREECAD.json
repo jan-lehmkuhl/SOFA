@@ -2,20 +2,28 @@
     "name"                  :   "",
     "description"           :   "",
 
+    "sofaAspectLinks" : {
+        "meshLink"          :   "mesh001"
+    },
+
+    "caseExecutions" : {
+        "pythonPreExec"     :   "../shared/scripts/pre1.py",
+        "pythonPostExec"    :   "../shared/scripts/post1.py",
+
+        "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
+        "paraviewMacro"     :   "",
+
+        "RMarkdownReport"   :   ""
+    },
+
     "buildSettings" : {
-        "meshLink"          :   "mesh001",
+        "defaultFiles"      :   "",
 
         "solver"            :   "",
         "turbulenceModel"   :   "",
 
         "dynamicMesh"       :   "False",
-        "porousZone"        :   "False",
-
-        "pythonPreExec"     :   "../shared/scripts/pre1.py",
-        "pythonPostExec"    :   "../shared/scripts/post1.py",
-        "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
-        "paraviewMacro"     :   "",
-        "report"            :   ""
+        "porousZone"        :   "False"
     },
 
     "runSettings" : {

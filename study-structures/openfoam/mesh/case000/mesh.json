@@ -5,16 +5,22 @@
         ""
     ],
 
+    "sofaAspectLinks" : {
+        "cadLink"           :   ""
+    },
 
-    "buildSettings" : {
-        "cadLink"           :   "",
-        "defaultFiles"      :   "bundle-1",
-
+    "caseExecutions" : {
         "pythonPreExec"     :   "",
         "pythonPostExec"    :   "",
+
         "paraviewState"     :   "../shared/postStates/mesh-state-01.pvsm",
         "paraviewMacro"     :   "",
-        "report"            :   "meshReport01.Rmd"
+
+        "RMarkdownReport"   :   "meshReport01.Rmd"
+    },
+
+    "buildSettings" : {
+        "defaultFiles"      :   "bundle-1"
     },
 
     "meshSettings" : {
