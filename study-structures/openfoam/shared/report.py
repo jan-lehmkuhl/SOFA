@@ -47,10 +47,9 @@ if True:
     reportDst = None
     if 'upstreamAspects' in thisCase.structure : 
         for thisUpstreamConnection in thisCase.structure['upstreamAspects'] : 
-            if "RMarkdownReport" in thisUpstreamConnection['upstreamAspect']: 
-                if 'specialLinks' in thisUpstreamConnection : 
-                    for thisLink in thisUpstreamConnection['specialLinks'] : 
-                        reportDst = thisLink['targetPath']
+            if 'specialLinks' in thisUpstreamConnection : 
+                for thisLink in thisUpstreamConnection['specialLinks'] : 
+                    reportDst = thisLink['targetPath']
 
     # execute R report
     if reportDst == None:
