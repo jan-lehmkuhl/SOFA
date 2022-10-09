@@ -11,12 +11,14 @@
     "caseExecutions" : {
         "pythonPreExec"     :   "",
         "pythonPostExec"    :   "",
+
         "paraviewState"     :   "../shared/postStates/CAD.pvsm",
-        "paraviewMacro"     :   ""
+        "paraviewMacro"     :   "",
+
+        "RMarkdownReport"   :   ""
     },
 
     "buildSettings" : {
-        "report"            :   ""
     }
 
 }

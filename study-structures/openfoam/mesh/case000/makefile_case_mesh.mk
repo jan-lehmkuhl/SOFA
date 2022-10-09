@@ -19,7 +19,7 @@ pythonPreScript = $(shell node -p "require('$(jsonFile)').caseExecutions.pythonP
 pythonPostScript= $(shell node -p "require('$(jsonFile)').caseExecutions.pythonPostExec")
 paraviewState   = $(shell node -p "require('$(jsonFile)').caseExecutions.paraviewState")
 paraviewMacro   = $(shell node -p "require('$(jsonFile)').caseExecutions.paraviewMacro")
-rReport         = $(shell node -p "require('$(jsonFile)').buildSettings.report")
+rReport         = $(shell node -p "require('$(jsonFile)').caseExecutions.RMarkdownReport")
 
 
 include ${FRAMEWORK_PATH}/makefile.global.mk

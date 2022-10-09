@@ -9,13 +9,15 @@
     "caseExecutions" : {
         "pythonPreExec"     :   "../../run/shared/scripts/pre1.py",
         "pythonPostExec"    :   "../../run/shared/scripts/post1.py",
+
         "paraviewState"     :   "",
-        "paraviewMacro"     :   ""
+        "paraviewMacro"     :   "",
+
+        "RMarkdownReport"   :   ""
     },
 
     "buildSettings" : {
-        "defaultFiles"      :   "",
-        "report"            :   ""
+        "defaultFiles"      :   ""
     },
 
     "meshSettings" : {

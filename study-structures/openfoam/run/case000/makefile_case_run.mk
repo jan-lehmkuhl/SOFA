@@ -19,7 +19,7 @@ pythonPreScript  = $(shell node -p "require('$(jsonFile)').caseExecutions.python
 pythonPostScript = $(shell node -p "require('$(jsonFile)').caseExecutions.pythonPostExec")
 paraviewState    = $(shell node -p "require('$(jsonFile)').caseExecutions.paraviewState")
 paraviewMacro    = $(shell node -p "require('$(jsonFile)').caseExecutions.paraviewMacro")
-rReport          = $(shell node -p "require('$(jsonFile)').buildSettings.report")
+rReport          = $(shell node -p "require('$(jsonFile)').caseExecutions.RMarkdownReport")
 
 jsonFileMeshCase = $(shell find ../../mesh/$(linkedMeshCase) -name 'sofa.mesh*.json')
 linkedCadCase    = $(shell node -p "require('$(jsonFileMeshCase)').sofaAspectLinks.cadLink")

@@ -9,8 +9,11 @@
     "caseExecutions" : {
         "pythonPreExec"     :   "../shared/scripts/pre1.py",
         "pythonPostExec"    :   "../shared/scripts/post1.py",
+
         "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
-        "paraviewMacro"     :   ""
+        "paraviewMacro"     :   "",
+
+        "RMarkdownReport"   :   ""
     },
 
     "buildSettings" : {
@@ -20,9 +23,7 @@
         "turbulenceModel"   :   "",
 
         "dynamicMesh"       :   "False",
-        "porousZone"        :   "False",
-
-        "report"            :   ""
+        "porousZone"        :   "False"
     },
 
     "runSettings" : {

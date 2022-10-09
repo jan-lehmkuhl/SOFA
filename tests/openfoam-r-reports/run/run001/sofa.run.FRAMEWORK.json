@@ -12,12 +12,13 @@
         "pythonPostExec"    :   "",
 
         "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
-        "paraviewMacro"     :   ""
+        "paraviewMacro"     :   "",
+
+        "RMarkdownReport"   :   "runReport01.Rmd"
     },
 
     "buildSettings" : {
         "defaultFiles"      :   "",
-        "report"            :   "runReport01.Rmd",
 
         "solver"            :   "simpleFoam",
         "turbulenceModel"   :   "kOmegaSST",

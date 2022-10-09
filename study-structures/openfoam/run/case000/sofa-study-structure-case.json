@@ -60,7 +60,7 @@
         },
         {
             "upstreamAspect":           "run/shared/reportTemplates",
-            "caseJsonKey": [            "buildSettings", "report" ],
+            "caseJsonKey": [            "caseExecutions", "RMarkdownReport"  ],
             "useCaseJsonWithoutAspect": false,
             "createDirectSymlink":      false,
             "specialLinks": [

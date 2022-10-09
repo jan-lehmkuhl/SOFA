@@ -47,7 +47,7 @@ if True:
     reportDst = None
     if 'upstreamAspects' in thisCase.structure : 
         for thisUpstreamConnection in thisCase.structure['upstreamAspects'] : 
-            if "report" in thisUpstreamConnection['upstreamAspect']: 
+            if "RMarkdownReport" in thisUpstreamConnection['upstreamAspect']: 
                 if 'specialLinks' in thisUpstreamConnection : 
                     for thisLink in thisUpstreamConnection['specialLinks'] : 
                         reportDst = thisLink['targetPath']
@@ -55,8 +55,8 @@ if True:
     # execute R report
     if reportDst == None:
         print("no R report is defined")
-    elif (  'report' in thisCase.caseJson['buildSettings']
-            and thisCase.caseJson['buildSettings']['report'] == ""):
+    elif (  'RMarkdownReport' in thisCase.caseJson['caseExecutions']
+            and thisCase.caseJson['caseExecutions']['RMarkdownReport'] == ""):
         print("no R report is specified in sofa.*.json")
     else: 
         print("start creating R case report")
