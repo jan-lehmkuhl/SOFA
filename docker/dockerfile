@@ -3,20 +3,21 @@ FROM ubuntu:20.04
 
 #   install std utils
 # ==========================================================
-RUN apt-get update
-RUN apt-get install -y apt-utils
-RUN apt-get install -y software-properties-common
-RUN apt-get install -y sudo
-RUN apt-get install -y wget
-RUN apt-get install -y curl
-RUN apt-get install -y libglu1
-RUN apt-get install -y ca-certificates
-RUN apt-get install -y gnupg
-RUN apt-get install -y vim
-RUN apt-get install -y nano
-RUN apt-get install -y git
-RUN apt-get install -y make
-RUN apt-get install -y nodejs
+RUN apt-get update --fix-missing  && \
+    apt-get install -y \
+        apt-utils \
+        software-properties-common \
+        sudo \
+        wget \
+        curl \
+        libglu1 \
+        ca-certificates \
+        gnupg \
+        vim \
+        nano \
+        git \
+        make \
+        nodejs
 
 # Allow localisation
 RUN apt-get install -y locales
