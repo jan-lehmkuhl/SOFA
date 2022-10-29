@@ -29,20 +29,6 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 # ENV LC_ALL en_US.UTF-8 
 
 
-
-#   install R reporting tools
-# ==========================================================
-
-RUN mkdir -p /scripts
-COPY install-r-deb-packages.sh /scripts
-COPY install-r-packages.sh /scripts
-WORKDIR /scripts
-RUN chmod +x install-r-deb-packages.sh
-RUN ./install-r-deb-packages.sh
-RUN ./install-r-packages.sh
-WORKDIR /
-
-
 #   install OpenFOAM 7
 # ==========================================================
 RUN sh -c "wget -O - https://dl.openfoam.org/gpg.key | apt-key add -"
