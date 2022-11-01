@@ -210,9 +210,7 @@ clean-report:
 # =============================================================================
 
 # opens paraview with the referenced state file
-paraview: 
-	# Remove variable parts from Paraview state file
-	@${remove_paraview_variable_parts} $(paraviewState)
+paraview: paraview-fix-state
 	paraview --state=$(paraviewState)
 
 
@@ -228,7 +226,11 @@ paraview-empty-state:
 		echo "*** start paraFoam"                                             ; \
 		paraFoam                                                              ; \
 	fi ;
+	make paraview-fix-state
 
+paraview-fix-state:
+	# Remove variable parts from Paraview state file
+	@${remove_paraview_variable_parts} $(paraviewState)
 
 paraview-macro: 
 	@if [ -f "${paraviewMacro}" ] ; then   \

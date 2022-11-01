@@ -194,9 +194,7 @@ clean-freecad:
 # =============================================================================
 
 # opens paraview with the referenced state file
-paraview: 
-	# Remove variable parts from Paraview state file
-	@${remove_paraview_variable_parts} $(paraviewState)
+paraview: paraview-fix-state
 	paraview --state=$(paraviewState)
 
 
@@ -205,10 +203,18 @@ paraview-empty-state:
 	if [ ! -f "Allrun" ] ; then                                                 \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py view      ; \
+	elif [ -f "pv.foam" ] ; then                                                \
+		echo "*** start paraview pv.foam"                                     ; \
+		paraview pv.foam                                                      ; \
 	else                                                                        \
 		echo "*** start paraFoam -builtin"                                    ; \
 		paraFoam -builtin                                                     ; \
 	fi ;
+	make paraview-fix-state
+
+paraview-fix-state:
+	# Remove variable parts from Paraview state file
+	@${remove_paraview_variable_parts} $(paraviewState)
 
 paraview-macro: 
 	@if [ -f "${paraviewMacro}" ] ; then   \
