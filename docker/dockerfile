@@ -1,22 +1,25 @@
 FROM ubuntu:20.04
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 
 #   install std utils
 # ==========================================================
-RUN apt-get update
-RUN apt-get install -y apt-utils
-RUN apt-get install -y software-properties-common
-RUN apt-get install -y sudo
-RUN apt-get install -y wget
-RUN apt-get install -y curl
-RUN apt-get install -y libglu1
-RUN apt-get install -y ca-certificates
-RUN apt-get install -y gnupg
-RUN apt-get install -y vim
-RUN apt-get install -y nano
-RUN apt-get install -y git
-RUN apt-get install -y make
-RUN apt-get install -y nodejs
+RUN apt-get update --fix-missing  && \
+    apt-get install -y \
+        apt-utils \
+        software-properties-common \
+        sudo \
+        wget \
+        curl \
+        libglu1 \
+        ca-certificates \
+        gnupg \
+        vim \
+        nano \
+        git \
+        make \
+        nodejs
 
 # Allow localisation
 RUN apt-get install -y locales
@@ -24,20 +27,6 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 # ENV LANG en_US.UTF-8  
 # ENV LANGUAGE en_US:en  
 # ENV LC_ALL en_US.UTF-8 
-
-
-
-#   install R reporting tools
-# ==========================================================
-
-RUN mkdir -p /scripts
-COPY install-r-deb-packages.sh /scripts
-COPY install-r-packages.sh /scripts
-WORKDIR /scripts
-RUN chmod +x install-r-deb-packages.sh
-RUN ./install-r-deb-packages.sh
-RUN ./install-r-packages.sh
-WORKDIR /
 
 
 #   install OpenFOAM 7
@@ -50,6 +39,7 @@ RUN apt-get install -y --no-install-recommends openfoam7
 # create separate user with login shell
 RUN useradd --user-group --create-home --shell /bin/bash foam ;\
 	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER foam
 RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc 
 USER root
