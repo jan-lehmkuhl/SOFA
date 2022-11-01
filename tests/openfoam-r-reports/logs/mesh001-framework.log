@@ -3,7 +3,7 @@ starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  mesh001  ***
 start case constructor
-with case-json:   sofa.mesh.FRAMEWORK.json	in: /tests/openfoam-r-reports/mesh/mesh001
+with case-json:   /tests/openfoam-r-reports/mesh/mesh001/sofa.mesh.FRAMEWORK.json
 creating case:         		  >>  mesh001  <<
 Skip existing folder      /openfoam-r-reports/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json

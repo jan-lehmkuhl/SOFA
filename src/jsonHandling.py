@@ -6,9 +6,17 @@
 # Topic:       File handling                                               #
 #--------------------------------------------------------------------------#
 
-import os
-import json
 import collections
+import fnmatch
+import json
+import os
+
+
+
+def findSofaJson( path, aspectType ):
+    for file in sorted(os.listdir( path )):
+        if fnmatch.fnmatch(file, "sofa."+ aspectType +"*.json"):
+            return file
 
 
 

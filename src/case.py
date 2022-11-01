@@ -25,6 +25,7 @@ from fileHandling import copyFolderSafely
 from fileHandling import findFile
 from folderHandling import findFolder
 from folderHandling import findParentFolder
+from jsonHandling import findSofaJson
 from jsonHandling import loadJson
 
 
@@ -117,11 +118,9 @@ class Case(object):
             self.path       = os.path.join( self.aspectRoot, self.caseName )
         else:
             self.createNew  = False
-            for file in sorted(os.listdir( self.path )):
-                if fnmatch.fnmatch(file, "sofa."+ self.aspectType +"*.json"):
-                    if self.verbose: 
-                        print("with case-json:   "+ file+ "\tin: "+ self.path )
-                    self.pathToJson = os.path.join(self.path, file)
+            self.pathToJson = os.path.join(self.path, findSofaJson(self.path, self.aspectType +".") )
+            if self.verbose: 
+                print("with case-json:   "+ self.pathToJson )
 
 
         # store linked cases to self
