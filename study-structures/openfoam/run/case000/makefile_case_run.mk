@@ -216,7 +216,8 @@ paraview-fix-state:
 	# Remove variable parts from Paraview state file
 	@${remove_paraview_variable_parts} $(paraviewState)
 
-paraview-macros: 
+paraview-macros:
+	python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/python-postprocessing.py
 	pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
 	@if [ -f "${paraviewMacro}" ] ; then   \
 		pvbatch ${paraviewMacro}         ; \

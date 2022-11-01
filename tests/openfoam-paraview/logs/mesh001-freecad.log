@@ -1476,6 +1476,7 @@ Hello Python-Post-Script
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make paraview-macros
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/python-postprocessing.py
 pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'

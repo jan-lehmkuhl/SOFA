@@ -3,7 +3,8 @@ xxxK
 2 x.xK  0/
 2 x.xK  0.org/
 3 x.xK  constant/
-3 x.xK  doc/
+4 x.xK  doc/
+3 x.xK  postProcessing/
 6 x.xK  processor0/
 6 x.xK  processor1/
 2 x.xK  system/
@@ -64,12 +65,29 @@ xxxK
 
 ./doc:
 xxxK
+2 x.xK  exports/
 2 x.xK  paraview/
+
+./doc/exports:
+xxxK
+1 xxxK  residuals.png
 
 ./doc/paraview:
 xxxK
 1 xxxK  renderView1.png
 1 xxxK  renderView2.png
+
+./postProcessing:
+xxxK
+3 x.xK  residuals/
+
+./postProcessing/residuals:
+xxxK
+2 x.xK  0/
+
+./postProcessing/residuals/0:
+xxxK
+1 x.xK  residuals.dat
 
 ./processor0:
 xxxK
