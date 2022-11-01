@@ -15,7 +15,7 @@ file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, file_path )
 sys.path.insert(1, './tools/sofa-framework/openFoam/python') 
 
-from fileHandling import loadJson
+from jsonHandling import loadJson
 from fileHandling import handleStudyStructFile
 from folderHandling import findParentFolder
 from folderHandling import findChildFolders
