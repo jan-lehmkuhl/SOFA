@@ -48,7 +48,7 @@ mesh: upstream-links
 		make finalizeMesh                                  ; \
 	fi ;
 	make python-post
-	make paraview-macro
+	make paraview-macros
 	@if [ "${rReport}" != "" ] ; then     \
 		make -C .. overview-report      ; \
 	fi ;
@@ -232,9 +232,9 @@ paraview-fix-state:
 	# Remove variable parts from Paraview state file
 	@${remove_paraview_variable_parts} $(paraviewState)
 
-paraview-macro: 
+paraview-macros: 
+	pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
 	@if [ -f "${paraviewMacro}" ] ; then   \
-		mkdir --parents doc/exports      ; \
 		pvbatch ${paraviewMacro}         ; \
 	fi ;
 

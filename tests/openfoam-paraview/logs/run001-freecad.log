@@ -1975,7 +1975,12 @@ make python-post
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 Hello Python-Post-Script
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
-make paraview-macro
+make paraview-macros
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
+pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
+load pv.foam and paraview state
+execute picture export
+save renderView: 1
+save renderView: 2
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'

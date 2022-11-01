@@ -11,7 +11,7 @@
         "pythonPreExec"     :   "",
         "pythonPostExec"    :   "",
 
-        "paraviewState"     :   "../shared/postStates/run-state-01.pvsm",
+        "paraviewState"     :   "",
         "paraviewMacro"     :   "",
 
         "RMarkdownReport"   :   "runReport01.Rmd"

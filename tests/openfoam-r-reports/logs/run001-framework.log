@@ -44,8 +44,9 @@ make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
 make python-post
 make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
 make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
-make paraview-macro
+make paraview-macros
 make[x]: Entering directory '/tests/openfoam-r-reports/run/run001'
+pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
 make[x]: Leaving directory '/tests/openfoam-r-reports/run/run001'
 make[x]: Entering directory '/tests/openfoam-r-reports/run'
 python3 ../../tools/sofa-framework/src/sofa-tasks.py overview

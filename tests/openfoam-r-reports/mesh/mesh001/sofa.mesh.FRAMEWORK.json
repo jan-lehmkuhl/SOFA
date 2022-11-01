@@ -10,7 +10,7 @@
         "pythonPreExec"     :   "",
         "pythonPostExec"    :   "",
 
-        "paraviewState"     :   "../shared/postStates/mesh-inspection.pvsm",
+        "paraviewState"     :   "",
         "paraviewMacro"     :   "",
 
         "RMarkdownReport"   :   "meshReport01.Rmd"
