@@ -50,7 +50,7 @@ run: upstream-links
 		make frameworkrun       ; \
 	fi ;
 	make python-post
-	make paraview-macro
+	make paraview-macros
 	@if [ "${rReport}" != "" ] ; then     \
 		make -C .. overview-report      ; \
 	fi ;
@@ -194,9 +194,7 @@ clean-freecad:
 # =============================================================================
 
 # opens paraview with the referenced state file
-paraview: 
-	# Remove variable parts from Paraview state file
-	@${remove_paraview_variable_parts} $(paraviewState)
+paraview: paraview-fix-state
 	paraview --state=$(paraviewState)
 
 
@@ -205,14 +203,23 @@ paraview-empty-state:
 	if [ ! -f "Allrun" ] ; then                                                 \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py view      ; \
+	elif [ -f "pv.foam" ] ; then                                                \
+		echo "*** start paraview pv.foam"                                     ; \
+		paraview pv.foam                                                      ; \
 	else                                                                        \
 		echo "*** start paraFoam -builtin"                                    ; \
 		paraFoam -builtin                                                     ; \
 	fi ;
+	make paraview-fix-state
 
-paraview-macro: 
+paraview-fix-state:
+	# Remove variable parts from Paraview state file
+	@${remove_paraview_variable_parts} $(paraviewState)
+
+paraview-macros:
+	python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/python-postprocessing.py
+	pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
 	@if [ -f "${paraviewMacro}" ] ; then   \
-		mkdir --parents doc/exports      ; \
 		pvbatch ${paraviewMacro}         ; \
 	fi ;
 

@@ -17,7 +17,7 @@ from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
 from fileHandling import copyFileSafely
 from fileHandling import copyFolderSafely
-from fileHandling import loadJson
+from jsonHandling import loadJson
 from fileHandling import findFile
 from fileHandling import handleStudyStructFile
 from fileHandling import handleStudyStructFolder

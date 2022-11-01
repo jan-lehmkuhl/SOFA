@@ -3,7 +3,7 @@ starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  run001  ***
 start case constructor
-with case-json:   sofa.run.FREECAD.json	in: /tests/openfoam-paraview/run/run001
+with case-json:   /tests/openfoam-paraview/run/run001/sofa.run.FREECAD.json
 creating case:         		  >>  run001  <<
 Skip existing folder      /openfoam-paraview/run/run001
 Skip onlyAtCreation file: sofa.run.json
@@ -1975,7 +1975,14 @@ make python-post
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 Hello Python-Post-Script
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
-make paraview-macro
+make paraview-macros
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
+python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/python-postprocessing.py
+write residuals plot
+pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
+load pv.foam and paraview state
+execute picture export
+save renderView: 1
+save renderView: 2
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'

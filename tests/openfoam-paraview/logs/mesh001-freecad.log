@@ -3,7 +3,7 @@ starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  mesh001  ***
 start case constructor
-with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam-paraview/mesh/mesh001
+with case-json:   /tests/openfoam-paraview/mesh/mesh001/sofa.mesh.FC-EXPORT.json
 creating case:         		  >>  mesh001  <<
 Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
@@ -1453,7 +1453,7 @@ starting sofa-tasks.py in verbose mode
     with passed entryPoint:  upstreamLinks
 *** update Upstream-Links in  mesh001  ***
 start case constructor
-with case-json:   sofa.mesh.FC-EXPORT.json	in: /tests/openfoam-paraview/mesh/mesh001
+with case-json:   /tests/openfoam-paraview/mesh/mesh001/sofa.mesh.FC-EXPORT.json
 creating case:         		  >>  mesh001  <<
 Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
@@ -1474,7 +1474,9 @@ make python-post
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
 Hello Python-Post-Script
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
-make paraview-macro
+make paraview-macros
 make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
+python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/python-postprocessing.py
+pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'
 make[x]: Leaving directory '/tests/openfoam-paraview/mesh/mesh001'

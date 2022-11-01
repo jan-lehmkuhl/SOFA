@@ -46,4 +46,8 @@ libs
     "libturbulenceModels.so"
 );
 
+functions
+{
+    #includeFunc residuals 
+};
 // ************************************************************************* //

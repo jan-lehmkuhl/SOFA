@@ -20,7 +20,7 @@ sys.path.insert(1, os.path.realpath( file_path +'/../openFoam/python' ) )
 # import from sofa
 from fileHandling import createDirSafely
 from fileHandling import copyFileSafely
-from fileHandling import loadJson
+from jsonHandling import loadJson
 from fileHandling import hasRepositoryStagedFiles
 from folderHandling import findParentFolder
 from testing.isThisATest import isThisAnInternalSofaTest
