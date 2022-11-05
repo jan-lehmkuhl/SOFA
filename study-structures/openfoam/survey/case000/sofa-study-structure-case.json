@@ -2,7 +2,7 @@
     "files": [
         {
             "sourcePath": "survey.json",
-            "targetPath": "survey.json",
+            "targetPath": "sofa.survey.json",
             "isSymlink": false,
             "onlyAtCaseCreation": true
         },
@@ -12,7 +12,7 @@
             "isSymlink": true
         },
         {
-            "sourcePath": "../../run/case000/.gitignore_foam",
+            "sourcePath": ".gitignore_survey",
             "targetPath": ".gitignore",
             "isSymlink": true
         }
