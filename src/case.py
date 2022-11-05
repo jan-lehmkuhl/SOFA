@@ -118,7 +118,7 @@ class Case(object):
             self.path       = os.path.join( self.aspectRoot, self.caseName )
         else:
             self.createNew  = False
-            self.pathToJson = os.path.join(self.path, findSofaJson(self.path, self.aspectType +".") )
+            self.pathToJson = os.path.join(self.path, findSofaJson(self.path, self.aspectType) )
             if self.verbose: 
                 print("with case-json:   "+ self.pathToJson )
 
