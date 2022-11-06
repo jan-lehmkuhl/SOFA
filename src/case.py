@@ -14,6 +14,9 @@ import fnmatch
 import subprocess
 import shutil
 
+from sre_compile import isstring
+
+
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, file_path ) 
@@ -258,11 +261,14 @@ class Case(object):
             for thisUpstreamConnection in self.structure['upstreamAspects'] : 
                 # sort information
                 thisUpstreamAspect  = thisUpstreamConnection['upstreamAspect']
-                upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]
+                upstreamCaseList    = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]
                     # TODO read for free key depth
-                upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
+                if isstring(upstreamCaseList):
+                    upstreamCaseList = [ upstreamCaseList ]
+                upstreamCaseList = list(filter(None, upstreamCaseList))
 
-                if upstreamCase != "":
+                for upstreamCase in upstreamCaseList:
+                    upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
                     if thisUpstreamConnection['createDirectSymlink']: 
                         createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
 
