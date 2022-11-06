@@ -19,6 +19,25 @@
     ],
 
     "optional-file-bundles": [
+    ],
+
+
+    "upstreamAspects": [
+        {
+            "upstreamAspect":   "run",
+            "caseJsonKey": [    "sofaAspectLinks", "caseLinks" ],
+            "useCaseJsonWithoutAspect": false,
+            "createDirectSymlink": false,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "doc/paraview",
+                    "targetPath":       "paraview",
+                    "separateFiles":    true,
+                    "copyFile":         false
+                }
+            ],
+            "isOptional":       true
+        }
     ]
 
 }
