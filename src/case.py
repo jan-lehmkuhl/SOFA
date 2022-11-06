@@ -265,6 +265,9 @@ class Case(object):
                     # TODO read for free key depth
                 if isstring(upstreamCaseList):
                     upstreamCaseList = [ upstreamCaseList ]
+                    multiUpstreamCases = False
+                else:
+                    multiUpstreamCases = True
                 upstreamCaseList = list(filter(None, upstreamCaseList))
 
                 for upstreamCase in upstreamCaseList:
@@ -282,20 +285,25 @@ class Case(object):
                                     src     = upstreamTarget
                                 else: 
                                     src     = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
-                            dst = thisLink['targetPath']
+                            dst_folder = thisLink['targetPath']
 
                             # create file
                             if thisLink['separateFiles']:
                                 for element in sorted(os.listdir(src)):
-                                    if thisLink['copyFile']: 
-                                        copyFileSafely( os.path.join(src,element), os.path.join(dst,element), overwrite=True, verbose=self.verbose )
+                                    if multiUpstreamCases:
+                                        dst_file = os.path.join(dst_folder, os.path.splitext(element)[0], upstreamCase)+ os.path.splitext(element)[1]
                                     else:
-                                        createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
+                                        dst_file = os.path.join(dst_folder,element)
+
+                                    if thisLink['copyFile']: 
+                                        copyFileSafely( os.path.join(src,element), dst_file, overwrite=True, verbose=self.verbose )
+                                    else:
+                                        createSymlinkSavely( os.path.join(src,element), dst_file, verbose=self.verbose )
                             else:
                                 if thisLink['copyFile']: 
-                                    copyFileSafely( src, dst, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
+                                    copyFileSafely( src, dst_folder, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
                                 else:
-                                    createSymlinkSavely( src, dst, verbose=self.verbose )
+                                    createSymlinkSavely( src, dst_folder, verbose=self.verbose )
         return(True)
 
 
