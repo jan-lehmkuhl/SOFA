@@ -1,0 +1,26 @@
+make[x]: Entering directory '/tests/openfoam-paraview/survey/survey001'
+rm -rf paraview
+python3 ../../../tools/sofa-framework/src/sofa-tasks.py upstreamLinks
+starting sofa-tasks.py in verbose mode
+    with passed entryPoint:  upstreamLinks
+*** update Upstream-Links in  survey001  ***
+start case constructor
+with case-json:   /tests/openfoam-paraview/survey/survey001/sofa.survey.json
+creating case:         		  >>  survey001  <<
+Skip existing folder      /openfoam-paraview/survey/survey001
+Skip onlyAtCreation file: sofa.survey.json
+Skip correct link    /openfoam-paraview/survey/survey001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
+Skip correct link    /openfoam-paraview/survey/survey001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/.gitignore_survey
+create upstream aspect links for:  	  >>  survey001  <<
+missing parent folder of link:  paraview/renderView1/run001.png
+Creating folder      /paraview/renderView1
+Creating link to     paraview/renderView1/run001.png 		 with pointer to   ../../run/run001/doc/paraview/renderView1.png
+missing parent folder of link:  paraview/renderView2/run001.png
+Creating folder      /paraview/renderView2
+Creating link to     paraview/renderView2/run001.png 		 with pointer to   ../../run/run001/doc/paraview/renderView2.png
+Creating link to     paraview/renderView1/run002.png 		 with pointer to   ../../run/run002/doc/paraview/renderView1.png
+Creating link to     paraview/renderView2/run002.png 		 with pointer to   ../../run/run002/doc/paraview/renderView2.png
+
+*** finished sofa-tasks.py *** 
+
+make[x]: Leaving directory '/tests/openfoam-paraview/survey/survey001'

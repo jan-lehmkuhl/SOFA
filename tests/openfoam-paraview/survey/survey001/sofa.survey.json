@@ -1,9 +1,12 @@
 {
-    "caseLinks"             :[  "", 
-                                ""
-                             ],
+    "name"                  :   "",
+    "description"           :   "",
 
-    "buildSettings" : {
-        "report"            :   ""
-    }    
+    "sofaAspectLinks" : {
+        "caseLinks": [
+            "run001",
+            "run002",
+            ""
+        ]
+    }
 }
