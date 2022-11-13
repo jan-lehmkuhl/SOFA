@@ -357,7 +357,7 @@ class Case(object):
                 while True:
                     # git handling
                     os.system('git add %s' % clonePath)
-                    message = '[%s %s] #CLONE from >%s<' % (self.studyName, caseName, os.path.basename(currentCase))
+                    message = '[%s/%s] CLONE from %s' % (self.studyName.lstrip('/'), caseName, os.path.basename(currentCase))
                     print("staged commit for %s with commit-message: \n\t%s" % (caseName, message) )
                     print("\nCommit cloning of >%s< to >%s< ? (y/N)" % (os.path.basename(currentCase), caseName))
                     answer3 = input().lower()
