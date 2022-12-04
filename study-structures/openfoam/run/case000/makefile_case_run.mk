@@ -94,7 +94,7 @@ init-case: upstream-links
 upstream-links:
 	@# renew the upstreamLinks to mesh
 	@if [ -f "Allrun" ] ; then                                                   \
-		sed -i 's\MESHDIR=".*"\MESHDIR="./$(linkedMeshCase)"\' Allrun         ; \
+		sed -i 's\MESHDIR=".*"\MESHDIR="../../mesh/$(linkedMeshCase)"\' Allrun         ; \
 	fi
 	@python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
@@ -168,7 +168,7 @@ freecad-case-setup-fetch:
 	@rm  -rf constant
 	@rm  -rf system
 	mv  ../../cad/$(linkedCadCase)/case/* .
-	sed -i 's\MESHDIR="../meshCase"\MESHDIR="./$(linkedMeshCase)"\' Allrun
+	make upstream-links
 	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
 
 

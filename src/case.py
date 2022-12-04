@@ -14,6 +14,9 @@ import fnmatch
 import subprocess
 import shutil
 
+from sre_compile import isstring
+
+
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, file_path ) 
@@ -118,7 +121,7 @@ class Case(object):
             self.path       = os.path.join( self.aspectRoot, self.caseName )
         else:
             self.createNew  = False
-            self.pathToJson = os.path.join(self.path, findSofaJson(self.path, self.aspectType +".") )
+            self.pathToJson = os.path.join(self.path, findSofaJson(self.path, self.aspectType) )
             if self.verbose: 
                 print("with case-json:   "+ self.pathToJson )
 
@@ -258,11 +261,17 @@ class Case(object):
             for thisUpstreamConnection in self.structure['upstreamAspects'] : 
                 # sort information
                 thisUpstreamAspect  = thisUpstreamConnection['upstreamAspect']
-                upstreamCase        = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]
+                upstreamCaseList    = self.caseJson[ thisUpstreamConnection['caseJsonKey'][0] ][ thisUpstreamConnection['caseJsonKey'][1] ]
                     # TODO read for free key depth
-                upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
+                if isstring(upstreamCaseList):
+                    upstreamCaseList = [ upstreamCaseList ]
+                    multiUpstreamCases = False
+                else:
+                    multiUpstreamCases = True
+                upstreamCaseList = list(filter(None, upstreamCaseList))
 
-                if upstreamCase != "":
+                for upstreamCase in upstreamCaseList:
+                    upstreamTarget      = os.path.join('..','..',thisUpstreamAspect,upstreamCase)
                     if thisUpstreamConnection['createDirectSymlink']: 
                         createSymlinkSavely(upstreamTarget,upstreamCase,verbose=self.verbose)
 
@@ -276,20 +285,25 @@ class Case(object):
                                     src     = upstreamTarget
                                 else: 
                                     src     = os.path.join( upstreamTarget, thisLink['upstreamCasePath'] )
-                            dst = thisLink['targetPath']
+                            dst_folder = thisLink['targetPath']
 
                             # create file
                             if thisLink['separateFiles']:
                                 for element in sorted(os.listdir(src)):
-                                    if thisLink['copyFile']: 
-                                        copyFileSafely( os.path.join(src,element), os.path.join(dst,element), overwrite=True, verbose=self.verbose )
+                                    if multiUpstreamCases:
+                                        dst_file = os.path.join(dst_folder, os.path.splitext(element)[0], upstreamCase)+ os.path.splitext(element)[1]
                                     else:
-                                        createSymlinkSavely( os.path.join(src,element), os.path.join(dst,element), verbose=self.verbose )
+                                        dst_file = os.path.join(dst_folder,element)
+
+                                    if thisLink['copyFile']: 
+                                        copyFileSafely( os.path.join(src,element), dst_file, overwrite=True, verbose=self.verbose )
+                                    else:
+                                        createSymlinkSavely( os.path.join(src,element), dst_file, verbose=self.verbose )
                             else:
                                 if thisLink['copyFile']: 
-                                    copyFileSafely( src, dst, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
+                                    copyFileSafely( src, dst_folder, referencePath=self.projectRoot, overwrite=True, verbose=self.verbose )
                                 else:
-                                    createSymlinkSavely( src, dst, verbose=self.verbose )
+                                    createSymlinkSavely( src, dst_folder, verbose=self.verbose )
         return(True)
 
 
@@ -343,7 +357,7 @@ class Case(object):
                 while True:
                     # git handling
                     os.system('git add %s' % clonePath)
-                    message = '[%s %s] #CLONE from >%s<' % (self.studyName, caseName, os.path.basename(currentCase))
+                    message = '[%s/%s] CLONE from %s' % (self.studyName.lstrip('/'), caseName, os.path.basename(currentCase))
                     print("staged commit for %s with commit-message: \n\t%s" % (caseName, message) )
                     print("\nCommit cloning of >%s< to >%s< ? (y/N)" % (os.path.basename(currentCase), caseName))
                     answer3 = input().lower()

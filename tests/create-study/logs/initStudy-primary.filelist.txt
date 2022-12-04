@@ -125,6 +125,6 @@ xxxK
 
 ./survey/survey001:
 xxxK
-1 tiny  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1 tiny  .gitignore -> ../../../../tools/sofa-framework/study-structures/openfoam/survey/case000/.gitignore_survey
 1 tiny  makefile -> ../../../../tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
-1 tiny  survey.json
+1 tiny  sofa.survey.json

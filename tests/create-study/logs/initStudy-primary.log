@@ -72,9 +72,9 @@ Copying file to      /create-study/dummy/survey/sofa.aspect.json 	 from /tools/s
 start case constructor
 creating case:         		  >>  survey001  <<
 Creating folder      /create-study/dummy/survey/survey001
-Copying file to      /create-study/dummy/survey/survey001/survey.json 	 from /tools/sofa-framework/study-structures/openfoam/survey/case000/survey.json
+Copying file to      /create-study/dummy/survey/survey001/sofa.survey.json 	 from /tools/sofa-framework/study-structures/openfoam/survey/case000/survey.json
 Creating link to     /create-study/dummy/survey/survey001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
-Creating link to     /create-study/dummy/survey/survey001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/../../run/case000/.gitignore_foam
+Creating link to     /create-study/dummy/survey/survey001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/.gitignore_survey
 completed structure creation and staging of:   create-study/dummy
 
 *** finished sofa-tasks.py *** 

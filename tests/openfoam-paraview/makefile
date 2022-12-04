@@ -16,7 +16,7 @@ tests: clean-and-remove-logs freecad-chain mesh-overview
 	@echo "finished tests for openfoam"
 
 
-freecad-chain: cad001 mesh001 run001 
+freecad-chain: cad001 mesh001 run001 survey001
 	@echo "finished tests for freecad-chain"
 
 
@@ -64,6 +64,13 @@ run001:
 	@python3 ../../src/testing/isGitClean.py    logs/run001-freecad.log
 	@cd run/run001 ;  ${list_content}   > ../../logs/run001-freecad.files.txt
 	@python3 ../../src/testing/isGitClean.py    logs/run001-freecad.files.txt
+
+survey001: 
+	make -C survey/survey001  survey   >        logs/survey001.log
+	@${remove_logs_variable_content}            logs/survey001.log
+	@python3 ../../src/testing/isGitClean.py    logs/survey001.log
+	@cd survey/survey001 ;  ${list_content}   > ../../logs/survey001.files.txt
+	@python3 ../../src/testing/isGitClean.py    logs/survey001.files.txt
 
 mesh-overview:
 	@cd mesh/doc ;  ${list_content}     > ../../logs/mesh-overview.files.txt

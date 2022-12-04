@@ -1,16 +1,15 @@
 {
-    "name"                  :   "",
-    "description"           :   "",
-    "notes"                 :[  
+    "name": "",
+    "description": "",
+    "notes": [
         ""
     ],
 
-
-    "caseLinks"             :[  "", 
-                                ""
-                            ],
-
-    "buildSettings" : {
-        "report"            :   ""
-    }    
+    "sofaAspectLinks" : {
+        "caseLinks": [
+            "run001",
+            "run002",
+            ""
+        ]
+    }
 }

@@ -18,6 +18,8 @@ ifneq ("$(wildcard ./special-targets.mk)","")
 endif
 
 
+survey: clean upstream-links
+
 
 init:
 	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py initCase
@@ -25,17 +27,5 @@ init:
 upstream-links:
 	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
-clone:
-	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
-
-mesh:
-	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py mesh
-
-meshLayer:
-	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py meshLayer
-
-cleanMesh:
-	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py cleanMesh
-
-view:
-	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py view
+clean:
+	rm -rf paraview

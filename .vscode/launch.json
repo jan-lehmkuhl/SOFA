@@ -66,6 +66,24 @@
             "showReturnValue":  true,
         },
 
+
+        // Tests / OpenFOAM-Paraview
+
+        {
+            "name":             "tests/of-para/mesh001 upstreamLinks",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests/openfoam-paraview/mesh/mesh001",
+            "program":          "${workspaceRoot}/src/sofa-tasks.py",
+            "args":             [   "upstreamLinks", 
+                                    "--verbose", 
+                                ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
+
         {
             "name":             "tests/openfoam-paraview/mesh/mesh001 report",
             "type":             "python",
@@ -95,6 +113,24 @@
             "justMyCode":       true,
             "showReturnValue":  true,
         },
+
+        {
+            "name":             "tests/of-para/survey001 upstreamLinks",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests/openfoam-paraview/survey/survey001",
+            "program":          "${workspaceRoot}/src/sofa-tasks.py",
+            "args":             [   "upstreamLinks", 
+                                    "--verbose", 
+                                ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
+
+
+        // tests/openfoam-r-reports
         {
             "name":             "tests/of-rreport/run001 upstreamLinks",
             "type":             "python",

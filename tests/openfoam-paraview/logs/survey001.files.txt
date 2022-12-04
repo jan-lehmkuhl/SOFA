@@ -1,0 +1,21 @@
+.:
+xxxK
+4 x.xK  paraview/
+1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/survey/case000/.gitignore_survey
+1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
+1 tiny  sofa.survey.json
+
+./paraview:
+xxxK
+2 x.xK  renderView1/
+2 x.xK  renderView2/
+
+./paraview/renderView1:
+0
+1 tiny  run001.png -> ../../../../run/run001/doc/paraview/renderView1.png
+1 tiny  run002.png -> ../../../../run/run002/doc/paraview/renderView1.png
+
+./paraview/renderView2:
+0
+1 tiny  run001.png -> ../../../../run/run001/doc/paraview/renderView2.png
+1 tiny  run002.png -> ../../../../run/run002/doc/paraview/renderView2.png

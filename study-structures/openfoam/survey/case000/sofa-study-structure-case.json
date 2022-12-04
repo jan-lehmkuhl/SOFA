@@ -2,7 +2,7 @@
     "files": [
         {
             "sourcePath": "survey.json",
-            "targetPath": "survey.json",
+            "targetPath": "sofa.survey.json",
             "isSymlink": false,
             "onlyAtCaseCreation": true
         },
@@ -12,13 +12,32 @@
             "isSymlink": true
         },
         {
-            "sourcePath": "../../run/case000/.gitignore_foam",
+            "sourcePath": ".gitignore_survey",
             "targetPath": ".gitignore",
             "isSymlink": true
         }
     ],
 
     "optional-file-bundles": [
+    ],
+
+
+    "upstreamAspects": [
+        {
+            "upstreamAspect":   "run",
+            "caseJsonKey": [    "sofaAspectLinks", "caseLinks" ],
+            "useCaseJsonWithoutAspect": false,
+            "createDirectSymlink": false,
+            "specialLinks": [
+                {
+                    "upstreamCasePath": "doc/paraview",
+                    "targetPath":       "paraview",
+                    "separateFiles":    true,
+                    "copyFile":         false
+                }
+            ],
+            "isOptional":       true
+        }
     ]
 
 }

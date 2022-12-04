@@ -10,6 +10,6 @@
         "cad"   :   {"aspectName": "cad"},
         "mesh"  :   {"aspectName": "mesh",     "linkName": "cadLink",   "linkType": "cad" },
         "run"   :   {"aspectName": "run",      "linkName": "meshLink",  "linkType": "mesh"},
-        "survey":   {"aspectName": "survey",   "linkName": "caseLinks", "linkType": "run"}
+        "survey":   {"aspectName": "survey",   "linkType": "run"}
     }
 }
