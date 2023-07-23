@@ -169,6 +169,9 @@ elif args.entryPoint == "updateAllReports":
         else:
             print("Found no RMarkdown file for OverviewReports")
 
+elif args.entryPoint == "updateSofaFiles":
+    pass
+
 else:
     raise SystemExit("ERROR no sofa-task defined")
 

@@ -17,6 +17,25 @@
 
         //  debug test-cases inside the framework-repository
         // =====================================================================
+
+        {
+            "name":             "tests updateSofaFiles",
+            "type":             "python",
+            "request":          "launch",
+            "cwd":              "${workspaceRoot}/tests",
+            "program":          "${workspaceRoot}/src/sofa-tasks.py",
+            "args":             [    
+                                    "updateSofaFiles", 
+            ],
+            "console":          "integratedTerminal",
+            "stopOnEntry":      true,
+            "justMyCode":       true,
+            "showReturnValue":  true,
+        },
+
+
+        // Tests / Create-Study
+        // -----------------------------------------------------------
         {
             "name":             "tests/create-study",
             "preLaunchTask":    "tests/create-study remove dummy",
@@ -68,7 +87,7 @@
 
 
         // Tests / OpenFOAM-Paraview
-
+        // -----------------------------------------------------------
         {
             "name":             "tests/of-para/mesh001 upstreamLinks",
             "type":             "python",
@@ -131,6 +150,7 @@
 
 
         // tests/openfoam-r-reports
+        // -----------------------------------------------------------
         {
             "name":             "tests/of-rreport/run001 upstreamLinks",
             "type":             "python",
