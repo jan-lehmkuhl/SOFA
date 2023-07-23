@@ -8,7 +8,7 @@ creating case:         		  >>  mesh001  <<
 Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
 Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-Skip correct link    /openfoam-paraview/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Unabel to create target >/home/jan/workspace/cfd-lecture/tools/sofa-framework/tests/openfoam-paraview/mesh/mesh001/.gitignore< since it exists
 Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
@@ -1458,7 +1458,7 @@ creating case:         		  >>  mesh001  <<
 Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
 Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-Skip correct link    /openfoam-paraview/mesh/mesh001/.gitignore 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/../../run/case000/.gitignore_foam
+Unabel to create target >/home/jan/workspace/cfd-lecture/tools/sofa-framework/tests/openfoam-paraview/mesh/mesh001/.gitignore< since it exists
 Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
