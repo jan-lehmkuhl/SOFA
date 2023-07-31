@@ -89,8 +89,8 @@ zip:
 # =============================================================================
 
 # reinitialize case and copies files again
-initCase: 
-	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py newCase
+init-case: upstream-links
+	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py initCase
 
 
 upstream-links:
