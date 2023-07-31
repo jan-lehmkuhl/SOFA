@@ -77,6 +77,7 @@ class Case(object):
 
         # store known values to self
         # ================================================================================
+        self.isValid    = False
         self.className4 = "Case"    # only for debugging purpose
         self.aspectRoot = storagePath
         self.aspectType = aspectType
@@ -88,11 +89,16 @@ class Case(object):
         # search for sofa environment provided information
         # ================================================================================
         # project handling
-        self.projectRoot    = findParentFolder( "sofa.project.json" )
-        if caseStructure == None :
-            self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
-            thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
-            self.studyName = convertToRelativePath(self.studyRoot, self.projectRoot, verbose=verbose)
+        try:
+            self.projectRoot    = findParentFolder( "sofa.project.json" )
+            if caseStructure == None :
+                self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
+                thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
+                self.studyName = convertToRelativePath(self.studyRoot, self.projectRoot, verbose=verbose)
+        except:
+            if verbose:
+                print("Abort init case, no project or study found")
+            return
         # aspect handling
         if self.aspectType == None: 
             # read Case.aspectType from foldername
@@ -108,7 +114,8 @@ class Case(object):
                 if self.aspectRoot == None :
                     self.aspectRoot = os.path.abspath(os.path.join(self.path, os.pardir))
         if self.aspectType == None: 
-            raise SystemExit("ERROR no aspectType detected")
+            print("Abort init case, no aspectType detected")
+            return
 
         if caseStructure == None :
             self.structure      = thisStudyStructure.aspectList[self.aspectType]['case000']
@@ -145,16 +152,17 @@ class Case(object):
                 # differentiate between single links and a list of links (survey)
                 if isinstance(self.linkedCase, str):
                     self.pathToLinkedCase = findFolder( self.linkedCase
-                                                      , foamStructure[ foamStructure[self.aspectType]["linkType"] ]["aspectName"] )
+                                                        , foamStructure[ foamStructure[self.aspectType]["linkType"] ]["aspectName"] )
                 elif isinstance(self.linkedCase, list):
                     self.pathToLinkedCase = []
                     for element in self.linkedCase:
                         self.pathToLinkedCase.append(findFolder( element
-                                                               , foamStructure[ foamStructure[self.aspectType]["linkType"] ]["aspectName"] ) )
+                                                                , foamStructure[ foamStructure[self.aspectType]["linkType"] ]["aspectName"] ) )
                 else:
                     print(
                         "Unexpected aspectType of self.linkPath in __init__ of %s" % self.name)
-        pass  # end linked cases search
+        if currentDir == self.caseName:
+            self.isValid = True
 
 
     def nextCaseName(self, path="./"):
@@ -204,7 +212,7 @@ class Case(object):
             return(False)
 
 
-    def create(self):
+    def create(self, createNew=False):
         # create a new case inside a Aspect depending on the aspectType of case
         #
         # Args:
@@ -215,6 +223,11 @@ class Case(object):
         from fileHandling import handleStudyStructFile
         from fileHandling import handleStudyStructFolder
         from fileHandling import copyRecursiveAndStage
+
+        if (        not self.isValid
+                and not createNew ): 
+            if self.verbose:    print("This is no case or intended to create a new one")
+            return
         if self.verbose:    print(  "creating case:         \t\t  >>  " +self.caseName +"  <<")
 
         # create case folder
