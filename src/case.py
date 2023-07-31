@@ -69,7 +69,7 @@ def cfdAspectSelector(path=None, verbose=False):
 class Case(object):
     # base class to handle all operations related to cases
 
-    def __init__(self, storagePath=None, aspectType=None, caseStructure=None, verbose=False, path="./"):
+    def __init__(self, storagePath=None, aspectType=None, caseStructure=None, verbose=False, path=os.getcwd()):
         from aspect import readFoamStructure
         from study import StudyStructure
         from fileHandling import convertToRelativePath
@@ -84,15 +84,15 @@ class Case(object):
         self.verbose    = verbose
         if self.verbose:
             print("start case constructor")
-        currentDir  = os.path.basename( os.getcwd() )
+        currentDir  = os.path.basename( path )
 
         # search for sofa environment provided information
         # ================================================================================
         # project handling
         try:
-            self.projectRoot    = findParentFolder( "sofa.project.json" )
+            self.projectRoot    = findParentFolder( "sofa.project.json" , startFolder=path)
             if caseStructure == None :
-                self.studyRoot      = findParentFolder( "sofa.study.json", verbose=verbose )
+                self.studyRoot      = findParentFolder( "sofa.study.json", startFolder=path, verbose=verbose )
                 thisStudyStructure  = StudyStructure( studyJsonFolder=self.studyRoot ) 
                 self.studyName = convertToRelativePath(self.studyRoot, self.projectRoot, verbose=verbose)
         except:
@@ -104,12 +104,12 @@ class Case(object):
             # read Case.aspectType from foldername
             if currentDir in thisStudyStructure.aspectList:
                 self.aspectType     = currentDir
-                self.aspectRoot     = os.getcwd()
+                self.aspectRoot     = path
         # case handling
         if 'thisStudyStructure' in locals():
             if currentDir[:-3] in thisStudyStructure.aspectList:
                 self.aspectType     = currentDir[:-3]
-                self.path           = os.getcwd()
+                self.path           = path
                 self.caseName       = currentDir
                 if self.aspectRoot == None :
                     self.aspectRoot = os.path.abspath(os.path.join(self.path, os.pardir))
