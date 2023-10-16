@@ -19,7 +19,7 @@ import subprocess
 
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(1, os.path.realpath( file_path +'/../../src' ) ) 
+sys.path.insert(1, os.path.realpath( file_path +'/../../src' ) )
 
 from case import cfdAspectSelector
 from fileHandling import createDirSafely
@@ -50,11 +50,19 @@ def checkFoamVer():
         return ("6")
     elif version == "/opt/openfoam7":
         return ("7")
+    elif version == "/opt/openfoam8":
+        return ("8")
+    elif version == "/opt/openfoam9":
+        return ("9")
+    elif version == "/opt/openfoam10":
+        return ("10")
+    elif version == "/opt/openfoam11":
+        return ("11")
     elif version == "/opt/openfoam-dev":
         return ("dev")
     elif version == "":
         print("OpenFoam is not sourced")
-    else: 
+    else:
         print("Unknown OpenFoam version")
 
 def md5(filePath):
@@ -71,11 +79,11 @@ def md5(filePath):
             buffer = currentFile.read()
             hasher.update(buffer)
             return(hasher.hexdigest())
-    else: 
+    else:
         print(">%s< is not a file, can't get md5 sum" %filePath)
 
 def boolChecker(value):
-    # takes a str and checkes if it is a bool and then converts 
+    # takes a str and checkes if it is a bool and then converts
     #
     # Args:
     #   value:  str: potential bool
@@ -96,11 +104,11 @@ class foamRunner(object):
 
     def __init__(self):
         # general info
-        self.startSolving = datetime.datetime.now()  
+        self.startSolving = datetime.datetime.now()
         self.case = Case( )
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
-        # make sure 0.org exists or is retreived 
+        # make sure 0.org exists or is retreived
         CaseFiles = os.listdir(".")
         if "0.org" in CaseFiles:
             if "0" in CaseFiles:
@@ -128,7 +136,7 @@ class foamRunner(object):
         self.runReconstructPar = boolChecker(self.runJson["runSettings"]["reconstructPar"])
         self.runFoamLog = boolChecker(self.runJson["runSettings"]["foamLog"])
         self.runReport = boolChecker(self.runJson["runSettings"]["report"])
-        # decision wether to run decomposePar       
+        # decision wether to run decomposePar
         if self.nCores > 1:
             if self.fileChangeDict["system/decomposeParDict"]:
                 self.runDecomposePar = True
@@ -138,15 +146,15 @@ class foamRunner(object):
         else:
             self.runDecomposePar = False
             self.runRenumberMesh = False
-        # init process handler 
+        # init process handler
         self.procHandler = procHandler(self.nCores)
-        
+
     ###################################################################
-    # general purpose 
+    # general purpose
     ###################################################################
 
     def getNoProcFolder(self):
-        # count how many processor directories are present 
+        # count how many processor directories are present
         #
         # Args:
         #
@@ -160,7 +168,7 @@ class foamRunner(object):
             return(0)
 
     def loadFileStates(self):
-        # load file containing dictionary of filenames and their md5 hashes 
+        # load file containing dictionary of filenames and their md5 hashes
         #
         # Args:
         #
@@ -175,7 +183,7 @@ class foamRunner(object):
         return(oldFileStates)
 
     def saveFileStates(self):
-        # save file containing dictionary of filenames and their md5 hashes 
+        # save file containing dictionary of filenames and their md5 hashes
         #
         # Args:
         #
@@ -187,7 +195,7 @@ class foamRunner(object):
             pickle.dump(fileStates, filehandle)
 
     def getFileStates(self):
-        # generate md5 hashes of files in system and constant  
+        # generate md5 hashes of files in system and constant
         #
         # Args:
         #
@@ -213,7 +221,7 @@ class foamRunner(object):
         previousFileStates = self.loadFileStates()
         currentFileStates  = self.getFileStates()
         fileChangeDict = {}
-        # compare old and new hashes 
+        # compare old and new hashes
         for fileName in currentFileStates:
             if fileName in previousFileStates:
                 if currentFileStates[fileName] == previousFileStates[fileName]:
@@ -291,7 +299,7 @@ class foamRunner(object):
         cmd = ['R', '-e' , 'rmarkdown::render(\'doc/runReport/runReport.Rmd\')']
         text = "Generating run report"
         logFilePath = os.path.join("log",str("runReport" + ".log"))
-        self.procHandler.general(cmd, text, logFilePath)      
+        self.procHandler.general(cmd, text, logFilePath)
 
     ###################################################################
     # routines
@@ -322,7 +330,7 @@ class foamRunner(object):
                 files = [os.path.join("./log", f) for f in files]
                 files.sort(key=lambda x: os.path.getmtime(x))
                 NewestSolverLog = files[-1]
-                self.procHandler.foam("foamLog", NewestSolverLog, serial=True)    
+                self.procHandler.foam("foamLog", NewestSolverLog, serial=True)
             if self.runReport:
                 self.generateReport()
         except AssertionError:
