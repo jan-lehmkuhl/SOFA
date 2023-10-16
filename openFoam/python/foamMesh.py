@@ -358,7 +358,6 @@ class foamMesher(object):
         #
         procStart = datetime.datetime.now()
         self.procHandler.printProcStart("Cleaning Case")
-        self.procHandler.general(["foamCleanTutorials"])
         self.procHandler.general(["foamCleanPolyMesh"])
         if os.path.exists(".fileStates.data"):
             os.remove(".fileStates.data")
