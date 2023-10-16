@@ -1361,10 +1361,10 @@ checkMesh  | tee log.checkMesh
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  11
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
+Build  : 11-d5b4d966c3c5
 Exec   : checkMesh
 Date   : xxx xx xxxx
 Time   : xx:xx:xx
@@ -1436,11 +1436,11 @@ Checking geometry...
     Max cell openness = 2.40321553343322e-16 OK.
     Max aspect ratio = 3.75493118548884 OK.
     Minimum face area = 3.06931180010314e-05. Maximum face area = 0.000164636518081557.  Face area magnitudes OK.
-    Min volume = 1.86834964494071e-07. Max volume = 1.28580680886543e-06.  Total volume = 0.00402319493417503.  Cell volumes OK.
-    Mesh non-orthogonality Max: 36.8654915871679 average: 5.6774992066862
+    Min volume = 1.86834913895151e-07. Max volume = 1.28580680886543e-06.  Total volume = 0.00402319509056365.  Cell volumes OK.
+    Mesh non-orthogonality Max: 36.8463096199873 average: 5.67663619549825
     Non-orthogonality check OK.
     Face pyramids OK.
-    Max skewness = 0.718962959975085 OK.
+    Max skewness = 0.719097338606502 OK.
     Coupled point location match (average 0) OK.
 
 Mesh OK.
