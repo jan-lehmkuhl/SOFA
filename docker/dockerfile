@@ -51,8 +51,8 @@ USER root
 # install separate paraview for pvpython inside pvbatch
 
 # download paraview from https://www.paraview.org/download/
-ARG  PARAVIEW_VERSION=5.7
-ARG  PARAVIEW_DOWNLOAD=ParaView-5.7.0-MPI-Linux-Python3.7-64bit
+ARG  PARAVIEW_VERSION=5.11
+ARG  PARAVIEW_DOWNLOAD=ParaView-5.11.2-osmesa-MPI-Linux-Python3.9-x86_64
 RUN wget --quiet --output-document - \
     "https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v${PARAVIEW_VERSION}&type=binary&os=Linux&downloadFile=${PARAVIEW_DOWNLOAD}.tar.gz"  \
     | tar -xz --directory=/opt  -f -
