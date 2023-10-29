@@ -32,13 +32,13 @@ endif
 
 
 
-# standard targets 
+# standard targets
 # =============================================================================
 
 # default creating target
-all: 
+all:
 	make -C ../../mesh/$(linkedMeshCase)
-	make run 
+	make run
 
 rerun: clean run
 
@@ -56,7 +56,7 @@ run: upstream-links
 	fi ;
 
 
-mesh: 
+mesh:
 	make -C ../../mesh/$(linkedMeshCase) mesh
 
 
@@ -99,7 +99,7 @@ upstream-links:
 	@python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 
-# clone this case to a new case with the next available running number 
+# clone this case to a new case with the next available running number
 clone:
 	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
@@ -111,7 +111,7 @@ case-report:
 
 show-reports:  show-overview-report show-case-report
 
-show-case-report: 
+show-case-report:
 	xdg-open doc/runReport/runReport.html
 
 show-overview-report:
@@ -122,17 +122,17 @@ rstudio:
 	rstudio doc/runReport/runReport.Rmd
 
 
-clean-report: 
+clean-report:
 	@rm -f  .Rhistory
 	@rm -rf doc/meshReport
 	@rm -f  doc/runReport/.Rhistory
 
 
-python-pre: 
+python-pre:
 	@if [ -f "${pythonPreScript}" ] ; then   \
 		python3 ${pythonPreScript}         ; \
 	fi ;
-python-post: 
+python-post:
 	@if [ -f "${pythonPostScript}" ] ; then   \
 		python3 ${pythonPostScript}         ; \
 	fi ;
@@ -162,7 +162,7 @@ freecad-gui:
 
 
 # can be used to overwrite the dummy settings
-freecad-case-setup-fetch: 
+freecad-case-setup-fetch:
 	mv  ../../cad/$(linkedCadCase)/case/0  ../../cad/$(linkedCadCase)/case/0.org
 	@rm  -rf 0.org
 	@rm  -rf constant
@@ -185,8 +185,8 @@ run-allrun:
 	make case-report
 
 
-clean-freecad: 
-	@rm -f constant/polyMesh
+clean-freecad:
+	@rm -rf constant/polyMesh
 
 
 
@@ -199,7 +199,7 @@ paraview: paraview-fix-state
 
 
 # opens Paraview without specified state
-paraview-empty-state: 
+paraview-empty-state:
 	if [ ! -f "Allrun" ] ; then                                                 \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py view      ; \

@@ -19,14 +19,15 @@ RUN apt-get update --fix-missing  && \
         nano \
         git \
         make \
-        nodejs
+        nodejs \
+        python3-pip
 
 # Allow localisation
 RUN apt-get install -y locales
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
-# ENV LANG en_US.UTF-8  
-# ENV LANGUAGE en_US:en  
-# ENV LC_ALL en_US.UTF-8 
+# ENV LANG en_US.UTF-8
+# ENV LANGUAGE en_US:en
+# ENV LC_ALL en_US.UTF-8
 
 
 #   install OpenFOAM 7
@@ -41,7 +42,7 @@ RUN useradd --user-group --create-home --shell /bin/bash foam ;\
 	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER foam
-RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc 
+RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc
 USER root
 
 
@@ -50,15 +51,27 @@ USER root
 # install separate paraview for pvpython inside pvbatch
 
 # download paraview from https://www.paraview.org/download/
-ARG  PARAVIEW_VERSION=5.7
-ARG  PARAVIEW_DOWNLOAD=ParaView-5.7.0-MPI-Linux-Python3.7-64bit
-RUN wget --quiet --output-document - \ 
+ARG  PARAVIEW_VERSION=5.11
+ARG  PARAVIEW_DOWNLOAD=ParaView-5.11.2-osmesa-MPI-Linux-Python3.9-x86_64
+RUN wget --quiet --output-document - \
     "https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v${PARAVIEW_VERSION}&type=binary&os=Linux&downloadFile=${PARAVIEW_DOWNLOAD}.tar.gz"  \
-    | tar -xz --directory=/opt  -f - 
+    | tar -xz --directory=/opt  -f -
 
-# make pvpython and pvbatch available in your $PATH
-RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvbatch /bin
-RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvpython /bin
+# make only pvpython and pvbatch available in your $PATH
+USER foam
+RUN mkdir -p ~/bin
+RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvbatch  ~/bin
+RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvpython ~/bin
+RUN echo "PATH=~/bin:${PATH}" >> ~foam/.bashrc
+USER root
+
+# pythonn packages used in python-postprocessing.py
+RUN python3 -m pip install matplotlib
+RUN python3 -m pip install pandas
+
+USER foam
+RUN ln --symbolic /opt/openfoam7/platforms/linux64GccDPInt32Opt/bin/checkMesh ~/bin
+USER root
 
 
 

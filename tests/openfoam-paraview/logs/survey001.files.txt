@@ -1,7 +1,7 @@
 .:
 xxxK
 4 x.xK  paraview/
-1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/survey/case000/.gitignore_survey
+1 tiny  .gitignore
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
 1 tiny  sofa.survey.json
 

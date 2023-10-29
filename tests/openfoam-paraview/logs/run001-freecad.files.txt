@@ -4,18 +4,18 @@ xxxK
 2 x.xK  0.org/
 3 x.xK  constant/
 4 x.xK  doc/
+1 tiny  mesh001 -> ../../mesh/mesh001/
 3 x.xK  postProcessing/
 6 x.xK  processor0/
 6 x.xK  processor1/
 2 x.xK  system/
 1 x.xK  Allrun*
-1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1 x.xK  .gitignore
 1 x.xK  log.createPatch
 1 x.xK  log.decomposePar
 1 x.xK  log.potentialFoam
 1 xxxK  log.simpleFoam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
-1 tiny  mesh001 -> ../../mesh/mesh001/
 1 tiny  pv.foam
 1 tiny  pvScript.py
 1 tiny  sofa.run.FREECAD.json
@@ -87,6 +87,7 @@ xxxK
 
 ./postProcessing/residuals/0:
 xxxK
+1 x.xK  residuals_1.dat
 1 x.xK  residuals.dat
 
 ./processor0:

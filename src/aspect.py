@@ -79,4 +79,4 @@ class Aspect(object):
                             caseStructure = self.structure['case000'],
                             verbose =       self.verbose
                         )
-        newCase001.create()
+        newCase001.create( createNew=True )

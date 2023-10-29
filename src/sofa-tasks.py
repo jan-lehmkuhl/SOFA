@@ -105,19 +105,17 @@ elif args.entryPoint == "initFoam":
         else:
             print("skipping study >" + studyFolder + " since it already exists")
 
+# new case from aspect level
 elif args.entryPoint == "newCase":
     exitIfRepositoryIsNotClean()
     newCaseXXX = Case( verbose=args.verbose )
-    if not newCaseXXX.createNew:
-        print("\nWARNING: this will overwrite existing files with default values")
-        input("Press Enter to continue...")
-    newCaseXXX.create()
+    newCaseXXX.create( createNew=True )
 
-# todo
+# (re-)initialize case on case level and copies sofa files again
 elif args.entryPoint == "initCase":
     exitIfRepositoryIsNotClean()
-    currentCase = cfdAspectSelector()
-    currentCase.initCase()
+    initCaseXXX = Case( verbose=args.verbose )
+    initCaseXXX.create()
 
 elif args.entryPoint == "upstreamLinks":
     print("*** update Upstream-Links in ", os.path.basename(os.getcwd()), " ***" )
@@ -168,6 +166,9 @@ elif args.entryPoint == "updateAllReports":
                 break
         else:
             print("Found no RMarkdown file for OverviewReports")
+
+elif args.entryPoint == "updateSofaFiles":
+    pass
 
 else:
     raise SystemExit("ERROR no sofa-task defined")

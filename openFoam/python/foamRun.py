@@ -275,7 +275,6 @@ class foamRunner(object):
         #
         procStart = datetime.datetime.now()
         self.procHandler.printProcStart("Cleaning Case")
-        self.procHandler.general(["foamCleanTutorials"])
         if os.path.exists(".fileStates.data"):
             os.remove(".fileStates.data")
         if os.path.exists("doc/runReport/runReport.html"):

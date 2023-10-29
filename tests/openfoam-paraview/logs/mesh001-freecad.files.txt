@@ -1,10 +1,10 @@
 .:
 xxxK
+1 tiny  cad001 -> ../../cad/cad001/
 5 x.xK  constant/
 2 x.xK  system/
 1 tiny  Allmesh*
-1 tiny  cad001 -> ../../cad/cad001/
-1 tiny  .gitignore -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/.gitignore_foam
+1 x.xK  .gitignore
 1 x.xK  log.blockMesh
 1 x.xK  log.checkMesh
 1 xxxK  log.snappyHexMesh

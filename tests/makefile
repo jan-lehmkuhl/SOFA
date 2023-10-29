@@ -9,6 +9,10 @@ tests: pipeline-tests additional-local-tests
 	@echo ""
 
 
+update-sofa-files:
+	python3 tools/sofa-framework/src/sofa-tasks.py updateSofaFiles
+
+
 gitlab-pipeline: 
 	make pipeline-tests
 	@echo ""

@@ -67,7 +67,7 @@ def findChildFolders( containingFile, startFolder=os.getcwd(), directoryMaxDepth
 
 def findParentFolder( containingFile, startFolder=os.getcwd(), allowFail=False, verbose=False, searchDepth=6 ):
     wd = startFolder
-    subdirs = os.listdir(os.getcwd())
+    subdirs = os.listdir(wd)
     i = 0
     while i < searchDepth:
         if containingFile in subdirs:
