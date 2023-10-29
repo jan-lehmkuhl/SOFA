@@ -8,7 +8,7 @@ creating case:         		  >>  run001  <<
 Skip existing folder      /openfoam-paraview/run/run001
 Skip onlyAtCreation file: sofa.run.json
 Skip correct link    /openfoam-paraview/run/run001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
-Unabel to create target >/home/jan/workspace/cfd-lecture/tools/sofa-framework/tests/openfoam-paraview/run/run001/.gitignore< since it exists
+Unabel to create target >/sofa-project/tools/sofa-framework/tests/openfoam-paraview/run/run001/.gitignore< since it exists
 Skip existing file        /openfoam-paraview/run/run001/pv.foam
 create upstream aspect links for:  	  >>  run001  <<
 Skip correct link    mesh001 		 with pointer to   ../../mesh/mesh001
