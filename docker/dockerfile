@@ -69,6 +69,11 @@ USER root
 RUN python3 -m pip install matplotlib
 RUN python3 -m pip install pandas
 
+USER foam
+RUN ln --symbolic /opt/openfoam7/platforms/linux64GccDPInt32Opt/bin/checkMesh ~/bin
+USER root
+
+
 
 # closing
 # ==========================================================
