@@ -1,18 +1,5 @@
-image: ubuntu
-
-
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-
-default:
-  before_script:
-    - apt update
-    - apt-get install -y git
-    - apt-get install -y make
-    - apt-get install -y python3
-    - git config --global http.sslVerify "false"
-    - git submodule init
-    - git submodule update --recursive --remote
 
 stages:
   - build
@@ -25,6 +12,13 @@ docker-build-main:
   services:
     - docker:dind
   before_script:
+    - apt update
+    - apt-get install -y git
+    - apt-get install -y make
+    - apt-get install -y python3
+    - git config --global http.sslVerify "false"
+    - git submodule init
+    - git submodule update --recursive --remote
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - echo "running pipeline on branch.. $CI_COMMIT_BRANCH because of a.. $CI_PIPELINE_SOURCE"
@@ -39,6 +33,12 @@ docker-build-main:
 
 make-test:
   stage: test
+  image: ubuntu
+  before_script:
+    - apt update
+    - apt-get install -y git
+    - apt-get install -y make
+    - apt-get install -y python3
   script:
     - echo "running pipeline on branch.. $CI_COMMIT_BRANCH because of a.. $CI_PIPELINE_SOURCE"
     - "make -C ./tests/ gitlab-pipeline"
