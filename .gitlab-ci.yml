@@ -2,7 +2,7 @@ image: ubuntu
 
 
 variables:
-  GIT_SUBMODULE_STRATEGY: recursive 
+  GIT_SUBMODULE_STRATEGY: recursive
 
 default:
   before_script:
@@ -50,3 +50,13 @@ make-test:
     expire_in: 30 days
     paths:
       - tests/
+
+
+openfoam-paraview:
+  stage: test
+  image: $CI_REGISTRY_IMAGE
+  script:
+    - echo "running OpenFOAM-Paraview pipeline on branch.. $CI_COMMIT_BRANCH because of a.. $CI_PIPELINE_SOURCE"
+    - "make -C ./tests/openfoam-paraview"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
