@@ -57,6 +57,7 @@ openfoam-paraview:
   image: $CI_REGISTRY_IMAGE
   script:
     - echo "running OpenFOAM-Paraview pipeline on branch.. $CI_COMMIT_BRANCH because of a.. $CI_PIPELINE_SOURCE"
+    - git config --global --add safe.directory /builds/sofa-framework/core
     - "make -C ./tests/openfoam-paraview"
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
