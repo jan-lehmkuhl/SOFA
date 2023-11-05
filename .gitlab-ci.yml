@@ -7,14 +7,16 @@ stages:
 
 
 docker-build-main:
-  image: docker:latest
+  image: docker:stable
   stage: build
   services:
     - docker:dind
   before_script:
     - echo "Hello 1"
-    - apk add python git make
+    - apk add python python-dev python pip
     - echo "Hello 2"
+    - apk add git make
+    - echo "Hello 3"
     - git config --global http.sslVerify "false"
     - git submodule init
     - git submodule update --recursive --remote
