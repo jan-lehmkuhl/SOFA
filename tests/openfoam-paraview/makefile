@@ -12,6 +12,22 @@ include ../../makefile.global.mk
 #   Main
 # ==========================================================
 
+debug-output:
+	id
+	pwd
+	echo $$PATH | tr : '\n'
+
+
+	# paraview --version
+	pvbatch  --version
+	pvpython --version
+	# which paraview
+	which pvbatch
+	which pvpython
+	@echo "finished debug calls, continue tests"
+	make tests
+
+
 tests: clean-and-remove-logs freecad-chain mesh-overview
 	@echo "finished tests for openfoam"
 

@@ -43,7 +43,7 @@ make-test:
     - echo "running pipeline on branch.. $CI_COMMIT_BRANCH because of a.. $CI_PIPELINE_SOURCE"
     - "make -C ./tests/ gitlab-pipeline"
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "master"
   artifacts:
     when: always
     untracked: true
