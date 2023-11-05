@@ -58,20 +58,14 @@ RUN wget --quiet --output-document - \
     | tar -xz --directory=/opt  -f -
 
 # make only pvpython and pvbatch available in your $PATH
-USER foam
-RUN mkdir -p ~/bin
-RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvbatch  ~/bin
-RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvpython ~/bin
-RUN echo "PATH=~/bin:${PATH}" >> ~foam/.bashrc
-USER root
+RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvbatch   /bin
+RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvpython  /bin
 
 # pythonn packages used in python-postprocessing.py
 RUN python3 -m pip install matplotlib
 RUN python3 -m pip install pandas
 
-USER foam
-RUN ln --symbolic /opt/openfoam7/platforms/linux64GccDPInt32Opt/bin/checkMesh ~/bin
-USER root
+RUN ln --symbolic /opt/openfoam7/platforms/linux64GccDPInt32Opt/bin/checkMesh  /bin
 
 
 
