@@ -12,7 +12,7 @@ docker-build-main:
   services:
     - docker:dind
   before_script:
-    - apt update
+    - apt-get update
     - apt-get install -y git
     - apt-get install -y make
     - apt-get install -y python3
@@ -35,7 +35,7 @@ make-test:
   stage: test
   image: ubuntu
   before_script:
-    - apt update
+    - apt-get update
     - apt-get install -y git
     - apt-get install -y make
     - apt-get install -y python3
