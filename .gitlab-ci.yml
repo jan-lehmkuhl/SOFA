@@ -12,7 +12,9 @@ docker-build-main:
   services:
     - docker:dind
   before_script:
+    - echo "Hello 1"
     - apt-get update
+    - echo "Hello 2"
     - apt-get install -y git
     - apt-get install -y make
     - apt-get install -y python3
