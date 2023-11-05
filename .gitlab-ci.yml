@@ -13,11 +13,8 @@ docker-build-main:
     - docker:dind
   before_script:
     - echo "Hello 1"
-    - apt-get update
+    - apk add python git make
     - echo "Hello 2"
-    - apt-get install -y git
-    - apt-get install -y make
-    - apt-get install -y python3
     - git config --global http.sslVerify "false"
     - git submodule init
     - git submodule update --recursive --remote
