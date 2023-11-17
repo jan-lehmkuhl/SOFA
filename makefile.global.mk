@@ -71,6 +71,7 @@ remove_logs_variable_content = sed --in-place --regexp-extended --expression \
 	s/(\")(\/.*)(\/tests.*\")/\1\3/g; \
 	s/( )(\/.*)(\/tests.*)/\1\3/g; \
 	s/(Slaves : ).*/\1xxx/g; \
+	s/(\".{3,13}\.[0-9]{3,6}\")/HOST\.ID/g; \
 	s/(.* in )([0-9][0-9\.]*) s/\1xxx s/g; \
 	s/( [0-9](\.[0-9])?e[-][0-9][0-9] s)/ x.xeXX s/g; \
 	s/(^R version )([0-9]\..*)/\1 x.x.x \.\.\./g; \

@@ -213,9 +213,9 @@ nProcs : 4
 Slaves : xxx
 3
 (
-"sandy.293366"
-"sandy.293367"
-"sandy.293368"
+HOST.ID
+HOST.ID
+HOST.ID
 )
 
 Pstream initialised with:
@@ -286,9 +286,9 @@ nProcs : 4
 Slaves : xxx
 3
 (
-"sandy.293389"
-"sandy.293390"
-"sandy.293391"
+HOST.ID
+HOST.ID
+HOST.ID
 )
 
 Pstream initialised with:
@@ -379,9 +379,9 @@ nProcs : 4
 Slaves : xxx
 3
 (
-"sandy.293434"
-"sandy.293436"
-"sandy.293439"
+HOST.ID
+HOST.ID
+HOST.ID
 )
 
 Pstream initialised with:
