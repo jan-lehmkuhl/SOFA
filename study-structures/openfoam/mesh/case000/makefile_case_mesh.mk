@@ -29,13 +29,13 @@ endif
 
 
 
-# standard targets 
+# standard targets
 # =============================================================================
 
 # default creating target
-all: 
+all:
 	make -C ../../cad/$(linkedCadCase)
-	make mesh 
+	make mesh
 
 
 mesh: upstream-links
@@ -94,16 +94,16 @@ init-case: upstream-links
 
 
 upstream-links:
-    # renew the upstreamLinks to cad 
+    # renew the upstreamLinks to cad
 	@python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py upstreamLinks
 
 
-# clone case to a new case with the next available running number 
+# clone case to a new case with the next available running number
 clone:
 	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 
-clean-framework-mesh: 
+clean-framework-mesh:
 	@rm -f  .fileStates.data
 	@rm -rf [0-9]/polyMesh/*
 	@rm -rf constant/extendedFeatureEdgeMesh/*
@@ -127,11 +127,11 @@ show-overview-report:
 rstudio:
 	rstudio doc/meshReport/meshReport.Rmd
 
-python-pre: 
+python-pre:
 	@if [ -f "${pythonPreScript}" ] ; then   \
 		python3 ${pythonPreScript}         ; \
 	fi ;
-python-post: 
+python-post:
 	@if [ -f "${pythonPostScript}" ] ; then   \
 		python3 ${pythonPostScript}         ; \
 	fi ;
@@ -154,8 +154,8 @@ freecad-mesh-setup-fetch: clean
 		make  -C  ../../cad/$(linkedCadCase)  freecad-stl-push ; \
 	fi
 
-	@echo "\n*** fetch FreeCAD meshCase files ***" 
-	@read -p "press ENTER to start overwriting files ..." dummy 
+	@echo "\n*** fetch FreeCAD meshCase files ***"
+	@read -p "press ENTER to start overwriting files ..." dummy
 	mv    -f  ../../cad/$(linkedCadCase)/meshCase/Allmesh   .
 	mkdir -p  system
 	rm    -f  system/*
@@ -164,7 +164,7 @@ freecad-mesh-setup-fetch: clean
 	make upstream-links
 
 
-mesh-allmesh: 
+mesh-allmesh:
 	./Allmesh
 	@test -e constant/polyMesh/points && echo "mesh exists" || (echo "mesh not exists"; exit 1)
 	checkMesh  | tee log.checkMesh
@@ -172,8 +172,8 @@ mesh-allmesh:
 
 
 clean-freecad-mesh:
-	@rm -f log.* 
-	@rm -f mesh_outside.stl
+	@rm -f log.*
+	@rm -f surfaceMesh.vtk
 	@rm -f *_Geometry.fms
 	@# rm -rf gmsh
 
@@ -187,7 +187,7 @@ frameworkmeshing:
 	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py mesh
 
 
-# erase last boundary layer and redo 
+# erase last boundary layer and redo
 redoMeshLayer:
 	python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py meshLayer
 
@@ -215,7 +215,7 @@ paraview: paraview-fix-state
 
 
 # opens Paraview without specified state
-paraview-empty-state: 
+paraview-empty-state:
 	if [ ! -f "Allmesh" ] ; then                                                \
 		echo "*** start foamMesh.py"                                          ; \
 		python3 ${FRAMEWORK_PATH}/openFoam/python/foamMesh.py view     ; \
