@@ -2172,6 +2172,7 @@ make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make paraview-macros
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 python3 ../../../tools/sofa-framework/study-structures/openfoam/shared/python-postprocessing.py
+write residuals plot
 pvbatch ../../../tools/sofa-framework/study-structures/openfoam/shared/paraview-export-all.py
 load pv.foam and paraview state
 execute picture export
