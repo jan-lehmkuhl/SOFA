@@ -59,10 +59,7 @@ surfaceMesh.vtk
 # =============================================================================
 
 ## Timestep directories
-0/*
-0.*
 [1-9]*
-!0.org
 
 ## Fields that must get ignored
 */phi*

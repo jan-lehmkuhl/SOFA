@@ -1,7 +1,6 @@
 .:
 xxxK
 2 x.xK  0/
-2 x.xK  0.org/
 3 x.xK  constant/
 4 x.xK  doc/
 3 x.xK  postProcessing/
@@ -24,14 +23,6 @@ xxxK
 1 tiny  sofa.run.FREECAD.json
 
 ./0:
-xxxK
-1 x.xK  k
-1 x.xK  nut
-1 x.xK  omega
-1 x.xK  p
-1 x.xK  U
-
-./0.org:
 xxxK
 1 x.xK  k
 1 x.xK  nut

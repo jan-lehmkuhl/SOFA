@@ -22,9 +22,6 @@ make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
 Hello Python-Pre-Script
 make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
-make[x]: Entering directory '/tests/openfoam-paraview/run/run001'
-cp    -rf  0.org/*  0
-make[x]: Leaving directory '/tests/openfoam-paraview/run/run001'
 ./Allrun
 /*---------------------------------------------------------------------------*\
   =========                 |
