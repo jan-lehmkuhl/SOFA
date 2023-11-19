@@ -150,7 +150,10 @@ frameworkrun:
 # erase all results
 clean-run:
 	@python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py cleanRun
+	@rm -rf processor[0-9]
+	@rm -rf postProcessing
 	@rm -rf logs
+	@rm -f  log.*
 
 
 
