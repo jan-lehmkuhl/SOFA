@@ -26,11 +26,11 @@ ifneq ("$(wildcard ./special-targets.mk)","")
 endif
 
 
-#   standard targets 
+#   standard targets
 # =============================================================================
 
 .PHONY: stl
-stl: 
+stl:
 	@echo "no automatic stl creation provided"
 
 
@@ -45,8 +45,8 @@ freecad:
 
 
 view:
-	if [   -f native/geometry.FCStd ]; then   make freecad-gui              ; fi
-	if [ ! -f native/geometry.FCStd ]; then   make frameworkview               ; fi
+	if [   -f geometry.FCStd ]; then   make freecad-gui              ; fi
+	if [ ! -f geometry.FCStd ]; then   make frameworkview               ; fi
 	make paraview
 	make paraview-macro
 
@@ -60,18 +60,18 @@ clean: clean-freecad-output clean-vtk clean-paraview
 #   framework handling
 # =============================================================================
 
-# clone case to a new case with the next available running number 
+# clone case to a new case with the next available running number
 clone:
 	python3 ${FRAMEWORK_PATH}/src/sofa-tasks.py clone
 
 clean-upstream-included: clean
 
 
-python-pre: 
+python-pre:
 	@if [ -f "${pythonPreScript}" ] ; then   \
 		python3 ${pythonPreScript}         ; \
 	fi ;
-python-post: 
+python-post:
 	@if [ -f "${pythonPostScript}" ] ; then   \
 		python3 ${pythonPostScript}         ; \
 	fi ;
@@ -101,11 +101,11 @@ clean-vtk:
 # =============================================================================
 
 freecad-gui:
-	if [ ! -f native/geometry.FCStd ]; then cp ${FRAMEWORK_PATH}/openFoam/dummies/cad/geometry.FCStd  native/geometry.FCStd; fi
-	freecad native/geometry.FCStd
+	if [ ! -f geometry.FCStd ]; then cp ${FRAMEWORK_PATH}/openFoam/dummies/cad/geometry.FCStd  geometry.FCStd; fi
+	freecad geometry.FCStd
 
 
-freecad-stl-push: 
+freecad-stl-push:
 	@echo "\n*** push freecad stl export to ./stl ***"
 
 	# check for freecad stl file existence
@@ -115,7 +115,7 @@ freecad-stl-push:
 	fi
 
 	@# delete outdated stl files
-	@mkdir -p stl ; 
+	@mkdir -p stl ;
 	@if [ ! `find stl -prune -empty 2>/dev/null` ]          ; then     \
 		echo "*** OVERWRITING/DELETING EXISTING stl-files in stl folder ***"      ; \
 		ls -lA stl  ; \
@@ -125,10 +125,10 @@ freecad-stl-push:
 	@echo ""
 
 	# move freecad stl export to ./stl
-	mv meshCase/constant/triSurface/*  stl 
-	@echo "\n    list of moved stl files " 
-	@ls -lA stl 
-	@echo "" 
+	mv meshCase/constant/triSurface/*  stl
+	@echo "\n    list of moved stl files "
+	@ls -lA stl
+	@echo ""
 	make prune-empty-freecad-export-folders
 
 
@@ -157,13 +157,13 @@ frameworkview:
 
 
 # opens paraview with the referenced state file
-paraview: 
+paraview:
 	@echo "*** loaded data is specified in state file and should be made relative from caseXXX ***"
 	@${remove_paraview_variable_parts} $(paraviewState)
 	paraview --state=$(paraviewState)
 
 
-paraview-macro: 
+paraview-macro:
 	@if [ -f "${paraviewMacro}" ] ; then   \
 		mkdir --parents doc/exports      ; \
 		pvbatch ${paraviewMacro}         ; \

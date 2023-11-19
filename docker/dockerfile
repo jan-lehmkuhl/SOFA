@@ -30,19 +30,21 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 # ENV LC_ALL en_US.UTF-8
 
 
-#   install OpenFOAM 7
+#   install OpenFOAM 11
 # ==========================================================
 RUN sh -c "wget -O - https://dl.openfoam.org/gpg.key | apt-key add -"
 RUN add-apt-repository http://dl.openfoam.org/ubuntu
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends openfoam7
+RUN apt-get install -y --no-install-recommends openfoam11
 
 # create separate user with login shell
 RUN useradd --user-group --create-home --shell /bin/bash foam ;\
 	echo "foam ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER foam
-RUN echo "source /opt/openfoam7/etc/bashrc" >> ~foam/.bashrc
+RUN echo "source /opt/openfoam11/etc/bashrc" >> ~foam/.bashrc
+RUN mkdir -p ~/bin
+RUN ln --symbolic /opt/openfoam11/platforms/linux64GccDPInt32Opt/bin/checkMesh ~/bin
 USER root
 
 
@@ -59,19 +61,18 @@ RUN wget --quiet --output-document - \
 
 # make only pvpython and pvbatch available in your $PATH
 USER foam
-RUN mkdir -p ~/bin
 RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvbatch  ~/bin
 RUN ln --symbolic /opt/${PARAVIEW_DOWNLOAD}/bin/pvpython ~/bin
 RUN echo "PATH=~/bin:${PATH}" >> ~foam/.bashrc
 USER root
 
-# pythonn packages used in python-postprocessing.py
+
+#   install Python stuff
+# ==========================================================
+# python packages used in python-postprocessing.py
+
 RUN python3 -m pip install matplotlib
 RUN python3 -m pip install pandas
-
-USER foam
-RUN ln --symbolic /opt/openfoam7/platforms/linux64GccDPInt32Opt/bin/checkMesh ~/bin
-USER root
 
 
 

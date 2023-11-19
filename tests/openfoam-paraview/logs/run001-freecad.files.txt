@@ -1,35 +1,28 @@
 .:
 xxxK
 2 x.xK  0/
-2 x.xK  0.org/
 3 x.xK  constant/
 4 x.xK  doc/
-1 tiny  mesh001 -> ../../mesh/mesh001/
 3 x.xK  postProcessing/
 6 x.xK  processor0/
 6 x.xK  processor1/
+6 x.xK  processor2/
+6 x.xK  processor3/
 2 x.xK  system/
 1 x.xK  Allrun*
 1 x.xK  .gitignore
 1 x.xK  log.createPatch
 1 x.xK  log.decomposePar
 1 x.xK  log.potentialFoam
+1 x.xK  log.renumberMesh
 1 xxxK  log.simpleFoam
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/run/case000/makefile_case_run.mk
+1 tiny  mesh001 -> ../../mesh/mesh001/
 1 tiny  pv.foam
-1 tiny  pvScript.py
+1 x.xK  pvScript.py
 1 tiny  sofa.run.FREECAD.json
 
 ./0:
-xxxK
-1 x.xK  k
-1 x.xK  nut
-1 x.xK  omega
-1 x.xK  p
-1 xxxK  phi
-1 xxxK  U
-
-./0.org:
 xxxK
 1 x.xK  k
 1 x.xK  nut
@@ -39,15 +32,16 @@ xxxK
 
 ./constant:
 xxxK
-3 x.xK  polyMesh/
+2 x.xK  polyMesh/
+1 tiny  momentumTransport
 1 tiny  transportProperties
 1 tiny  turbulenceProperties
 
 ./constant/polyMesh:
 xxxK
-2 x.xK  sets/
 1 x.xK  boundary
 1 tiny  cellLevel
+1 x.xK  cellProc
 1 tiny  cellZones
 1 xxxK  faces
 1 tiny  faceZones
@@ -58,10 +52,6 @@ xxxK
 1 xxxK  points
 1 tiny  pointZones
 1 xxxK  surfaceIndex
-
-./constant/polyMesh/sets:
-xxxK
-1 x.xK  unmatchedFaces
 
 ./doc:
 xxxK
@@ -94,7 +84,7 @@ xxxK
 xxxK
 2 x.xK  0/
 3 x.xK  100/
-3 x.xK  104/
+3 x.xK  107/
 3 x.xK  constant/
 
 ./processor0/0:
@@ -120,7 +110,7 @@ xxxK
 xxxK
 1 tiny  time
 
-./processor0/104:
+./processor0/107:
 xxxK
 2 x.xK  uniform/
 1 xxxK  k
@@ -130,39 +120,32 @@ xxxK
 1 xxxK  phi
 1 xxxK  U
 
-./processor0/104/uniform:
+./processor0/107/uniform:
 xxxK
 1 tiny  time
 
 ./processor0/constant:
 xxxK
-3 x.xK  polyMesh/
+2 x.xK  polyMesh/
 
 ./processor0/constant/polyMesh:
 xxxK
-2 x.xK  sets/
 1 x.xK  boundary
-1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1 xxxK  cellProcAddressing
-1 xxxK  faceProcAddressing
+1 tiny  cellZones
 1 xxxK  faces
-1 tiny  level0Edge
+1 tiny  faceZones
 1 xxxK  neighbour
 1 xxxK  owner
 1 tiny  pointLevel
-1 xxxK  pointProcAddressing
 1 xxxK  points
-
-./processor0/constant/polyMesh/sets:
-xxxK
-1 x.xK  unmatchedFaces
+1 tiny  pointZones
 
 ./processor1:
 xxxK
 2 x.xK  0/
 3 x.xK  100/
-3 x.xK  104/
+3 x.xK  107/
 3 x.xK  constant/
 
 ./processor1/0:
@@ -188,7 +171,7 @@ xxxK
 xxxK
 1 tiny  time
 
-./processor1/104:
+./processor1/107:
 xxxK
 2 x.xK  uniform/
 1 xxxK  k
@@ -198,39 +181,154 @@ xxxK
 1 xxxK  phi
 1 xxxK  U
 
-./processor1/104/uniform:
+./processor1/107/uniform:
 xxxK
 1 tiny  time
 
 ./processor1/constant:
 xxxK
-3 x.xK  polyMesh/
+2 x.xK  polyMesh/
 
 ./processor1/constant/polyMesh:
 xxxK
-2 x.xK  sets/
 1 x.xK  boundary
-1 tiny  boundaryProcAddressing
 1 tiny  cellLevel
-1 xxxK  cellProcAddressing
-1 xxxK  faceProcAddressing
+1 tiny  cellZones
 1 xxxK  faces
-1 tiny  level0Edge
+1 tiny  faceZones
 1 xxxK  neighbour
 1 xxxK  owner
 1 tiny  pointLevel
-1 xxxK  pointProcAddressing
 1 xxxK  points
+1 tiny  pointZones
 
-./processor1/constant/polyMesh/sets:
+./processor2:
 xxxK
-1 x.xK  unmatchedFaces
+2 x.xK  0/
+3 x.xK  100/
+3 x.xK  107/
+3 x.xK  constant/
+
+./processor2/0:
+xxxK
+1 x.xK  k
+1 x.xK  nut
+1 x.xK  omega
+1 x.xK  p
+1 xxxK  phi
+1 xxxK  U
+
+./processor2/100:
+xxxK
+2 x.xK  uniform/
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
+
+./processor2/100/uniform:
+xxxK
+1 tiny  time
+
+./processor2/107:
+xxxK
+2 x.xK  uniform/
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
+
+./processor2/107/uniform:
+xxxK
+1 tiny  time
+
+./processor2/constant:
+xxxK
+2 x.xK  polyMesh/
+
+./processor2/constant/polyMesh:
+xxxK
+1 x.xK  boundary
+1 tiny  cellLevel
+1 tiny  cellZones
+1 xxxK  faces
+1 tiny  faceZones
+1 xxxK  neighbour
+1 xxxK  owner
+1 tiny  pointLevel
+1 xxxK  points
+1 tiny  pointZones
+
+./processor3:
+xxxK
+2 x.xK  0/
+3 x.xK  100/
+3 x.xK  107/
+3 x.xK  constant/
+
+./processor3/0:
+xxxK
+1 x.xK  k
+1 x.xK  nut
+1 x.xK  omega
+1 x.xK  p
+1 xxxK  phi
+1 xxxK  U
+
+./processor3/100:
+xxxK
+2 x.xK  uniform/
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
+
+./processor3/100/uniform:
+xxxK
+1 tiny  time
+
+./processor3/107:
+xxxK
+2 x.xK  uniform/
+1 xxxK  k
+1 xxxK  nut
+1 xxxK  omega
+1 xxxK  p
+1 xxxK  phi
+1 xxxK  U
+
+./processor3/107/uniform:
+xxxK
+1 tiny  time
+
+./processor3/constant:
+xxxK
+2 x.xK  polyMesh/
+
+./processor3/constant/polyMesh:
+xxxK
+1 x.xK  boundary
+1 tiny  cellLevel
+1 tiny  cellZones
+1 xxxK  faces
+1 tiny  faceZones
+1 xxxK  neighbour
+1 xxxK  owner
+1 tiny  pointLevel
+1 xxxK  points
+1 tiny  pointZones
 
 ./system:
 xxxK
-1 x.xK  changeDictionaryDict
 1 x.xK  controlDict
 1 x.xK  createPatchDict
 1 tiny  decomposeParDict
 1 x.xK  fvSchemes
 1 x.xK  fvSolution
+1 tiny  turbulenceLib

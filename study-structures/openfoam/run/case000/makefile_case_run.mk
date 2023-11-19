@@ -150,7 +150,10 @@ frameworkrun:
 # erase all results
 clean-run:
 	@python3 ${FRAMEWORK_PATH}/openFoam/python/foamRun.py cleanRun
+	@rm -rf processor[0-9]
+	@rm -rf postProcessing
 	@rm -rf logs
+	@rm -f  log.*
 
 
 
@@ -163,8 +166,7 @@ freecad-gui:
 
 # can be used to overwrite the dummy settings
 freecad-case-setup-fetch:
-	mv  ../../cad/$(linkedCadCase)/case/0  ../../cad/$(linkedCadCase)/case/0.org
-	@rm  -rf 0.org
+	@rm  -rf 0
 	@rm  -rf constant
 	@rm  -rf system
 	mv  ../../cad/$(linkedCadCase)/case/* .
@@ -172,13 +174,7 @@ freecad-case-setup-fetch:
 	make  -C  ../../cad/$(linkedCadCase)  prune-empty-freecad-export-folders
 
 
-copy-0org-to-0:
-	@mkdir -p   0
-	cp    -rf  0.org/*  0
-
-
 run-allrun:
-	@make copy-0org-to-0
 	./Allrun
 	# check for existing results
 	@find . -maxdepth 4 -type f -wholename "*/uniform/time" 2>/dev/null | grep -q . || (echo "ERROR did recognize a run to process"; exit 1)

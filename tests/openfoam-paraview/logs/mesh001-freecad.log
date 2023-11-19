@@ -8,7 +8,7 @@ creating case:         		  >>  mesh001  <<
 Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
 Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-Unabel to create target >/home/jan/workspace/cfd-lecture/tools/sofa-framework/tests/openfoam-paraview/mesh/mesh001/.gitignore< since it exists
+Unabel to create target >/sofa-project/tools/sofa-framework/tests/openfoam-paraview/mesh/mesh001/.gitignore< since it exists
 Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001
@@ -26,10 +26,10 @@ make[x]: Entering directory '/tests/openfoam-paraview/mesh/mesh001'
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  11
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
+Build  : 11-d5b4d966c3c5
 Exec   : blockMesh
 Date   : xxx xx xxxx
 Time   : xx:xx:xx
@@ -45,18 +45,16 @@ allowSystemOperations : Allowing user-supplied system call operations
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 Create time
 
+Reading "blockMeshDict"
+
 Creating block mesh from
-    "/tests/openfoam-paraview/mesh/mesh001/system/blockMeshDict"
+    "system/blockMeshDict"
 Creating block edges
 No non-planar block faces defined
 Creating topology blocks
 Creating topology patches
 
 Creating block mesh topology
---> FOAM Warning : 
-    From function Foam::polyMesh::polyMesh(const Foam::IOobject&, Foam::pointField&&, const cellShapeList&, const faceListList&, const wordList&, const Foam::PtrList<Foam::dictionary>&, const Foam::word&, const Foam::word&, bool)
-    in file meshes/polyMesh/polyMeshFromShapeMesh.C at line 873
-    Found 6 undefined faces in mesh; adding to default patch.
 
 Check topology
 
@@ -76,8 +74,8 @@ Creating cells
 Creating points with scale 1
     Block 0 cell size :
         i : 0.00942857142857144
-        j : 0.00977683359954875 .. 0.00977683359954873
-        k : 0.00967843694183479 .. 0.0096784369418348
+        j : 0.00978788076000623 .. 0.0097878807600062
+        k : 0.00968518799604923 .. 0.0096851879960492
 
 There are no merge patch pairs edges
 
@@ -85,7 +83,7 @@ Writing polyMesh
 ----------------
 Mesh Information
 ----------------
-  boundingBox: (-0.099 -0.049 -0.424000151154176) (0.099 0.273635508785109 0.0986354437049027)
+  boundingBox: (-0.099 -0.049 -0.424000151786658) (0.099 0.274000065080206 0.099)
   nPoints: 41140
   nCells: 37422
   nFaces: 115875
@@ -93,7 +91,12 @@ Mesh Information
 ----------------
 Patches
 ----------------
-  patch 0 (start: 108657 size: 7218) name: defaultFaces
+  patch 0 (start: 108657 size: 1782) name: xMin
+  patch 1 (start: 110439 size: 1782) name: xMax
+  patch 2 (start: 112221 size: 693) name: yMin
+  patch 3 (start: 112914 size: 693) name: yMax
+  patch 4 (start: 113607 size: 1134) name: zMin
+  patch 5 (start: 114741 size: 1134) name: zMax
 
 End
 
@@ -101,11 +104,11 @@ End
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  11
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
-Exec   : surfaceFeatureExtract
+Build  : 11-d5b4d966c3c5
+Exec   : surfaceFeatures
 Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
@@ -120,15 +123,15 @@ allowSystemOperations : Allowing user-supplied system call operations
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 Create time
 
-Reading surfaceFeatureExtractDict
+Reading "surfaceFeaturesDict"
 
 Surface            : "Body001_Geometry.stl"
 
 
 Feature line extraction is only valid on closed manifold surfaces.
 Statistics:
-Triangles    : 11258
-Vertices     : 5631
+Triangles    : 3438
+Vertices     : 1771
 Bounding Box : (-0.0500000007450581 -1.09999999869629e-17 -0.375000149011612) (0.0500000007450581 0.22500005364418 0.0500000007450581)
 
 
@@ -136,32 +139,35 @@ Constructing feature set from included angle 150
 Selecting edges purely based on geometric tests: no
 
 Initial feature set:
-    feature points : 0
-    feature edges  : 400
+    feature points : 100
+    feature edges  : 300
     of which
-        region edges   : 400
+        region edges   : 300
         external edges : 0
         internal edges : 0
 
 
 Final feature set:
-    points : 400
-    of which
-        convex             : 0
-        concave            : 0
-        mixed              : 0
-        non-feature        : 400
-    edges  : 400
-    of which
-        external edges     : 236
-        internal edges     : 143
-        flat edges         : 21
-        open edges         : 0
-        multiply connected : 0
+points      : 200
+edges       : 300
+boundingBox : (-0.0500000007450581 -1.09999999869629e-17 -0.375000149011612) (0.0500000007450581 0.22500005364418 0.0500000007450581)
+point classification :
+    convex feature points          :        0
+    concave feature points         :        0
+    mixed feature points           :      100
+    other (non-feature) points     :      100
+edge classification :
+    external (convex angle) edges  :        0
+    internal (concave angle) edges :        0
+    flat region edges              :        0
+    open edges                     :      257
+    multiply connected edges       :       43
 
-Writing extendedFeatureEdgeMesh to "/tests/openfoam-paraview/mesh/mesh001/constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
+Writing extendedFeatureEdgeMesh to "constant/extendedFeatureEdgeMesh/Body001_Geometry.extendedFeatureEdgeMesh"
 
-Writing featureEdgeMesh to "/tests/openfoam-paraview/mesh/mesh001/constant/triSurface/Body001_Geometry.eMesh"
+Writing extendedEdgeMesh components to "/tests/openfoam-paraview/mesh/mesh001/constant/extendedFeatureEdgeMesh/Body001_Geometry"
+
+Writing featureEdgeMesh to "constant/triSurface/Body001_Geometry.eMesh"
 
 ExecutionTime = x.xx s  ClockTime = x.xx s
 
@@ -171,10 +177,10 @@ End
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  11
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
+Build  : 11-d5b4d966c3c5
 Exec   : snappyHexMesh -overwrite
 Date   : xxx xx xxxx
 Time   : xx:xx:xx
@@ -193,27 +199,26 @@ Create time
 Create mesh for time = 0
 
 Read mesh in = x.xx s
+Reading "snappyHexMeshDict"
 
-Overall mesh bounding box  : (-0.099 -0.049 -0.424000151154176) (0.099 0.273635508785109 0.0986354437049027)
+
+Overall mesh bounding box  : (-0.099 -0.049 -0.424000151786658) (0.099 0.274000065080206 0.099)
 Relative tolerance         : 1e-06
-Absolute matching distance : 6.4532599245864e-07
+Absolute matching distance : 6.45803531122806e-07
 
-Reading refinement surfaces.
+Reading refinement surfaces...
 Read refinement surfaces in = x.xx s
 
-Reading refinement shells.
-Read refinement shells in = x.xx s
+Reading refinement regions...
+Read refinement regions in = x.xeXX s
 
-Setting refinement level of surface to be consistent with shells.
-Checked shell refinement in = x.xx s
-
-Reading features.
+Reading features...
 Read edgeMesh Body001_Geometry.eMesh
-    points      : 400
-    edges       : 400
+    points      : 200
+    edges       : 300
     boundingBox : (-0.0500000007450581 -1.09999999869629e-17 -0.375000149011612) (0.0500000007450581 0.22500005364418 0.0500000007450581)
 
-Refinement level according to distance to "Body001_Geometry.eMesh" (400 points, 400 edges).
+Refinement level according to distance to "Body001_Geometry.eMesh" (200 points, 300 edges).
     level 0 for all cells within 0 metre.
 Read features in = x.xx s
 
@@ -224,7 +229,7 @@ Determining initial surface intersections
 Edge intersection testing:
     Number of edges             : 115875
     Number of edges to retest   : 115875
-    Number of intersected edges : 2504
+    Number of intersected edges : 2500
 Calculated surface intersections in = x.xx s
 
 Initial mesh : cells:37422  faces:115875  points:41140
@@ -238,22 +243,14 @@ Patch Type                Region
 ----- ----                ------                        
 Body001_Geometry:
 
-1     wall                face0                         
-2     wall                face1                         
-3     wall                face2                         
-4     wall                face3                         
-5     wall                face4                         
+6     wall                patch_1_0                     
+7     wall                patch_2_0                     
+8     wall                patch_3_0                     
 
 Added patches in = x.xx s
 
- Foam::decompositionMethod::New 
-{
-    method          none;
-    numberOfSubdomains 1;
-}
-
-Selecting decompositionMethod none
-Layer thickness specified as final layer and expansion ratio.
+Selecting distributor none
+Cell selection insidePoints: 1((0 0 0))
 
 Refinement phase
 ----------------
@@ -281,13 +278,12 @@ Stopping refining since too few cells selected.
 Removing mesh beyond surface intersections
 ------------------------------------------
 
-Found point (0 0 0) in global region 1 out of 2 regions.
-Keeping all cells in region 1 containing point (0 0 0)
-Selected for keeping : 7447 cells.
+Selecting all cells in regions containing any of the points in 1((0 0 0))
+Selected: 14211 cells.
 Edge intersection testing:
-    Number of edges             : 23917
-    Number of edges to retest   : 3152
-    Number of intersected edges : 2504
+    Number of edges             : 51005
+    Number of edges to retest   : 9526
+    Number of intersected edges : 2500
 
 Shell refinement iteration 0
 ----------------------------
@@ -295,7 +291,7 @@ Shell refinement iteration 0
 Marked for refinement due to distance to explicit features : 0 cells.
 Marked for refinement due to refinement shells             : 0 cells.
 Determined cells to refine in = x.xx s
-Selected for internal refinement : 0 cells (out of 7447)
+Selected for internal refinement : 0 cells (out of 14211)
 Stopping refining since too few cells selected.
 
 
@@ -303,7 +299,7 @@ Dangling coarse cells refinement iteration 0
 --------------------------------------------
 
 Determined cells to refine in = x.xx s
-Selected for refinement : 0 cells (out of 7447)
+Selected for refinement : 0 cells (out of 14211)
 Stopping refining since too few cells selected.
 
 
@@ -311,77 +307,77 @@ Dangling coarse cells refinement iteration 0
 --------------------------------------------
 
 Determined cells to refine in = x.xx s
-Selected for refinement : 0 cells (out of 7447)
+Selected for refinement : 0 cells (out of 14211)
 Stopping refining since too few cells selected.
 
 
 Splitting mesh at surface intersections
 ---------------------------------------
 
-Introducing baffles for 2504 faces that are intersected by the surface.
+Introducing baffles for 2500 faces that are intersected by the surface.
 
 Edge intersection testing:
-    Number of edges             : 26421
-    Number of edges to retest   : 14992
-    Number of intersected edges : 5008
+    Number of edges             : 53505
+    Number of edges to retest   : 14972
+    Number of intersected edges : 5000
 Created baffles in = x.xx s
 
 
-After introducing baffles : cells:7447  faces:26421  points:9108
+After introducing baffles : cells:14211  faces:53505  points:22676
 Cells per refinement level:
-    0	7447
+    0	14211
 
 Introducing baffles to block off problem cells
 ----------------------------------------------
 
-markFacesOnProblemCells : marked 5648 additional internal faces to be converted into baffles.
+markFacesOnProblemCells : marked 5640 additional internal faces to be converted into baffles.
 Analyzed problem cells in = x.xx s
 
 
 Introducing baffles to delete problem cells.
 
 Edge intersection testing:
-    Number of edges             : 32069
-    Number of edges to retest   : 16980
-    Number of intersected edges : 5008
+    Number of edges             : 59145
+    Number of edges to retest   : 16956
+    Number of intersected edges : 5000
 Created baffles in = x.xx s
 
 
-After introducing baffles : cells:7447  faces:32069  points:9108
+After introducing baffles : cells:14211  faces:59145  points:22676
 Cells per refinement level:
-    0	7447
+    0	14211
 
 Remove unreachable sections of mesh
 -----------------------------------
 
-Keeping all cells in region 141 containing point (0 0 0)
-Selected for keeping : 4621 cells.
+Keeping all cells in regions containing any point in 1((0 0 0))
+Selected for keeping : 4595 cells.
 Edge intersection testing:
-    Number of edges             : 15113
+    Number of edges             : 15033
     Number of edges to retest   : 0
-    Number of intersected edges : 2496
+    Number of intersected edges : 2492
 Split mesh in = x.xx s
 
 
-After subsetting : cells:4621  faces:15113  points:5950
+After subsetting : cells:4595  faces:15033  points:5922
 Cells per refinement level:
-    0	4621
+    0	4595
 
 Handling cells with snap problems
 ---------------------------------
 
-Introducing baffles for 2496 faces that are intersected by the surface.
+Introducing baffles for 2492 faces that are intersected by the surface.
 
 Edge intersection testing:
-    Number of edges             : 15113
-    Number of edges to retest   : 6806
-    Number of intersected edges : 2496
+    Number of edges             : 15033
+    Number of edges to retest   : 6796
+    Number of intersected edges : 2492
 Created baffles in = x.xx s
 
 
-After introducing baffles : cells:4621  faces:15113  points:5950
+After introducing baffles : cells:4595  faces:15033  points:5922
 Cells per refinement level:
-    0	4621
+    0	4595
 
 Introducing baffles to block off problem cells
 ----------------------------------------------
@@ -393,31 +389,25 @@ Analyzed problem cells in = x.xx s
 Introducing baffles to delete problem cells.
 
 Edge intersection testing:
-    Number of edges             : 15113
+    Number of edges             : 15033
     Number of edges to retest   : 0
-    Number of intersected edges : 2496
+    Number of intersected edges : 2492
 Created baffles in = x.xx s
 
 
-After introducing baffles : cells:4621  faces:15113  points:5950
+After introducing baffles : cells:4595  faces:15033  points:5922
 Cells per refinement level:
-    0	4621
+    0	4595
 
 Remove unreachable sections of mesh
 -----------------------------------
 
-Keeping all cells in region 0 containing point (0 0 0)
-Selected for keeping : 4621 cells.
-Edge intersection testing:
-    Number of edges             : 15113
-    Number of edges to retest   : 0
-    Number of intersected edges : 2496
 Split mesh in = x.xx s
 
 
-After subsetting : cells:4621  faces:15113  points:5950
+After subsetting : cells:4595  faces:15033  points:5922
 Cells per refinement level:
-    0	4621
+    0	4595
 
 Merge free-standing baffles
 ---------------------------
@@ -428,11 +418,11 @@ Detected free-standing baffles : 0
 Merged free-standing baffles in = x.xx s
 
 
-dupNonManifoldPoints : Found : 0 non-manifold points (out of 5950)
+dupNonManifoldPoints : Found : 0 non-manifold points (out of 5922)
 Edge intersection testing:
-    Number of edges             : 15113
+    Number of edges             : 15033
     Number of edges to retest   : 0
-    Number of intersected edges : 2496
+    Number of intersected edges : 2492
 Detected unsplittable baffles : 0
 
 Merge refined boundary faces
@@ -447,9 +437,9 @@ Merging all points on surface that
 - make an angle with a cosine of more than 0.707106781186548.
 
 No straight edges simplified and no points removed ...
-Refined mesh : cells:4621  faces:15113  points:5950
+Refined mesh : cells:4595  faces:15033  points:5922
 Cells per refinement level:
-    0	4621
+    0	4595
 Writing mesh to time constant
 Wrote mesh in = x.xx s.
 Mesh refined in = x.xx s.
@@ -557,32 +547,31 @@ Patch points smoothed in = x.xx s
 Morph iteration 0
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.0018498590414493 min:4.89280583161572e-06 max:0.00538877032381839
+Wanted displacement : average:0.00187575389025069 min:1.94188853882521e-06 max:0.00548150548668937
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 238 points out of 2502 for reverse attraction.
-Stringing feature edges : changed 2 points
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(-0.00404217817639532 -0.00356365559406899 0) avg:(4.37293563224585e-08 -0.000149599901701609 -1.39195903290606e-05)
-     feature  : max:(0.0058922723076764 -0.00590163842306579 -0.00362638461749926) avg:(-8.3822203702154e-08 -8.78844676403291e-05 -7.87111021277643e-05)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(0.000687015851378819 -4.5102810375397e-17 -0.00543828204680117) avg:(-1.20218627589926e-07 -0.000239695334552075 -2.19136295207526e-05)
+     feature  : max:(-1.31339607639747e-05 -0.00457477511707061 -0.00809337595374866) avg:(3.54370290631583e-12 -9.42224725733209e-05 -7.96931346526435e-05)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-4.14750073429895e-06 -7.72230217432588e-07 -1.3194209726378e-05) at mesh point 4707 coord (0.0499666021615505 0.0585451695950362 -0.00693206097310479) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-2.39097450742961e-07 -1.00338132669558e-05 -2.16453033380125e-06) at mesh point 599 coord (0.0504878305904844 0.176121257480143 -0.327148271826166) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -619,31 +608,31 @@ Moved mesh in = x.xx s
 Morph iteration 1
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.00171239501625934 min:5.81333230159826e-06 max:0.00521192243751566
+Wanted displacement : average:0.00173848629513086 min:9.08075926765591e-06 max:0.00528497386561744
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(0.00390952255672734 -0.00344670405940506 0) avg:(3.3342309838083e-08 -0.000135283503166031 -1.04922033158662e-05)
-     feature  : max:(0.0058333071142698 -0.00584267187335316 -0.00326374536323376) avg:(-7.40737687971952e-08 -8.84962250089035e-05 -7.49977057866394e-05)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(-0.00407214792849978 -0.00336876238530923 0) avg:(-1.19261420402678e-07 -0.000217177483466692 -1.78849569174685e-05)
+     feature  : max:(-0.00575679776407294 -0.00615053286371242 -0.00329665983843863) avg:(-8.04586274909712e-13 -9.11812948454554e-05 -7.58098730948224e-05)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-1.71323723212828e-05 -5.72097571284341e-06 -2.06269289780646e-05) at mesh point 4695 coord (0.049966318799121 0.048765944992359 -0.00694582220278934) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-3.96301608040548e-06 -1.54579080423381e-05 -1.42935147940296e-05) at mesh point 491 coord (0.0504983269522143 0.176111884679234 -0.336839269544033) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -680,31 +669,31 @@ Moved mesh in = x.xx s
 Morph iteration 2
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.00145525063321876 min:8.35069055865037e-07 max:0.00473987128853804
+Wanted displacement : average:0.00148048880473519 min:1.11951448302146e-05 max:0.00480506588262193
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(0.00355543159758851 -0.0031345312228109 0) avg:(4.81123781152366e-08 -0.000108480027669388 -4.6593963784337e-06)
-     feature  : max:(0.00559980248655492 -0.00560916314168741 -0.00261099483860339) avg:(-5.72458758518193e-08 -8.17290263621632e-05 -6.67554865845179e-05)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(-0.00370237196583334 -0.00306285813627544 0) avg:(-1.06726224383103e-07 -0.00017552709191469 -1.07437194238974e-05)
+     feature  : max:(-0.00552616205633831 -0.00590492294580419 -0.00263732580439902) avg:(-1.89799577904973e-12 -8.40696181366174e-05 -6.78379718441108e-05)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-4.07727518381482e-06 -6.37671613918568e-05 -2.14796510255213e-05) at mesh point 4671 coord (0.0500354469221381 0.0291636076603582 -0.00697191462091252) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-1.79494955100454e-06 4.60810168663729e-06 -0.000114537022121541) at mesh point 287 coord (0.0500201356674494 0.185015754021471 -0.356183526174733) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -741,31 +730,31 @@ Moved mesh in = x.xx s
 Morph iteration 3
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.0011268343703254 min:3.25954364397833e-06 max:0.00390763062203665
+Wanted displacement : average:0.00114735038710938 min:5.57042455014943e-06 max:0.00395975666093028
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 238 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 238 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(0.00293115836687178 -0.00258416092892763 0) avg:(8.90404227266031e-08 -7.52658929225323e-05 1.60625508375718e-06)
-     feature  : max:(0.00509543057759574 -0.00510478326151387 -0.00182769425745422) avg:(-3.82401112280527e-08 -7.11323953804628e-05 -5.49745139955038e-05)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(-0.00305104912421107 -0.00252403883794061 0) avg:(-7.93884235603473e-08 -0.00012365095979971 -3.23144663699217e-06)
+     feature  : max:(-0.00502798983649474 -0.00537440599305347 -0.00184612546347218) avg:(-1.8641791639841e-12 -7.29835745423711e-05 -5.59449288893924e-05)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-3.89604735501644e-05 -0.000185045269111621 -1.02904163663416e-05) at mesh point 4659 coord (0.0501378665933326 0.0193290955237261 -0.00698661232728937) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-1.32175067912168e-05 -1.10116410545252e-05 -0.000273124458444041) at mesh point 179 coord (0.0497261939739773 0.184953156957362 -0.365090853425948) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -802,31 +791,31 @@ Moved mesh in = x.xx s
 Morph iteration 4
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.000794440806662132 min:2.01383411423547e-06 max:0.00274514100396239
+Wanted displacement : average:0.000806232887079019 min:3.00207511683627e-07 max:0.00277964790357997
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(0.00205916162511116 -0.0018153932172687 0) avg:(6.39692240407323e-08 -4.3096335256257e-05 5.86721632414458e-06)
-     feature  : max:(0.00427946746904392 -0.00428880760699618 -0.00109661356812801) avg:(-2.27236437541542e-08 -5.71689831520354e-05 -4.19861301934999e-05)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(-0.00214175845336929 -0.00177181071091065 0) avg:(-6.8749877573044e-08 -7.30903395547693e-05 2.82828278856055e-06)
+     feature  : max:(-0.00422205957744116 -0.00451614682586723 -0.00110767258477151) avg:(-1.78370530026684e-12 -5.84976369601346e-05 -4.33406102042125e-05)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-3.22597072483972e-05 -0.000421393652032574 4.60673649614696e-06) at mesh point 3905 coord (0.0385394360780271 0.0101504066998877 -0.0327886479539627) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-0.00021871462107266 -0.000464591722293601 4.82152389613015e-05) at mesh point 17 coord (-0.0143880787796969 0.146240619072709 -0.375396014525573) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -863,31 +852,31 @@ Moved mesh in = x.xx s
 Morph iteration 5
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.000505389476157687 min:5.52941166641221e-07 max:0.00154280254663921
+Wanted displacement : average:0.000509356523278229 min:2.54985632156256e-07 max:0.00149633786386191
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(-0.000145179230893387 0.00148233300485859 0.000402307782102887) avg:(2.05345949963304e-08 -1.83832168837275e-05 6.87607254477898e-06)
-     feature  : max:(0.00320851487080672 -0.00321783862215819 -0.000548302742184537) avg:(-1.37200525649344e-08 -4.1280974027197e-05 -2.88939781419605e-05)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(-0.000140815947264714 0.00144215102496106 0.000373360808101922) avg:(-6.49789648807062e-08 -3.31208264340353e-05 5.25558512886957e-06)
+     feature  : max:(-0.00316427973260577 -0.00338967854757444 -0.000553833954789029) avg:(-6.55691374589033e-13 -4.21299258281122e-05 -2.96396320339899e-05)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-0.00026649129173471 0.000153024283195236 -0.000666399965127747) at mesh point 3889 coord (-0.0143706312521112 -0.000108214691473381 -0.0373564917851897) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-0.000282429290105789 0.000153124929810358 -0.000697389609654021) at mesh point 3889 coord (-0.0144082200020025 -8.87794080488706e-05 -0.0371626176189436) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -924,31 +913,31 @@ Moved mesh in = x.xx s
 Morph iteration 6
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.000274735823353908 min:5.71564615915477e-07 max:0.000893405899848005
+Wanted displacement : average:0.000276764944374595 min:1.2154603292751e-06 max:0.000880896305479051
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(-8.40703703128371e-05 0.000858389205387916 0.000232968338604603) avg:(3.13551534041474e-09 -4.07999927779295e-06 4.95864739919937e-06)
-     feature  : max:(0.00205188691454514 -0.00206118864414612 -0.000219317606159397) avg:(-1.13605965595227e-08 -2.57342397316632e-05 -1.71435795754215e-05)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(-8.2898555663004e-05 0.000848996433567673 0.000219798057919086) avg:(-4.3449813584288e-08 -1.0492838601038e-05 4.07256550937253e-06)
+     feature  : max:(-0.00202188498100473 -0.00217308495203378 -0.000221531927462049) avg:(-2.12171021365383e-12 -2.61520969656612e-05 -1.75602189857075e-05)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-0.000230396631533685 0.000214976974529805 -0.000587759987066808) at mesh point 3889 coord (-0.0146371225438459 4.4809591721855e-05 -0.0380228917503174) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-0.000244234701956551 0.000213907648117196 -0.000614268842635504) at mesh point 3889 coord (-0.0146906492921083 6.43455217614872e-05 -0.0378600072285976) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -985,31 +974,31 @@ Moved mesh in = x.xx s
 Morph iteration 7
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:0.000131520647592502 min:9.35655066692083e-07 max:0.000420792920806847
+Wanted displacement : average:0.000132873428158635 min:7.95350667846311e-07 max:0.000425062465850932
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(4.61724014610967e-05 9.92882120981475e-05 0.000406296249653902) avg:(-1.37948001552238e-09 1.10170346532019e-06 1.90598736479318e-06)
-     feature  : max:(0.00104433846173407 -0.00105361499290166 -6.57931943692236e-05) avg:(-1.29966377438874e-08 -1.29116019092954e-05 -8.11355701174058e-06)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(5.32745342634059e-05 -1.21430643318376e-17 0.000421710711121133) avg:(-2.2687674798702e-08 -1.32315231005638e-06 1.32615690857908e-06)
+     feature  : max:(-0.0010267464723788 -0.00111328090531887 -6.64586878783013e-05) avg:(-9.52897459183517e-13 -1.30847106331549e-05 -8.40312829314181e-06)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-0.000149661438553791 5.00094060343341e-05 -0.000387063131228222) at mesh point 3889 coord (-0.0148675191753796 0.00025978656625166 -0.0386106517373842) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-0.00015922461826791 4.51789039383168e-05 -0.000403918078488414) at mesh point 3889 coord (-0.0149348839940649 0.000278253169878683 -0.0384742760712331) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -1046,31 +1035,31 @@ Moved mesh in = x.xx s
 Morph iteration 8
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:5.20797170941887e-05 min:8.15851135037078e-08 max:0.000488433100241571
+Wanted displacement : average:5.30697916031012e-05 min:3.85846421799481e-09 max:0.000497885423729731
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(0.000366379247914689 0.000323006408773974 0) avg:(-8.76546015068889e-10 1.17610338456781e-06 -2.85540433879249e-07)
-     feature  : max:(0.000373193239891455 -0.000382441706609865 -1.31579316819397e-05) avg:(-4.56791637122788e-08 -4.66413130437208e-06 -2.78769715349952e-06)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(0.000383627837795254 0.000317363478098964 0) avg:(-8.32569634318268e-09 2.67144852133419e-07 -6.99760412438636e-07)
+     feature  : max:(-0.000363887445428153 -0.00040729331682729 -1.32914291944286e-05) avg:(-3.50388328239769e-13 -4.70209003713964e-06 -2.90395284791155e-06)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (1.29300607258436e-05 0.000141055358167833 9.24188340052246e-06) at mesh point 4127 coord (-0.0338751880922604 -0.00023442616254787 -0.0278604032567036) points through the surrounding patch faces
+--> FOAM Warning : Displacement (3.19676243166818e-06 -0.000300762855381679 2.64459212638908e-06) at mesh point 3886 coord (-0.0382780870024703 0.000371312167137869 -0.0320229179789019) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -1107,31 +1096,31 @@ Moved mesh in = x.xx s
 Morph iteration 9
 -----------------
 Calculating patchDisplacement as distance to nearest surface point ...
-Wanted displacement : average:1.41576908535404e-05 min:9.54219814015961e-08 max:0.000234213314850098
+Wanted displacement : average:1.4835222011727e-05 min:9.32879842307585e-09 max:0.000238373502602172
 Calculated surface displacement in = x.xx s
 
 
 Detecting near surfaces ...
-Overriding nearest with intersection of close gaps at 0 out of 2502 points.
+Overriding nearest with intersection of close gaps at 0 out of 2498 points.
 Overriding displacement on features :
    implicit features    : false
    explicit features    : true
    multi-patch features : false
 
-Detected 0 baffle edges out of 5000 edges.
-Initially selected 84 points out of 2502 for reverse attraction.
-Selected 236 points out of 2502 for reverse attraction.
+Detected 0 baffle edges out of 4992 edges.
+Initially selected 84 points out of 2498 for reverse attraction.
+Selected 236 points out of 2498 for reverse attraction.
 Stringing feature edges : changed 0 points
 Attraction:
-     linear   : max:(0.000175686082912775 0.000154887950221561 0) avg:(2.19141689087248e-09 1.99429489315068e-07 -7.36964689099909e-07)
-     feature  : max:(-7.38877773111034e-05 -1.63814821362668e-06 -8.82105166943939e-05) avg:(-3.65125494072311e-08 -9.73251708185564e-07 -4.47596943842507e-07)
-Feature analysis : total master points:2502 attraction to :
+     linear   : max:(0.000183670192041192 0.000151944684995492 0) avg:(-1.58942191574311e-09 -2.3779679728802e-07 -1.01621097246971e-06)
+     feature  : max:(-0.000106759517116375 -1.6600943944826e-06 -8.8345089789027e-05) avg:(-5.41662763009292e-14 -9.65260163570448e-07 -5.0262971753183e-07)
+Feature analysis : total master points:2498 attraction to :
     feature point   : 0
     feature edge    : 84
     nearest surface : 0
-    rest            : 2418
+    rest            : 2414
 
---> FOAM Warning : Displacement (-7.38877773111034e-05 -1.63814821362668e-06 -8.82105166943939e-05) at mesh point 3694 coord (-0.00443531848705374 1.63814821361573e-06 -0.0496836528055122) points through the surrounding patch faces
+--> FOAM Warning : Displacement (-0.000106759517116375 -1.6600943944826e-06 -8.8345089789027e-05) at mesh point 3694 coord (-0.00476894137728066 1.66009439447165e-06 -0.0496488742380978) points through the surrounding patch faces
 Smoothing displacement ...
 Iteration 0
 Iteration 10
@@ -1169,15 +1158,15 @@ Repatched 0 faces in = x.xx s
 
 
 Edge intersection testing:
-    Number of edges             : 15113
-    Number of edges to retest   : 6812
-    Number of intersected edges : 2500
+    Number of edges             : 15033
+    Number of edges to retest   : 6802
+    Number of intersected edges : 2496
 Merging 826 sets of faces.
 
 Edge intersection testing:
-    Number of edges             : 14197
+    Number of edges             : 14119
     Number of edges to retest   : 3308
-    Number of intersected edges : 1584
+    Number of intersected edges : 1582
 
 Undo iteration 0
 ----------------
@@ -1196,12 +1185,12 @@ Merging all points on surface that
 - are used by only two boundary faces and
 - make an angle with a cosine of more than 0.866025403784439.
 
-Removing 762 straight edge points ...
+Removing 764 straight edge points ...
 
 Edge intersection testing:
-    Number of edges             : 14197
-    Number of edges to retest   : 3196
-    Number of intersected edges : 1584
+    Number of edges             : 14119
+    Number of edges to retest   : 3204
+    Number of intersected edges : 1582
 
 Undo iteration 0
 ----------------
@@ -1217,11 +1206,16 @@ Checking faces in error :
     faces on cells with determinant < 0.001                : 0
 
 Removing zero-sized patches:
-    defaultFaces type empty at position 0
+    xMin type patch at position 0
+    xMax type patch at position 1
+    yMin type patch at position 2
+    yMax type patch at position 3
+    zMin type patch at position 4
+    zMax type patch at position 5
 
-Snapped mesh : cells:4621  faces:14197  points:5098
+Snapped mesh : cells:4595  faces:14119  points:5070
 Cells per refinement level:
-    0	4621
+    0	4595
 Writing mesh to time constant
 Wrote mesh in = x.xx s.
 Mesh snapped in = x.xx s.
@@ -1244,11 +1238,11 @@ End
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  11
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
-Exec   : surfaceToPatch constant/triSurface/Body001_Geometry.stl
+Build  : 11-d5b4d966c3c5
+Exec   : foamToSurface -scale 1000 -tri surfaceMesh.vtk
 Date   : xxx xx xxxx
 Time   : xx:xx:xx
 Host   : "LocalMachine"
@@ -1263,96 +1257,17 @@ allowSystemOperations : Allowing user-supplied system call operations
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 Create time
 
-Create polyMesh for time = 0
+--> FOAM Warning : 
+    From function static Foam::instantList Foam::timeSelector::select0(Foam::Time&, const Foam::argList&)
+    in file db/Time/timeSelector.C at line 269
+    No time specified or available, selecting 'constant'
+Create polyMesh for time = constant
 
-Reading surface from "constant/triSurface/Body001_Geometry.stl" ...
-Patching all boundary faces according to nearest surface triangle ...
-All boundary faces further away than 0.001 of mesh bounding box (-0.0499847733577159 -1.09498066673932e-17 -0.375000149011612) (0.0499784071584657 0.22475168216349 0.0497604799927962) will keep their patch label ...
-Before patching:
-    patch	size
-    face0	88
-    face1	280
-    face2	324
-    face3	806
-    face4	86
 
-Surface region 0 becomes boundary patch 0 with name face0
-Surface region 1 becomes boundary patch 1 with name face1
-Surface region 2 becomes boundary patch 2 with name face2
-Surface region 3 becomes boundary patch 3 with name face3
-Surface region 4 becomes boundary patch 4 with name face4
-Reusing patch face0 at 0
-Reusing patch face1 at 1
-Reusing patch face2 at 2
-Reusing patch face3 at 3
-Reusing patch face4 at 4
-Writing all 276 unmatched faces to faceSet unmatchedFaces
-Changed 0 boundary faces.
+Time [0] = constant
+writing "surfaceMesh.vtk" triangulated with scaling 1000
 
-End
 
-/*---------------------------------------------------------------------------*\
-  =========                 |
-  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
-   \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
-     \\/     M anipulation  |
-\*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
-Exec   : surfaceMeshTriangulate mesh_outside.stl
-Date   : xxx xx xxxx
-Time   : xx:xx:xx
-Host   : "LocalMachine"
-PID    : xxxxxx
-I/O    : uncollated
-Case   : /tests/openfoam-paraview/mesh/mesh001
-nProcs : 1
-sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
-fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
-allowSystemOperations : Allowing user-supplied system call operations
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-Create time
-
-Extracting surface from boundaryMesh ...
-
-Including all processor patches.
-
-Reading mesh from time 0
-Create polyMesh for time = 0
-
-surfZone 0 : face3
-surfZone 1 : face1
-surfZone 2 : face0
-surfZone 3 : face4
-surfZone 4 : face2
-Writing merged surface to "/tests/openfoam-paraview/mesh/mesh001/mesh_outside.stl"
-End
-
-/*---------------------------------------------------------------------------*\
-  =========                 |
-  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
-   \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
-     \\/     M anipulation  |
-\*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
-Exec   : surfaceTransformPoints -scale (1000 1000 1000) mesh_outside.stl mesh_outside.stl
-Date   : xxx xx xxxx
-Time   : xx:xx:xx
-Host   : "LocalMachine"
-PID    : xxxxxx
-I/O    : uncollated
-Case   : /tests/openfoam-paraview/mesh/mesh001
-nProcs : 1
-sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
-fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
-allowSystemOperations : Allowing user-supplied system call operations
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-Reading surf from "mesh_outside.stl" ...
-Writing surf to "mesh_outside.stl" ...
-Scaling points by (1000 1000 1000)
 End
 
 mesh exists
@@ -1361,10 +1276,10 @@ checkMesh  | tee log.checkMesh
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  11
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
-Build  : 7-3bcbaf946ae9
+Build  : 11-d5b4d966c3c5
 Exec   : checkMesh
 Date   : xxx xx xxxx
 Time   : xx:xx:xx
@@ -1389,28 +1304,28 @@ Create polyMesh for time = constant
 Time = constant
 
 Mesh stats
-    points:           5098
-    faces:            14197
-    internal faces:   12613
-    cells:            4621
-    faces per cell:   5.80177450768232
-    boundary patches: 5
+    points:           5070
+    faces:            14119
+    internal faces:   12537
+    cells:            4595
+    faces per cell:   5.80108813928183
+    boundary patches: 3
     point zones:      0
     face zones:       0
     cell zones:       0
 
 Overall number of cells of each type:
-    hexahedra:     3795
+    hexahedra:     3769
     prisms:        692
     wedges:        0
     pyramids:      0
-    tet wedges:    4
+    tet wedges:    6
     tetrahedra:    0
-    polyhedra:     130
+    polyhedra:     128
     Breakdown of polyhedra by number of faces:
         faces   number of cells
-            4   86
-            5   44
+            4   82
+            5   46
 
 Checking topology...
     Boundary definition OK.
@@ -1422,25 +1337,23 @@ Checking topology...
 
 Checking patch topology for multiply connected surfaces...
                    Patch    Faces   Points                  Surface topology
-                   face0       88       96  ok (non-closed singly connected)
-                   face1      280      308  ok (non-closed singly connected)
-                   face2      324      430  ok (non-closed singly connected)
-                   face3      806      832  ok (non-closed singly connected)
-                   face4       86       92  ok (non-closed singly connected)
+               patch_1_0       86       94  ok (non-closed singly connected)
+               patch_2_0       86       92  ok (non-closed singly connected)
+               patch_3_0     1410     1514  ok (non-closed singly connected)
 
 Checking geometry...
-    Overall domain bounding box (-0.0499847733577159 -1.09498066673932e-17 -0.375000149011612) (0.0499784071584657 0.22475168216349 0.0497604799927962)
+    Overall domain bounding box (-0.049982044848235 -1.09421833708679e-17 -0.375000149011612) (0.04996475305186 0.224703985614912 0.0497390948363108)
     Mesh has 3 geometric (non-empty/wedge) directions (1 1 1)
     Mesh has 3 solution (non-empty) directions (1 1 1)
-    Boundary openness (1.35192199750797e-16 -3.1073065182917e-17 -1.01744411490745e-16) OK.
-    Max cell openness = 2.40321553343322e-16 OK.
-    Max aspect ratio = 3.75493118548884 OK.
-    Minimum face area = 3.06931180010314e-05. Maximum face area = 0.000164636518081557.  Face area magnitudes OK.
-    Min volume = 1.86834964494071e-07. Max volume = 1.28580680886543e-06.  Total volume = 0.00402319493417503.  Cell volumes OK.
-    Mesh non-orthogonality Max: 36.8654915871679 average: 5.6774992066862
+    Boundary openness (-1.85767531204949e-16 4.41914893412629e-17 9.16051109290892e-18) OK.
+    Max cell openness = 2.44695891729853e-16 OK.
+    Max aspect ratio = 3.78337664685257 OK.
+    Minimum face area = 3.11776441814767e-05. Maximum face area = 0.000165086542022845.  Face area magnitudes OK.
+    Min volume = 1.88312775642703e-07. Max volume = 1.29793583755443e-06.  Total volume = 0.0040157904359554.  Cell volumes OK.
+    Mesh non-orthogonality Max: 37.2295052492161 average: 5.73051874540973
     Non-orthogonality check OK.
     Face pyramids OK.
-    Max skewness = 0.718962959975085 OK.
+    Max skewness = 0.742949689787492 OK.
     Coupled point location match (average 0) OK.
 
 Mesh OK.
@@ -1458,7 +1371,7 @@ creating case:         		  >>  mesh001  <<
 Skip existing folder      /openfoam-paraview/mesh/mesh001
 Skip onlyAtCreation file: sofa.mesh.json
 Skip correct link    /openfoam-paraview/mesh/mesh001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-Unabel to create target >/home/jan/workspace/cfd-lecture/tools/sofa-framework/tests/openfoam-paraview/mesh/mesh001/.gitignore< since it exists
+Unabel to create target >/sofa-project/tools/sofa-framework/tests/openfoam-paraview/mesh/mesh001/.gitignore< since it exists
 Skip existing file        /openfoam-paraview/mesh/mesh001/pv.foam
 create upstream aspect links for:  	  >>  mesh001  <<
 Skip correct link    cad001 		 with pointer to   ../../cad/cad001

@@ -1,5 +1,5 @@
 
-# project-root makefile 
+# project-root makefile
 
 
 
@@ -18,7 +18,7 @@ foamFolder      = $(shell node -p "require('./sofa.project.json').foamFolders[0]
 # requirement targets
 # =============================================================================
 
-installrequirements: 
+installrequirements-local:
 	make -C tools/sofa-framework installrequirements
 	make -C tools/sofa-framework requirementtest
 

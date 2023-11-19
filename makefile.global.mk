@@ -7,7 +7,7 @@ ifeq ($(OS),Windows_NT)
     del                     	=del
     rm                      	=TODO
     mkdir                   	=md
-    copy                    	=copy 
+    copy                    	=copy
 
     project_repository_dir  	= ${CURDIR}
 
@@ -15,7 +15,7 @@ else
     del                     	=rm
     rm                      	=rm -Rf
     mkdir                   	=mkdir -p
-    copy                    	=cp 
+    copy                    	=cp
 
     project_repository_dir  	= $(shell pwd)
 
@@ -48,7 +48,7 @@ list_content = ls --almost-all -g --no-group \
     | sed -re 's/([1-9] )([ 1-9]\.[0-9])([KM]  .*)/\1x.x\3/g' \
     | sed -re 's/^([0-9] )?( ?[0-9]{0,3})(\.[0-9])*([KM]  )/\1xxx\4/g'
 
-# SED notes: 
+# SED notes:
 #   - remove empty double lines
 #   - replace , by .
 #   - replace plain digigs by tiny
@@ -71,7 +71,9 @@ remove_logs_variable_content = sed --in-place --regexp-extended --expression \
 	s/(\")(\/.*)(\/tests.*\")/\1\3/g; \
 	s/( )(\/.*)(\/tests.*)/\1\3/g; \
 	s/(Slaves : ).*/\1xxx/g; \
+	s/(\".{3,13}\.[0-9]{3,6}\")/HOST\.ID/g; \
 	s/(.* in )([0-9][0-9\.]*) s/\1xxx s/g; \
+	s/( [0-9](\.[0-9])?e[-][0-9][0-9] s)/ x.xeXX s/g; \
 	s/(^R version )([0-9]\..*)/\1 x.x.x \.\.\./g; \
 	s/(Copyright \(C\) )([0-9]{4})/\1xxxx/g; \
 	s/( --mathjax=rmdformats )/ /g; \

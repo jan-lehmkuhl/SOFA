@@ -1,35 +1,33 @@
 .:
 xxxK
-1 tiny  cad001 -> ../../cad/cad001/
 5 x.xK  constant/
 2 x.xK  system/
-1 tiny  Allmesh*
+1 x.xK  Allmesh*
+1 tiny  cad001 -> ../../cad/cad001/
 1 x.xK  .gitignore
 1 x.xK  log.blockMesh
 1 x.xK  log.checkMesh
+1 x.xK  log.foamToSurface
 1 xxxK  log.snappyHexMesh
-1 x.xK  log.surfaceFeatureExtract
-1 x.xK  log.surfaceMeshTriangulate
-1 x.xK  log.surfaceToPatch
-1 x.xK  log.surfaceTransformPoints
+1 x.xK  log.surfaceFeatures
 1 tiny  makefile -> ../../../tools/sofa-framework/study-structures/openfoam/mesh/case000/makefile_case_mesh.mk
-1 xxxK  mesh_outside.stl
 1 tiny  pv.foam
 1 tiny  sofa.mesh.FC-EXPORT.json
+1 xxxK  surfaceMesh.vtk
 
 ./constant:
 xxxK
 2 x.xK  extendedFeatureEdgeMesh/
-3 x.xK  polyMesh/
+2 x.xK  polyMesh/
 2 x.xK  triSurface/
 
 ./constant/extendedFeatureEdgeMesh:
 xxxK
+1 xxxK  Body001_Geometry_edgeMesh.obj
 1 xxxK  Body001_Geometry.extendedFeatureEdgeMesh
 
 ./constant/polyMesh:
 xxxK
-2 x.xK  sets/
 1 x.xK  boundary
 1 tiny  cellLevel
 1 tiny  cellZones
@@ -42,10 +40,6 @@ xxxK
 1 xxxK  points
 1 tiny  pointZones
 1 xxxK  surfaceIndex
-
-./constant/polyMesh/sets:
-xxxK
-1 x.xK  unmatchedFaces
 
 ./constant/triSurface:
 xxxK
@@ -60,4 +54,5 @@ xxxK
 1 tiny  fvSolution
 1 tiny  meshQualityDict
 1 x.xK  snappyHexMeshDict
-1 x.xK  surfaceFeatureExtractDict
+1 tiny  surfaceFeatureExtractDict
+1 x.xK  surfaceFeaturesDict

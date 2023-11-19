@@ -49,7 +49,7 @@ constant/polyMesh/surfaceIndex*
 constant/triSurface
 
 # freecad meshing
-mesh_outside.stl
+surfaceMesh.vtk
 
 # cfmesh output
 *_Geometry.fms
@@ -59,10 +59,7 @@ mesh_outside.stl
 # =============================================================================
 
 ## Timestep directories
-0/*
-0.*
 [1-9]*
-!0.org
 
 ## Fields that must get ignored
 */phi*

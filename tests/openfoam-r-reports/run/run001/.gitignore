@@ -49,7 +49,7 @@ constant/polyMesh/surfaceIndex*
 constant/triSurface
 
 # freecad meshing
-mesh_outside.stl
+surfaceMesh.vtk
 
 # cfmesh output
 *_Geometry.fms

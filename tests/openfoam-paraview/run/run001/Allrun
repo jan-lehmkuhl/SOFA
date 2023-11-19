@@ -1,9 +1,28 @@
 #!/bin/bash
 
+runParallel()
+{
+    nproc="$1"
+    echo "nproc: $nproc"
+    shift
+    exe="$(which $1)"
+    echo "exe: $exe"
+    sol=$(basename -- "$1")
+    sol="${sol%.*}"
+    echo "sol: $sol"
+    shift
+    if [ -f log."$sol" ]; then rm log."$sol"; fi
+    export OMPI_MCA_btl_vader_single_copy_mechanism=none  # Workarond for open-mpi/docker bug
+    echo "at: $@"
+    mpiexec -np $nproc "$exe" -parallel "$@" 1> >(tee -a log."$sol") 2> >(tee -a log."$sol" >&2)
+    echo "err: $err"
+    err=$?
+    if [ ! $err -eq 0 ]; then exit $err; fi
+}
+
 runCommand()
 {
-    if [ "$1" == "mpirun" ]; then sol="$4"; else sol="$1"; fi
-    sol=$(basename -- "$sol")
+    sol=$(basename -- "$1")
     sol="${sol%.*}"
     if [ -f log."$sol" ]; then rm log."$sol"; fi
     "$@" 1> >(tee -a log."$sol") 2> >(tee -a log."$sol" >&2)
@@ -12,15 +31,18 @@ runCommand()
 }
 
 # Unset and source bashrc
-FOAMDIR="/opt/openfoam7"
-source "$FOAMDIR/etc/config.sh/unset" 2> /dev/null
-source "$FOAMDIR/etc/bashrc"
+FOAMDIR="/opt/openfoam11"
+if [ ! -z "$FOAMDIR" ]
+then
+    source "$FOAMDIR/etc/config.sh/unset" 2> /dev/null
+    source "$FOAMDIR/etc/bashrc"
+fi
 
 # Copy mesh from mesh case dir if available
 MESHDIR="../../mesh/mesh001"
 if [ -f "$MESHDIR"/constant/polyMesh/faces ]
 then
-    rm -r constant/polyMesh 2> /dev/null
+    rm -rf constant/polyMesh
     cp -r "$MESHDIR"/constant/polyMesh constant/polyMesh
 elif [ ! -f constant/polyMesh/faces ]
 then
@@ -28,14 +50,32 @@ then
     exit 1
 fi
 
+# Detect available turbulence lib
+if [ -f "$FOAM_LIBBIN/libmomentumTransportModels.so" ] || [ -f "$FOAM_LIBBIN/libmomentumTransportModels.dll" ]
+then
+    echo \"libmomentumTransportModels.so\" > system/turbulenceLib
+else
+    echo \"libturbulenceModels.so\" > system/turbulenceLib
+fi
+
 # Update patch name and type
 runCommand createPatch -overwrite
 
 PNAME=p
+
+# Parallel decomposition
+runCommand decomposePar -force
+
+# Pick up number of parallel processes
+NPROC=$(foamDictionary -entry "numberOfSubdomains" -value system/decomposeParDict)
+
+# Mesh renumbering
+echo "Mesh renumbering"
+runParallel $NPROC renumberMesh -overwrite
+
 # Initialise flow
-runCommand potentialFoam -initialiseUBCs -pName $PNAME
+echo "initialise flow"
+runParallel $NPROC potentialFoam -initialiseUBCs -pName $PNAME
 
 # Run application in parallel
-runCommand decomposePar -force
-runCommand mpirun -n 2 simpleFoam -parallel
-
+runParallel $NPROC simpleFoam

@@ -18,7 +18,7 @@ import fnmatch
 
 # add paths
 file_path = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(1, os.path.realpath( file_path +'/../../src' ) ) 
+sys.path.insert(1, os.path.realpath( file_path +'/../../src' ) )
 
 from fileHandling import createDirSafely
 from fileHandling import createSymlinkSavely
@@ -48,11 +48,19 @@ def checkFoamVer():
         return ("6")
     elif version == "/opt/openfoam7":
         return ("7")
+    elif version == "/opt/openfoam8":
+        return ("8")
+    elif version == "/opt/openfoam9":
+        return ("9")
+    elif version == "/opt/openfoam10":
+        return ("10")
+    elif version == "/opt/openfoam11":
+        return ("11")
     elif version == "/opt/openfoam-dev":
         return ("dev")
     elif version == "":
         print("OpenFoam is not sourced")
-    else: 
+    else:
         print("Unknown OpenFoam version")
 
 def md5(filePath):
@@ -69,11 +77,11 @@ def md5(filePath):
             buffer = currentFile.read()
             hasher.update(buffer)
             return(hasher.hexdigest())
-    else: 
+    else:
         print(">%s< is not a file, can't get md5 sum" %filePath)
 
 def boolChecker(value, variable):
-    # takes a str and checkes if it is a bool and then converts 
+    # takes a str and checkes if it is a bool and then converts
     #
     # Args:
     #   value:  str: potential bool
@@ -111,15 +119,15 @@ class foamMesher(object):
         self.settingsTopoSet         = boolChecker(self.meshSettings["topoSet"], "topoSet")
         self.settingsCreatePatches   = boolChecker(self.meshSettings["createPatches"], "createPatches")
         self.settingsReport          = boolChecker(self.meshSettings["report"],"report" )
-        # initialize variables determining weather to run a program or not 
-        self.runBlockMesh       = self.settingsBlockMesh       
-        self.runSurfaceFeatures = self.settingsSurfaceFeatures 
-        self.runSnappyHexMesh   = self.settingsSnappyHexMesh   
+        # initialize variables determining weather to run a program or not
+        self.runBlockMesh       = self.settingsBlockMesh
+        self.runSurfaceFeatures = self.settingsSurfaceFeatures
+        self.runSnappyHexMesh   = self.settingsSnappyHexMesh
         self.runCheckMesh       = self.settingsCheckMesh
-        self.runTopoSet         = self.settingsTopoSet         
+        self.runTopoSet         = self.settingsTopoSet
         self.runCreatePatches   = self.settingsCreatePatches
-        self.runReport          = self.settingsReport          
-        # instantiate process handler with number 
+        self.runReport          = self.settingsReport
+        # instantiate process handler with number
         self.procHandler = procHandler(self.nCores)
         # run blockmesh logic
         if self.settingsBlockMesh:
@@ -131,7 +139,7 @@ class foamMesher(object):
                 self.runBlockMesh = False
         else:
             self.runBlockMesh = False
-        # run decomposePar logic 
+        # run decomposePar logic
         if self.nCores > 1:
             # run if  decomposePar changed
             if self.fileChangeDict["decomposeParDict"]:
@@ -144,8 +152,8 @@ class foamMesher(object):
                 self.runDecomposePar = False
         else:
             self.runDecomposePar = False
-        # run surfaceFeatures 
-        if (self.settingsSurfaceFeatures and 
+        # run surfaceFeatures
+        if (self.settingsSurfaceFeatures and
             os.path.exists("constant/triSurface") ):
             # check weather surface features are present
             featureEdgesPresent = False     # init
@@ -157,25 +165,25 @@ class foamMesher(object):
             if 'surfaceFeaturesDict' in self.fileChangeDict :
                 if not self.fileChangeDict["surfaceFeaturesDict"] and featureEdgesPresent:
                     self.runSurfaceFeatures = False
-                else: 
+                else:
                     self.runSurfaceFeatures = True
             elif 'surfaceFeatureExtractDict' in self.fileChangeDict :
                 if not self.fileChangeDict["surfaceFeatureExtractDict"] and featureEdgesPresent:
                     self.runSurfaceFeatures = False
-                else: 
+                else:
                     self.runSurfaceFeatures = True
             else:
                 print("neiter surfaceFeatures or surfaceFeaturesExtract exist")
             if self.runSurfaceFeatures == True :
-                print("decided to run surface features")            
+                print("decided to run surface features")
 
 
     ###################################################################
-    # general purpose 
+    # general purpose
     ###################################################################
 
     def getNoProcFolder(self):
-        # count how many processor directories are present 
+        # count how many processor directories are present
         #
         # Args:
         #
@@ -189,7 +197,7 @@ class foamMesher(object):
             return(0)
 
     def loadFileStates(self):
-        # load file containing dictionary of filenames and their md5 hashes 
+        # load file containing dictionary of filenames and their md5 hashes
         #
         # Args:
         #
@@ -204,7 +212,7 @@ class foamMesher(object):
         return(oldFileStates)
 
     def saveFileStates(self):
-        # save file containing dictionary of filenames and their md5 hashes 
+        # save file containing dictionary of filenames and their md5 hashes
         #
         # Args:
         #
@@ -216,7 +224,7 @@ class foamMesher(object):
             pickle.dump(fileStates, filehandle)
 
     def getFileStates(self):
-        # generate md5 hashes of files in system and constant  
+        # generate md5 hashes of files in system and constant
         #
         # Args:
         #
@@ -235,7 +243,7 @@ class foamMesher(object):
         return(fileStates)
 
     def compareFileStates(self):
-        # compares hashes of files to find changes 
+        # compares hashes of files to find changes
         #
         # Args:
         #
@@ -245,7 +253,7 @@ class foamMesher(object):
         previousFileStates = self.loadFileStates()
         currentFileStates  = self.getFileStates()
         fileChangeDict = {}
-        # compare old and new hashes 
+        # compare old and new hashes
         for fileName in currentFileStates:
             if fileName in previousFileStates:
                 if currentFileStates[fileName] == previousFileStates[fileName]:
@@ -254,8 +262,8 @@ class foamMesher(object):
                     fileChangeDict[fileName] = True
             else:
                 fileChangeDict[fileName] = True
-        return(fileChangeDict)   
-    
+        return(fileChangeDict)
+
     def latestLogFile(self, path, ident):
         # lists all files matching "ident" and write them into a single file
         # in order of modification date
@@ -306,7 +314,7 @@ class foamMesher(object):
         print("\n==========================================================================")
         print("Meshing boundary layers with OpenFoam %s on %s" %(self.foamVer, self.localHost) )
         print("==========================================================================\n")
-    
+
     def printHeaderFinalize(self):
         # prints header for layering process
         #
@@ -395,7 +403,7 @@ class foamMesher(object):
             for procTimeDir in procTimeDirs:
                 shutil.rmtree(os.path.join(procName,procTimeDir))
         self.procHandler.printProcEnd("Removing previous layers", (datetime.datetime.now()-procStart))
-        
+
 
     ###################################################################
     # routines
@@ -445,7 +453,7 @@ class foamMesher(object):
         self.removeBoundaryDirs()
         self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "castellatedMesh", "-set", "false"])
         self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "snap", "-set", "false"])
-        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "addLayers", "-set", "true"])        
+        self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "addLayers", "-set", "true"])
         self.procHandler.foam("snappyHexMesh")
         self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "castellatedMesh", "-set", "true"])
         self.procHandler.general(["foamDictionary", "system/snappyHexMeshDict", "-disableFunctionEntries", "-entry", "snap", "-set", "true"])
@@ -471,7 +479,7 @@ class foamMesher(object):
             shutil.rmtree("constant/polyMesh")
         shutil.copytree(os.path.join(latestTime, "polyMesh"), "constant/polyMesh")
         self.procHandler.printProcEnd("Copying mesh", (datetime.datetime.now() - start))
-        self.printFooterMesh()      
+        self.printFooterMesh()
 
     def view(self):
         print("Starting paraFoam")
@@ -486,7 +494,7 @@ class foamMesher(object):
 
 # read arguments and options from command line
 parser = argparse.ArgumentParser(description='input for foamMesher.py')
-parser.add_argument( 'entryPoint',      help="chose the task for this python script" ) 
+parser.add_argument( 'entryPoint',      help="chose the task for this python script" )
 parser.add_argument( '--verbose', '-v', action="store_true", dest="verbose", default=False )
 
 entryPoint = sys.argv[1]

@@ -10,7 +10,7 @@ creating case:         		  >>  survey001  <<
 Skip existing folder      /openfoam-paraview/survey/survey001
 Skip onlyAtCreation file: sofa.survey.json
 Skip correct link    /openfoam-paraview/survey/survey001/makefile 		 with pointer to   /tools/sofa-framework/study-structures/openfoam/survey/case000/makefile_case_survey.mk
-Unabel to create target >/home/jan/workspace/cfd-lecture/tools/sofa-framework/tests/openfoam-paraview/survey/survey001/.gitignore< since it exists
+Unabel to create target >/sofa-project/tools/sofa-framework/tests/openfoam-paraview/survey/survey001/.gitignore< since it exists
 create upstream aspect links for:  	  >>  survey001  <<
 missing parent folder of link:  paraview/renderView1/run001.png
 Creating folder      /paraview/renderView1

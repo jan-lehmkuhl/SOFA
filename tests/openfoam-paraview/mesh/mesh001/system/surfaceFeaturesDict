@@ -10,12 +10,31 @@ FoamFile
     format      ascii;
     class       dictionary;
     location    "system";
-    object      meshQualityDict;
+    object      surfaceFeatureExtractDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Include defaults parameters from master dictionary
-#includeIfPresent "$FOAM_ETC/caseDicts/meshQualityDict"
-#includeIfPresent "$FOAM_ETC/caseDicts/mesh/generation/meshQualityDict"
+surfaces
+(
+    "Body001_Geometry.stl"
+);
+
+includedAngle       150;
+geometricTestOnly   no;
+
+subsetFeatures
+{
+    nonManifoldEdges    yes;
+    openEdges           yes;
+}
+
+trimFeatures
+{
+    minElem         0;
+    minLen          0.0;
+}
+
+writeObj            yes;
+verboseObj          no;
 
 // ************************************************************************* //

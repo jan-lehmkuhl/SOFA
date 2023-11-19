@@ -7,7 +7,7 @@ working_dir = $(shell pwd)
 default: run-interactive
 
 
-build: 
+build:
 	@echo "update local docker image"
 	docker build --tag sofa-openfoam:local .
 
@@ -16,7 +16,7 @@ build:
 #   Docker helper targets
 # ====================================================================
 
-run-interactive: 
+run-interactive:
 	# choose what is good
 	@if [ -d "../.git" ]; then \
 		echo "This is a standalone git-repository" ;\
@@ -35,3 +35,8 @@ run-interactive-core: build
 run-interactive-project: build
 # opens underlying sofa-project
 	docker run --interactive --tty --volume ${working_dir}/../../..:/sofa-project --workdir /sofa-project sofa-openfoam:local
+
+
+run-interactive-cloud:
+	docker pull schlupp05/sofa-openfoam:latest
+	docker run --interactive --tty --volume ${working_dir}/../../..:/sofa-project --workdir /sofa-project schlupp05/sofa-openfoam:latest

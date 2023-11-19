@@ -6,16 +6,43 @@
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-    version     4.0;
+    version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "system";
-    object      meshQualityDict;
+    class       volScalarField;
+    object      nut;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Include defaults parameters from master dictionary
-#includeIfPresent "$FOAM_ETC/caseDicts/meshQualityDict"
-#includeIfPresent "$FOAM_ETC/caseDicts/mesh/generation/meshQualityDict"
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+
+    Inlet
+    {
+        type        calculated;
+        value       $internalField;
+    }
+
+    outlet
+    {
+        type        calculated;
+        value       $internalField;
+    }
+
+    wall
+    {
+        type        nutkWallFunction;
+        value       uniform 0;
+    }
+
+    defaultFaces
+    {
+        type        zeroGradient;
+    }
+
+}
 
 // ************************************************************************* //
