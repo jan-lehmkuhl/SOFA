@@ -108,15 +108,8 @@ class foamRunner(object):
         self.case = Case( )
         self.foamVer = checkFoamVer()
         self.localHost = os.uname()[1]
-        # make sure 0.org exists or is retreived
         CaseFiles = os.listdir(".")
-        if "0.org" in CaseFiles:
-            if "0" in CaseFiles:
-                shutil.rmtree("0")
-            shutil.copytree("0.org", "0")
-        elif "0" in CaseFiles:
-            shutil.copytree("0", "0.org")
-        else:
+        if not "0" in CaseFiles:
             print("No boundary files present")
             sys.exit(1)
         # info about the state of case
@@ -202,7 +195,7 @@ class foamRunner(object):
         # Return:
         #
         fileStates = {}
-        for folder in  ["system", "constant", "0.org"]:
+        for folder in  ["system", "constant", "0"]:
             for fileName in os.listdir(folder):
                 if os.path.isfile(os.path.join(folder,fileName)):
                     fileStates[os.path.join(folder,fileName)] = md5(os.path.join(folder,fileName))
